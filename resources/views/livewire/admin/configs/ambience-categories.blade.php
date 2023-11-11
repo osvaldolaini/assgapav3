@@ -19,18 +19,7 @@
                                                     dark:text-gray-400">
                                             Categoria
                                         </th>
-                                        <th scope="col"
-                                            class="py-3.5 px-4 text-sm font-normal
-                                                    text-center text-gray-500
-                                                    dark:text-gray-400">
-                                            Master
-                                        </th>
-                                        <th scope="col"
-                                            class="py-3.5 px-4 text-sm font-normal
-                                                    text-center text-gray-500
-                                                    dark:text-gray-400">
-                                            Valor
-                                        </th>
+
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
@@ -65,30 +54,22 @@
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->parent_category }}
-                                                </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->value }}</td>
+
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    <svg class="h-6 w-6 mx-auto" fill="{{ $data->color }}" viewBox="0 0 32 32"
-                                                        version="1.1" xmlns="http://www.w3.org/2000/svg">
-                                                        <title>user-card</title>
+                                                    <svg class="h-6 w-6 mx-auto" fill="{{ $data->color }}"
+                                                        viewBox="0 0 24 24" fill="none"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <path
-                                                            d="M0 26.016q0 2.496 1.76 4.224t4.256 1.76h20q2.464 0 4.224-1.76t1.76-4.224v-20q0-2.496-1.76-4.256t-4.224-1.76h-20q-2.496 0-4.256 1.76t-1.76 4.256v20zM4 24v-17.984q0-0.832 0.576-1.408t1.44-0.608h20q0.8 0 1.408 0.608t0.576 1.408v17.984h-24zM10.016 19.008q0 1.248 0.864 2.144t2.112 0.864h6.016q1.248 0 2.112-0.864t0.896-2.144q-0.256-1.344-1.088-2.464t-2.048-1.792q1.12-1.152 1.12-2.752v-1.984q0-1.664-1.184-2.848t-2.816-1.152-2.816 1.152-1.184 2.848v1.984q0 1.6 1.12 2.752-1.216 0.672-2.048 1.792t-1.056 2.464z">
-                                                        </path>
+                                                            d="M7 14.0014H17M7 14.0014V11.6014C7 11.0413 7 10.7613 7.10899 10.5474C7.20487 10.3592 7.35785 10.2062 7.54601 10.1104C7.75992 10.0014 8.03995 10.0014 8.6 10.0014H15.4C15.9601 10.0014 16.2401 10.0014 16.454 10.1104C16.6422 10.2062 16.7951 10.3592 16.891 10.5474C17 10.7613 17 11.0413 17 11.6014V14.0014M7 14.0014V18.0014V21.0014M17 14.0014V18.0014V21.0014M18.3466 6.17468L14.1466 4.07468C13.3595 3.68113 12.966 3.48436 12.5532 3.40691C12.1876 3.33832 11.8124 3.33832 11.4468 3.40691C11.034 3.48436 10.6405 3.68113 9.85338 4.07468L5.65337 6.17468C4.69019 6.65627 4.2086 6.89707 3.85675 7.25631C3.5456 7.574 3.30896 7.95688 3.16396 8.37725C3 8.85262 3 9.39106 3 10.4679V19.4014C3 19.9614 3 20.2414 3.10899 20.4554C3.20487 20.6435 3.35785 20.7965 3.54601 20.8924C3.75992 21.0014 4.03995 21.0014 4.6 21.0014H19.4C19.9601 21.0014 20.2401 21.0014 20.454 20.8924C20.6422 20.7965 20.7951 20.6435 20.891 20.4554C21 20.2414 21 19.9614 21 19.4014V10.4679C21 9.39106 21 8.85262 20.836 8.37725C20.691 7.95688 20.4544 7.574 20.1433 7.25631C19.7914 6.89707 19.3098 6.65627 18.3466 6.17468Z"
+                                                            stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                                            stroke-linejoin="round" />
                                                     </svg>
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
-                                                    <x-table-buttons id="{{ $data->id }}"
-                                                        :update="true"
-                                                        :delete="true"
-                                                        :view="true"
-                                                        :active="$data->active">
+                                                    <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                        :delete="true" :view="true" :active="$data->active">
                                                     </x-table-buttons>
                                                 </td>
                                             </tr>
@@ -177,46 +158,24 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+
+
                     <div class="col-span-2 ">
-                        <label for="parent_category"
-                            class="block text-sm font-medium text-gray-900 dark:text-white">Mídia</label>
-                        <select wire:model="parent_category"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Selecione uma opção</option>
-                            <option value="Sócio">Sócio</option>
-                            <option value="Não sócio">Não sócio</option>
-                        </select>
-                        @error('parent_category')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="value" class="text-sm">
-                            Valor
-                        </label>
-                        <input x-mask:dynamic="$money($input, ',')" wire:model="value" required type="text"
-                            maxlength="8" placeholder="Valor"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('value')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
                         <label for="color" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Cor</label>
                         <div class="flex">
                             <input type="color" wire:model.live="color" placeholder="Cor" required
-                                class="bg-gray-50 h-10 w-10 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                class="bg-gray-50 h-10  border border-gray-300 text-gray-900 text-sm rounded-lg
                                 focus:ring-primary-600 focus:border-primary-600 block w-full
                                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <span
                                 class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md dark:bg-gray-700">
-                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
+                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <title>user-card</title>
                                     <path
-                                        d="M0 26.016q0 2.496 1.76 4.224t4.256 1.76h20q2.464 0 4.224-1.76t1.76-4.224v-20q0-2.496-1.76-4.256t-4.224-1.76h-20q-2.496 0-4.256 1.76t-1.76 4.256v20zM4 24v-17.984q0-0.832 0.576-1.408t1.44-0.608h20q0.8 0 1.408 0.608t0.576 1.408v17.984h-24zM10.016 19.008q0 1.248 0.864 2.144t2.112 0.864h6.016q1.248 0 2.112-0.864t0.896-2.144q-0.256-1.344-1.088-2.464t-2.048-1.792q1.12-1.152 1.12-2.752v-1.984q0-1.664-1.184-2.848t-2.816-1.152-2.816 1.152-1.184 2.848v1.984q0 1.6 1.12 2.752-1.216 0.672-2.048 1.792t-1.056 2.464z">
-                                    </path>
+                                        d="M7 14.0014H17M7 14.0014V11.6014C7 11.0413 7 10.7613 7.10899 10.5474C7.20487 10.3592 7.35785 10.2062 7.54601 10.1104C7.75992 10.0014 8.03995 10.0014 8.6 10.0014H15.4C15.9601 10.0014 16.2401 10.0014 16.454 10.1104C16.6422 10.2062 16.7951 10.3592 16.891 10.5474C17 10.7613 17 11.0413 17 11.6014V14.0014M7 14.0014V18.0014V21.0014M17 14.0014V18.0014V21.0014M18.3466 6.17468L14.1466 4.07468C13.3595 3.68113 12.966 3.48436 12.5532 3.40691C12.1876 3.33832 11.8124 3.33832 11.4468 3.40691C11.034 3.48436 10.6405 3.68113 9.85338 4.07468L5.65337 6.17468C4.69019 6.65627 4.2086 6.89707 3.85675 7.25631C3.5456 7.574 3.30896 7.95688 3.16396 8.37725C3 8.85262 3 9.39106 3 10.4679V19.4014C3 19.9614 3 20.2414 3.10899 20.4554C3.20487 20.6435 3.35785 20.7965 3.54601 20.8924C3.75992 21.0014 4.03995 21.0014 4.6 21.0014H19.4C19.9601 21.0014 20.2401 21.0014 20.454 20.8924C20.6422 20.7965 20.7951 20.6435 20.891 20.4554C21 20.2414 21 19.9614 21 19.4014V10.4679C21 9.39106 21 8.85262 20.836 8.37725C20.691 7.95688 20.4544 7.574 20.1433 7.25631C19.7914 6.89707 19.3098 6.65627 18.3466 6.17468Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
                             </span>
                         </div>
@@ -259,46 +218,24 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
+
+
                     <div class="col-span-2 ">
-                        <label for="parent_category"
-                            class="block text-sm font-medium text-gray-900 dark:text-white">Mídia</label>
-                        <select wire:model="parent_category"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                            <option value="">Selecione uma opção</option>
-                            <option value="Sócio">Sócio</option>
-                            <option value="Não sócio">Não sócio</option>
-                        </select>
-                        @error('parent_category')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="value" class="text-sm">
-                            Valor
-                        </label>
-                        <input x-mask:dynamic="$money($input, ',')" wire:model="value" required type="text"
-                            maxlength="8" placeholder="Valor"
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('value')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
                         <label for="color" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Cor</label>
                         <div class="flex">
                             <input type="color" wire:model.live="color" placeholder="Cor" required
-                                class="bg-gray-50 h-10 w-10 border border-gray-300 text-gray-900 text-sm rounded-lg
+                                class="bg-gray-50 h-10  border border-gray-300 text-gray-900 text-sm rounded-lg
                                 focus:ring-primary-600 focus:border-primary-600 block w-full
                                 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <span
                                 class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md dark:bg-gray-700">
-                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
+                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
-                                    <title>user-card</title>
                                     <path
-                                        d="M0 26.016q0 2.496 1.76 4.224t4.256 1.76h20q2.464 0 4.224-1.76t1.76-4.224v-20q0-2.496-1.76-4.256t-4.224-1.76h-20q-2.496 0-4.256 1.76t-1.76 4.256v20zM4 24v-17.984q0-0.832 0.576-1.408t1.44-0.608h20q0.8 0 1.408 0.608t0.576 1.408v17.984h-24zM10.016 19.008q0 1.248 0.864 2.144t2.112 0.864h6.016q1.248 0 2.112-0.864t0.896-2.144q-0.256-1.344-1.088-2.464t-2.048-1.792q1.12-1.152 1.12-2.752v-1.984q0-1.664-1.184-2.848t-2.816-1.152-2.816 1.152-1.184 2.848v1.984q0 1.6 1.12 2.752-1.216 0.672-2.048 1.792t-1.056 2.464z">
-                                    </path>
+                                        d="M7 14.0014H17M7 14.0014V11.6014C7 11.0413 7 10.7613 7.10899 10.5474C7.20487 10.3592 7.35785 10.2062 7.54601 10.1104C7.75992 10.0014 8.03995 10.0014 8.6 10.0014H15.4C15.9601 10.0014 16.2401 10.0014 16.454 10.1104C16.6422 10.2062 16.7951 10.3592 16.891 10.5474C17 10.7613 17 11.0413 17 11.6014V14.0014M7 14.0014V18.0014V21.0014M17 14.0014V18.0014V21.0014M18.3466 6.17468L14.1466 4.07468C13.3595 3.68113 12.966 3.48436 12.5532 3.40691C12.1876 3.33832 11.8124 3.33832 11.4468 3.40691C11.034 3.48436 10.6405 3.68113 9.85338 4.07468L5.65337 6.17468C4.69019 6.65627 4.2086 6.89707 3.85675 7.25631C3.5456 7.574 3.30896 7.95688 3.16396 8.37725C3 8.85262 3 9.39106 3 10.4679V19.4014C3 19.9614 3 20.2414 3.10899 20.4554C3.20487 20.6435 3.35785 20.7965 3.54601 20.8924C3.75992 21.0014 4.03995 21.0014 4.6 21.0014H19.4C19.9601 21.0014 20.2401 21.0014 20.454 20.8924C20.6422 20.7965 20.7951 20.6435 20.891 20.4554C21 20.2414 21 19.9614 21 19.4014V10.4679C21 9.39106 21 8.85262 20.836 8.37725C20.691 7.95688 20.4544 7.574 20.1433 7.25631C19.7914 6.89707 19.3098 6.65627 18.3466 6.17468Z"
+                                        stroke="#000000" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
                                 </svg>
                             </span>
                         </div>

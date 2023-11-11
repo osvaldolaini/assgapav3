@@ -6,6 +6,14 @@
 
 # Sistema ASSGAPA V3
 
+## V 3.7 11/11/2023
+    Configurações
+        -Geral
+        -Cat sócio
+        -Cat Ambiente
+        -Tipos de locatários
+        -Tipos de evento
+        -Centro de custo
 ## V 3.6
     Controle de acesso por níveis e Middleware
 ## V 3.5 

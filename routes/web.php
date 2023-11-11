@@ -1,10 +1,15 @@
 <?php
 
+use App\Livewire\Admin\Configs\AmbienceCategories;
+use App\Livewire\Admin\Configs\AmbienceTenants;
+use App\Livewire\Admin\Configs\CostCenters;
+use App\Livewire\Admin\Configs\EventTypes;
 use App\Livewire\Admin\Configuration;
 use App\Livewire\Admin\ListUser;
 use App\Livewire\Admin\Panel;
 use App\Livewire\Admin\Homepage;
-use App\Livewire\Admin\Register\PartnerCategories;
+use App\Livewire\Admin\Configs\PartnerCategories;
+use App\Livewire\Admin\Configs\ReasonEvents;
 use App\Livewire\Admin\UserAccesses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -50,6 +55,14 @@ Route::middleware([
         ->middleware('admin.access');
     Route::get('/configurações-categorias-de-socio', PartnerCategories::class)
         ->name('partner-categories');
+    Route::get('/configurações-categorias-de-ambiente', AmbienceCategories::class)
+        ->name('ambience-categories');
+    Route::get('/configurações-tipos-de-locatário', AmbienceTenants::class)
+        ->name('ambience-tenats');
+    Route::get('/configurações-tipos-de-evento', ReasonEvents::class)
+        ->name('event-types');
+    Route::get('/configurações-centro-de-custo', CostCenters::class)
+        ->name('cost-center');
 });
 // Usuários pageAccess 2
 Route::middleware([

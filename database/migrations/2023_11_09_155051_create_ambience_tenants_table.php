@@ -18,6 +18,7 @@ class CreateAmbienceTenantsTable extends Migration
             $table->boolean('active')->nullable();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->string('type')->nullable();
             $table->text('obs')->nullable();
 
             /*Padrão */

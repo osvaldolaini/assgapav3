@@ -1,15 +1,14 @@
 <?php
 
-namespace App\Livewire\Admin\Register;
+namespace App\Livewire\Admin\Configs;
 
-use App\Models\Admin\Register\PartnerCategory;
+use App\Models\Admin\Configs\AmbienceCategory;
 use Livewire\Component;
-
 use Illuminate\Support\Facades\Auth;
 
-class PartnerCategories extends Component
+class AmbienceCategories extends Component
 {
-    public PartnerCategory $partnerCategory;
+    public AmbienceCategory $ambienceCategory;
 
     public $showJetModal = false;
     public $showModalView = false;
@@ -23,26 +22,24 @@ class PartnerCategories extends Component
     public $registerId;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Register\PartnerCategory"; //Model principal
+    public $model = "App\Models\Admin\Configs\AmbienceCategory"; //Model principal
     public $modelId="id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'title,value,color,parent_category,active';
-    public $searchable = 'title,value,parent_category'; //Colunas pesquisadas no banco de dados
+    public $columnsInclude = 'title,color,active';
+    public $searchable = 'title'; //Colunas pesquisadas no banco de dados
     public $sort = "title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
     //Campos
     public $active = 1;
     public $title;
-    public $value;
     public $color;
-    public $parent_category;
 
     public function render()
     {
-        return view('livewire.admin.register.partner-categories', [
+        return view('livewire.admin.configs.ambience-categories', [
             'dataTable' => $this->getData(),
         ]);
     }
@@ -50,8 +47,6 @@ class PartnerCategories extends Component
     {
         $this->reset(
             'title',
-            'value',
-            'parent_category',
             'color',
         );
     }
@@ -66,16 +61,12 @@ class PartnerCategories extends Component
     {
         $this->rules = [
             'title' => 'required',
-            'value' => 'required',
-            'parent_category'  => 'required',
             'color' => 'required',
         ];
         $this->validate();
 
-        PartnerCategory::create([
+        AmbienceCategory::create([
             'title'                 => $this->title,
-            'value'                 => $this->value,
-            'parent_category'       => $this->parent_category,
             'color'                 => $this->color,
             'active'                => 1,
             'created_by' => Auth::user()->name,
@@ -91,7 +82,7 @@ class PartnerCategories extends Component
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = PartnerCategory::where('id', $id)->first();
+            $data = AmbienceCategory::where('id', $id)->first();
             $this->detail = [
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
@@ -104,35 +95,29 @@ class PartnerCategories extends Component
         }
     }
     //UPDATE
-    public function showModalUpdate(PartnerCategory $partnerCategory)
+    public function showModalUpdate(AmbienceCategory $ambienceCategory)
     {
         $this->resetAll();
 
-        $this->model_id         = $partnerCategory->id;
-        $this->title            = $partnerCategory->title;
-        $this->value            = $partnerCategory->value;
-        $this->parent_category  = $partnerCategory->parent_category;
-        $this->color            = $partnerCategory->color;
+        $this->model_id         = $ambienceCategory->id;
+        $this->title            = $ambienceCategory->title;
+        $this->color            = $ambienceCategory->color;
         $this->showModalEdit = true;
     }
     public function update()
     {
         $this->rules = [
             'title' => 'required',
-            'value' => 'required',
-            'parent_category'  => 'required',
             'color'  => 'required',
         ];
 
         $this->validate();
 
-        PartnerCategory::updateOrCreate([
+        AmbienceCategory::updateOrCreate([
             'id' => $this->model_id,
         ], [
             'title'                 => $this->title,
-            'value'                 => $this->value,
             'color'                 => $this->color,
-            'parent_category'       => $this->parent_category,
             'updated_by' => Auth::user()->name,
         ]);
 
@@ -154,7 +139,7 @@ class PartnerCategories extends Component
     //ACTIVE
     public function buttonActive($id)
     {
-        $data = PartnerCategory::where('id', $id)->first();
+        $data = AmbienceCategory::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
             $data->save();
@@ -166,7 +151,7 @@ class PartnerCategories extends Component
     }
     public function delete($id)
     {
-        $data = PartnerCategory::where('id', $id)->first();
+        $data = AmbienceCategory::where('id', $id)->first();
         $data->active = 2;
         $data->save();
 
