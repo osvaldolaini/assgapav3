@@ -1,4 +1,13 @@
 <div>
+    <x-breadcrumb>
+        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
+            <div class="col-span-6 justify-items-start">
+                <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
+                    CONFIGURAÇÕES
+                </h3>
+            </div>
+        </div>
+    </x-breadcrumb>
     <section class="p-6 dark:bg-gray-800 dark:text-gray-50">
         <form wire:submit.prevent="update()" wire.loading.attr='disable'
             class="container flex flex-col mx-auto space-y-12">
@@ -127,11 +136,11 @@
                             placeholder="Complemento" name="complement"
                             value="{{ old('complement', $complement ?? '') }}">
                     </div>
-                    <div class="col-span-full" wire:ignore>
+                    {{-- <div class="col-span-full" wire:ignore>
                         <textarea wire:model.defer="about" id="about">
                             {{ old('about', $about ?? '') }}
                         </textarea>
-                    </div>
+                    </div> --}}
                     <div class="flex col-span-full items-center space-x-4 mt-10 justify-end">
                         <button class="btn btn-neutral">Salvar</button>
                     </div>
@@ -140,7 +149,7 @@
         </fieldset>
     </section>
 </div>
-@section('scripts')
+{{-- @section('scripts')
 
 <script src="https://cdn.ckeditor.com/ckeditor5/39.0.2/classic/ckeditor.js"></script>
     <script>
@@ -203,4 +212,4 @@
                 console.error(error);
             });
     </script>
-@endsection
+@endsection --}}

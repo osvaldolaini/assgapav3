@@ -114,7 +114,7 @@
                                         </svg>
                                         Não Sócios
                                     </x-link-dropdown>
-                                    <x-link-dropdown url="list-users" active="*agendas*">
+                                    <x-link-dropdown url="ambiences" active="*ambientes*">
                                         <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="0.4"
@@ -131,10 +131,10 @@
 
 
                         <div class="divider"></div>
-                        <span class="text-gray-600
-                            flex items-center justify-start w-full px-4 py-0 my-0 mb-1
-                            text-sm transition-colors duration-200"
-                        >
+                            <span class="text-gray-600
+                                flex items-center justify-start w-full px-4 py-0 my-0 mb-1
+                                text-sm transition-colors duration-200"
+                            >
                             Configurações do sistema
                         </span>
                         <!-- Dropdown Configurações -->
@@ -219,7 +219,7 @@
                                             <path fill="#292D32"
                                                 d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
                                         </svg>
-                                        Tipo de evento
+                                        Tipos de evento
                                     </x-link-dropdown>
                                     <x-link-dropdown url="cost-center" active="configurações-centro-de-custo">
                                         <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"

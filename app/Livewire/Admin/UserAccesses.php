@@ -10,11 +10,13 @@ class UserAccesses extends Component
 {
     public $access;
     public $user;
+    public $breadcrumb_title;
 
     public function mount(User $user)
     {
         $this->access = $user->access->pluck('page_id')->toArray();
         $this->user= $user;
+        $this->breadcrumb_title = 'ACESSOS DE: '.strtoupper($user->name);
     }
     public function render()
     {

@@ -60,5 +60,16 @@ if (!function_exists('convertDate')) {
         }
     }
 }
-
+if (!function_exists('valueDB')) {
+function valueDB($value)
+    {
+        if($value){
+            str_replace(' ', '', $value);
+            ltrim($value);
+            $value = str_replace('.', '', $value);
+            $value = str_replace(',', '.', $value);
+            return str_replace(' ', '', $value);
+        }
+    }
+}
 
