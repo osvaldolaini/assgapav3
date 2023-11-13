@@ -13,6 +13,7 @@ use App\Livewire\Admin\Ambiences\AmbienceContracts;
 use App\Livewire\Admin\Ambiences\AmbienceEdit;
 use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
+use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
 use App\Livewire\Admin\UserAccesses;
 use Illuminate\Http\Request;
@@ -113,6 +114,8 @@ Route::middleware([
         ->name('ambience-values');
     Route::get('/ambientes/{ambience}/termo-contrato', AmbienceContracts::class)
         ->name('ambience-contracts');
+    Route::get('/ambientes/indisponibilidades', AmbienceUnavailabilities::class)
+        ->name('ambience-unavailabilities');
 });
 
 

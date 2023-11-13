@@ -27,7 +27,7 @@ class Ambience extends Model
     ];
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=strtoupper($value);
+        $this->attributes['title']=mb_strtoupper($value);
         $this->attributes['slug']=Str::slug($value);
     }
     public function category():BelongsTo

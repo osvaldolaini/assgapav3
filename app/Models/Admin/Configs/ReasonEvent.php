@@ -23,7 +23,7 @@ class ReasonEvent extends Model
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=strtoupper($value);
+        $this->attributes['title']=mb_strtoupper($value);
     }
 
     public function getActivitylogOptions(): LogOptions

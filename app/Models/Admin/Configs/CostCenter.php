@@ -23,11 +23,11 @@ class CostCenter extends Model
 
     public function setCategoryAttribute($value)
     {
-        $this->attributes['category']=strtoupper($value);
+        $this->attributes['category']=mb_strtoupper($value);
     }
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=strtoupper($value);
+        $this->attributes['title']=mb_strtoupper($value);
         $this->attributes['slug']=Str::slug($value);
     }
 

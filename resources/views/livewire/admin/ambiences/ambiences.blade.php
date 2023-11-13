@@ -11,7 +11,6 @@
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
-
             <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
@@ -83,9 +82,27 @@
                                                     {{ $data->capacity }}
                                                 </td> --}}
                                                 <td
-                                                    class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                    class="w-2/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                                    <div class="tooltip tooltip-top p-0" data-tip="Indisponibilidades">
+                                                        <a href="{{ route('ambience-unavailabilities') }}"
+                                                        class="py-2 px-3 flex
+                                                        hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
+                                                        duration-200 whitespace-nowrap">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                                                                <g>
+                                                                    <path fill="currentColor" d="M60.005,23.299c9.799,0,19.014,3.817,25.946,10.75C92.884,40.98,96.701,50.197,96.701,60c0,9.803-3.817,19.02-10.75,25.952
+                                                                        C79.02,92.884,69.803,96.701,60,96.701c-9.803,0-19.02-3.817-25.952-10.75C27.116,79.02,23.299,69.804,23.299,60
+                                                                        c0-9.804,3.817-19.02,10.75-25.952c6.931-6.931,16.148-10.749,25.955-10.75H60.005 M60,3.299
+                                                                        C45.491,3.3,30.977,8.836,19.906,19.906c-22.144,22.144-22.143,58.045,0,80.188C30.978,111.166,45.489,116.701,60,116.701
+                                                                        s29.021-5.535,40.094-16.607c22.144-22.144,22.144-58.044,0-80.188C89.021,8.833,74.513,3.297,60,3.299L60,3.299z"/>
+                                                                </g>
+                                                                <rect x="49.307" y="11.443" fill="currentColor" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.7729 59.8067)" width="20.999" height="96.728"/>
+                                                                </svg>
+                                                        </a>
+                                                    </div>
                                                     <div class="tooltip tooltip-top p-0"
                                                     data-tip="Valores">
+
                                                         <a href="{{ route('ambience-values',$data->id) }}"
                                                             class="py-2 px-3 flex
                                                                 hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
