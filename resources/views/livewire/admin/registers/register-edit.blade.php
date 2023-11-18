@@ -179,7 +179,7 @@
                 <label class="text-sm" for="postalCode">CEP</label>
                 <input x-mask="99999-999"
                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                    maxlength="10" placeholder="CEP" wire:model="postalCode"
+                    maxlength="10" placeholder="CEP" wire:model.lazy="postalCode"
                     value="{{ old('postalCode', $postalCode ?? '') }}">
             </div>
 
@@ -208,7 +208,7 @@
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="state">Estado</label>
                 <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                    placeholder="UF" x-mask="aa" name="state" maxlength="2"
+                    placeholder="UF" x-mask="aa" wire:model="state" maxlength="2"
                     value="{{ old('state', $state ?? '') }}">
             </div>
             <div class="col-span-full">

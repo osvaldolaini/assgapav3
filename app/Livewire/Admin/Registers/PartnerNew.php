@@ -75,6 +75,24 @@ class PartnerNew extends Component
     {
         $this->newImg = $image;
     }
+    //BUSCAR CEP
+    public function updated($property)
+    {
+        if ($property === 'postalCode') {
+            $cep = str_replace ('-' ,'', $this->postalCode);
+            // dd($cep);
+            $ch = curl_init("https://viacep.com.br/ws/".$cep."/json/");
+            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            $result = json_decode(curl_exec($ch));
+            curl_close($ch);
+            if($result){
+                $this->address = $result->logradouro;
+                $this->city = $result->localidade;
+                $this->district = $result->bairro;
+                $this->state = $result->uf;
+            }
+        }
+    }
     public static function uploadPhoto($image)
     {
         // dd('storage/public/livewire-tmp/' . $image);
@@ -99,7 +117,7 @@ class PartnerNew extends Component
         if ($this->inputSearch != '') {
             $this->responsible_search = Partner::where('name', 'LIKE', '%' . $this->inputSearch . '%')
                 ->where('partner_category_master', '!=', 'Dependente')
-                ->limit(10)->get();
+                ->limit(7)->get();
         }
 
         $this->category = PartnerCategory::select('id','title')->orderBy('title','asc')
