@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Registers;
+namespace App\Livewire\Admin\Material;
 
-use App\Models\Admin\Registers\Partner;
+use App\Models\Admin\Material\Product;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-class Others extends Component
+class Permanent extends Component
 {
-    public Partner $partner;
-    public $breadcrumb_title = 'NÃO SÓCIOS';
+    public Product $product;
 
-    public $showModalUnavailability = false;
     public $showJetModal = false;
     public $showModalView = false;
     public $showModalCreate = false;
@@ -24,29 +22,70 @@ class Others extends Component
     public $registerId;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Registers\Partner"; //Model principal
-    public $modelId="partners.id"; //Ex: 'table.id' or 'id'
+    public $model = "App\Models\Admin\Material\Product"; //Model principal
+    public $modelId="id"; //Ex: 'table.id' or 'id'
     public $search;
-    public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
+    public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'partners.name,partners.cpf,partner_categories.title as category,partner_categories.color as color,partners.active';
-    public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
-    public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
-    public $paginate = 15; //Qtd de registros por página
+    public $columnsInclude = 'title,code,type,active';
+    public $searchable = 'title,code'; //Colunas pesquisadas no banco de dados
+    public $sort = "title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $paginate = 10; //Qtd de registros por página
+    //Campos
+    public $active = 1;
+    public $title;
+    public $code;
+    public $minimum;
+    public $type = 'permanente';
+    public $measured_unit;
 
     public function render()
     {
-        return view('livewire.admin.registers.list', [
+        return view('livewire.admin.material.permanent', [
             'dataTable' => $this->getData(),
         ]);
     }
+    public function resetAll()
+    {
+        $this->reset(
+    'title',
+    'code',
+        );
+    }
+    //CREATE
+    public function modalCreate()
+    {
+        $this->resetAll();
+        $this->showModalCreate = true;
+    }
 
+    public function store()
+    {
+        $this->rules = [
+            'title'=>'required',
+            'code'=>'required',
+        ];
+        $this->validate();
+
+        Product::create([
+            'title'         =>  $this->title,
+            'code'          =>  $this->code,
+            'type'          =>  $this->type,
+            'active'        => 1,
+            'created_by' => Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro criado com sucesso.');
+
+        $this->showModalCreate = false;
+        $this->resetAll();
+    }
     //READ
     public function showModalRead($id)
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = Partner::where('id', $id)->first();
+            $data = Product::where('id', $id)->first();
             $this->detail = [
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
@@ -58,21 +97,42 @@ class Others extends Component
             $this->detail = '';
         }
     }
-    //CREATE
-    public function modalCreate()
+    //UPDATE
+    public function showModalUpdate(Product $product)
     {
-        redirect()->route('new-other');
-    }
-    public function showModalUpdate(Partner $Partner)
-    {
-        redirect()->route('edit-other',$Partner);
-    }
+        $this->resetAll();
 
+        $this->model_id         =  $product->id;
+        $this->title            = $product->title;
+        $this->code             = $product->code;
+        $this->showModalEdit    = true;
+    }
+    public function update()
+    {
+        $this->rules = [
+            'title'=>'required',
+            'code'=>'required',
+        ];
+
+        $this->validate();
+
+        Product::updateOrCreate([
+            'id' => $this->model_id,
+        ], [
+            'title'         =>  $this->title,
+            'code'          =>  $this->code,
+            'updated_by'    =>Auth::user()->name,
+        ]);
+
+        $this->openAlert('success', 'Registro atualizado com sucesso.');
+
+        $this->showModalEdit = false;
+        $this->resetAll();
+    }
     //DELETE
     public function showModalDelete($id)
     {
         $this->showJetModal = true;
-
         if (isset($id)) {
             $this->registerId = $id;
         } else {
@@ -82,7 +142,7 @@ class Others extends Component
     //ACTIVE
     public function buttonActive($id)
     {
-        $data = Partner::where('id', $id)->first();
+        $data = Product::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
             $data->save();
@@ -94,21 +154,20 @@ class Others extends Component
     }
     public function delete($id)
     {
-        $data = Partner::where('id', $id)->first();
-        $data->active = 0;
+        $data = Product::where('id', $id)->first();
+        $data->active = 2;
         $data->save();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');
 
         $this->showJetModal = false;
+        $this->resetAll();
     }
     //MESSAGE
     public function openAlert($status, $msg)
     {
         $this->dispatch('openAlert', $status, $msg);
     }
-
-
     //SEARCH PERSONALIZADO
     private function getData()
     {
@@ -119,9 +178,7 @@ class Others extends Component
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
-        $query = $query->where('partner_category_master', '!=','Dependente');
-        $query = $query->where('partner_category_master', '!=','Sócio');
-
+        $query = $query->where('type', $this->type);
         $selects = array($this->modelId .' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
@@ -143,9 +200,7 @@ class Others extends Component
             $this->search($query);
         }
 
-        // dd($query->paginate($this->paginate));
-        // $query->take(3);
-        // return $query->simplePaginate($this->paginate);
+        // dd($query);
         return $query->paginate($this->paginate);
     }
     #PRICIPAL FUNCTIONS

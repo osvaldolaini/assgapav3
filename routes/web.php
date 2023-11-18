@@ -15,6 +15,8 @@ use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
+use App\Livewire\Admin\Material\Consumption;
+use App\Livewire\Admin\Material\Permanent;
 use App\Livewire\Admin\Registers\DependentEdit;
 use App\Livewire\Admin\Registers\DependentNew;
 use App\Livewire\Admin\Registers\Dependents;
@@ -147,4 +149,16 @@ Route::middleware([
     Route::get('/ambientes/indisponibilidades', AmbienceUnavailabilities::class)
         ->name('ambience-unavailabilities');
 });
-
+// Material pageAccess 5
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:5'
+])->group(function () {
+    Route::get('/material-permanente', Permanent::class)
+        ->name('material-permanent');
+    Route::get('/material-de-consumo', Consumption::class)
+        ->name('material-consuption');
+});

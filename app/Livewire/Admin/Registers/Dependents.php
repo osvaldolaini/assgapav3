@@ -33,7 +33,7 @@ class Dependents extends Component
     public $columnsInclude = 'partners.name,partners.cpf,partner_categories.title as category,partner_categories.color as color,partners.active';
     public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
-    public $paginate = 25; //Qtd de registros por página
+    public $paginate = 10; //Qtd de registros por página
 
     public function mount(Partner $partner)
     {
@@ -101,7 +101,7 @@ class Dependents extends Component
     public function delete($id)
     {
         $data = Partner::where('id', $id)->first();
-        $data->active = 2;
+        $data->active = 0;
         $data->save();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');

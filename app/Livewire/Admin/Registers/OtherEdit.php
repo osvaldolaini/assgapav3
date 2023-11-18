@@ -118,6 +118,7 @@ class OtherEdit extends Component
         $this->id = $partner->id;
         $this->name = $partner->name;
         $this->responsible = $partner->responsible;
+        $this->responsible_name = $partner->parent->name . ' ( ' . $partner->parent->cpf . ' )';
         $this->kinship = $partner->kinship;
         $this->image = $partner->image;
         $this->date_of_birth = $partner->date_of_birth;
@@ -164,14 +165,18 @@ class OtherEdit extends Component
     public function save()
     {
         $this->persist();
+        if($this->partner_category_master == 'Dependente') {
+            redirect()->route('edit-dependent',$this->id);
+        }
     }
     public function save_out()
     {
         $this->persist();
-        $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } else {
+        } elseif($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent',$this->responsible);
+        }else {
             redirect()->route('others');
         }
     }
@@ -194,6 +199,12 @@ class OtherEdit extends Component
                 'cnpj' => 'required|min:14',
             ];
         }
+        if ($this->partner_category_master == 'Dependente') {
+            $this->rules = [
+                'kinship' => 'required',
+                'responsible'=>'required'
+            ];
+        }
 
         $this->validate();
 
@@ -202,7 +213,7 @@ class OtherEdit extends Component
         ], [
             'name'                  =>$this->name,
             'responsible'           =>$this->responsible,
-            'kinship'               =>'PRÓPRIO',
+            'kinship'               =>$this->kinship,
             'image'                 =>$this->image,
             'date_of_birth'         =>$this->date_of_birth,
             'obs'                   =>$this->obs,
@@ -229,6 +240,7 @@ class OtherEdit extends Component
             'registration_at'       =>$this->registration_at,
             'discount'              =>$this->discount,
             'partner_category'      =>$this->partner_category,
+            'partner_category_master'=> $this->partner_category_master,
             'company'               =>$this->company,
 
             'updated_by'            =>Auth::user()->name,

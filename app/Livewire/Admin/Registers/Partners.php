@@ -33,7 +33,7 @@ class Partners extends Component
     public $columnsInclude = 'partners.name,partners.cpf,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
     public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
-    public $paginate = 25; //Qtd de registros por página
+    public $paginate = 15; //Qtd de registros por página
 
     public function render()
     {

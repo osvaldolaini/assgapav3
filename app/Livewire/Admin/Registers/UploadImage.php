@@ -32,25 +32,27 @@ class UploadImage extends Component
     }
     public function changePhoto()
     {
-
         $this->dispatch('submitForm');
     }
-    public function uploadPhoto()
+    public function updated($property)
+    // public function uploadPhoto()
     {
-        $this->rules = [
-            'uploadimage'   => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
-        ];
+        if ($property === 'uploadimage') {
+            $this->rules = [
+                'uploadimage'   => ['nullable', 'mimes:jpg,jpeg,png', 'max:1024'],
+            ];
 
-        $this->validate();
-        if (isset($this->uploadimage)) {
-            $ext = $this->uploadimage->getClientOriginalExtension();
-            $code = Str::uuid();
-            $new_name = $code . '.jpg';
-            $this->uploadimage->storeAs('public/livewire-tmp', $new_name);
+            $this->validate();
+            if (isset($this->uploadimage)) {
+                $ext = $this->uploadimage->getClientOriginalExtension();
+                $code = Str::uuid();
+                $new_name = $code . '.jpg';
+                $this->uploadimage->storeAs('public/livewire-tmp', $new_name);
 
-            $this->dispatch('uploadingImage', $new_name);
-            $this->valid = true;
-            $this->openAlert('success', 'Foto validada com sucesso.');
+                $this->dispatch('uploadingImage', $new_name);
+                $this->valid = true;
+                $this->openAlert('success', 'Foto validada com sucesso.');
+            }
         }
     }
     public function excluirTemp()
@@ -61,10 +63,10 @@ class UploadImage extends Component
     {
         $this->partner->image = '';
         $this->partner->save();
-        $name = explode('.',$this->photo);
-        Storage::delete('public/partners/'.$this->photo);
-        Storage::delete('public/partners/'.$name[0].'.webp');
-        Storage::delete('public/partners/'.$name[0].'.jpg');
+        $name = explode('.', $this->photo);
+        Storage::delete('public/partners/' . $this->photo);
+        Storage::delete('public/partners/' . $name[0] . '.webp');
+        Storage::delete('public/partners/' . $name[0] . '.jpg');
         $this->photo = $this->partner->image;
     }
     //pega o status do registro
@@ -72,6 +74,4 @@ class UploadImage extends Component
     {
         $this->dispatch('openAlert', $status, $msg);
     }
-
-
 }

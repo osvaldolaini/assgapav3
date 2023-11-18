@@ -172,7 +172,9 @@ class DependentEdit extends Component
         $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } else {
+        } elseif($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent',$this->responsible);
+        }else {
             redirect()->route('others');
         }
     }
@@ -198,6 +200,7 @@ class DependentEdit extends Component
         if ($this->partner_category_master == 'Dependente') {
             $this->rules = [
                 'kinship' => 'required',
+                'responsible'=>'required'
             ];
         }
         if ($this->newImg) {
@@ -241,6 +244,7 @@ class DependentEdit extends Component
             'registration_at'       => $this->registration_at,
             'discount'              => $this->discount,
             'partner_category'      => $this->partner_category,
+            'partner_category_master'      => $this->partner_category_master,
             'company'               => $this->company,
 
             'updated_by'            => Auth::user()->name,

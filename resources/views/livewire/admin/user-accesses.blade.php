@@ -28,6 +28,9 @@
                     <div class="col-span-2 sm:col-span-6">
                         <x-link-checkbox :access="$access" page="4" title="Ambientes"></x-link-checkbox>
                     </div>
+                    <div class="col-span-2 sm:col-span-6">
+                        <x-link-checkbox :access="$access" page="5" title="Estoque"></x-link-checkbox>
+                    </div>
                 </div>
             </fieldset>
         </section>

@@ -111,6 +111,7 @@ class PartnerEdit extends Component
 
     public function mount(Partner $partner)
     {
+
         $this->breadcrumb_title = $partner->name;
         $this->registration_at = date('d/m/Y');
         $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
@@ -119,6 +120,7 @@ class PartnerEdit extends Component
         $this->id = $partner->id;
         $this->name = $partner->name;
         $this->responsible = $partner->responsible;
+        // $this->responsible_name = $partner->parent->name . ' ( ' . $partner->parent->cpf . ' )';
         $this->kinship = $partner->kinship;
         $this->image = $partner->image;
         $this->date_of_birth = $partner->date_of_birth;
@@ -157,6 +159,7 @@ class PartnerEdit extends Component
                 ->limit(7)->get();
         }
 
+
         $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->where('parent_category', $this->partner_category_master)->get();
         return view('livewire.admin.registers.register-edit');
@@ -165,13 +168,18 @@ class PartnerEdit extends Component
     public function save()
     {
         $this->persist();
+        if($this->partner_category_master == 'Dependente') {
+            redirect()->route('edit-dependent',$this->id);
+        }
     }
     public function save_out()
     {
         $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } else {
+        } elseif($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent',$this->responsible);
+        }else {
             redirect()->route('others');
         }
     }
@@ -194,9 +202,15 @@ class PartnerEdit extends Component
                 'cnpj' => 'required|min:14',
             ];
         }
+        if ($this->partner_category_master == 'Dependente') {
+            $this->rules = [
+                'kinship' => 'required',
+                'responsible'=>'required'
+            ];
+        }
 
         $this->validate();
-
+        // dd($this->partner_category_master);
         if ($this->newImg) {
             if ($this->newImg != $this->image) {
                 $this->image = $this->newImg;
@@ -209,7 +223,7 @@ class PartnerEdit extends Component
         ], [
             'name'                  => $this->name,
             'responsible'           => $this->responsible,
-            'kinship'               => 'PRÓPRIO',
+            'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,
             'obs'                   => $this->obs,
@@ -236,6 +250,7 @@ class PartnerEdit extends Component
             'registration_at'       => $this->registration_at,
             'discount'              => $this->discount,
             'partner_category'      => $this->partner_category,
+            'partner_category_master'      => $this->partner_category_master,
             'company'               => $this->company,
 
             'updated_by'            => Auth::user()->name,

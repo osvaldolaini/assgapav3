@@ -61,7 +61,7 @@
                             x-on:livewire-upload-error="isUploading = false"
                             x-on:livewire-upload-progress="progress = $event.detail.progress">
                             <!-- File Input -->
-                            <input id="dropzone-file" type="file" class="hidden" wire:model="uploadimage"
+                            <input id="dropzone-file" type="file" class="hidden" wire:model.lazy="uploadimage"
                             />
 
                             @error('uploadimage')

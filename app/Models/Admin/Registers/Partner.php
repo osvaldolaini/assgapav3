@@ -64,11 +64,15 @@ class Partner extends Model
         return $this->hasMany(Partner::class,'responsible','id');
     }
     /*Setar a categoria master */
-    public function setPartnerCategoryAttribute($value)
+    public function setActiveAttribute($value)
     {
-        $this->attributes['partner_category']=$value;
-        $master = PartnerCategory::where('id','=', $value)->first();
-        $this->attributes['partner_category_master']=$master->parent_category;
+        $this->attributes['active']=$value;
+        if($value == 0)
+        {
+            $master = PartnerCategory::where('parent_category', 'Não sócio')->first();
+            $this->attributes['partner_category']=$master->id;
+            $this->attributes['partner_category_master']=$master->parent_category;
+        }
     }
     /*Setar a e pegar datas */
     public function setPrintDateAttribute($value)

@@ -213,8 +213,7 @@
             </div>
             <div class="col-span-full">
                 <label class="text-sm" for="obs">Observações</label>
-                <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                    placeholder="obso" name="obs" value="{{ old('obs', $obs ?? '') }}">
+                <textarea wire:model="obs" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" rows="5"></textarea>
             </div>
         </form>
         <div class="col-span-full">
