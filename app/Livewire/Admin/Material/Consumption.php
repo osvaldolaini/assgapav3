@@ -39,11 +39,20 @@ class Consumption extends Component
     public $type = 'consumo';
     public $measured_unit;
 
+    protected $listeners =
+    [
+        'uploadingStock',
+    ];
+
     public function render()
     {
         return view('livewire.admin.material.consumption', [
             'dataTable' => $this->getData(),
         ]);
+    }
+    public function uploadingStock()
+    {
+        $this->getData();
     }
     public function resetAll()
     {

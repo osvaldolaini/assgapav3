@@ -8,7 +8,7 @@
             required={{ $required }}
             x-mask="99/99/9999"
             placeholder="99/99/9999"
-            class="w-full rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+            class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
         <span
             class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"

@@ -71,7 +71,7 @@
                                         </tr>
                                     @else
                                         @foreach ($dataTable as $data)
-                                            <tr>
+                                            <tr wire:key="{{ $data->id }}">
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
                                                     {{ $data->title }}
@@ -101,7 +101,7 @@
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->code }}
+                                                    @livewire('admin.material.stocks', ['product' => $data], key($data->id))
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
@@ -222,9 +222,6 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-
-
-
                 </div>
             </form>
         </x-slot>
