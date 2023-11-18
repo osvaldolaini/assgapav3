@@ -15,6 +15,17 @@ use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
+use App\Livewire\Admin\Registers\DependentEdit;
+use App\Livewire\Admin\Registers\DependentNew;
+use App\Livewire\Admin\Registers\Dependents;
+use App\Livewire\Admin\Registers\History;
+use App\Livewire\Admin\Registers\OtherEdit;
+use App\Livewire\Admin\Registers\OtherNew;
+use App\Livewire\Admin\Registers\Others;
+use App\Livewire\Admin\Registers\PartnerEdit;
+use App\Livewire\Admin\Registers\PartnerNew;
+use App\Livewire\Admin\Registers\Partners;
+use App\Livewire\Admin\Registers\SelectCards;
 use App\Livewire\Admin\UserAccesses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -82,7 +93,6 @@ Route::middleware([
         Route::get('/acessos-do-usuários/{user}', UserAccesses::class)
         ->name('user.access');
 });
-
 // Cadastros pageAccess 3
 Route::middleware([
     'auth:sanctum',
@@ -91,10 +101,30 @@ Route::middleware([
     'registerLogging',
     'pagesAccess:3'
 ])->group(function () {
-    Route::get('/sócios', ListUser::class)
+    Route::get('/cadastros-sócios', Partners::class)
         ->name('partners');
-    Route::get('/não-sócios', ListUser::class)
+    Route::get('/cadastros-sócios/novo', PartnerNew::class)
+        ->name('new-partner');
+    Route::get('/cadastros-sócios/{partner}/editar', PartnerEdit::class)
+        ->name('edit-partner');
+    Route::get('/cadastros-não-sócios', Others::class)
         ->name('others');
+    Route::get('/cadastros-não-sócios/novo', OtherNew::class)
+        ->name('new-other');
+    Route::get('/cadastros-não-sócios/{partner}/editar', PartnerEdit::class)
+        ->name('edit-other');
+    Route::get('/cadastros-sócios/{partner}/carteirinhas', SelectCards::class)
+        ->name('select-cards');
+    // Route::get('/carteirinhas', Card::class)
+    //     ->name('card');
+    Route::get('/cadastros/{partner}/historico', History::class)
+        ->name('history');
+    Route::get('/cadastros/{partner}/dependentes', Dependents::class)
+        ->name('dependent');
+        Route::get('/cadastros-dependente/{partner}/novo', DependentNew::class)
+        ->name('new-dependent');
+    Route::get('/cadastros-dependente/{partner}/editar', DependentEdit::class)
+        ->name('edit-dependent');
 });
 // Ambientes pageAccess 4
 Route::middleware([
@@ -117,5 +147,4 @@ Route::middleware([
     Route::get('/ambientes/indisponibilidades', AmbienceUnavailabilities::class)
         ->name('ambience-unavailabilities');
 });
-
 

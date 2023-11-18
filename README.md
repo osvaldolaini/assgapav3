@@ -5,6 +5,12 @@
 </p>
 
 # Sistema ASSGAPA V3
+## V 3.9 18/11/2023
+    Cadastros
+        -Cadastro
+        -Dependentes
+        -Botões
+
 ## V 3.8 12/11/2023
     Ambientes
         -Cadastro

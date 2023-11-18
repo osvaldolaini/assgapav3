@@ -1,16 +1,15 @@
 <?php
 
-namespace App\Livewire\Admin\Ambiences;
+namespace App\Livewire\Admin\Registers;
 
-use App\Models\Admin\Ambiences\Ambience;
-use App\Models\Admin\Ambiences\AmbienceUnavailability;
+use App\Models\Admin\Registers\Partner;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
-class Ambiences extends Component
+class Dependents extends Component
 {
-    public Ambience $ambience;
-    public $breadcrumb_title = 'AMBIENTES';
+    public Partner $partner;
+    public $breadcrumb_title;
 
     public $showModalUnavailability = false;
     public $showJetModal = false;
@@ -23,36 +22,29 @@ class Ambiences extends Component
     public $logs;
     public $model_id;
     public $registerId;
+    public $responsible;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Ambiences\Ambience"; //Model principal
-    public $modelId="ambiences.id"; //Ex: 'table.id' or 'id'
+    public $model = "App\Models\Admin\Registers\Partner"; //Model principal
+    public $modelId="partners.id"; //Ex: 'table.id' or 'id'
     public $search;
-    public $relationTables = "ambience_categories,ambience_categories.id,ambiences.ambience_category"; //Relacionamentos ( table , key , foreingKey )
+    public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'ambiences.title,ambience_categories.title as category,ambiences.active,ambiences.capacity';
-    public $searchable = 'ambiences.title,ambience_categories.title,capacity'; //Colunas pesquisadas no banco de dados
-    public $sort = "ambiences.title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
-    public $paginate = 10; //Qtd de registros por página
+    public $columnsInclude = 'partners.name,partners.cpf,partner_categories.title as category,partner_categories.color as color,partners.active';
+    public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
+    public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $paginate = 25; //Qtd de registros por página
 
-    public $title;
-    public $start;
-    public $end;
-    public $ambience_title = '';
-
-
+    public function mount(Partner $partner)
+    {
+        $this->breadcrumb_title = 'DEPENDENTES DE: '.$partner->name;
+        $this->responsible = $partner->id;
+    }
     public function render()
     {
-        return view('livewire.admin.ambiences.ambiences', [
+        return view('livewire.admin.registers.dependents', [
             'dataTable' => $this->getData(),
         ]);
-    }
-    public function resetAll()
-    {
-        $this->reset(
-            'title',
-            'color',
-        );
     }
 
     //READ
@@ -60,7 +52,7 @@ class Ambiences extends Component
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = Ambience::where('id', $id)->first();
+            $data = Partner::where('id', $id)->first();
             $this->detail = [
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
@@ -75,35 +67,13 @@ class Ambiences extends Component
     //CREATE
     public function modalCreate()
     {
-        redirect()->route('new-ambience');
+        redirect()->route('new-dependent');
     }
-    public function showModalUpdate(Ambience $ambience)
+    public function showModalUpdate(Partner $Partner)
     {
-        redirect()->route('edit-ambience',$ambience);
+        redirect()->route('edit-dependent',$Partner);
     }
 
-    public function update()
-    {
-        $this->rules = [
-            'title' => 'required',
-            'color'  => 'required',
-        ];
-
-        $this->validate();
-
-        Ambience::updateOrCreate([
-            'id' => $this->model_id,
-        ], [
-            'title'                 => $this->title,
-            'color'                 => $this->color,
-            'updated_by' => Auth::user()->name,
-        ]);
-
-        $this->openAlert('success', 'Registro atualizado com sucesso.');
-
-        $this->showModalEdit = false;
-        $this->resetAll();
-    }
     //DELETE
     public function showModalDelete($id)
     {
@@ -118,7 +88,7 @@ class Ambiences extends Component
     //ACTIVE
     public function buttonActive($id)
     {
-        $data = Ambience::where('id', $id)->first();
+        $data = Partner::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
             $data->save();
@@ -130,14 +100,13 @@ class Ambiences extends Component
     }
     public function delete($id)
     {
-        $data = Ambience::where('id', $id)->first();
+        $data = Partner::where('id', $id)->first();
         $data->active = 2;
         $data->save();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');
 
         $this->showJetModal = false;
-        $this->resetAll();
     }
     //MESSAGE
     public function openAlert($status, $msg)
@@ -145,52 +114,7 @@ class Ambiences extends Component
         $this->dispatch('openAlert', $status, $msg);
     }
 
-    //Indisponibilidades
-    public function modalUnavailability($id)
-    {
-        $data = Ambience::where('id', $id)->first();
-        $this->ambience_title = $data->title;
-        $this->reset(
-            'title',
-            'start',
-            'end',
-        );
 
-        if (isset($id)) {
-            $this->registerId = $id;
-        } else {
-            $this->registerId = '';
-        }
-        $this->showModalUnavailability = true;
-    }
-
-    public function store()
-    {
-        $this->rules = [
-            'title' => 'required',
-            'start' => 'required',
-            'end' => 'required',
-        ];
-        $this->validate();
-
-        AmbienceUnavailability::create([
-            'title'          => $this->title,
-            'start'          => $this->start,
-            'end'            => $this->end,
-            'ambience_id'    => $this->registerId,
-            'active'         => 1,
-            'created_by' => Auth::user()->name,
-        ]);
-
-        $this->openAlert('success', 'Registro criado com sucesso.');
-
-        $this->showModalUnavailability = false;
-        $this->reset(
-            'title',
-            'start',
-            'end',
-        );
-    }
     //SEARCH PERSONALIZADO
     private function getData()
     {
@@ -201,6 +125,9 @@ class Ambiences extends Component
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
+        $query = $query->where('partner_category_master','Dependente');
+        $query->where('responsible', $this->partner->id);
+
         $selects = array($this->modelId .' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
@@ -222,7 +149,9 @@ class Ambiences extends Component
             $this->search($query);
         }
 
-        // dd($query);
+        // dd($query->paginate($this->paginate));
+        // $query->take(3);
+        // return $query->simplePaginate($this->paginate);
         return $query->paginate($this->paginate);
     }
     #PRICIPAL FUNCTIONS

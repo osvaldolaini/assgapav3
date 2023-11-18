@@ -37,6 +37,7 @@ class CreatePartnersTable extends Migration
             $table->string('number')->nullable();
             $table->string('email')->nullable();
             $table->string('email_birthday')->nullable();
+            $table->boolean('send_email_barthday')->nullable();
             $table->text('needs')->nullable();
             $table->date('access_pool')->nullable();
             $table->date('print_date')->nullable();

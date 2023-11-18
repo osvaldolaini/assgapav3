@@ -172,7 +172,8 @@ return [
         App\Providers\JetstreamServiceProvider::class,
 
         Jorenvh\Share\Providers\ShareServiceProvider::class,
-        Intervention\Image\ImageServiceProvider::class
+        Intervention\Image\ImageServiceProvider::class,
+        // Mpdf\MpdfServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -190,7 +191,8 @@ return [
         // 'Example' => App\Facades\Example::class,
 
         'Share' => Jorenvh\Share\ShareFacade::class,
-        'Image' => Intervention\Image\Facades\Image::class
+        'Image' => Intervention\Image\Facades\Image::class,
+        // 'Mpdf' => Mpdf\MpdfFacade::class,
     ])->toArray(),
 
 ];

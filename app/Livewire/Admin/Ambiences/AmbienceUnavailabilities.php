@@ -30,7 +30,7 @@ class AmbienceUnavailabilities extends Component
     public $customSearch; //Colunas personalizadas, customizar no model
     public $columnsInclude = 'unavailabilities.title as motive,start,end,ambience_id,ambiences.title';
     public $searchable = 'unavailabilities.title'; //Colunas pesquisadas no banco de dados
-    public $sort = "unavailabilities.end,asc|ambiences.title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $sort = "unavailabilities.end,desc|ambiences.title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
     //Campos

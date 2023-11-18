@@ -49,7 +49,7 @@
 
                         <!-- Dropdown Cadastros -->
                             <button id="dropdownArticle" data-dropdown-toggle="dropdown"
-                                class="flex items-center justify-start w-full px-4 py-0.5
+                                class="flex items-center justify-start w-full px-4 py-1
                                     font-thin uppercase transition-colors duration-200
                                     {{ Request::is('*cadastros*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
@@ -92,7 +92,7 @@
                                     divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
                                 <ul class="text-sm ml-5 -mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                     aria-labelledby="dropdownArticle">
-                                    <x-link-dropdown url="list-users" active="*agendas*">
+                                    <x-link-dropdown url="partners" active="*cadastros-sócios*">
                                         <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="0.4"
@@ -103,7 +103,7 @@
                                         </svg>
                                         Sócios
                                     </x-link-dropdown>
-                                    <x-link-dropdown url="list-users" active="*agendas*">
+                                    <x-link-dropdown url="others" active="*cadastros-não-sócios*">
                                         <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
                                             xmlns="http://www.w3.org/2000/svg">
                                             <path opacity="0.4"
@@ -235,7 +235,7 @@
 
                                 </ul>
                             </div>
-                        <!-- End Dropdown Cadastros -->
+                        <!-- End Dropdown Configurações -->
 
                         <a href="{{ url('/user/profile') }}"
                             class="flex items-center justify-start w-full px-4 py-2 my-1

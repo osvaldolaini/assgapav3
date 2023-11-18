@@ -1,10 +1,30 @@
 <div class="w-100">
     <x-breadcrumb>
-        <div class="grid grid-cols-7 gap-4 text-gray-600 ">
+        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
+            </div>
+            <div class="col-span-2 flex justify-end">
+                <div class="tooltip tooltip-top p-0" data-tip="Indisponibilidades">
+                    <a href="{{ route('ambience-unavailabilities') }}"
+                    class="py-2 px-3 flex
+                    hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
+                    duration-200 whitespace-nowrap">
+                        Indisponibilidades  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 ml-1" viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                            <g>
+                                <path fill="currentColor" d="M60.005,23.299c9.799,0,19.014,3.817,25.946,10.75C92.884,40.98,96.701,50.197,96.701,60c0,9.803-3.817,19.02-10.75,25.952
+                                    C79.02,92.884,69.803,96.701,60,96.701c-9.803,0-19.02-3.817-25.952-10.75C27.116,79.02,23.299,69.804,23.299,60
+                                    c0-9.804,3.817-19.02,10.75-25.952c6.931-6.931,16.148-10.749,25.955-10.75H60.005 M60,3.299
+                                    C45.491,3.3,30.977,8.836,19.906,19.906c-22.144,22.144-22.143,58.045,0,80.188C30.978,111.166,45.489,116.701,60,116.701
+                                    s29.021-5.535,40.094-16.607c22.144-22.144,22.144-58.044,0-80.188C89.021,8.833,74.513,3.297,60,3.299L60,3.299z"/>
+                            </g>
+                            <rect x="49.307" y="11.443" fill="currentColor" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.7729 59.8067)" width="20.999" height="96.728"/>
+                            </svg>
+                    </a>
+                </div>
+
             </div>
         </div>
     </x-breadcrumb>
@@ -84,8 +104,8 @@
                                                 <td
                                                     class="w-2/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                     <div class="tooltip tooltip-top p-0" data-tip="Indisponibilidades">
-                                                        <a href="{{ route('ambience-unavailabilities') }}"
-                                                        class="py-2 px-3 flex
+                                                        <button wire:click="modalUnavailability({{ $data->id }})"
+                                                        class="py-2 px-3
                                                         hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
                                                         duration-200 whitespace-nowrap">
                                                             <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
@@ -98,7 +118,7 @@
                                                                 </g>
                                                                 <rect x="49.307" y="11.443" fill="currentColor" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.7729 59.8067)" width="20.999" height="96.728"/>
                                                                 </svg>
-                                                        </a>
+                                                        </button>
                                                     </div>
                                                     <div class="tooltip tooltip-top p-0"
                                                     data-tip="Valores">
@@ -198,6 +218,58 @@
         </x-slot>
         <x-slot name="footer">
             <x-secondary-button wire:click="$toggle('showModalView')" class="mx-2">
+                Fechar
+            </x-secondary-button>
+        </x-slot>
+    </x-dialog-modal>
+        {{-- MODAL CREATE --}}
+    <x-dialog-modal wire:model="showModalUnavailability">
+        <x-slot name="title">Nova indisponibilidade: {{ $ambience_title }}</x-slot>
+        <x-slot name="content">
+            <form wire:submit="store">
+                <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                    <div class="col-span-full ">
+                        <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            *Motivo</label>
+                        <input type="text" wire:model="title" placeholder="Motivo" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            Início</label>
+                        <input type="text" x-mask="99/99/9999" wire:model="start" placeholder="Início" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-2 sm:col-span-1">
+                        <label for="end"  class="block text-sm font-medium text-gray-900 dark:text-white">
+                            Término</label>
+                        <input type="text" x-mask="99/99/9999" wire:model="end" placeholder="Término" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                </div>
+            </form>
+        </x-slot>
+        <x-slot name="footer">
+            <button type="submit" wire:click="store"
+                class="text-white
+                        bg-blue-700 hover:bg-blue-800
+                        focus:ring-4 focus:outline-none focus:ring-blue-300
+                        font-medium rounded-lg text-sm px-5 py-2.5
+                        text-center dark:bg-blue-600 dark:hover:bg-blue-700
+                        dark:focus:ring-blue-800">
+                Salvar
+            </button>
+            <x-secondary-button wire:click="$toggle('modalUnavailability')" class="mx-2">
                 Fechar
             </x-secondary-button>
         </x-slot>

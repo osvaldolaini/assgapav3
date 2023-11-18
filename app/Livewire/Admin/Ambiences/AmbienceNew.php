@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Ambiences;
 
 use App\Models\Admin\Configs\AmbienceCategory;
 use App\Models\Admin\Ambiences\Ambience;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AmbienceNew extends Component
@@ -53,17 +54,18 @@ class AmbienceNew extends Component
         $this->validate();
         $ambience = Ambience::create([
             'active' =>1,
-            'title' => $this->title,
-            'capacity' => $this->capacity,
-            'cashback' => $this->cashback,
-            'time_week' => $this->time_week,
-            'time_weekend' => $this->time_weekend,
-            'multiple' => $this->multiple,
-            'need' => $this->need,
-            'ambience_category' => $this->ambience_category,
-            'obs'=> $this->obs,
-            'term'=> $this->term,
-            'contract'=> $this->contract,
+            'title'                 => $this->title,
+            'capacity'              => $this->capacity,
+            'cashback'              => $this->cashback,
+            'time_week'             => $this->time_week,
+            'time_weekend'          => $this->time_weekend,
+            'multiple'              => $this->multiple,
+            'need'                  => $this->need,
+            'ambience_category'     => $this->ambience_category,
+            'obs'                   => $this->obs,
+            'term'                  => $this->term,
+            'contract'              => $this->contract,
+            'created_by'            =>Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         redirect()->route('ambience-values',$ambience->id);

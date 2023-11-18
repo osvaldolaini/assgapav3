@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Ambiences;
 
 use App\Models\Admin\Configs\AmbienceCategory;
 use App\Models\Admin\Ambiences\Ambience;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class AmbienceEdit extends Component
@@ -77,17 +78,18 @@ class AmbienceEdit extends Component
         Ambience::updateOrCreate([
             'id' => $this->id,
         ], [
-            'title' => $this->title,
-            'capacity' => $this->capacity,
-            'cashback' => $this->cashback,
-            'time_week' => $this->time_week,
-            'time_weekend' => $this->time_weekend,
-            'multiple' => $this->multiple,
-            'need' => $this->need,
-            'ambience_category' => $this->ambience_category,
-            'obs'=> $this->obs,
-            'term'=> $this->term,
-            'contract'=> $this->contract,
+            'title'                 => $this->title,
+            'capacity'              => $this->capacity,
+            'cashback'              => $this->cashback,
+            'time_week'             => $this->time_week,
+            'time_weekend'          => $this->time_weekend,
+            'multiple'              => $this->multiple,
+            'need'                  => $this->need,
+            'ambience_category'     => $this->ambience_category,
+            'obs'                   => $this->obs,
+            'term'                  => $this->term,
+            'contract'              => $this->contract,
+            'updated_by'            =>Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
     }
