@@ -1,6 +1,6 @@
 @props(['pdf', 'excel','print'])
 <div>
-    <div class="flex col-span-full items-center space-x-2 mt-2 justify-start px-4 pb-0 mb-0">
+    <div class="flex col-span-full items-center space-x-2 my-1 justify-start px-4 pb-0 mb-0">
         @if (isset($print))
             <div class="tooltip tooltip-top p-0" data-tip="Imprimir">
                 <button wire:click="printExport()"
@@ -8,7 +8,7 @@
                     text-sm tracking-wide text-white transition-colors
                     duration-200 bg-blue-500 rounded-lg sm:w-auto
                     hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                    <svg class="h-6 w-6 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <svg class="h-5 w-5 " viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M18.3529 14H19C19.9428 14 20.4142 14 20.7071 13.7071C21 13.4142 21 12.9428 21 12V11C21 9.11438 21 8.17157 20.4142 7.58579C19.8284 7 18.8856 7 17 7H7C5.11438 7 4.17157 7 3.58579 7.58579C3 8.17157 3 9.11438 3 11V13C3 13.4714 3 13.7071 3.14645 13.8536C3.29289 14 3.5286 14 4 14H5.64706" stroke="currentColor" stroke-width="2"/>
                         <path d="M6 20.3063L6 12C6 11.0572 6 10.5858 6.29289 10.2929C6.58579 10 7.05719 10 8 10L16 10C16.9428 10 17.4142 10 17.7071 10.2929C18 10.5858 18 11.0572 18 12L18 20.3063C18 20.6228 18 20.7811 17.8962 20.856C17.7924 20.9308 17.6422 20.8807 17.3419 20.7806L15.1581 20.0527C15.0798 20.0266 15.0406 20.0135 15 20.0135C14.9594 20.0135 14.9202 20.0266 14.8419 20.0527L12.1581 20.9473C12.0798 20.9734 12.0406 20.9865 12 20.9865C11.9594 20.9865 11.9202 20.9734 11.8419 20.9473L9.15811 20.0527C9.07975 20.0266 9.04057 20.0135 9 20.0135C8.95943 20.0135 8.92025 20.0266 8.84189 20.0527L6.65811 20.7806C6.3578 20.8807 6.20764 20.9308 6.10382 20.856C6 20.7811 6 20.6228 6 20.3063Z" stroke="currentColor" stroke-width="2"/>
                         <path d="M18 7V5.88C18 4.87191 18 4.36786 17.8038 3.98282C17.6312 3.64413 17.3559 3.36876 17.0172 3.19619C16.6321 3 16.1281 3 15.12 3H8.88C7.87191 3 7.36786 3 6.98282 3.19619C6.64413 3.36876 6.36876 3.64413 6.19619 3.98282C6 4.36786 6 4.87191 6 5.88V7" stroke="currentColor" stroke-width="2"/>
@@ -25,7 +25,7 @@
                     class="flex items-center justify-center  p-1
                  text-sm tracking-wide text-white transition-colors
                 duration-200 bg-green-500 rounded-lg sm:w-auto hover:bg-green-600 dark:hover:bg-green-500 dark:bg-green-600">
-                    <svg class="h-6 w-6 text-white " fill="currentColor" viewBox="0 0 32 32"
+                    <svg class="h-5 w-5 text-white " fill="currentColor" viewBox="0 0 32 32"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M28.781,4.405H18.651V2.018L2,4.588V27.115l16.651,2.868V26.445H28.781A1.162,1.162,0,0,0,30,25.349V5.5A1.162,1.162,0,0,0,28.781,4.405Zm.16,21.126H18.617L18.6,23.642h2.487v-2.2H18.581l-.012-1.3h2.518v-2.2H18.55l-.012-1.3h2.549v-2.2H18.53v-1.3h2.557v-2.2H18.53v-1.3h2.557v-2.2H18.53v-2H28.941Z"
@@ -49,7 +49,7 @@
                 text-sm tracking-wide text-white transition-colors
                 duration-200 bg-red-500 rounded-lg sm:w-auto
                 hover:bg-red-600 dark:hover:bg-red-500 dark:bg-red-600">
-                <svg class="h-6 w-6 " version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                <svg class="h-5 w-5 " version="1.1" id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                 viewBox="0 0 512 512"  xml:space="preserve">
            <g>
                <path fill="currentColor" d="M347.746,346.204c-8.398-0.505-28.589,0.691-48.81,4.533c-11.697-11.839-21.826-26.753-29.34-39.053

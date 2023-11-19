@@ -51,7 +51,7 @@
                         <!-- Dropdown Cadastros -->
                         <button id="dropdownArticle" data-dropdown-toggle="dropdown"
                             class="flex items-center justify-start w-full px-4 py-1
-                                    font-thin uppercase transition-colors duration-200
+                                    font-thin uppercase transition-colors duration-200 mb-0
                                     {{ Request::is('*cadastros*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
                                         : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
@@ -91,7 +91,7 @@
                         <div id="dropdown"
                             class="justify-start w-full z-10 hidden bg-white
                                     divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
-                            <ul class="text-sm ml-5 -mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
+                            <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownArticle">
                                 <x-link-dropdown url="partners" active="*cadastros-sócios*">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
@@ -155,8 +155,8 @@
                         <div id="dropdownMaterial"
                             class="justify-start w-full z-10 hidden bg-white
                             divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
-                            <ul class="text-sm ml-5 -mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="dropdownArticle">
+                            <ul class="text-sm ml-5 mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
+                                aria-labelledby="dropdownMaterial">
                                 <x-link-dropdown url="material-permanent" active="*material-permanente*">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4"
@@ -215,7 +215,7 @@
                         <div id="configs"
                             class="justify-start w-full z-10 hidden bg-white
                                     divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
-                            <ul class="text-sm ml-5 -mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
+                            <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownConfigs">
                                 <x-link-dropdown url="configuration" active="*conf">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">

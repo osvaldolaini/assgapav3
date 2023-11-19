@@ -35,7 +35,7 @@
             :print="true"
             :excel="true">
             </x-table-buttons-relatories>
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
+            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg mb-6 mt-1 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">

@@ -16,6 +16,7 @@ use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
 use App\Livewire\Admin\Material\Consumption;
+use App\Livewire\Admin\Material\MovementStock;
 use App\Livewire\Admin\Material\Permanent;
 use App\Livewire\Admin\Registers\DependentEdit;
 use App\Livewire\Admin\Registers\DependentNew;
@@ -161,4 +162,6 @@ Route::middleware([
         ->name('material-permanent');
     Route::get('/material-de-consumo', Consumption::class)
         ->name('material-consuption');
+    Route::get('/material-movimentações', MovementStock::class)
+        ->name('material-movement');
 });
