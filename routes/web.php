@@ -15,6 +15,13 @@ use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
+use App\Livewire\Admin\Locations\LocationEdit;
+use App\Livewire\Admin\Locations\LocationNew;
+use App\Livewire\Admin\Locations\Locations;
+use App\Livewire\Admin\Marketing\EmailPromo;
+use App\Livewire\Admin\Marketing\EmailBirth;
+use App\Livewire\Admin\Marketing\EmailPromoEdit;
+use App\Livewire\Admin\Marketing\EmailPromoNew;
 use App\Livewire\Admin\Material\Consumption;
 use App\Livewire\Admin\Material\MovementStock;
 use App\Livewire\Admin\Material\Permanent;
@@ -114,7 +121,7 @@ Route::middleware([
         ->name('others');
     Route::get('/cadastros-não-sócios/novo', OtherNew::class)
         ->name('new-other');
-    Route::get('/cadastros-não-sócios/{partner}/editar', PartnerEdit::class)
+    Route::get('/cadastros-não-sócios/{partner}/editar', OtherEdit::class)
         ->name('edit-other');
     Route::get('/cadastros-sócios/{partner}/carteirinhas', SelectCards::class)
         ->name('select-cards');
@@ -164,4 +171,37 @@ Route::middleware([
         ->name('material-consuption');
     Route::get('/material-movimentações', MovementStock::class)
         ->name('material-movement');
+});
+// Marketing pageAccess 6
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:6'
+])->group(function () {
+    Route::get('/emails-promocionais', EmailPromo::class)
+        ->name('emails-promo');
+    Route::get('/emails-promocionais-novo', EmailPromoNew::class)
+        ->name('new-email-promo');
+    Route::get('/emails-promocionais/{email}/editar', EmailPromoEdit::class)
+        ->name('edit-email-promo');
+    Route::get('/emails-aniversariantes', EmailBirth::class)
+        ->name('emails-birth');
+});
+// Locações pageAccess 7
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:7'
+])->group(function () {
+    Route::get('/locações', Locations::class)
+        ->name('locations');
+    Route::get('/locações/novo', LocationNew::class)
+        ->name('new-location');
+    Route::get('/locações/{location}/editar', LocationEdit::class)
+        ->name('edit-location');
+
 });

@@ -16,9 +16,11 @@ return new class extends Migration
             $table->string('title',100)->nullable();
             $table->string('acronym',50)->nullable();
             $table->string('president',100)->nullable();
+            $table->string('financial',100)->nullable();
             $table->string('slug',150)->nullable();
             $table->string('update_by',50)->nullable();
             $table->string('email')->nullable();
+            $table->longText('email_happy')->nullable();
             $table->string('phone')->nullable();
             $table->string('cellphone')->nullable();
             $table->string('whatsapp')->nullable();
@@ -32,6 +34,7 @@ return new class extends Migration
             $table->string('state')->nullable();
             $table->string('complement')->nullable();
             $table->timestamps();
+
         });
     }
 

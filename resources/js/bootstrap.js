@@ -22,6 +22,10 @@ Alpine.plugin(mask)
 
 import Inputmask from 'inputmask';
 
+
+//Calendar
+// import Fullcalendar from 'fullcalendar';
+
 // import Echo from 'laravel-echo';
 
 // import Pusher from 'pusher-js';

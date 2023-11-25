@@ -32,7 +32,7 @@ class AmbienceTenantPivot extends Model
 
     public function getValueAttribute($value)
     {
-        return str_replace(".", ",", $value);
+        return number_format($value,2,',','.');
     }
     public function setDepositAttribute($value)
     {
@@ -41,6 +41,6 @@ class AmbienceTenantPivot extends Model
 
     public function getDepositAttribute($value)
     {
-        return str_replace(".", ",", $value);
+        return number_format($value,2,',','.');
     }
 }

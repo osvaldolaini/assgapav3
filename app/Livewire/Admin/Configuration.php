@@ -76,6 +76,25 @@ class Configuration extends Component
         return view('livewire.admin.configuration');
     }
 
+     //BUSCAR CEP
+     public function updated($property)
+     {
+         if ($property === 'postalCode') {
+             $cep = str_replace ('-' ,'', $this->postalCode);
+             // dd($cep);
+             $ch = curl_init("https://viacep.com.br/ws/".$cep."/json/");
+             curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+             $result = json_decode(curl_exec($ch));
+             curl_close($ch);
+             if($result){
+                 $this->address = $result->logradouro;
+                 $this->city = $result->localidade;
+                 $this->district = $result->bairro;
+                 $this->state = $result->uf;
+             }
+         }
+     }
+
     public function update()
     {
         $this->rules = [

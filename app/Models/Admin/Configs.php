@@ -13,15 +13,14 @@ class Configs extends Model
     protected $table = 'configs';
 
     protected $fillable = [
-        'id','title','slug','acronym','logo_path','cpf_cnpj','email','phone',
-        'cellphone','whatsapp','telegram','about' ,'updated_by','meta_description',
-        'meta_tags','video_link','postalCode','number','address','district','city','state'
-        ,'complement'
+        'title','acronym','president', 'financial','slug','update_by',
+        'email','email_happy','phone','cellphone','whatsapp','telegram','cnpj',
+        'postalCode','number','address','district','city','state','complement',
     ];
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=$value;
+        $this->attributes['title']=mb_strtoupper($value);
         $this->attributes['slug']=Str::slug($value);
     }
 

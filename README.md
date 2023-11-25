@@ -5,7 +5,16 @@
 </p>
 
 # Sistema ASSGAPA V3
-## V 3.9 18/11/2023
+
+## V 3.11 24/11/2023
+    Locações
+
+## V 3.10 18/11/2023
+    Estoque
+    Marketing
+    Email
+        
+## V 3.9 17/11/2023
     Cadastros
         -Cadastro
         -Dependentes

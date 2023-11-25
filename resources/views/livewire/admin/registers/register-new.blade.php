@@ -242,8 +242,28 @@
                                                     wire:click="selectResponsible({{ $partner->id }})">
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
-                                                            <img src="{{ url('storage/logos/assgapa.png') }}"
-                                                                alt="{{ $partner->name }}" />
+                                                            @if ($partner->imageTitle)
+                                                                <picture>
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
+                                                                    <img src="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}"
+                                                                        alt="{{ $partner->name }}">
+                                                                </picture>
+                                                            @else
+                                                                <picture>
+                                                                    <source
+                                                                        srcset="{{ url('storage/logos/assgapa.png') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/logo/assgapa.webp') }}" />
+                                                                    <img src="{{ url('storage/logo/assgapa.png') }}"
+                                                                        alt="{{ $partner->name }}">
+                                                                </picture>
+                                                            @endif
+
                                                         </div>
                                                     </div>
                                                     <div>

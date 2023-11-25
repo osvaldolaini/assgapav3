@@ -31,6 +31,12 @@
                     <div class="col-span-2 sm:col-span-6">
                         <x-link-checkbox :access="$access" page="5" title="Estoque"></x-link-checkbox>
                     </div>
+                    <div class="col-span-2 sm:col-span-6">
+                        <x-link-checkbox :access="$access" page="6" title="Marketing"></x-link-checkbox>
+                    </div>
+                    <div class="col-span-2 sm:col-span-6">
+                        <x-link-checkbox :access="$access" page="7" title="Locações"></x-link-checkbox>
+                    </div>
                 </div>
             </fieldset>
         </section>
