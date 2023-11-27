@@ -16,7 +16,10 @@ use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
 use App\Livewire\Admin\Locations\LocationEdit;
+use App\Livewire\Admin\Locations\LocationExtras;
+use App\Livewire\Admin\Locations\LocationInstallments;
 use App\Livewire\Admin\Locations\LocationNew;
+use App\Livewire\Admin\Locations\LocationsExtras;
 use App\Livewire\Admin\Locations\Locations;
 use App\Livewire\Admin\Marketing\EmailPromo;
 use App\Livewire\Admin\Marketing\EmailBirth;
@@ -156,6 +159,7 @@ Route::middleware([
         ->name('ambience-contracts');
     Route::get('/ambientes/indisponibilidades', AmbienceUnavailabilities::class)
         ->name('ambience-unavailabilities');
+
 });
 // Material pageAccess 5
 Route::middleware([
@@ -203,5 +207,9 @@ Route::middleware([
         ->name('new-location');
     Route::get('/locações/{location}/editar', LocationEdit::class)
         ->name('edit-location');
+    Route::get('/locações/{location}/extras', LocationExtras::class)
+        ->name('extras-location');
+    Route::get('/locações/{location}/parcelas', LocationInstallments::class)
+        ->name('installments-location');
 
 });

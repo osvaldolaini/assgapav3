@@ -73,9 +73,38 @@ class Location extends Model
         }
     }
 
+    public function getPaidAttribute()
+    {
+        $paids = $this->installments->where('active',1);
+        if($paids){
+            $p=0;
+            foreach ($paids as $item) {
+                $p+=$item->value_db;
+            }
+            return number_format($p, 2, ',', '.');
+        }else{
+            return 0;
+        }
+    }
+
+    public function getRemainingAttribute()
+    {
+        $paids = $this->installments->where('active',1);
+        if($paids){
+            $remaing = $this->value_db - $this->convert_value($this->paid);
+            return number_format($remaing, 2, ',', '.');
+        }else{
+            return $this->value;
+        }
+    }
+
     public function partners()
     {
         return $this->belongsTo(Partner::class, 'partner_id', 'id');
+    }
+    public function installments()
+    {
+        return $this->hasMany(Installment::class,  'location_id','id');
     }
     public function indication()
     {
@@ -88,6 +117,19 @@ class Location extends Model
     public function ambiences()
     {
         return $this->belongsTo(Ambience::class,  'ambience_id','id');
+    }
+    public function getCashbackAttribute()
+    {
+        if($this->indication_id && $this->ambiences->cashback != '' && $this->value_db > 0)
+        {
+            $cash = $this->ambiences->cashback/100;
+            $cashback =  $this->value_db * $cash;
+            // $cashback = $this->ambiences->cashback;
+        }else{
+            $cashback = 0;
+        }
+
+        return $cashback;
     }
     public function ambienceTenants()
     {
@@ -135,6 +177,15 @@ class Location extends Model
     }
     public function convert_value($value)
     {
+        str_replace(' ', '', $value);
+        ltrim($value);
+        $value = str_replace('.', '', $value);
+        $value = str_replace(',', '.', $value);
+        return str_replace(' ', '', $value);
+    }
+    public function getValueDbAttribute()
+    {
+        $value = $this->value;
         str_replace(' ', '', $value);
         ltrim($value);
         $value = str_replace('.', '', $value);

@@ -18,6 +18,7 @@ class LocationEdit extends Component
 
     public $rules;
     public $dependents;
+    public $location;
 
     public $breadcrumb_title;
     //Calendar
@@ -66,6 +67,7 @@ class LocationEdit extends Component
     ];
     public function mount(Location $location)
     {
+        $this->location = $location;
         $this->breadcrumb_title = 'LOCAÇÃO DE: ' . $location->partners->name;
         $this->id = $location->id;
 

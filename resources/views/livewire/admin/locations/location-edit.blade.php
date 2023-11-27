@@ -1,10 +1,13 @@
 <div>
     <x-breadcrumb>
-        <div class="grid grid-cols-7 gap-4 text-gray-600 ">
+        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
+            </div>
+            <div class="col-span-2 justify-items-end">
+                @livewire('admin.locations.location-buttons', ['location' => $location], key($location->id))
             </div>
         </div>
     </x-breadcrumb>

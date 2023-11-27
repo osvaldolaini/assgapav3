@@ -28,7 +28,7 @@ class Locations extends Component
     public $search;
     public $relationTables = "ambiences,ambiences.id,locations.ambience_id | partners,partners.id,locations.partner_id"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch='location_date'; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'location_date,partner,ambience,ambiences.title as ambiente,partners.name as locatario';
+    public $columnsInclude = 'location_date,locations.active,partner,ambience,ambiences.title as ambiente,partners.name as locatario';
     public $searchable = 'locations.id,ambiences.title,partners.name,location_date'; //Colunas pesquisadas no banco de dados
     public $sort = "id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
@@ -39,7 +39,6 @@ class Locations extends Component
             'dataTable' => $this->getData(),
         ]);
     }
-
 
     //READ
     public function showModalRead($id)

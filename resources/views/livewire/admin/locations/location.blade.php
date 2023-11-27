@@ -11,8 +11,13 @@
             </div>
         </div>
     </x-breadcrumb>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <x-table-buttons-relatories
+            :pdf="true"
+            :print="true"
+            :excel="true">
+            </x-table-buttons-relatories>
         <div>
+    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
             <x-table-search></x-table-search>
             <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -63,7 +68,7 @@
                                         </th>
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                                <tbody  class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                                     @if ($dataTable->isEmpty())
                                         <tr>
                                             <td colspan="5"
@@ -73,7 +78,7 @@
                                         </tr>
                                     @else
                                         @foreach ($dataTable as $data)
-                                            <tr>
+                                            <tr  wire:key="locations-row-{{$data->id}}">
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
                                                     {{ $data->id }}
@@ -97,24 +102,8 @@
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
-                                                     text-gray-500 dark:text-gray-400 flex-nowrap">
-                                                    @if($data->partner_category_master == 'Sócio')
-                                                        <x-table-register-buttons id="{{ $data->id }}"
-                                                        :card="true"
-                                                        :dependent="true"
-                                                        :history="true"
-                                                        :discount="$data->discount"
-                                                         >
-                                                        </x-table-register-buttons>
-                                                        @else
-                                                        <x-table-register-buttons id="{{ $data->id }}"
-                                                           :card="true"
-                                                           :dependent="true"
-                                                           :history="true"
-                                                           :discount="true"
-                                                            >
-                                                       </x-table-register-buttons>
-                                                   @endif
+                                                     text-gray-500 dark:text-gray-400 flex-nowrap" >
+                                                        @livewire('admin.locations.location-buttons', ['location' => $data], key($data->id))
                                                 </td>
 
                                                 <td
