@@ -16,6 +16,7 @@ class CreateLocationExtrasTable extends Migration
         Schema::create('location_extras', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('location_id')->nullable();
+            $table->boolean('active')->nullable();
             $table->decimal('dressing_room', $precision = 10, $scale = 2)->nullable();
             $table->decimal('lighting', $precision = 10, $scale = 2)->nullable();
             $table->decimal('janitor', $precision = 10, $scale = 2)->nullable();
@@ -29,6 +30,10 @@ class CreateLocationExtrasTable extends Migration
             $table->integer('qtd_security')->nullable();
             $table->integer('qtd_inflatable')->nullable();
             $table->integer('qtd_brigade')->nullable();
+            $table->string('updated_by',50)->nullable();
+            $table->string('created_by',50)->nullable();
+            $table->string('form_payment')->nullable();
+            $table->date('date_payment')->nullable();
 
             $table->timestamps();
             /*RELACIONAMENTO*/

@@ -2,7 +2,7 @@
     <x-breadcrumb>
         <div class="grid grid-cols-7 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
@@ -59,7 +59,24 @@
                         </div>
                         <div class="col-span-4">
                             <label for="location_date">*Data</label>
-                            <x-datepicker id='location_date' :required="true"></x-datepicker>
+                            <div class="flex">
+                                <input
+                                readonly
+                                    type="text"
+                                    wire:model="location_date"
+                                    required
+                                    x-mask="99/99/9999"
+                                    placeholder="99/99/9999"
+                                    class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                <span
+                                    class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                    </svg>
+                                </span>
+                            </div>
                             @error('location_date')
                                 <span class="error">{{ $message }}</span>
                             @enderror

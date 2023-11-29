@@ -105,6 +105,7 @@
         <x-slot name="content">
             <h2 class="h2">Deseja realmente excluir o registro?</h2>
             <p>Não será possível reverter esta ação!</p>
+            <h3 class="text-red-500">*Apagar o pagamento não exclui o recibo anterior criado!</h3>
         </x-slot>
 
         <x-slot name="footer">

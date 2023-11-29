@@ -2,12 +2,14 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
+                <h3 class="text-xl font-bold tracki  dark:text-gray-50">
                     MOVIMENTOS DO MATERIAL DE CONSUMO
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
+    <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
+    </x-table-buttons-relatories>
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
         <div>
             <div
@@ -41,12 +43,8 @@
 
             </div>
 
-            <x-table-buttons-relatories
-            :pdf="true"
-            :print="true"
-            :excel="true">
-            </x-table-buttons-relatories>
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
+
+            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4 ">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">

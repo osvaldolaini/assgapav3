@@ -86,6 +86,13 @@ class Location extends Model
             return 0;
         }
     }
+    public function getDeletedAtInAttribute($value)
+    {
+        if ($value != "") {
+            return Carbon::createFromFormat('Y-m-d', $value)
+            ->format('d/m/Y');
+        }
+    }
 
     public function getRemainingAttribute()
     {
@@ -98,6 +105,7 @@ class Location extends Model
         }
     }
 
+
     public function partners()
     {
         return $this->belongsTo(Partner::class, 'partner_id', 'id');
@@ -105,6 +113,10 @@ class Location extends Model
     public function installments()
     {
         return $this->hasMany(Installment::class,  'location_id','id');
+    }
+    public function extras()
+    {
+        return $this->hasOne(Extras::class,  'location_id','id');
     }
     public function indication()
     {

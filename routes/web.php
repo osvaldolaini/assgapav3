@@ -15,11 +15,19 @@ use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
+use App\Livewire\Admin\Financial\BillEdit;
+use App\Livewire\Admin\Financial\BillNew;
+use App\Livewire\Admin\Financial\Bills;
+use App\Livewire\Admin\Financial\CashierEdit;
+use App\Livewire\Admin\Financial\CashierNew;
+use App\Livewire\Admin\Financial\Cashiers;
+use App\Livewire\Admin\Financial\ReceivedEdit;
+use App\Livewire\Admin\Financial\ReceivedNew;
+use App\Livewire\Admin\Financial\Receiveds;
 use App\Livewire\Admin\Locations\LocationEdit;
 use App\Livewire\Admin\Locations\LocationExtras;
 use App\Livewire\Admin\Locations\LocationInstallments;
 use App\Livewire\Admin\Locations\LocationNew;
-use App\Livewire\Admin\Locations\LocationsExtras;
 use App\Livewire\Admin\Locations\Locations;
 use App\Livewire\Admin\Marketing\EmailPromo;
 use App\Livewire\Admin\Marketing\EmailBirth;
@@ -211,5 +219,35 @@ Route::middleware([
         ->name('extras-location');
     Route::get('/locações/{location}/parcelas', LocationInstallments::class)
         ->name('installments-location');
+});
+
+// Financeiro pageAccess 8
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:8'
+])->group(function () {
+    Route::get('/financeiro-caixa', Cashiers::class)
+        ->name('cashier');
+    Route::get('/financeiro-caixa/novo', CashierNew::class)
+        ->name('new-cashier');
+    Route::get('/financeiro-caixa/{cashier}/editar', CashierEdit::class)
+        ->name('edit-cashier');
+
+    Route::get('/financeiro-saídas', Bills::class)
+        ->name('bills');
+    Route::get('/financeiro-saídas/novo', BillNew::class)
+        ->name('new-bill');
+    Route::get('/financeiro-saídas/{bill}/editar', BillEdit::class)
+        ->name('edit-bill');
+
+    Route::get('/financeiro-entradas', Receiveds::class)
+        ->name('receiveds');
+    Route::get('/financeiro-entradas/novo', ReceivedNew::class)
+        ->name('new-received');
+    Route::get('/financeiro-entradas/{received}/editar', ReceivedEdit::class)
+        ->name('edit-received');
 
 });

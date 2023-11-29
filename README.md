@@ -6,6 +6,12 @@
 
 # Sistema ASSGAPA V3
 
+## V 3.12 29/11/2023
+    Financeiro
+        Caixa
+        Entradas
+        Saídas
+
 ## V 3.11 24/11/2023
     Locações
 

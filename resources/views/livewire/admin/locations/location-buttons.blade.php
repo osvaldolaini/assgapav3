@@ -1,5 +1,6 @@
 <div>
     <div class="w-full">
+
         <div class="flex justify-end font-medium duration-200 ">
 
             <div class="tooltip tooltip-top p-0" data-tip="Extras">

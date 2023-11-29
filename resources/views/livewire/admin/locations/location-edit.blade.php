@@ -2,7 +2,7 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki sm:text-3xl dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
@@ -62,7 +62,24 @@
                         </div>
                         <div class="col-span-4">
                             <label for="location_date">*Data</label>
-                            <x-datepicker id='location_date' :required="true"></x-datepicker>
+                            <div class="flex">
+                                <input
+                                    readonly
+                                    type="text"
+                                    wire:model="location_date"
+                                    required
+                                    x-mask="99/99/9999"
+                                    placeholder="99/99/9999"
+                                    class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                <span
+                                    class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                    <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                        fill="currentColor" viewBox="0 0 20 20">
+                                        <path
+                                            d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                                    </svg>
+                                </span>
+                            </div>
                             @error('location_date')
                                 <span class="error">{{ $message }}</span>
                             @enderror
@@ -132,7 +149,7 @@
                                     </Select>
                                 @else
                                     <input
-                                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" "Beneficiado do evento "
+                                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                                         placeholder="Beneficiado do evento " wire:model="event_benefited" required>
                                 @endif
                                 @error('event_benefited')
@@ -161,7 +178,24 @@
                                 @enderror
                             </div>
                             <div class="col-span-12 ">
-                                <label for="indication">Indicação</label>
+                                <label for="indication">Indicação
+                                    <div class="badge bg-red-400 gap-1 py-1 text-white cursor-pointer" wire:click='clean()'>
+                                        <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 32 32" xml:space="preserve">
+                                            <style type="text/css">
+                                                .st0{fill:none;stroke:#FFFFFF;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;}
+                                            </style>
+                                            <g>
+                                                <path d="M18,14h-4c-0.6,0-1-0.4-1-1V3c0-1.7,1.3-3,3-3s3,1.3,3,3v10C19,13.6,18.6,14,18,14z"/>
+                                            </g>
+                                            <g>
+                                                <path d="M24.7,20l-0.3-1.6C24,17,22.8,16,21.4,16H10.6c-1.4,0-2.6,1-2.9,2.4L7.3,20H24.7z"/>
+                                                <path d="M6.9,22L5,30.8c-0.1,0.3,0,0.6,0.2,0.8C5.4,31.9,5.7,32,6,32h4v-5c0-0.6,0.4-1,1-1s1,0.4,1,1v5h8v-3c0-0.6,0.4-1,1-1
+                                                    s1,0.4,1,1v3h4c0.3,0,0.6-0.1,0.8-0.4c0.2-0.2,0.3-0.5,0.2-0.8L25.1,22H6.9z"/>
+                                            </g>
+                                            </svg>
+                                        Limpar
+                                      </div>
+                                </label>
 
                                 <div class="grid gap-4 mb-1 grid-cols-1">
                                     <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"

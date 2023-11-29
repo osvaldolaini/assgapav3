@@ -125,6 +125,11 @@ class LocationEdit extends Component
         $this->modalSearch = true;
         $this->typeSearch = $typeSearch;
     }
+    public function clean()
+    {
+        $this->indication = NULL;
+        $this->indication_id = NULL;
+    }
 
     public function updated($property)
     {

@@ -33,6 +33,9 @@ class Locations extends Component
     public $sort = "id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
+    public $deleted_because;
+    public $deleted_at;
+
     public function render()
     {
         return view('livewire.admin.locations.location', [
@@ -51,6 +54,9 @@ class Locations extends Component
                 'Criada por'        => $data->created_by,
                 'Atualizada'        => $data->updated,
                 'Atualizada por'    => $data->updated_by,
+                'Excluida'          => $data->deleted_at,
+                'Excluida por'      => $data->deleted_by,
+                'Motivo'            => $data->deleted_because,
             ];
             $this->logs = logging($data->id,$this->model);
         } else {
@@ -68,39 +74,48 @@ class Locations extends Component
     }
 
     //DELETE
-    public function showModalDelete($id)
-    {
-        $this->showJetModal = true;
+   public function showModalDelete($id)
+   {
+       $this->showJetModal = true;
 
-        if (isset($id)) {
-            $this->registerId = $id;
-        } else {
-            $this->registerId = '';
-        }
-    }
-    //ACTIVE
-    public function buttonActive($id)
-    {
-        $data = Location::where('id', $id)->first();
-        if ($data->active == 1) {
-            $data->active = 0;
-            $data->save();
-        } else {
-            $data->active = 1;
-            $data->save();
-        }
-        $this->openAlert('success', 'Registro atualizado com sucesso.');
-    }
-    public function delete($id)
-    {
-        $data = Location::where('id', $id)->first();
-        $data->active = 2;
-        $data->save();
+       if (isset($id)) {
+           $this->registerId = $id;
+       } else {
+           $this->registerId = '';
+       }
+   }
 
-        $this->openAlert('success', 'Registro excluido com sucesso.');
+   public function delete($id)
+   {
+       $this->rules = [
+           'deleted_because' => 'required',
+       ];
 
-        $this->showJetModal = false;
-    }
+       $this->validate();
+
+       $data = Location::where('id', $id)->first();
+       $data->deleted_because = $this->deleted_because;
+       $data->deleted_at = date('Y-m-d');
+       $data->active = 2;
+       $data->save();
+
+       $this->openAlert('success', 'Registro excluido com sucesso.');
+
+       $this->showJetModal = false;
+   }
+   //ACTIVE
+   public function buttonActive($id)
+   {
+       $data = Location::where('id', $id)->first();
+       if ($data->active == 1) {
+           $data->active = 0;
+           $data->save();
+       } else {
+           $data->active = 1;
+           $data->save();
+       }
+       $this->openAlert('success', 'Registro atualizado com sucesso.');
+   }
     //MESSAGE
     public function openAlert($status, $msg)
     {

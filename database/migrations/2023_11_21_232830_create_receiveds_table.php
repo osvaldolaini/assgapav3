@@ -25,6 +25,7 @@ class CreateReceivedsTable extends Migration
             $table->unsignedBigInteger('location_id')->nullable();
             $table->unsignedBigInteger('ambience_tenant_id')->nullable();
             $table->string('form_payment')->nullable();
+            $table->string('obs')->nullable();
 
             /*Alteração */
             $table->text('updated_because')->nullable();
