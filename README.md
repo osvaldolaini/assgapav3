@@ -11,6 +11,7 @@
         Caixa
         Entradas
         Saídas
+        Recibos PDF
 
 ## V 3.11 24/11/2023
     Locações

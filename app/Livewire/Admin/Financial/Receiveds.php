@@ -2,13 +2,19 @@
 
 namespace App\Livewire\Admin\Financial;
 
+use App\Models\Admin\Configs;
 use App\Models\Admin\Financial\Received;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
+
+use Mpdf\Mpdf;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
+
 class Receiveds extends Component
 {
     public Received $received;
+    public $config;
     public $breadcrumb_title = 'ENTRADAS';
 
     public $showJetModal = false;
@@ -24,10 +30,10 @@ class Receiveds extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Financial\Received"; //Model principal
-    public $modelId="receiveds.id as id"; //Ex: 'table.id' or 'id'
+    public $modelId = "receiveds.id as id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables = "partners,partners.id,receiveds.partner_id"; //Relacionamentos ( table , key , foreingKey )
-    public $customSearch='paid_in'; //Colunas personalizadas, customizar no model
+    public $customSearch = 'paid_in'; //Colunas personalizadas, customizar no model
     public $columnsInclude = 'paid_in,value,receiveds.active as active,receiveds.partner_id,partners.name,receiveds.title';
     public $searchable = 'receiveds.id,receiveds.title,partners.name,paid_in'; //Colunas pesquisadas no banco de dados
     public $sort = "receiveds.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
@@ -41,6 +47,11 @@ class Receiveds extends Component
         return view('livewire.admin.financial.receiveds', [
             'dataTable' => $this->getData(),
         ]);
+    }
+    //CONTRACT
+    public function printVoucher(Received $received)
+    {
+        $this->dispatch('printReceived', $received);
     }
 
     //READ
@@ -58,7 +69,7 @@ class Receiveds extends Component
                 'Excluida por'      => $data->deleted_by,
                 'Motivo'            => $data->deleted_because,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -70,7 +81,7 @@ class Receiveds extends Component
     }
     public function showModalUpdate(Received $received)
     {
-        redirect()->route('edit-received',$received);
+        redirect()->route('edit-received', $received);
     }
 
     //DELETE
@@ -132,7 +143,7 @@ class Receiveds extends Component
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -184,32 +195,32 @@ class Receiveds extends Component
     }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 }

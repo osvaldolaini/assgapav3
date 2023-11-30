@@ -219,6 +219,7 @@ Route::middleware([
         ->name('extras-location');
     Route::get('/locações/{location}/parcelas', LocationInstallments::class)
         ->name('installments-location');
+
 });
 
 // Financeiro pageAccess 8
