@@ -4,12 +4,10 @@ namespace App\Livewire\Admin\Locations;
 
 use App\Models\Admin\Ambiences\Ambience;
 use App\Models\Admin\Ambiences\AmbienceTenantPivot;
-use App\Models\Admin\Ambiences\AmbienceUnavailability;
 use App\Models\Admin\Configs\AmbienceTenant;
 use App\Models\Admin\Configs\ReasonEvent;
 use App\Models\Admin\Locations\Location;
 use App\Models\Admin\Registers\Partner;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
@@ -149,7 +147,7 @@ class LocationNew extends Component
             'ambience_id'           => 'required',
             'partner_id'            => 'required',
             'ambience_tenant_id'    => 'required',
-            'location_date'         => 'required',
+            'location_date'         => 'required|date_format:d/m/Y',
             'event_benefited'       => 'required',
             'value'                 => 'required',
             'deposit'               => 'required',

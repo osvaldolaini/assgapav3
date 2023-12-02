@@ -36,6 +36,11 @@ use App\Livewire\Admin\Marketing\EmailPromoNew;
 use App\Livewire\Admin\Material\Consumption;
 use App\Livewire\Admin\Material\MovementStock;
 use App\Livewire\Admin\Material\Permanent;
+use App\Livewire\Admin\Pool\SeasonPays;
+use App\Livewire\Admin\Pool\SeasonPayEdit;
+use App\Livewire\Admin\Pool\SeasonPayNew;
+use App\Livewire\Admin\Pool\Passes;
+use App\Livewire\Admin\Pool\Seasons;
 use App\Livewire\Admin\Registers\DependentEdit;
 use App\Livewire\Admin\Registers\DependentNew;
 use App\Livewire\Admin\Registers\Dependents;
@@ -47,6 +52,7 @@ use App\Livewire\Admin\Registers\PartnerEdit;
 use App\Livewire\Admin\Registers\PartnerNew;
 use App\Livewire\Admin\Registers\Partners;
 use App\Livewire\Admin\Registers\SelectCards;
+use App\Livewire\Admin\Schedule\AllLocations;
 use App\Livewire\Admin\UserAccesses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -251,4 +257,36 @@ Route::middleware([
     Route::get('/financeiro-entradas/{received}/editar', ReceivedEdit::class)
         ->name('edit-received');
 
+});
+
+// Locações pageAccess 9
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:9'
+])->group(function () {
+    Route::get('/piscinas-temporada', Seasons::class)
+        ->name('seasons');
+    Route::get('/piscinas-passes', Passes::class)
+        ->name('passes');
+
+    Route::get('/piscinas-pagar', SeasonPays::class)
+        ->name('seasonPays');
+    Route::get('/piscinas-pagar/novo', SeasonPayNew::class)
+        ->name('new-seasonPay');
+    Route::get('/piscinas-pagar/{seasonPay}/editar', SeasonPayEdit::class)
+        ->name('edit-seasonPay');
+});
+// Locações pageAccess 10
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:10'
+])->group(function () {
+    Route::get('/agendas', AllLocations::class)
+        ->name('schedules');
 });

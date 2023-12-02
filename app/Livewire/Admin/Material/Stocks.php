@@ -56,7 +56,7 @@ class Stocks extends Component
      public function persist($status)
      {
         $this->rules = [
-            'date'=>'required',
+            'date'=>'required|date_format:d/m/Y',
             'quantity'=>'required',
         ];
         $this->validate();

@@ -198,12 +198,13 @@ class LocationEdit extends Component
             'ambience_id'           => 'required',
             'partner_id'            => 'required',
             'ambience_tenant_id'    => 'required',
-            'location_date'         => 'required',
+            'location_date'         => 'required|date_format:d/m/Y',
             'event_benefited'       => 'required',
             'value'                 => 'required',
             'deposit'               => 'required',
             'reason_event_id'       => 'required',
         ];
+
 
         $this->validate();
         Location::updateOrCreate([

@@ -77,7 +77,7 @@ class BillNew extends Component
         $this->rules = [
             'title' => 'required',
             'creditor' => 'required',
-            'paid_in' => 'required',
+            'paid_in' => 'required|date_format:d/m/Y',
             'value' => 'required',
             'cost_center_id' => 'required',
             'type' => 'required',

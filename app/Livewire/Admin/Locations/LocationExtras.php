@@ -123,6 +123,11 @@ class LocationExtras extends Component
     }
     public function updateDay()
     {
+        $this->rules = [
+            'date_payment'    => 'required|date_format:d/m/Y',
+        ];
+
+        $this->validate();
         Extras::updateOrCreate([
             'id' => $this->id,
         ], [
@@ -161,6 +166,10 @@ class LocationExtras extends Component
         $data->save();
         $this->showJetModal = false;
         $this->openAlert('success', 'Registro excluido com sucesso.');
+        $this->openAlert('error', 'Excluir esse registro não exclui o
+        recibo '.$data->received_id.'
+        automaticamente.');
+        sleep(3);
         redirect()->route('extras-location',$this->location_id);
 
     }

@@ -58,6 +58,12 @@ class LocationInstallment extends Component
     }
     public function updateDay()
     {
+        $this->rules = [
+            'installment_maturity_date'    => 'required|date_format:d/m/Y',
+        ];
+
+        $this->validate();
+
         Installment::updateOrCreate([
             'id' => $this->id,
         ], [
@@ -76,7 +82,7 @@ class LocationInstallment extends Component
         $this->rules = [
             'location_id'   => 'required',
             'form_payment'  => 'required',
-            'installment_maturity_date'    => 'required',
+            'installment_maturity_date'    => 'required|date_format:d/m/Y',
             'value'         => 'required',
         ];
 
@@ -115,6 +121,10 @@ class LocationInstallment extends Component
         $data->save();
         $this->showJetModal = false;
         $this->openAlert('success', 'Registro excluido com sucesso.');
+        $this->openAlert('error', 'Excluir esse registro não exclui o
+        recibo '.$data->received_id.'
+        automaticamente.');
+        sleep(3);
         redirect()->route('installments-location',$this->location_id);
 
     }

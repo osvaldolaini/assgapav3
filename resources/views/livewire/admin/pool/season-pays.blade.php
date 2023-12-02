@@ -3,59 +3,54 @@
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
-                    {{ $breadcrumb_title }}
+                    TEMPORADAS
                 </h3>
-            </div>
-            <div class="col-span-2 justify-items-end">
-
             </div>
         </div>
     </x-breadcrumb>
-    <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
-    </x-table-buttons-relatories>
-    <div>
-        <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+        <div>
             <x-table-search></x-table-search>
+
             <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
-                            <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
+                            <table style="uppercase width:100%"
+                                class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
                                 <thead class="bg-gray-50 dark:bg-gray-800">
                                     <tr scope="col"
-                                        class="py-3.5 px-4 text-xs font-normal text-left text-gray-500
+                                        class="py-3.5 px-4 text-sm font-normal text-left text-gray-500
                                         dark:text-gray-400">
-
-                                        <th scope="col"
-                                            class="py-3.5 px-4 text-xs font-normal
-                                                    text-left text-gray-500
-                                                    dark:text-gray-400">
-                                            Contrato
-                                        </th>
-
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
-                                                    text-left text-gray-500
-                                                    dark:text-gray-400">
-                                            Espaço
-                                        </th>
-                                        <th scope="col"
-                                            class="py-3.5 px-4 text-sm font-normal
-                                                    text-left text-gray-500
-                                                    dark:text-gray-400">
-                                            Locatário
-                                        </th>
-                                        <th scope="col"
-                                            class="py-3.5 px-4 text-sm font-normal
-                                                    text-center text-gray-500
-                                                    dark:text-gray-400">
+                                                text-center text-gray-500
+                                                dark:text-gray-400">
                                             Data
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
                                                     dark:text-gray-400">
-                                            Extras
+                                            Pagantes
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-left text-gray-500
+                                                    dark:text-gray-400">
+                                            Título
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-center text-gray-500
+                                                    dark:text-gray-400">
+                                            Valor
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-center text-gray-500
+                                                    dark:text-gray-400">
+                                            Recibo
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -75,63 +70,36 @@
                                         </tr>
                                     @else
                                         @foreach ($dataTable as $data)
-                                            <tr wire:key="locations-row-{{ $data->id }}">
+                                            <tr>
                                                 <td
-                                                    class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                                    {{ $data->id }}
-                                                    @if ($data->active == 2)
-                                                        <div class="badge badge-error gap-2 mx-1">
-                                                            Excluido
-                                                        </div>
-                                                    @endif
-                                                </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->locatario }}
-                                                </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->ambiente }}
+                                                    class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->paid_in }}
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->location_date }}
+                                                    {{ $data->name }}
                                                 </td>
                                                 <td
-                                                    class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
-                                                     text-gray-500 dark:text-gray-400 flex-nowrap">
-
-                                                    @if ($data->active == 2)
-                                                        <div
-                                                            class="py-1 px-3 flex rounded-lg
-                                                            transition-colors bg-red-500 text-white
-                                                            duration-200 whitespace-nowrap items-center justify-center">
-                                                            Excluido
-                                                            <svg xmlns="http://www.w3.org/2000/svg"
-                                                                class="h-6 w-6 text-white my-1" viewBox="0 0 24 24"
-                                                                fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                <path
-                                                                    d="M10 10V13M4 6H20M16 6L15.7294 5.18807C15.4671 4.40125 15.3359 4.00784 15.0927 3.71698C14.8779 3.46013 14.6021 3.26132 14.2905 3.13878C13.9376 3 13.523 3 12.6936 3H11.3064C10.477 3 10.0624 3 9.70951 3.13878C9.39792 3.26132 9.12208 3.46013 8.90729 3.71698C8.66405 4.00784 8.53292 4.40125 8.27064 5.18807L8 6M10 21H9C7.34315 21 6 19.6569 6 18V6M18 6V9M14 10V10.5M17 15.5V17H18.5M21 17C21 19.2091 19.2091 21 17 21C14.7909 21 13 19.2091 13 17C13 14.7909 14.7909 13 17 13C19.2091 13 21 14.7909 21 17Z"
-                                                                    stroke="currentColor" stroke-width="2"
-                                                                    stroke-linecap="round" stroke-linejoin="round" />
-                                                            </svg>
-                                                        </div>
-                                                    @else
-                                                        @livewire('admin.locations.location-buttons', ['location' => $data], key($data->id))
-                                                    @endif
-
+                                                    class="uppercase py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
+                                                    {{ $data->season }}
                                                 </td>
-
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->value }}
+                                                </td>
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
+                                                    PDF
+                                                </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
-
-                                                    @if ($data->active == 2)
+                                                    @if ($data->active > 1)
                                                         <x-table-buttons-deleted id="{{ $data->id }}"
                                                             :update="false" :delete="true" :view="true">
                                                         </x-table-buttons-deleted>
                                                     @else
                                                         <x-table-buttons id="{{ $data->id }}" :update="true"
-                                                            :delete="true" :view="true">
+                                                            :delete="true" :view="true" :active="$data->active">
                                                         </x-table-buttons>
                                                     @endif
                                                 </td>
@@ -159,6 +127,7 @@
         <x-slot name="content">
             <h2 class="h2">Deseja realmente excluir o registro?</h2>
             <p>Não será possível reverter esta ação!</p>
+            <h3 class="text-red-500">*Apagar o pagamento da temporada não exclui o recibo anterior criado!</h3>
             <form>
                 <div class="col-span-full">
                     <label for="deleted_because">*Motivo da exclusão</label>
@@ -168,8 +137,8 @@
                     @error('deleted_because')
                         <span class="error">{{ $message }}</span>
                     @enderror
+                </div>
             </form>
-
         </x-slot>
 
         <x-slot name="footer">
@@ -182,7 +151,6 @@
             </x-danger-button>
         </x-slot>
     </x-confirmation-modal>
-
 
     {{-- MODAL READ --}}
     <x-dialog-modal wire:model="showModalView">
@@ -218,5 +186,4 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
-
 </div>

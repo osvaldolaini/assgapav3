@@ -90,7 +90,7 @@ class ReceivedEdit extends Component
     {
         $this->rules = [
             'title' => 'required',
-            'paid_in' => 'required',
+            'paid_in' => 'required|date_format:d/m/Y',
             'value' => 'required',
             'form_payment' => 'required',
             'partner_id' => 'required',
