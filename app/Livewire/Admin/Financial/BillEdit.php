@@ -40,7 +40,7 @@ class BillEdit extends Component
     public function mount(Bill $bill)
     {
         $this->bill = $bill;
-        $this->breadcrumb_title = 'PAGO À: ' . $bill->partner->name;
+        $this->breadcrumb_title = 'PAGO À: ' . $bill->creditor;
         $this->id = $bill->id;
 
         $this->title =  $bill->title;

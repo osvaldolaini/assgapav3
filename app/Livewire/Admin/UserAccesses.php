@@ -37,5 +37,6 @@ class UserAccesses extends Component
                 'page_id' => $pageId,
             ]);
         }
+        $this->dispatch('updateSideBar');
     }
 }

@@ -2,9 +2,11 @@
 
 namespace App\Livewire\Admin\Locations;
 
+use App\Models\Admin\Financial\Received;
 use App\Models\Admin\Locations\Extras;
 use App\Models\Admin\Locations\Location;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class LocationExtras extends Component
@@ -22,6 +24,7 @@ class LocationExtras extends Component
     public $config;
     public $installments;
     public $breadcrumb_title;
+    public $partner;
 
 
     //Campos
@@ -46,6 +49,7 @@ class LocationExtras extends Component
     {
         $this->location = $location;
         $this->location_id = $location->id;
+        $this->partner = $location->partners;
 
         $this->breadcrumb_title = 'LOCAÇÃO DE: ' . $location->partners->name;
         $this->extras = $this->location->extras;
@@ -142,6 +146,17 @@ class LocationExtras extends Component
 
     public function checkout()
     {
+        Received::create([
+            'active'        => 1,
+            'title'         => 'PAGAMENTO REFERENTE À EXTRAS DA LOCAÇÃO DO CONTRATO Nº: '. $this->location_id,
+            'paid_in'       => $this->date_payment,
+            'value'         => $this->total,
+            'form_payment'  => $this->form_payment,
+            'partner_id'    => $this->partner->id,
+            'partner'       => $this->partner->name,
+            'created_by'    => Auth::user()->name,
+        ]);
+
         Extras::updateOrCreate([
             'id' => $this->id,
         ], [
@@ -150,8 +165,8 @@ class LocationExtras extends Component
         ]);
 
         redirect()->route('extras-location',$this->location_id);
-
     }
+
     //DELETE
     public function showModalDelete()
     {

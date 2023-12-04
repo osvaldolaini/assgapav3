@@ -5,6 +5,14 @@
 </p>
 
 # Sistema ASSGAPA V3
+## V 3.14 02/12/2023
+    Mensalidade
+    Recibos 
+        Mensalidade
+        Extras
+        Parcelas
+    Cadastro rápido de não sócio
+
 ## V 3.13 02/12/2023
     Agenda
     

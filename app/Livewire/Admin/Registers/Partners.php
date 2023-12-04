@@ -30,7 +30,7 @@ class Partners extends Component
     public $search;
     public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'partners.name,partners.cpf,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
+    public $columnsInclude = 'partners.name,partners.cpf,partner_category_master,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
     public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 15; //Qtd de registros por página

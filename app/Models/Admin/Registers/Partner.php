@@ -3,12 +3,15 @@
 namespace App\Models\Admin\Registers;
 
 use App\Models\Admin\Configs\PartnerCategory;
+use App\Models\Admin\Financial\Bill;
+use App\Models\Admin\Financial\Received;
+use App\Models\Admin\Locations\Location;
+use App\Models\Admin\Monthly\MonthlyPayment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Str;
 
 
@@ -62,6 +65,24 @@ class Partner extends Model
     public function dependents():HasMany
     {
         return $this->hasMany(Partner::class,'responsible','id');
+    }
+    public function locations():HasMany
+    {
+        return $this->hasMany(Location::class);
+    }
+    public function receiveds():HasMany
+    {
+        return $this->hasMany(Received::class);
+    }
+    public function bills()
+    {
+        return $this->hasMany(Bill::class,'creditor_id','id');
+    }
+
+    //Mensalidades
+    public function monthlys():HasMany
+    {
+        return $this->hasMany(MonthlyPayment::class);
     }
     /*Setar a categoria master */
     public function setActiveAttribute($value)

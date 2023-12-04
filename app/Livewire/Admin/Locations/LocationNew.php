@@ -103,15 +103,17 @@ class LocationNew extends Component
 
             $this->dispatch('changeAmbience', $this->ambience_id,$this->partner_id);
         }
+
         if ($property === 'ambience_tenant_id') {
-            $this->typeTenant = AmbienceTenant::select('type')->find($this->ambience_tenant_id)->type;
+            $this->typeTenant = AmbienceTenant::select('type')
+                ->find($this->ambience_tenant_id)->type;
             $pivot = AmbienceTenantPivot::select('value', 'deposit')
                 ->where('ambience_id', $this->ambience_id)
                 ->where('ambienceTenant_id', $this->ambience_tenant_id)
                 ->first();
             $this->value = $pivot->value;
             $this->deposit = $pivot->deposit;
-            $this->ambience_tenant = $this->typeTenant->title;
+            // $this->ambience_tenant = $this->typeTenant->title;
 
             if ($this->typeTenant == 1) {
                 $this->dependents = Partner::find($this->partner_id)->dependents;

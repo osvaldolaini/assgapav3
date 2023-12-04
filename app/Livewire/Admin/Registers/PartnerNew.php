@@ -183,6 +183,7 @@ class PartnerNew extends Component
             'discount'              =>$this->discount,
             'partner_category'      =>$this->partner_category,
             'company'               =>$this->company,
+            'partner_category_master'      => $this->partner_category_master,
             'created_by'            =>Auth::user()->name,
         ]);
 

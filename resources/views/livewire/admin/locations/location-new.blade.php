@@ -13,7 +13,9 @@
             <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900 items-start">
                 <div class="col-span-6 grid grid-cols-12 gap-2">
                     <div class="col-span-12 ">
-                        <label for="partner">*Nome completo</label>
+                        <label class="flex w-full" for="partner">*Nome completo
+                            @livewire('admin.registers.other-fast',['url' =>'new-location'])
+                        </label>
                         <div class="grid gap-4 mb-1 grid-cols-1">
                             <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
                                 wire:click="openModalSearch('partner')" wire:ignore>

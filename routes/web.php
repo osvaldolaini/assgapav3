@@ -36,6 +36,7 @@ use App\Livewire\Admin\Marketing\EmailPromoNew;
 use App\Livewire\Admin\Material\Consumption;
 use App\Livewire\Admin\Material\MovementStock;
 use App\Livewire\Admin\Material\Permanent;
+use App\Livewire\Admin\Monthly\Monthlys;
 use App\Livewire\Admin\Pool\SeasonPays;
 use App\Livewire\Admin\Pool\SeasonPayEdit;
 use App\Livewire\Admin\Pool\SeasonPayNew;
@@ -148,10 +149,12 @@ Route::middleware([
         ->name('history');
     Route::get('/cadastros/{partner}/dependentes', Dependents::class)
         ->name('dependent');
-        Route::get('/cadastros-dependente/{partner}/novo', DependentNew::class)
+    Route::get('/cadastros-dependente/{partner}/novo', DependentNew::class)
         ->name('new-dependent');
     Route::get('/cadastros-dependente/{partner}/editar', DependentEdit::class)
         ->name('edit-dependent');
+    Route::get('/cadastros/{partner}/mensalidades', Monthlys::class)
+        ->name('monthlys');
 });
 // Ambientes pageAccess 4
 Route::middleware([

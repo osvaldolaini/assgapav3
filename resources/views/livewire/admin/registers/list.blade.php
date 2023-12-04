@@ -82,20 +82,23 @@
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                                      text-gray-500 dark:text-gray-400 flex-nowrap">
+
                                                     @if($data->partner_category_master == 'Sócio')
                                                         <x-table-register-buttons id="{{ $data->id }}"
                                                         :card="true"
                                                         :dependent="true"
                                                         :history="true"
                                                         :discount="$data->discount"
+                                                        align="justify-start"
                                                          >
                                                         </x-table-register-buttons>
-                                                        @else
+                                                    @else
                                                         <x-table-register-buttons id="{{ $data->id }}"
                                                            :card="true"
                                                            :dependent="true"
                                                            :history="true"
                                                            :discount="true"
+                                                           align="justify-start"
                                                             >
                                                        </x-table-register-buttons>
                                                    @endif

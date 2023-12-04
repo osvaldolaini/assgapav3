@@ -3,7 +3,7 @@
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
-                    TEMPORADAS
+                    PAGAMENTOS TEMPORADAS
                 </h3>
             </div>
         </div>
@@ -89,7 +89,9 @@
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    PDF
+                                                    @if ($data->active == 1 && $data->received_id != '')
+                                                        @livewire('admin.financial.voucher', ['data' => $data->received,'type'=>'received'], key($data->id))
+                                                    @endif
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">

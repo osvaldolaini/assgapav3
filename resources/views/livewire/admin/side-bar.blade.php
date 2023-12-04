@@ -5,7 +5,8 @@
             <div class="h-full bg-white rounded-2xl dark:bg-gray-700 py-2">
                 <nav class="mt-3">
                     <div>
-                        <x-link-simple url="dashboard" active="dashboard">
+
+                        <x-link-simple url="dashboard" active="dashboard" role='1' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -18,7 +19,10 @@
                                 Dashboard
                             </span>
                         </x-link-simple>
-                        <x-link-simple url="list-users" active="*usuários*">
+
+
+
+                        <x-link-simple url="list-users" active="*usuários*" role='2' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -32,9 +36,8 @@
                                 Usuários
                             </span>
                         </x-link-simple>
-
                         <div class="flex mx-2 items-center py-0.5 flex-nowrap border-t border-gray-200"></div>
-                        <x-link-simple url="schedules" active="*agendas*">
+                        <x-link-simple url="schedules" active="*agendas*" role='10' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 512 512" xml:space="preserve">
 
@@ -76,7 +79,7 @@
                                 Agendas
                             </span>
                         </x-link-simple>
-                        <x-link-simple url="locations" active="*locações*">
+                        <x-link-simple url="locations" active="*locações*" role='7' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -100,71 +103,77 @@
                                 Locações
                             </span>
                         </x-link-simple>
-                        <!-- Dropdown Pool -->
-                        <button id="dropdownPool" data-dropdown-toggle="pool"
-                            class="flex items-center justify-start w-full px-4 py-1
-                                font-thin uppercase transition-colors duration-200 mb-0
-                                {{ Request::is('*piscinas*')
-                                    ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
-                            type="button">
-                            <span class="text-left">
-                                <svg class="w-6 h-6" viewBox="0 0 15 15" fill="none">
-                                    <path fill-rule="evenodd" clip-rule="evenodd"
-                                        d="M5.63639 1C4.14922 1 3 2.20269 3 3.72724V4H9V3.63639C9 1.56904 10.6333 0 12.6818 0V1C11.1667 1 10 2.14011 10 3.63639V10H9V9H3V12H2V3.72724C2 1.68816 3.55993 0 5.63639 0V1ZM3 8H9V5H3V8Z"
-                                        fill="currentColor" />
-                                    <path
-                                        d="M7.43931 13.4416C6.54499 13.9461 5.56317 14.5 3.95454 14.5C2.47163 14.5 1.34063 13.7381 0.625824 12.9317L1.37417 12.2683C1.95937 12.9286 2.83745 13.5 3.95454 13.5C5.29393 13.5 6.0834 13.0584 6.95888 12.5645L6.96977 12.5584C7.8641 12.0539 8.84591 11.5 10.4545 11.5C11.9851 11.5 13.3377 12.3202 14.3064 13.0716L13.6936 13.8618C12.7714 13.1465 11.6421 12.5 10.4545 12.5C9.11516 12.5 8.32568 12.9416 7.4502 13.4355L7.43931 13.4416Z"
-                                        fill="currentColor" />
+                        @if (in_array(9, $pages) == true)
+                            <!-- Dropdown Pool -->
+                            <button id="dropdownPool" data-dropdown-toggle="pool"
+                                class="flex items-center justify-start w-full px-4 py-1
+                                    font-thin uppercase transition-colors duration-200 mb-0
+                                    {{ Request::is('*piscinas*')
+                                        ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                type="button">
+                                <span class="text-left">
+                                    <svg class="w-6 h-6" viewBox="0 0 15 15" fill="none">
+                                        <path fill-rule="evenodd" clip-rule="evenodd"
+                                            d="M5.63639 1C4.14922 1 3 2.20269 3 3.72724V4H9V3.63639C9 1.56904 10.6333 0 12.6818 0V1C11.1667 1 10 2.14011 10 3.63639V10H9V9H3V12H2V3.72724C2 1.68816 3.55993 0 5.63639 0V1ZM3 8H9V5H3V8Z"
+                                            fill="currentColor" />
+                                        <path
+                                            d="M7.43931 13.4416C6.54499 13.9461 5.56317 14.5 3.95454 14.5C2.47163 14.5 1.34063 13.7381 0.625824 12.9317L1.37417 12.2683C1.95937 12.9286 2.83745 13.5 3.95454 13.5C5.29393 13.5 6.0834 13.0584 6.95888 12.5645L6.96977 12.5584C7.8641 12.0539 8.84591 11.5 10.4545 11.5C11.9851 11.5 13.3377 12.3202 14.3064 13.0716L13.6936 13.8618C12.7714 13.1465 11.6421 12.5 10.4545 12.5C9.11516 12.5 8.32568 12.9416 7.4502 13.4355L7.43931 13.4416Z"
+                                            fill="currentColor" />
+                                    </svg>
+                                </span>
+                                <span class="mx-4 text-sm font-normal">
+                                    Piscinas
+                                </span>
+                                <svg class="w-2.5 h-2.5 ml-5 justify-end" aria-hidden="true"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
+                                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
+                                        stroke-width="2" d="m1 1 4 4 4-4" />
                                 </svg>
-                            </span>
-                            <span class="mx-4 text-sm font-normal">
-                                Piscinas
-                            </span>
-                            <svg class="w-2.5 h-2.5 ml-5 justify-end" aria-hidden="true"
-                                xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6">
-                                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round"
-                                    stroke-width="2" d="m1 1 4 4 4-4" />
-                            </svg>
-                        </button>
-                        <div id="pool"
-                            class="justify-start w-full z-10 hidden bg-white
-                                        divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
-                            <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
-                                aria-labelledby="dropdownPool">
-                                <x-link-dropdown url="seasonPays" active="*piscinas-pagar*">
-                                    <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4"
-                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                            fill="currentColor" />
-                                        <path fill="#292D32"
-                                            d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
-                                    </svg>
-                                    Pagar
-                                </x-link-dropdown>
-                                <x-link-dropdown url="seasons" active="*piscinas-temporada*">
-                                    <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4"
-                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                            fill="currentColor" />
-                                        <path fill="#292D32"
-                                            d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
-                                    </svg>
-                                    Temporada
-                                </x-link-dropdown>
-                                <x-link-dropdown url="passes" active="*piscinas-passes*">
-                                    <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                                        <path opacity="0.4"
-                                            d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
-                                            fill="currentColor" />
-                                        <path fill="#292D32"
-                                            d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
-                                    </svg>
-                                    Passe piscina
-                                </x-link-dropdown>
-                            </ul>
-                        </div>
-                        <!-- End Dropdown Pool -->
+                            </button>
+                            <div id="pool"
+                                class="justify-start w-full z-10 hidden bg-white
+                                            divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
+                                <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
+                                    aria-labelledby="dropdownPool">
+                                    <x-link-dropdown url="seasonPays" active="*piscinas-pagar*">
+                                        <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4"
+                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                fill="currentColor" />
+                                            <path fill="#292D32"
+                                                d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
+                                        </svg>
+                                        Pagar
+                                    </x-link-dropdown>
+                                    <x-link-dropdown url="seasons" active="*piscinas-temporada*">
+                                        <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4"
+                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                fill="currentColor" />
+                                            <path fill="#292D32"
+                                                d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
+                                        </svg>
+                                        Temporada
+                                    </x-link-dropdown>
+                                    <x-link-dropdown url="passes" active="*piscinas-passes*">
+                                        <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24"
+                                            xmlns="http://www.w3.org/2000/svg">
+                                            <path opacity="0.4"
+                                                d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z"
+                                                fill="currentColor" />
+                                            <path fill="#292D32"
+                                                d="M10.7397 16.2802C10.5497 16.2802 10.3597 16.2102 10.2097 16.0602C9.91969 15.7702 9.91969 15.2902 10.2097 15.0002L13.2097 12.0002L10.2097 9.00016C9.91969 8.71016 9.91969 8.23016 10.2097 7.94016C10.4997 7.65016 10.9797 7.65016 11.2697 7.94016L14.7997 11.4702C15.0897 11.7602 15.0897 12.2402 14.7997 12.5302L11.2697 16.0602C11.1197 16.2102 10.9297 16.2802 10.7397 16.2802Z" />
+                                        </svg>
+                                        Passe piscina
+                                    </x-link-dropdown>
+                                </ul>
+                            </div>
+                            <!-- End Dropdown Pool -->
+                        @endif
+                        @if (in_array(8, $pages) == true)
                         <!-- Dropdown Financial -->
                         <button id="dropdownFinancial" data-dropdown-toggle="financial"
                             class="flex items-center justify-start w-full px-4 py-1
@@ -227,7 +236,8 @@
                             </ul>
                         </div>
                         <!-- End Dropdown Financial -->
-
+                        @endif
+                        @if (in_array(3, $pages) == true)
                         <!-- Dropdown Cadastros -->
                         <button id="dropdownArticle" data-dropdown-toggle="dropdown"
                             class="flex items-center justify-start w-full px-4 py-1
@@ -293,6 +303,7 @@
                                     </svg>
                                     Não Sócios
                                 </x-link-dropdown>
+                                @if (in_array(4, $pages) == true)
                                 <x-link-dropdown url="ambiences" active="*ambientes*">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4"
@@ -303,9 +314,12 @@
                                     </svg>
                                     Ambientes
                                 </x-link-dropdown>
+                                @endif
                             </ul>
                         </div>
                         <!-- End Dropdown Cadastros -->
+                        @endif
+                        @if (in_array(5, $pages) == true)
                         <!-- Dropdown Material -->
                         <button id="material" data-dropdown-toggle="dropdownMaterial"
                             class="flex items-center justify-start w-full px-4 py-1
@@ -360,13 +374,15 @@
                             </ul>
                         </div>
                         <!-- End Dropdown Material -->
+                        @endif
+                        @if (in_array(6, $pages) == true)
                         <!-- Dropdown Marketing -->
                         <button id="marketing" data-dropdown-toggle="dropdownMarketing"
                             class="flex items-center justify-start w-full px-4 py-1
-                                font-thin uppercase transition-colors duration-200
-                                {{ Request::is('*emails*')
-                                    ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                    font-thin uppercase transition-colors duration-200
+                                    {{ Request::is('*emails*')
+                                        ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16"
@@ -386,7 +402,7 @@
                         </button>
                         <div id="dropdownMarketing"
                             class="justify-start w-full z-10 hidden bg-white
-                                divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
+                                    divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
                             <ul class="text-sm ml-5 mt-2 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownMarketing">
                                 <x-link-dropdown url="emails-promo" active="*emails-promocionais*">
@@ -422,7 +438,7 @@
                             </ul>
                         </div>
                         <!-- End Dropdown Marketing -->
-
+                        @endif
                         <div class="flex mx-2 items-center py-1 flex-nowrap border-t border-gray-200"></div>
                         <span
                             class="text-gray-600
@@ -430,13 +446,14 @@
                                 text-sm transition-colors duration-200">
                             Configurações do sistema
                         </span>
+                        @if (in_array(1, $pages) == true)
                         <!-- Dropdown Configurações -->
                         <button id="dropdownConfigs" data-dropdown-toggle="configs"
                             class="flex items-center justify-start w-full px-4 py-1
-                                font-thin uppercase transition-colors duration-200
-                                {{ Request::is('*configurações*')
-                                    ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                    font-thin uppercase transition-colors duration-200
+                                    {{ Request::is('*configurações*')
+                                        ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -456,7 +473,7 @@
                         </button>
                         <div id="configs"
                             class="justify-start w-full z-10 hidden bg-white
-                                    divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
+                                        divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
                             <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownConfigs">
                                 <x-link-dropdown url="configuration" active="*conf">
@@ -524,13 +541,13 @@
                             </ul>
                         </div>
                         <!-- End Dropdown Configurações -->
-
+                        @endif
                         <a href="{{ url('/user/profile') }}"
                             class="flex items-center justify-start w-full px-4 py-2 my-1
                         font-thin uppercase transition-colors duration-200
                         {{ Request::is('*profile*')
                             ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                        dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                             : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }} sm:hidden">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -551,7 +568,7 @@
                             font-thin uppercase transition-colors duration-200
                             {{ Request::is('profile*')
                                 ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                                                        dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                                                                    dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                                 : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}
                             sm:hidden">
                                 <span class="text-left">

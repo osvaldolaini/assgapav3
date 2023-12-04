@@ -15,6 +15,11 @@ class Voucher extends Component
     public $type;
     public $data;
 
+    protected $listeners =
+    [
+        'createReceived'
+    ];
+
     public function mount($data,$type)
     {
         $this->type = $type;
@@ -23,6 +28,22 @@ class Voucher extends Component
     public function render()
     {
         return view('livewire.admin.financial.voucher');
+    }
+    //CREATE RECEIVED
+    public function createReceived($data)
+    {
+        $data = json_decode($data);
+        $this->data = Received::create([
+            'active' => 1,
+            'title' => $data->title,
+            'paid_in' => $data->paid_in,
+            'value' => $data->value,
+            'form_payment' => $data->form_payment,
+            'partner_id' => $data->partner_id,
+            'partner' => $data->partner,
+            'created_by' => Auth::user()->name,
+        ]);
+        $this->dispatch('checkoutReturn',$this->data->id);
     }
     //RECEIVED
     public function printReceived()

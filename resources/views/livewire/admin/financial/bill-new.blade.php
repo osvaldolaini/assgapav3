@@ -15,7 +15,9 @@
         <fieldset>
             <form wire:submit="save_out" class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                 <div class="col-span-full">
-                    <label for="creditor">*Fornecedor / colaborador</label>
+                    <label for="creditor" class="flex w-full">*Fornecedor / colaborador
+                        @livewire('admin.registers.other-fast',['url' =>'new-bill'])
+                    </label>
                     <div class="grid gap-4 mb-1 grid-cols-1">
                         <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
                             wire:click="openModalSearch('creditor')" wire:ignore>
@@ -179,4 +181,14 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
+    @section('scripts')
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('refresh', (event) => {
+                alert()
+                window.reload();
+            })
+        })
+    </script>
+    @endsection
 </div>

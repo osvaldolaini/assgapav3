@@ -183,6 +183,7 @@ class OtherNew extends Component
             'registration_at'       =>$this->registration_at,
             'discount'              =>$this->discount,
             'partner_category'      =>$this->partner_category,
+            'partner_category_master'      => $this->partner_category_master,
             'company'               =>$this->company,
             'created_by'            =>Auth::user()->name,
         ]);

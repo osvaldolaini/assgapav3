@@ -6,6 +6,7 @@ use App\Models\Admin\Configs\CostCenter;
 use App\Models\Admin\Financial\Bill;
 use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 use Livewire\Component;
 
 class BillNew extends Component
@@ -38,6 +39,7 @@ class BillNew extends Component
         $this->paid_in = date('d/m/Y');
         $this->categories = CostCenter::select('title', 'id')->get();
     }
+
     public function render()
     {
         if ($this->inputSearch != '') {

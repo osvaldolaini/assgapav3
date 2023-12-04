@@ -168,6 +168,7 @@
                     @error('deleted_because')
                         <span class="error">{{ $message }}</span>
                     @enderror
+                </div>
             </form>
 
         </x-slot>

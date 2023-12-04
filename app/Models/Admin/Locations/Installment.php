@@ -5,7 +5,6 @@ namespace App\Models\Admin\Locations;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -53,7 +52,6 @@ class Installment extends Model
         }
         return $payment;
     }
-
 
     public function getValueAttribute($value)
     {

@@ -2,11 +2,13 @@
 
 namespace App\Livewire\Admin\Pool;
 
+use App\Models\Admin\Financial\Received;
 use App\Models\Admin\Pool\Season;
 use App\Models\Admin\Pool\SeasonPay;
 use App\Models\Admin\Registers\Partner;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\Attributes\On;
 
 class SeasonPayNew extends Component
 {
@@ -40,8 +42,9 @@ class SeasonPayNew extends Component
     public $form_payment;
     public $partner_id;
     public $type = 'Diário';
-    public $received_id;
+    public $paid_id;
     public $season_id;
+
 
     public function mount()
     {
@@ -52,8 +55,8 @@ class SeasonPayNew extends Component
     {
         $this->seasons = Season::select('id', 'title')
             ->orderBy('title', 'asc')
-            ->where('start', '<=',now())
-            ->where('end', '>',now())
+            ->where('start', '<=', now())
+            ->where('end', '>', now())
             ->where('active', 1)->get();
 
         if ($this->inputSearch != '') {
@@ -90,33 +93,46 @@ class SeasonPayNew extends Component
         $this->modalSearch = false;
     }
 
-
     public function save_out()
     {
         $this->rules = [
-            'paid_in'         => 'required|date_format:d/m/Y',
-            'value' => 'required',
-            'form_payment' => 'required',
-            'partner_id' => 'required',
-            'type' => 'required',
-            'season_id' => 'required',
+            'paid_in'       => 'required|date_format:d/m/Y',
+            'value'         => 'required',
+            'form_payment'  => 'required',
+            'partner_id'    => 'required',
+            'type'          => 'required',
+            'season_id'     => 'required',
         ];
 
         $this->validate();
-        SeasonPay::create([
-            'active' => 1,
-            'created_by' => Auth::user()->name,
-            'paid_in'         => $this->paid_in,
-            'value' => $this->value,
-            'form_payment' => $this->form_payment,
-            'partner_id' => $this->partner_id,
-            'type' => $this->type,
-            'season_id' => $this->season_id,
+        $received = Received::create([
+            'active'        => 1,
+            'title'         => 'PAGAMENTO REFERENTE À '. Season::find($this->season_id)->title,
+            'paid_in'       => $this->paid_in,
+            'value'         => $this->value,
+            'form_payment'  => $this->form_payment,
+            'partner_id'    => $this->partner_id,
+            'partner'       => $this->partner,
+            'created_by'    => Auth::user()->name,
+        ]);
+
+        $season = SeasonPay::create([
+            'active'        => 1,
+            'created_by'    => Auth::user()->name,
+            'paid_in'       => $this->paid_in,
+            'value'         => $this->value,
+            'form_payment'  => $this->form_payment,
+            'partner_id'    => $this->partner_id,
+            'type'          => $this->type,
+            'season_id'     => $this->season_id,
+            'received_id'   => $received->id,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
+
         redirect()->route('seasonPays');
     }
+
 
     //MESSAGE
     public function openAlert($status, $msg)

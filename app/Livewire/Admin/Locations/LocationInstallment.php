@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Locations;
 
+use App\Models\Admin\Financial\Received;
 use App\Models\Admin\Locations\Installment;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
@@ -9,6 +10,7 @@ use Livewire\Component;
 class LocationInstallment extends Component
 {
     public $rules;
+    public $partner;
     public $showJetModal = false;
     public $checkoutModal = false;
 
@@ -32,8 +34,7 @@ class LocationInstallment extends Component
         $this->installment_maturity_date = $installment->installment_maturity_date;
         $this->received_id = $installment->received_id;
         $this->location_id = $installment->location_id;
-
-
+        $this->partner = $installment->location->partners;
     }
     public function render()
     {
@@ -93,10 +94,22 @@ class LocationInstallment extends Component
             return;
 
         }
+        $received = Received::create([
+            'active'        => 1,
+            'title'         => $this->title. 'DO CONTRATO Nº '.$this->location_id,
+            'paid_in'       => $this->installment_maturity_date,
+            'value'         => $this->value,
+            'form_payment'  => $this->form_payment,
+            'partner_id'    => $this->partner->id,
+            'partner'       => $this->partner->name,
+            'created_by'    => Auth::user()->name,
+        ]);
+
         Installment::updateOrCreate([
             'id' => $this->id,
         ], [
             'active' => 1,
+            'received_id' => $received->id,
             'updated_by' => Auth::user()->name,
         ]);
 
