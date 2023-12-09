@@ -3,6 +3,7 @@
 namespace App\Models\Admin\Locations;
 
 use App\Models\Admin\Ambiences\Ambience;
+use App\Models\Admin\Configs\AmbienceTenant;
 use App\Models\Admin\Configs\ReasonEvent;
 use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
@@ -42,6 +43,7 @@ class Location extends Model
                 ->format('d/m/Y');
         }
     }
+
 
     public function setValueAttribute($value)
     {
@@ -105,7 +107,10 @@ class Location extends Model
         }
     }
 
-
+    public function ambienceTenants()
+    {
+        return $this->belongsTo(AmbienceTenant::class, 'ambience_tenant_id', 'id');
+    }
     public function partners()
     {
         return $this->belongsTo(Partner::class, 'partner_id', 'id');
@@ -143,10 +148,7 @@ class Location extends Model
 
         return $cashback;
     }
-    public function ambienceTenants()
-    {
-        return $this->belongsTo(AmbienceTenant::class, 'ambience_tenant_id', 'id');
-    }
+
 
     public function getActivitylogOptions(): LogOptions
     {

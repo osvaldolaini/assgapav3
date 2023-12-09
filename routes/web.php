@@ -15,15 +15,18 @@ use App\Livewire\Admin\Ambiences\AmbienceNew;
 use App\Livewire\Admin\Ambiences\Ambiences;
 use App\Livewire\Admin\Ambiences\AmbienceUnavailabilities;
 use App\Livewire\Admin\Ambiences\AmbienceValues;
+use App\Livewire\Admin\Dashboard\Master;
 use App\Livewire\Admin\Financial\BillEdit;
 use App\Livewire\Admin\Financial\BillNew;
 use App\Livewire\Admin\Financial\Bills;
 use App\Livewire\Admin\Financial\CashierEdit;
 use App\Livewire\Admin\Financial\CashierNew;
 use App\Livewire\Admin\Financial\Cashiers;
+use App\Livewire\Admin\Financial\PaidMonth;
 use App\Livewire\Admin\Financial\ReceivedEdit;
 use App\Livewire\Admin\Financial\ReceivedNew;
 use App\Livewire\Admin\Financial\Receiveds;
+use App\Livewire\Admin\Locations\InstallmentsLate;
 use App\Livewire\Admin\Locations\LocationEdit;
 use App\Livewire\Admin\Locations\LocationExtras;
 use App\Livewire\Admin\Locations\LocationInstallments;
@@ -52,6 +55,7 @@ use App\Livewire\Admin\Registers\Others;
 use App\Livewire\Admin\Registers\PartnerEdit;
 use App\Livewire\Admin\Registers\PartnerNew;
 use App\Livewire\Admin\Registers\Partners;
+use App\Livewire\Admin\Registers\PartnersLate;
 use App\Livewire\Admin\Registers\SelectCards;
 use App\Livewire\Admin\Schedule\AllLocations;
 use App\Livewire\Admin\UserAccesses;
@@ -70,6 +74,17 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
+// Configurations pageAccess 11
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging'
+])->group(function () {
+    Route::get('/dashboard', Panel::class)->name('dashboard');
+    Route::get('/painel-de-controle-administrador', Master::class)
+        ->name('master-panel');
+});
 
 Route::get('/', Homepage::class)->name('homepage');
 
@@ -79,13 +94,14 @@ Route::middleware([
     'verified',
     'registerLogging'
 ])->group(function () {
-    Route::get('/dashboard', Panel::class)->name('dashboard');
+
     Route::post('/upload-editor',function(Request $request){
         $file = $request->file('file');
         $url = $file->store('public/uploads');
         return Storage::url($url);
     })->name('upload-editor');
 });
+
 // Configurations pageAccess 1
 Route::middleware([
     'auth:sanctum',
@@ -155,6 +171,9 @@ Route::middleware([
         ->name('edit-dependent');
     Route::get('/cadastros/{partner}/mensalidades', Monthlys::class)
         ->name('monthlys');
+
+        Route::get('/cadastros-sócios-em-atraso', PartnersLate::class)
+        ->name('partnersLate');
 });
 // Ambientes pageAccess 4
 Route::middleware([
@@ -229,6 +248,9 @@ Route::middleware([
     Route::get('/locações/{location}/parcelas', LocationInstallments::class)
         ->name('installments-location');
 
+    Route::get('/locações/parcelas-em-atraso', InstallmentsLate::class)
+        ->name('installmentsLate');
+
 });
 
 // Financeiro pageAccess 8
@@ -252,6 +274,8 @@ Route::middleware([
         ->name('new-bill');
     Route::get('/financeiro-saídas/{bill}/editar', BillEdit::class)
         ->name('edit-bill');
+    Route::get('/financeiro-contas-pagas-mês', PaidMonth::class)
+        ->name('paidMonth');
 
     Route::get('/financeiro-entradas', Receiveds::class)
         ->name('receiveds');

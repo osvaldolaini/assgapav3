@@ -38,24 +38,26 @@ class AllLocations extends Component
     ];
     public function updateCalendar()
     {
-        $this->dispatch('calendar', $this->getCalendarReservation());
+        $this->dispatch('calendar', $this->getCalendarReservation($this->year));
     }
 
     public function mount()
     {
+
+        $this->year = date('Y');
         $this->ambiences = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
-        $this->events = $this->getCalendarReservation();
-        $this->year = date('Y');
+        $this->events = $this->getCalendarReservation($this->year);
         $this->date = now();
         $this->nextyear = date('Y') + 1;
+
     }
 
     public function render()
     {
         $this->ambiences = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
-        $this->events = $this->getCalendarReservation();
+        $this->events = $this->getCalendarReservation($this->year);
         return view('livewire.admin.schedule.all-locations');
     }
 
@@ -139,13 +141,13 @@ class AllLocations extends Component
         $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
     }
 
-    public function getCalendarReservation()
+    public function getCalendarReservation($year)
     {
         $events = [];
         $calendar = array();
         if ($this->mounth) {
             $this->typeGrid =  'dayGridMonth';
-            $this->date = date($this->year . '-' . $this->mounth . '-01');
+            $this->date = date($year . '-' . $this->mounth . '-01');
         }
 
         if ($this->ambience_id) {
@@ -159,7 +161,7 @@ class AllLocations extends Component
             )
                 ->where('ambience_id', $this->ambience_id)
                 ->where('active', 1)
-                ->where('location_date', 'LIKE', '%' . $this->year . '%')
+                ->where('location_date', 'LIKE', '%' . $year . '%')
                 ->get();
         } else {
             $events = Location::select(
@@ -171,9 +173,11 @@ class AllLocations extends Component
                 'location_date'
             )
                 ->where('active', 1)
-                ->where('location_date', 'LIKE', '%' . $this->year . '%')
+                ->where('location_date', 'LIKE', '%' . $year . '%')
                 ->get();
         }
+
+        // dd($events,$this->year);
         foreach ($events as $event) {
             if ($event->ambience_id) {
                 $ambience = $event->ambiences->title;
@@ -187,7 +191,8 @@ class AllLocations extends Component
             } else {
                 $partner = $event->partner;
             }
-            $date = date('Y-m-d', strtotime($event->location_date));
+            $date = implode("-", array_reverse(explode("/", $event->location_date)));
+
             if ($event->location_hour_start != '') {
                 if ($event->location_hour_start == '00:00:00') {
                     $start = $date;
@@ -221,6 +226,7 @@ class AllLocations extends Component
                 'id' => $event->id,
             );
         }
+        // dd($calendar);
         $unavailabilities = AmbienceUnavailability::where('active', 1)
             ->get();
 

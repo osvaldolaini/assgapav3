@@ -15,6 +15,7 @@ class TableUsers extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->boolean('active')->nullable();
+            $table->string('dashboard')->nullable();
             $table->foreignId('user_groups_id')->nullable();
             $table->string('nick')->nullable();
             $table->string('updated_by',50)->nullable()->after('updated_at');

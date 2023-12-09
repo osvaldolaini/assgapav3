@@ -8,6 +8,7 @@ class Homepage extends Component
 {
     public function render()
     {
-        return view('livewire.admin.homepage')->layout('layouts.page');
+        redirect()->route('dashboard');
+        // return view('livewire.admin.homepage')->layout('layouts.page');
     }
 }

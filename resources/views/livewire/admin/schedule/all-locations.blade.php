@@ -1,6 +1,6 @@
 <div class="w-100">
     <x-breadcrumb>
-        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
+        <div class="grid grid-cols-8 gap-2 text-gray-600 ">
             <div class="col-span-6 justify-items-validity_of_card">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
                     AGENDA
@@ -15,7 +15,7 @@
         <div>
             <div
                 class="flex flex-col grid-cols-3 gap-1 items-end justify-start px-4
-                        space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                        space-y-3 md:flex-row md:space-y-0 md:space-x-1">
                 <div class="col-span-1">
                     <label for="year">Ano </label>
                     <Select wire:model="year"

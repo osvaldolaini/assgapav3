@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Financial;
 
+use App\Models\Admin\Configs\CostCenter;
 use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;

@@ -5,8 +5,7 @@
             <div class="h-full bg-white rounded-2xl dark:bg-gray-700 py-2">
                 <nav class="mt-3">
                     <div>
-
-                        <x-link-simple url="dashboard" active="dashboard" role='1' :pages="$pages">
+                        <x-link-simple url="dashboard" active="*painel*" role='1' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -19,9 +18,6 @@
                                 Dashboard
                             </span>
                         </x-link-simple>
-
-
-
                         <x-link-simple url="list-users" active="*usuários*" role='2' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"

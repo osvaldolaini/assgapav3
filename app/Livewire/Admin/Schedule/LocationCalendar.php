@@ -78,7 +78,7 @@ class LocationCalendar extends Component
             } else {
                 $partner = $event->partner;
             }
-            $date = date('Y-m-d', strtotime($event->location_date));
+            $date = implode("-", array_reverse(explode("/", $event->location_date)));
             if ($event->location_hour_start != '') {
                 if ($event->location_hour_start == '00:00:00') {
                     $start = $date;

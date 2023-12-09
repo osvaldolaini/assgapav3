@@ -81,6 +81,17 @@ class Received extends Model
         return $this->belongsTo(AmbienceTenant::class,'ambience_tenant_id','id');
     }
 
+    public function getPaymentAttribute()
+    {
+        switch ($this->form_payment) {
+            case "DIN": $payment = 'DINHEIRO';   break;
+            case "PIX": $payment = 'PIX';   break;
+            case "BOL": $payment = 'BOLETO';   break;
+            case "CAR": $payment = 'CARTÃO';   break;
+            default: $payment =    'DINHEIRO';   break;
+        }
+        return $payment;
+    }
 
     public function getActivitylogOptions(): LogOptions
     {
