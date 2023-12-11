@@ -17,16 +17,19 @@
         <div class="w-full h-full px-1">
             <div class="rounded-2xl px-4 py-2 flex flex-col h-full">
                 <div x-data='{
-                        dataLocations: @json($dataLocations),
+                        data: @json($dataLocations),
                         labels: @json($labels)
                     }'
-                    x-init="new Chart($refs.second, {
+                    x-init="
+                    const chartData = data;
+                    const chartLabels = labels;
+                    new Chart($refs.second, {
                         type: 'bar',
                         data: {
                             labels: labels,
                             datasets: [{
                                 label: 'Ambiente',
-                                data: dataLocations,
+                                data: data,
                                 borderWidth: 1
                             }]
                         },
@@ -36,6 +39,18 @@
                                 y: {
                                     min: 0,
                                     max: 30,
+                                }
+                            },
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            // Certifique-se de acessar os dados corretamente usando chartData e chartLabels
+
+                                            const value = chartData[context.dataIndex] || 0;
+                                            return value + '%';
+                                        }
+                                    }
                                 }
                             }
                         },

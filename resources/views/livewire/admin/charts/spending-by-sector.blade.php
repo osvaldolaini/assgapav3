@@ -2,14 +2,18 @@
     <div class="flex items-center justify-between p-3">
         <div class="flex items-center space-x-1">
             <div class="-space-y-1">
-                <h2 class="text-sm font-semibold leadi">Gastos por setor (últimos 30 dias)</h2>
+                <h2 class="text-sm font-semibold leadi">Receita por setor (últimos 30 dias)</h2>
             </div>
         </div>
         <span title="Open options">
-            <svg class="w-5 h-5" fill="currentColor" viewBox="-0.5 0 32 32" xmlns="http://www.w3.org/2000/svg"
-                preserveAspectRatio="xMidYMid">
-                <path
-                    d="M30.000,32.000 L23.000,32.000 C22.447,32.000 22.000,31.552 22.000,31.000 L22.000,1.000 C22.000,0.448 22.447,-0.000 23.000,-0.000 L30.000,-0.000 C30.553,-0.000 31.000,0.448 31.000,1.000 L31.000,31.000 C31.000,31.552 30.553,32.000 30.000,32.000 ZM29.000,2.000 L24.000,2.000 L24.000,30.000 L29.000,30.000 L29.000,2.000 ZM19.000,32.000 L12.000,32.000 C11.448,32.000 11.000,31.552 11.000,31.000 L11.000,17.000 C11.000,16.448 11.448,16.000 12.000,16.000 L19.000,16.000 C19.553,16.000 20.000,16.448 20.000,17.000 L20.000,31.000 C20.000,31.552 19.553,32.000 19.000,32.000 ZM18.000,18.000 L13.000,18.000 L13.000,30.000 L18.000,30.000 L18.000,18.000 ZM8.000,32.000 L1.000,32.000 C0.448,32.000 0.000,31.552 0.000,31.000 L0.000,11.000 C0.000,10.448 0.448,10.000 1.000,10.000 L8.000,10.000 C8.552,10.000 9.000,10.448 9.000,11.000 L9.000,31.000 C9.000,31.552 8.552,32.000 8.000,32.000 ZM7.000,12.000 L2.000,12.000 L2.000,30.000 L7.000,30.000 L7.000,12.000 Z" />
+            <svg class="w-5 h-5" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+                    <g id="Icon-Set" sketch:type="MSLayerGroup" transform="translate(-516.000000, -151.000000)" fill="currentColor">
+                        <path d="M544.551,172.613 L531,168 L531,153 C538.779,152.961 545.889,159.682 545.889,167.571 C545.889,169.629 545.351,171.19 544.551,172.613 L544.551,172.613 Z M530.5,181 C523.597,181 518,175.404 518,168.5 C518,162.21 522.917,156.878 529,156 L529,169.429 L541.709,173.855 C540.018,178.128 535.163,181 530.5,181 L530.5,181 Z M531,151 L529,151 L529,154 C521.721,154.789 516,161.026 516,168.5 C516,176.508 522.492,183 530.5,183 C536.406,183 541.479,179.463 543.738,174.397 L546,175 C547.093,173.205 548,170.657 548,167.571 C548,158.419 540.005,151 531,151 L531,151 Z" id="pie-chart" sketch:type="MSShapeGroup">
+
+            </path>
+                    </g>
+                </g>
             </svg>
         </span>
     </div>
@@ -21,7 +25,10 @@
                         color: @json($color),
                         labels: @json($labels)
                     }'
-                    x-init="new Chart($refs.third, {
+                    x-init="
+                    const chartData = data;
+                    const chartLabels = labels;
+                    new Chart($refs.four, {
                         type: 'pie',
                         data: {
                             labels: labels,
@@ -33,10 +40,22 @@
                         },
                         options: {
                             responsive: true,
+                            plugins: {
+                                tooltip: {
+                                    callbacks: {
+                                        label: function(context) {
+                                            // Certifique-se de acessar os dados corretamente usando chartData e chartLabels
+
+                                            const value = chartData[context.dataIndex] || 0;
+                                            return  value + '%';
+                                        }
+                                    }
+                                }
+                            }
 
                         },
                     });">
-                    <canvas id="third" x-ref="third"></canvas>
+                    <canvas id="four" x-ref="four"></canvas>
                 </div>
             </div>
         </div>
