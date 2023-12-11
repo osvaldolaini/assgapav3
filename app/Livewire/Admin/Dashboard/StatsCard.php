@@ -23,6 +23,7 @@ class StatsCard extends Component
     public $cashier;
     public $reports;
     public $reportsTiny;
+    public $charts;
     public $dailyreports;
     public $lastReceiveds;
     public $accessesPool = [];
@@ -38,14 +39,15 @@ class StatsCard extends Component
         $reports,
         $reportsTiny,
         $dailyreports,
-        $accessesPool
+        $accessesPool,
+        $charts
     ) {
         $this->reports = $reports;
         $this->reportsTiny = $reportsTiny;
         $this->dailyreports = $dailyreports;
+        $this->charts = $charts;
 
-
-        if ($this->accessesPool) {
+        if ($accessesPool) {
             $accesses = Pool::select('table', 'register_id', 'created_at')->orderBy('id','desc')->limit(5)->get();
             foreach ($accesses as $access) {
                 if ($access->table == 'passes') {

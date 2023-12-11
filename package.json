@@ -22,6 +22,7 @@
         "@ckeditor/ckeditor5-alignment": "^39.0.2",
         "@ckeditor/ckeditor5-build-classic": "^39.0.2",
         "alpinejs": "^3.13.0",
+        "chart.js": "^4.4.1",
         "flowbite": "^1.8.1",
         "fullcalendar": "^6.1.9",
         "inputmask": "^5.0.8"

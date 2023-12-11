@@ -12,3 +12,16 @@ import listPlugin from '@fullcalendar/list';
 window.listPlugin = listPlugin;
 import multiMonthPlugin from '@fullcalendar/multimonth';
 window.multiMonthPlugin = multiMonthPlugin;
+
+import Alpine from 'alpinejs';
+import focus from '@alpinejs/focus';
+
+//Graficos
+import Chart from 'chart.js/auto';
+
+window.Alpine = Alpine;
+window.Chart = Chart;
+
+Alpine.plugin(focus);
+
+Alpine.start();
