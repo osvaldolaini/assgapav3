@@ -18,6 +18,18 @@ window.axios.defaults.headers.common['X-Requested-With'] = 'XMLHttpRequest';
 import Alpine from 'alpinejs'
 import mask from '@alpinejs/mask'
 
+import focus from '@alpinejs/focus';
+
+//Graficos
+import Chart from 'chart.js/auto';
+
+// window.Alpine = Alpine;
+window.Chart = Chart;
+
+Alpine.plugin(focus);
+
+// Alpine.start();
+
 Alpine.plugin(mask)
 
 import Inputmask from 'inputmask';

@@ -20,7 +20,7 @@ class Pool extends Model
         'table','register_id','created_at'
     ];
 
-    public function getCreatedAtAttribute($value)
+    public function getCreatedAttribute($value)
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d H:i:s', $value)

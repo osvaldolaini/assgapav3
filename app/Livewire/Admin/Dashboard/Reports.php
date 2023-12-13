@@ -786,7 +786,7 @@ class Reports extends Component
             if ($access->table == 'passes') {
                 $pass = Pass::where('id', $access->register_id)->first();
                 $line[] = array(
-                    'date'     => date('Y-m-d', strtotime($access->created_at)),
+                    'date'     => date('d/m/Y', strtotime($access->created_at)),
                     'hour'     => date('H:i', strtotime($access->created_at)),
                     'name'     => mb_strtoupper($pass->title),
                     'color'    => $pass->color,

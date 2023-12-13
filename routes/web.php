@@ -44,6 +44,8 @@ use App\Livewire\Admin\Pool\SeasonPays;
 use App\Livewire\Admin\Pool\SeasonPayEdit;
 use App\Livewire\Admin\Pool\SeasonPayNew;
 use App\Livewire\Admin\Pool\Passes;
+use App\Livewire\Admin\Pool\RegisterAccessPool;
+use App\Livewire\Admin\Pool\RegisterPassPool;
 use App\Livewire\Admin\Pool\Seasons;
 use App\Livewire\Admin\Registers\DependentEdit;
 use App\Livewire\Admin\Registers\DependentNew;
@@ -87,6 +89,12 @@ Route::middleware([
 });
 
 Route::get('/', Homepage::class)->name('homepage');
+
+Route::get('/piscina/{partner}', RegisterAccessPool::class)
+->name('register-access-pool');
+
+Route::get('/passe-piscina/{pass}', RegisterPassPool::class)
+->name('pool-pass');
 
 Route::middleware([
     'auth:sanctum',
