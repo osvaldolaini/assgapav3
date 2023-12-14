@@ -8,7 +8,6 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -24,6 +23,10 @@ class MonthlyPayment extends Model
         'status','ref','value', 'received_id',
         'received','form_payment','updated_by','created_by',
     ];
+    public static function monthlyExists($ref,$partner_id)
+    {
+        return static::where('ref', $ref)->where('partner_id', $partner_id)->exists();
+    }
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = mb_strtoupper($value);

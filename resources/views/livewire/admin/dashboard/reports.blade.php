@@ -1,4 +1,8 @@
 <div class="relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full ">
+    <div class="col-span-2 flex justify-end">
+        <x-action-loading-calendar></x-action-loading-calendar>
+
+    </div>
     <div class="flex items-center justify-between p-3">
         <div class="flex items-center space-x-2">
             <div class="-space-y-1">

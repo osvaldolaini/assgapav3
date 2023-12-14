@@ -10,9 +10,9 @@ use Livewire\Component;
 
 class MonthlyUnpaid extends Component
 {
-
     public $showModalPay = false;
     public $showModalEdit = false;
+    public $showModalCreate= false;
 
     public $monthlys;
     public $partner;
@@ -30,6 +30,9 @@ class MonthlyUnpaid extends Component
     public $monthly_id;
 
     public $received_id;
+
+    public $mounth;
+    public $year;
 
     public function mount(Partner $partner)
     {
@@ -80,6 +83,40 @@ class MonthlyUnpaid extends Component
         }
         $this->value = number_format($tot, 2, ',', '.');
         $this->showModalPay = true;
+    }
+    public function modalCreate()
+    {
+        $this->mounth = date('m');
+        $this->year = date('Y');
+        $this->showModalCreate = true;
+    }
+    public function store()
+    {
+        $this->rules = [
+            'mounth' => 'required',
+            'year' => 'required',
+        ];
+        $ref = $this->year.'-'.$this->mounth;
+
+        $this->validate();
+        if (!MonthlyPayment::monthlyExists($ref,$this->partner->id)) {
+            MonthlyPayment::create([
+                'partner_id'    => $this->partner->id,
+                'status'        => 0,
+                'ref'           => $ref,
+                'paid_in'       => date('Y-m-d'),
+                'value'         => $this->partner->category->value,
+                'created_by'    => Auth::user()->name,
+            ]);
+
+
+            $this->openAlert('success', 'Registro criado com sucesso.');
+        }else{
+            $this->openAlert('error', 'Já existe essa mensalidade deste usuário.');
+        }
+        $this->resetAll();
+        $this->showModalCreate = false;
+
     }
     //UPDATE
     public function showModalUpdate($id)

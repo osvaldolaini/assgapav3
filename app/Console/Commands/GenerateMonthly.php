@@ -1,44 +1,34 @@
 <?php
 
-namespace App\Livewire\Admin\Dashboard;
+namespace App\Console\Commands;
 
 use App\Models\Admin\Monthly\MonthlyPayment;
 use App\Models\Admin\Registers\Partner;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
+use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
-use Livewire\Component;
 
-class Master extends Component
+class GenerateMonthly extends Command
 {
-    public function render()
-    {
-        $dataAtual = Carbon::now();
-        if ($dataAtual->day <= 7) {
-            $this->generateMonthly();
-        }else{
-            Log::info('Já passou do período de criação');
-        }
+    public $monthlys;
+    public $test;
+    /**
+     * The name and signature of the console command.
+     *
+     * @var string
+     */
+    protected $signature = 'app:generate-monthly';
 
-        switch (Auth::user()->dashboard) {
-            case 1:
-                return view('livewire.admin.dashboard.master');
-                break;
-            case 2:
-                return view('livewire.admin.dashboard.financial');
-                break;
-            case 3:
-                return view('livewire.admin.dashboard.secretary');
-                break;
-            case 4:
-                return view('livewire.admin.dashboard.director');
-                break;
-            default:
-                return view('livewire.admin.dashboard.director');
-                break;
-        }
-    }
-    public function generateMonthly()
+    /**
+     * The console command description.
+     *
+     * @var string
+     */
+    protected $description = 'Command description';
+
+    /**
+     * Execute the console command.
+     */
+    public function handle()
     {
         $tot = 0;
         $partners = Partner::select('id','partner_category')
@@ -48,7 +38,7 @@ class Master extends Component
         ->where('partner_category_master', 'Sócio')
         ->orderBy('partner_category', 'asc')
         ->orderBy('name', 'asc')
-        // ->limit(20)
+        // ->limit(20) teste
         ->get();
 
         $ref = date('Y-m');
@@ -59,6 +49,7 @@ class Master extends Component
                 'value'         => $partner->category->value,
             ];
         }
+
         foreach ($monthlys as $monthly) {
             // Verifica se já existe uma mensalidade para o mês desejado
             if (!MonthlyPayment::monthlyExists($ref,$monthly['partner_id'])) {
@@ -75,4 +66,5 @@ class Master extends Component
         }
         Log::info('Criadas '.$tot.' novas mensalidades');
     }
+
 }

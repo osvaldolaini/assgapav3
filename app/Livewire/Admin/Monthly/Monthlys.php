@@ -2,11 +2,8 @@
 
 namespace App\Livewire\Admin\Monthly;
 
-use App\Models\Admin\Configs\PartnerCategory;
 use App\Models\Admin\Registers\Partner;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-use Intervention\Image\Facades\Image;
 
 class Monthlys extends Component
 {
