@@ -327,6 +327,9 @@
         <div class="row-span-2 col-span-4 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.location-by-environment')
         </div>
+        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+            @livewire('admin.charts.new-partner')
+        </div>
     @endif
 
 </div>
