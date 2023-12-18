@@ -1,55 +1,48 @@
 <?php
 
-namespace App\Livewire\Admin\Financial;
+namespace App\Livewire\Admin\Marketing;
 
 use App\Models\Admin\Configs;
-use App\Models\Admin\Financial\Cashier;
+use App\Models\Admin\Configs\PartnerCategory;
+use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
-use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Illuminate\Support\Facades\Auth;
 use Mpdf\Mpdf;
 
-class Cashiers extends Component
+class Lists extends Component
 {
-    public Cashier $cashier;
-    public $breadcrumb_title = 'CAIXA';
+    public Partner $partner;
+    public $breadcrumb_title = 'LISTAS';
 
-    public $showJetModal = false;
-    public $showModalView = false;
-    public $showModalCreate = false;
-    public $showModalEdit = false;
-    public $alertSession = false;
-    public $rules;
-    public $detail;
-    public $logs;
+    public $pf_pj = false;
+    public $email = false;
+    public $phone = false;
+    public $address = false;
+    public $rg= false;
+
     public $model_id;
-    public $registerId;
 
     //Dados da tabela
-    public $model = "App\Models\Admin\Financial\Cashier"; //Model principal
-    public $modelId = "cashiers.id as id"; //Ex: 'table.id' or 'id'
+    public $model = "App\Models\Admin\Registers\Partner"; //Model principal
+    public $modelId = "partners.id"; //Ex: 'table.id' or 'id'
     public $search;
-    public $relationTables = "cost_centers,cost_centers.id,cashiers.cost_center_id"; //Relacionamentos ( table , key , foreingKey )
-    public $customSearch = 'paid_in|type'; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'paid_in,value,cashiers.active,type,cashiers.title as cashier_title,cost_centers.category,cost_centers.color';
-    public $searchable = 'cashiers.id,cashiers.title,cost_centers.category,paid_in,type,value'; //Colunas pesquisadas no banco de dados
-    public $sort = "cashiers.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
-    public $paginate = 10; //Qtd de registros por página
-
-    public $deleted_because;
-    public $deleted_at;
+    public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
+    public $customSearch; //Colunas personalizadas, customizar no model
+    public $columnsInclude = 'partners.name,partners.cpf,pf_pj,cnpj,rg,phone_first,address,city,state,number,email,partner_category_master,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
+    public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
+    public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $paginate = 15; //Qtd de registros por página
 
     public function render()
     {
-        return view('livewire.admin.financial.cashiers', [
+        return view('livewire.admin.marketing.lists', [
             'dataTable' => $this->getData(),
         ]);
     }
     //EXPORT
     public function printExport()
     {
-        ini_set('max_execution_time', '300');
-        ini_set("pcre.backtrack_limit", "5000000");
         $title = $this->breadcrumb_title;
         $config = Configs::find(1);
         $today = Carbon::parse(now())->locale('pt-BR');
@@ -57,14 +50,55 @@ class Cashiers extends Component
         $body = array();
         $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
+        $heads = array('Sócio');
+
         foreach ($this->getData() as $item) {
-            $body[] = [
-                'id'        => $item->id,
-                'title'     => $item->cashier_title,
-                'value'     => $item->value,
-                'paid_in'   => $item->paid_in,
+            $id = $item->id;
+
+            // Initialize $body[$id] if it doesn't exist
+            if (!isset($body[$id])) {
+                $body[$id] = [];
+            }
+
+            $body[$id] = [
+                'name' => $item->name,
             ];
+            if ($this->pf_pj) {
+                if ($item->pf_pj == 'pf'){
+                    $body[$id]['cpf'] = $item->cpf;
+                }else{
+                    $body[$id]['cnpj'] = $item->cnpj;
+                }
+            }
+            if ($this->email) {
+                $body[$id]['email'] = $item->email;
+            }
+            if ($this->phone) {
+                $body[$id]['phone'] = $item->phone_first;
+            }
+            if ($this->address) {
+                $body[$id]['address'] = $item->address.' '.$item->number.','. $item->city.'-'.$item->state;
+            }
+            if ($this->rg) {
+                $body[$id]['phone_first'] = $item->rg;
+            }
         }
+        if ($this->pf_pj) {
+            $heads[] = 'CPF / CNPJ';
+        }
+        if ($this->email) {
+            $heads[] = 'email';
+        }
+        if ($this->phone) {
+            $heads[] = 'Telefones';
+        }
+        if ($this->address) {
+            $heads[] = 'Endereço';
+        }
+        if ($this->rg) {
+            $heads[] = 'RG';
+        }
+
         $html = view(
             'livewire.admin.exports.pdf',
             [
@@ -73,7 +107,7 @@ class Cashiers extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Nº', 'Motivo','Valor','Vencimento / pagamento'),
+                'heads'         => $heads,
                 'body'          => $body,
             ]
         )->render();
@@ -95,96 +129,17 @@ class Cashiers extends Component
         $this->paginate = 15;
     }
     //END EXPORT
-
-    //READ
-    public function showModalRead($id)
-    {
-        $this->showModalView = true;
-        if (isset($id)) {
-            $data = Cashier::where('id', $id)->first();
-            $this->detail = [
-                'Criada'            => $data->created,
-                'Criada por'        => $data->created_by,
-                'Atualizada'        => $data->updated,
-                'Atualizada por'    => $data->updated_by,
-                'Excluida'          => $data->deleted_at,
-                'Excluida por'      => $data->deleted_by,
-                'Motivo'            => $data->deleted_because,
-            ];
-            $this->logs = logging($data->id, $this->model);
-        } else {
-            $this->detail = '';
-        }
-    }
-    //CREATE
-    public function modalCreate()
-    {
-        redirect()->route('new-cashier');
-    }
-    public function showModalUpdate(Cashier $cashier)
-    {
-        redirect()->route('edit-cashier', $cashier);
-    }
-
-    //DELETE
-    public function showModalDelete($id)
-    {
-        $this->showJetModal = true;
-
-        if (isset($id)) {
-            $this->registerId = $id;
-        } else {
-            $this->registerId = '';
-        }
-    }
-
-    public function delete($id)
-    {
-        $this->rules = [
-            'deleted_because' => 'required',
-        ];
-
-        $this->validate();
-
-        $data = Cashier::where('id', $id)->first();
-        $data->deleted_because = $this->deleted_because;
-        $data->deleted_at = date('Y-m-d');
-        $data->active = 2;
-        $data->save();
-
-        $this->openAlert('success', 'Registro excluido com sucesso.');
-
-        $this->showJetModal = false;
-    }
-    //ACTIVE
-    public function buttonActive($id)
-    {
-        $data = Cashier::where('id', $id)->first();
-        if ($data->active == 1) {
-            $data->active = 0;
-            $data->save();
-        } else {
-            $data->active = 1;
-            $data->save();
-        }
-        $this->openAlert('success', 'Registro atualizado com sucesso.');
-    }
-    //MESSAGE
-    public function openAlert($status, $msg)
-    {
-        $this->dispatch('openAlert', $status, $msg);
-    }
-
     //SEARCH PERSONALIZADO
     private function getData()
     {
-
         if (Auth::user()->group->level <= 5) {
             $query = $this->model::query();
         } else {
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
+        $query->where('partner_category_master', 'Sócio');
+
         $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
@@ -206,6 +161,9 @@ class Cashiers extends Component
             $this->search($query);
         }
 
+        // dd($query->paginate($this->paginate));
+        // $query->take(3);
+        // return $query->simplePaginate($this->paginate);
         if ($this->paginate == 'single') {
             return $query;
         } else {

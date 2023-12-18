@@ -11,6 +11,8 @@
             </div>
         </div>
     </x-breadcrumb>
+    <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
+    </x-table-buttons-relatories>
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
         <div>
             <div class="flex flex-col items-center justify-between px-4

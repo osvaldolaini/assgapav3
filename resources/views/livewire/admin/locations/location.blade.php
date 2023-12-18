@@ -7,14 +7,13 @@
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-
             </div>
         </div>
     </x-breadcrumb>
     <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
     </x-table-buttons-relatories>
     <div>
-        <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+        <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg" >
             <x-table-search></x-table-search>
             <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
@@ -85,13 +84,14 @@
                                                         </div>
                                                     @endif
                                                 </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->locatario }}
-                                                </td>
+
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->ambiente }}
+                                                </td>
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->locatario }}
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">

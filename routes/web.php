@@ -36,6 +36,7 @@ use App\Livewire\Admin\Marketing\EmailPromo;
 use App\Livewire\Admin\Marketing\EmailBirth;
 use App\Livewire\Admin\Marketing\EmailPromoEdit;
 use App\Livewire\Admin\Marketing\EmailPromoNew;
+use App\Livewire\Admin\Marketing\Lists;
 use App\Livewire\Admin\Material\Consumption;
 use App\Livewire\Admin\Material\MovementStock;
 use App\Livewire\Admin\Material\Permanent;
@@ -236,6 +237,8 @@ Route::middleware([
         ->name('edit-email-promo');
     Route::get('/emails-aniversariantes', EmailBirth::class)
         ->name('emails-birth');
+    Route::get('/emails-listas', Lists::class)
+        ->name('lists');
 });
 // Locações pageAccess 7
 Route::middleware([

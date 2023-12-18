@@ -211,8 +211,7 @@ class Reports extends Component
         if ($spending != '') {
             array_multisort($spending);
         }
-        $this->html = view(
-            'livewire.admin.reports.financial',
+        $this->html = view('livewire.admin.reports.financial',
             [
                 'title_postfix' => 'Relatório financeiro',
                 'subtext'       => $this->title,

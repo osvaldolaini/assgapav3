@@ -75,7 +75,7 @@
                                         </tr>
                                     @else
                                         @foreach ($dataTable as $data)
-                                            <tr>
+                                            <tr wire:key="data-row-{{ $data->id }}">
                                                 <td
                                                     @if ($data->type == 1) class="py-1.5 px-4 text-sm font-normal
                                                     text-left text-blue-500"

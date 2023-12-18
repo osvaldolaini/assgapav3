@@ -3,7 +3,7 @@
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
-                    MATERIAL DE CONSUMO
+                    {{ $breadcrumb_title }}
                 </h3>
             </div>
             <div class="col-span-2 flex justify-end">

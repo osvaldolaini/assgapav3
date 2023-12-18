@@ -11,6 +11,7 @@
             </div>
         </div>
     </x-breadcrumb>
+    {{-- @livewire('admin.exports.buttons') --}}
     <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
     </x-table-buttons-relatories>
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">

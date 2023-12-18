@@ -6,6 +6,9 @@
 
 # Sistema ASSGAPA V3
 ## V 3.17 12/12/2023
+    Botão EXPORTAR COMO PDF
+
+## V 3.17 12/12/2023
     Registro de acesso as piscinas
 
 ## V 3.16 10/12/2023

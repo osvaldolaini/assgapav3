@@ -1,5 +1,7 @@
 @props(['pdf', 'excel', 'print'])
-<div>
+<div >
+
+    <x-action-loading-exports ></x-action-loading-exports>
     <div class="px-4 pt-4 flex divide-x-2 rounded divide-gray-300">
         @if (isset($print))
             <div class="tooltip tooltip-top p-0" data-tip="Imprimir">
@@ -48,7 +50,7 @@
                 </button>
             </div>
         @endif
-        @if (isset($pdf))
+        {{-- @if (isset($pdf))
             <div class="tooltip tooltip-top p-0" data-tip="PDF">
                 <button wire:click="pdfExport()"
                     class="flex items-center justify-center px-3 py-1
@@ -97,9 +99,17 @@
                    C153.605,158.15,154.965,157.927,156.139,157.481z" />
                         </g>
                     </svg>
-                    {{-- <span>Imprimir </span> --}}
                 </button>
             </div>
-        @endif
+        @endif --}}
     </div>
+    <script>
+        document.addEventListener('livewire:init', () => {
+            Livewire.on('openPdfExports', ({
+                pdfPath
+            }) => {
+                window.open(pdfPath, '_blank');
+            })
+        })
+    </script>
 </div>
