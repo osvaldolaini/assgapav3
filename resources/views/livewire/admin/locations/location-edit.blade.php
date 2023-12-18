@@ -223,13 +223,18 @@
                                     </fieldset>
                                 </div>
                             </div>
-                            <div class="col-span-7 ">
+                            <div class="col-span-12 ">
                                 <label for="loc_time">Horário</label>
                                 <input
-                                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" "Horário"
+                                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                                     placeholder="Horário" wire:model="loc_time">
                             </div>
-                            <div class="col-span-5">
+                            <div class="col-span-6">
+                                <label for="guests">Convidados</label>
+                                <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                                    wire:model="guests" placeholder="Qtd de convidados">
+                            </div>
+                            <div class="col-span-6">
                                 <label for="value_extra">Valor extra</label>
                                 <input x-mask:dynamic="$money($input, ',')"
                                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"

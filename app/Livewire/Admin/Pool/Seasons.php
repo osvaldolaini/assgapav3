@@ -8,12 +8,12 @@ use App\Models\Admin\Pool\SeasonPay;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-
-
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Seasons extends Component
 {
+    use WithPagination;
     public Season $season;
 
     public $showJetModal = false;

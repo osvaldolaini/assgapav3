@@ -8,10 +8,12 @@ use App\Models\Admin\Configs;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Ambiences extends Component
 {
+    use WithPagination;
     public Ambience $ambience;
     public $breadcrumb_title = 'AMBIENTES';
 

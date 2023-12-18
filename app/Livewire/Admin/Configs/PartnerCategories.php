@@ -6,9 +6,11 @@ use App\Models\Admin\Configs\PartnerCategory;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class PartnerCategories extends Component
 {
+    use WithPagination;
     public PartnerCategory $partnerCategory;
 
     public $showJetModal = false;

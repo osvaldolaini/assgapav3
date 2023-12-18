@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Pool;
 use App\Models\Admin\Pool\SeasonPay;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class SeasonPays extends Component
 {
+    use WithPagination;
     public SeasonPay $season;
 
     public $showJetModal = false;

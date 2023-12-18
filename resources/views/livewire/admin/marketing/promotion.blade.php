@@ -33,6 +33,11 @@
                    </td>
             </tr>
             <tr>
+                <td width="260" valign="top">
+                    *Caso você não queira mais receber nossos emails informe nossa secretaria.
+                </td>
+            </tr>
+            <tr>
                 <td bgcolor="#007bff" style="padding: 20px 30px 20px 30px;">
                     <table cellpadding="0" cellspacing="0" width="100%">
                         <tr>

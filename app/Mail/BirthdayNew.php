@@ -11,7 +11,7 @@ use Illuminate\Mail\Mailables\Address;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class birthday extends Mailable implements ShouldQueue
+class BirthdayNew extends Mailable
 {
     use Queueable, SerializesModels;
     public $partner;
@@ -64,3 +64,4 @@ class birthday extends Mailable implements ShouldQueue
         return [];
     }
 }
+

@@ -5,7 +5,10 @@
 </p>
 
 # Sistema ASSGAPA V3
-## V 3.17 12/12/2023
+## V 3.19 12/12/2023
+    Envio de email de aniversário
+    
+## V 3.18 12/12/2023
     Botão EXPORTAR COMO PDF
 
 ## V 3.17 12/12/2023

@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Configs;
 use App\Models\Admin\Configs\ReasonEvent;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class ReasonEvents extends Component
 {
+    use WithPagination;
     public ReasonEvent $reasonEvent;
 
     public $showJetModal = false;

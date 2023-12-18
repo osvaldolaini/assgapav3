@@ -7,10 +7,12 @@ use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Others extends Component
 {
+    use WithPagination;
     public Partner $partner;
     public $breadcrumb_title = 'NÃO SÓCIOS';
 

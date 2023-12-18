@@ -7,10 +7,12 @@ use App\Models\Admin\Financial\Cashier;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Cashiers extends Component
 {
+    use WithPagination;
     public Cashier $cashier;
     public $breadcrumb_title = 'CAIXA';
 

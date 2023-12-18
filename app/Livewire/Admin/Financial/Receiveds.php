@@ -7,13 +7,13 @@ use App\Models\Admin\Financial\Received;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
-
-
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Receiveds extends Component
 {
+    use WithPagination;
     public Received $received;
     public $config;
     public $breadcrumb_title = 'ENTRADAS';

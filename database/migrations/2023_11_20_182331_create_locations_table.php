@@ -17,6 +17,7 @@ class CreateLocationsTable extends Migration
             $table->id();
             $table->boolean('active')->nullable();
             $table->string('ambience')->nullable();
+            $table->integer('guests')->nullable();
 
             $table->foreignId('ambience_id')->nullable()->constrained();
 

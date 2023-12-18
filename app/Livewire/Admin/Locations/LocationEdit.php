@@ -40,6 +40,7 @@ class LocationEdit extends Component
 
     //Campos
     public $id;
+    public $guests;
     public $ambience;
     public $ambience_id;
     public $partner;
@@ -70,6 +71,7 @@ class LocationEdit extends Component
         $this->location = $location;
         $this->breadcrumb_title = 'LOCAÇÃO DE: ' . $location->partners->name;
         $this->id = $location->id;
+        $this->guests = $location->guests;
 
         $this->ambience_id = $location->ambience_id;
         $this->partner = $location->partners->name;
@@ -210,6 +212,7 @@ class LocationEdit extends Component
         Location::updateOrCreate([
             'id' => $this->id,
         ], [
+            'guests'=> $this->guests,
             'updated_by' => Auth::user()->name,
             'ambience' => $this->ambience,
             'ambience_id' => $this->ambience_id,

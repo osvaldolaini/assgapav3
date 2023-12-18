@@ -52,6 +52,7 @@ class LocationNew extends Component
     public $value_extra;
     public $indication_id;
     public $indication;
+    public $guests;
 
     public $reason_event_id;
     public $loc_time;
@@ -100,6 +101,7 @@ class LocationNew extends Component
             $this->dependents = '';
             $this->location_date = '';
             $this->ambience = $selectAmbience->title;
+
 
             $this->dispatch('changeAmbience', $this->ambience_id,$this->partner_id);
         }
@@ -159,6 +161,7 @@ class LocationNew extends Component
         $this->validate();
         Location::create([
             'active' => 1,
+            'guests'=> $this->guests,
             'created_by' => Auth::user()->name,
             'ambience' => $this->ambience,
             'ambience_id' => $this->ambience_id,

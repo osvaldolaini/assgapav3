@@ -8,12 +8,13 @@ use App\Models\Admin\Pool\Pool;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
-
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class Passes extends Component
 {
+    use WithPagination;
     public Pass $pass;
 
     public $showJetModal = false;

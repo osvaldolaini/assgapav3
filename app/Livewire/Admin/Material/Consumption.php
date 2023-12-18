@@ -7,10 +7,12 @@ use App\Models\Admin\Material\Product;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Consumption extends Component
 {
+    use WithPagination;
     public Product $product;
     public $breadcrumb_title = 'MATERIAL DE CONSUMO';
 

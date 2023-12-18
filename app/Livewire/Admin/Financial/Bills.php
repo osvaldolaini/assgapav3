@@ -7,10 +7,12 @@ use App\Models\Admin\Financial\Bill;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Bills extends Component
 {
+    use WithPagination;
     public Bill $bill;
     public $breadcrumb_title = 'CAIXA';
 

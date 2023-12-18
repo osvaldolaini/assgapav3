@@ -7,10 +7,12 @@ use App\Models\Admin\Locations\Location;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 use Mpdf\Mpdf;
 
 class Locations extends Component
 {
+    use WithPagination;
     public Location $location;
     public $breadcrumb_title = 'LOCAÇÕES';
 

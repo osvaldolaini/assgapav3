@@ -20,40 +20,41 @@ class History extends Component
     //Campos
     public $partner;
     public $dataTable = [];
+    public $export = [];
 
     public function mount(Partner $partner)
     {
         $this->breadcrumb_title = $partner->name;
         $this->partner = $partner;
 
-        if ($partner->locations->where('active',1)) {
+        if ($partner->locations->where('active', 1)) {
             foreach ($partner->locations as $location) {
                 $this->dataTable[] = [
-                    'description'   => 'Locação do ambiente: '. $location->ambiences->title,
+                    'description'   => 'Locação do ambiente: ' . $location->ambiences->title,
                     'type'          => 'Locações',
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $location->location_date,
-                    'link'          => route('edit-location',$location->id)
+                    'link'          => route('edit-location', $location->id)
                 ];
             }
         }
-        if ($partner->monthlys->where('active',1)) {
+        if ($partner->monthlys->where('active', 1)) {
             foreach ($partner->monthlys as $monthly) {
                 $this->dataTable[] = [
-                    'description'   => 'Mendalidade de: '. $monthly->monthlyRef,
+                    'description'   => 'Mendalidade de: ' . $monthly->monthlyRef,
                     'type'          => 'Mensalidades',
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $monthly->paid_in,
-                    'link'          => route('monthlys',$monthly->partner_id)
+                    'link'          => route('monthlys', $monthly->partner_id)
                 ];
             }
         }
-        if ($partner->receiveds->where('active',1)) {
+        if ($partner->receiveds->where('active', 1)) {
             foreach ($partner->receiveds as $received) {
                 $this->dataTable[] = [
-                    'description'   => 'Pago devido: '. $received->title,
+                    'description'   => 'Pago devido: ' . $received->title,
                     'type'          => 'Mensalidades',
                     'received'      => $received->id,
                     'bill'          => '',
@@ -62,10 +63,10 @@ class History extends Component
                 ];
             }
         }
-        if ($partner->bills->where('active',1)) {
+        if ($partner->bills->where('active', 1)) {
             foreach ($partner->bills as $bill) {
                 $this->dataTable[] = [
-                    'description'   => 'Recebido por: '. $bill->title,
+                    'description'   => 'Recebido por: ' . $bill->title,
                     'type'          => 'Recebidos',
                     'received'      => '',
                     'bill'          => $bill->id,
@@ -74,48 +75,95 @@ class History extends Component
                 ];
             }
         }
+        $this->export = collect($this->dataTable)->sortByDesc('date');
         $this->dataTable = json_encode(collect($this->dataTable)->sortByDesc('date'));
     }
     public function render()
     {
-
         return view('livewire.admin.registers.history');
     }
+    //EXPORT
+    public function printExport()
+    {
+        $title = $this->breadcrumb_title;
+        $config = Configs::find(1);
+        $today = Carbon::parse(now())->locale('pt-BR');
+        $today = $today->translatedFormat('d F Y');
+        $body = array();
+
+        foreach ($this->export as $item) {
+            $body[] = [
+                'type'          => $item['type'],
+                'description'   => $item['description'],
+                'received'      => $item['received'],
+                'bill'          => $item['bill'],
+                'date'          => $item['date'],
+            ];
+        }
+        $html = view(
+            'livewire.admin.exports.pdf',
+            [
+                'title_postfix' => 'Relatório financeiro',
+                'subtext'       => $title,
+                'today'         => $today,
+                'responsible'   => Auth::user()->name,
+                'config'        => $config,
+                'heads'         => array('Tipo', 'Motivo','Receita','Despesa','data'),
+                'body'          => $body,
+            ]
+        )->render();
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            'margin_left'   => 10,
+            'margin_right'  => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/exportar-em-pdf.pdf');
+        $pdfPath = url('storage/livewire-tmp/exportar-em-pdf.pdf');
+        $mpdf->Output($down, 'F');
+        $this->dispatch('openPdfExports', pdfPath: $pdfPath);
+    }
+    //END EXPORT
     public function convertDate($value)
     {
         Carbon::createFromFormat('Y-m-d H:i:s', $value)
             ->format('d/m/Y');
     }
-     //RECEIVED
-     public function printReceived($id)
-     {
-         $received = Received::find($id);
-         $config = Configs::find(1);
-         // Crie uma instância do mPDF
-         $mpdf = new Mpdf([
-             'mode'          => 'utf-8',
-             // 'format'        => 'L',
-             'margin_left'   => 10,
-             'margin_top'    => 10,
-             'default_font_size'  => 9,
-             'default_font'  => 'arial',
-         ]);
+    //RECEIVED
+    public function printReceived($id)
+    {
+        $received = Received::find($id);
+        $config = Configs::find(1);
+        // Crie uma instância do mPDF
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            // 'format'        => 'L',
+            'margin_left'   => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
 
-         // Renderize a view do Livewire
-         $html = view(
-             'livewire.admin.financial.received-pdf',
-             [
-                 'received'          => $received,
-                 'config'            => $config,
-                 'title_postfix'     => 'Recibo',
-                 'subtext'           => 'Recibo nº' . str_pad($received->id, 6, '0', STR_PAD_LEFT),
-                 'responsible'       => Auth::user()->name,
-             ]
-         )->render();
+        // Renderize a view do Livewire
+        $html = view(
+            'livewire.admin.financial.received-pdf',
+            [
+                'received'          => $received,
+                'config'            => $config,
+                'title_postfix'     => 'Recibo',
+                'subtext'           => 'Recibo nº' . str_pad($received->id, 6, '0', STR_PAD_LEFT),
+                'responsible'       => Auth::user()->name,
+            ]
+        )->render();
 
-         // Adicione o conteúdo HTML ao PDF
-         $mpdf->WriteHTML($html);
-         $mpdf->SetHTMLFooter('
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        $mpdf->SetHTMLFooter('
              <table width="100%">
                  <tr>
                      <td width="66%">Impressão realizada em {DATE j/m/Y} às {DATE H:i:s}</td>
@@ -123,45 +171,45 @@ class History extends Component
                  </tr>
              </table>');
 
-         // Salve o PDF temporariamente
-         $down = storage_path('app/public/livewire-tmp/recibo.pdf');
-         $pdfPath = url('storage/livewire-tmp/recibo.pdf');
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/recibo.pdf');
+        $pdfPath = url('storage/livewire-tmp/recibo.pdf');
 
-         $mpdf->Output($down, 'F');
+        $mpdf->Output($down, 'F');
 
-         $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
-     }
+        $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
+    }
 
-     //BILL
-     public function printBill($id)
-     {
-         $bill = Bill::find($id);
-         $config = Configs::find(1);
-         // Crie uma instância do mPDF
-         $mpdf = new Mpdf([
-             'mode'          => 'utf-8',
-             // 'format'        => 'L',
-             'margin_left'   => 10,
-             'margin_top'    => 10,
-             'default_font_size'  => 9,
-             'default_font'  => 'arial',
-         ]);
+    //BILL
+    public function printBill($id)
+    {
+        $bill = Bill::find($id);
+        $config = Configs::find(1);
+        // Crie uma instância do mPDF
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            // 'format'        => 'L',
+            'margin_left'   => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
 
-         // Renderize a view do Livewire
-         $html = view(
-             'livewire.admin.financial.bill-pdf',
-             [
-                 'bill'              => $bill,
-                 'config'            => $config,
-                 'title_postfix'     => 'Recibo',
-                 'subtext'           => 'Recibo nº' . str_pad($bill->id, 6, '0', STR_PAD_LEFT),
-                 'responsible'       => Auth::user()->name,
-             ]
-         )->render();
+        // Renderize a view do Livewire
+        $html = view(
+            'livewire.admin.financial.bill-pdf',
+            [
+                'bill'              => $bill,
+                'config'            => $config,
+                'title_postfix'     => 'Recibo',
+                'subtext'           => 'Recibo nº' . str_pad($bill->id, 6, '0', STR_PAD_LEFT),
+                'responsible'       => Auth::user()->name,
+            ]
+        )->render();
 
-         // Adicione o conteúdo HTML ao PDF
-         $mpdf->WriteHTML($html);
-         $mpdf->SetHTMLFooter('
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        $mpdf->SetHTMLFooter('
              <table width="100%">
                  <tr>
                      <td width="66%">Impressão realizada em {DATE j/m/Y} às {DATE H:i:s}</td>
@@ -169,12 +217,12 @@ class History extends Component
                  </tr>
              </table>');
 
-         // Salve o PDF temporariamente
-         $down = storage_path('app/public/livewire-tmp/recibo.pdf');
-         $pdfPath = url('storage/livewire-tmp/recibo.pdf');
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/recibo.pdf');
+        $pdfPath = url('storage/livewire-tmp/recibo.pdf');
 
-         $mpdf->Output($down, 'F');
+        $mpdf->Output($down, 'F');
 
-         $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
-     }
+        $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
+    }
 }

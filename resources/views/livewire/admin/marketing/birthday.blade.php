@@ -9,9 +9,9 @@
         <table align="center" cellpadding="0" cellspacing="0" width="600" style="border-collapse: collapse;">
             <tr>
                 <td align="center" bgcolor="#007bff" style="padding: 20px 0 20px 0;">
-                    <img width="10%" src="{{url('storage/images/logos/logo.png')}}" alt="Feliz aniversário."  style="display: block;" />
-                    <h4 style="margin: 0; padding: 0; font-family:arial; color:#fff;" >{{$config->title}}</h4>
-                    <h6 style="margin: 0; padding: 0;font-family:arial; color:#fff;" >{{$config->addresses->address. ' - ' .$config->addresses->city.'/'.$config->addresses->state. ', Fone/Fax: '. $config->phone}}</h6>
+                    <img width="10%" src="{{url('storage/logos/assgapa.png')}}" alt="Feliz aniversário."  style="display: block;" />
+                    <h4 style="margin: 0; padding: 0; font-family:arial; color:#fff;" >{{$config->acronym}}</h4>
+                    <h6 style="margin: 0; padding: 0;font-family:arial; color:#fff;" >{{$config->address. ' - ' .$config->city.'/'.$config->state. ', Fone/Fax: '. $config->phone}}</h6>
                 </td>
             </tr>
             <tr>
@@ -24,7 +24,7 @@
                                             <td style="padding: 10px 0 0 0; font-family:arial;">
                                                <h4>Ola!
                                                     @php
-                                                        $first_name = str_word_count($name, 1)
+                                                        $first_name = str_word_count($partner->name, 1)
                                                     @endphp
                                                     {{mb_strtoupper($first_name[0])}}
                                                 </h4>
@@ -50,6 +50,11 @@
                    </td>
             </tr>
             <tr>
+                <td width="260" valign="top">
+                    *Caso você não queira mais receber nossos emails informe nossa secretaria.
+                </td>
+            </tr>
+            <tr>
                 <td bgcolor="#007bff" style="padding: 20px 30px 20px 30px;">
                     <table cellpadding="0" cellspacing="0" width="100%">
                         <tr>
@@ -61,19 +66,19 @@
                                     <tr>
                                         <td>
                                             <a href="https://www.instagram.com/cssgapa" target="_BLANK">
-                                                <img src="{{url('storage/images/email/instagram-1.png')}}" alt="Instagram" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/logos/email/instagram-1.png')}}" alt="Instagram" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                         <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
                                         <td>
                                             <a href="http://www.facebook.com/cssgapaoficial" target="_BLANK">
-                                                <img src="{{url('storage/images/email/facebook-1.png')}}" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/logos/email/facebook-1.png')}}" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                         <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
                                         <td>
                                             <a href="http://www.cssgapa.com" target="_BLANK">
-                                                <img src="{{url('storage/images/email/domain.png')}}" alt="dominio" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/logos/email/domain.png')}}" alt="dominio" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                     </tr>

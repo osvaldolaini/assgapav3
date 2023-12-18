@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Configs;
 use App\Models\Admin\Configs\AmbienceTenant;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class AmbienceTenants extends Component
 {
+    use WithPagination;
     public AmbienceTenant $ambienceTenant;
 
     public $showJetModal = false;

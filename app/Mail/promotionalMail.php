@@ -3,8 +3,6 @@
 namespace App\Mail;
 
 use App\Models\Admin\Configs;
-use App\Models\Admin\Marketing\Email;
-use App\Models\Admin\Registers\Partner;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;

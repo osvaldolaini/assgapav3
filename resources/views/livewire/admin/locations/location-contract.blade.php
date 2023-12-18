@@ -228,11 +228,16 @@ th {
                     @endif
 
                     <tr>
-                        <td colspan="3">Motivo do evento:
+                        <td colspan="5">Motivo do evento:
                             {{mb_strtoupper(($location->reason_event_id ? $location->reason->title : $location->event_type))}}
                         </td>
+                    </tr>
+                    <tr>
                         <td colspan="3">Beneficiado do evento:
                             {{mb_strtoupper($location->event_benefited)}}
+                        </td>
+                        <td colspan="2">Quantidade de convidados:
+                            {{$location->guests }}
                         </td>
                     </tr>
 

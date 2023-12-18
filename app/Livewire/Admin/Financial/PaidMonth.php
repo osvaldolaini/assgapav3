@@ -5,10 +5,11 @@ namespace App\Livewire\Admin\Financial;
 use App\Models\Admin\Financial\Bill;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class PaidMonth extends Component
-
 {
+    use WithPagination;
     public Bill $bill;
     public $breadcrumb_title = 'PAGAS NO MÊS ATUAL';
 

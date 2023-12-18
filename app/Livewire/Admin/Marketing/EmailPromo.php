@@ -7,9 +7,11 @@ use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Mail;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class EmailPromo extends Component
 {
+    use WithPagination;
     public Email $email;
     public $breadcrumb_title = 'AMBIENTES';
 
@@ -104,6 +106,7 @@ class EmailPromo extends Component
                         'email' => $email, 'partner' => $partner
                     ])
                 );
+
                 $this->countMail++;
             }
         }

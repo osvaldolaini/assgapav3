@@ -9,9 +9,11 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Mpdf\Mpdf;
+use Livewire\WithPagination;
 
 class Partners extends Component
 {
+    use WithPagination;
     public Partner $partner;
     public $breadcrumb_title = 'SÓCIOS';
 
@@ -190,9 +192,10 @@ class Partners extends Component
         }
         if ($this->searchable && $this->search) {
             $this->search($query);
+            // $this->resetPage();
         }
 
-        // dd($query->paginate($this->paginate));
+        // dd($query->paginate(10));
         // $query->take(3);
         // return $query->simplePaginate($this->paginate);
         if ($this->paginate == 'single') {

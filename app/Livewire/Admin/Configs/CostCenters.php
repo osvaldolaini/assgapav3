@@ -6,9 +6,11 @@ use App\Models\Admin\Configs\CostCenter;
 use Livewire\Component;
 
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class CostCenters extends Component
 {
+    use WithPagination;
     public CostCenter $costCenter;
 
     public $showJetModal = false;

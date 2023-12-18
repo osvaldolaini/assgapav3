@@ -5,9 +5,11 @@ namespace App\Livewire\Admin\Configs;
 use App\Models\Admin\Configs\AmbienceCategory;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Livewire\WithPagination;
 
 class AmbienceCategories extends Component
 {
+    use WithPagination;
     public AmbienceCategory $ambienceCategory;
 
     public $showJetModal = false;
