@@ -176,7 +176,7 @@
                         @foreach ($body as $tr)
                             <tr>
                                 @foreach ($tr as $td)
-                                    <td class="value">{{ $td }}</td>
+                                    <td class="value " style="white-space: pre-line;">{{ $td }}</td>
                                 @endforeach
                             </tr>
                         @endforeach

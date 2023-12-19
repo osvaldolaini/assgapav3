@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Admin\Locations;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Locations\Location;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 
 class Locations extends Component
@@ -95,6 +97,22 @@ class Locations extends Component
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
         $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[] = array('Contrato', 'Espaço','Locatário','Data');
+        foreach ($this->getData() as $item) {
+            $data[] = [
+                'id'        => $item->id,
+                'ambiente'  => $item->ambiente,
+                'locatario' => $item->locatario,
+                'date'      => $item->location_date,
+            ];
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
 

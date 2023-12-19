@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Admin\Financial;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Financial\Received;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -97,6 +99,22 @@ class Receiveds extends Component
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
         $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[] = array('Nº', 'Motivo','Valor','Vencimento / pagamento');
+        foreach ($this->getData() as $item) {
+            $data[] = [
+                'id'        => $item->id,
+                'title'     => $item->title,
+                'value'     => $item->value,
+                'paid_in'   => $item->paid_in,
+            ];
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
     //CONTRACT

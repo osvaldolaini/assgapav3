@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Admin\Marketing;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Configs\PartnerCategory;
 use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 
 class Lists extends Component
@@ -127,6 +129,60 @@ class Lists extends Component
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
         $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[0] =  array('Sócio');
+        if ($this->pf_pj) {
+            array_push($data[0],'CPF / CNPJ');
+        }
+        if ($this->email) {
+            array_push($data[0],'email');
+        }
+        if ($this->phone) {
+            array_push($data[0],'Telefones');
+        }
+        if ($this->address) {
+            array_push($data[0],'Endereço');
+        }
+        if ($this->rg) {
+            array_push($data[0],'RG');
+        }
+        foreach ($this->getData() as $item) {
+            $id = $item->id;
+
+            // Initialize $body[$id] if it doesn't exist
+            if (!isset($data[$id])) {
+                $data[$id] = [];
+            }
+
+            $data[$id] = [
+                'name' => $item->name,
+            ];
+            if ($this->pf_pj) {
+                if ($item->pf_pj == 'pf'){
+                    $data[$id]['cpf'] = $item->cpf;
+                }else{
+                    $data[$id]['cnpj'] = $item->cnpj;
+                }
+            }
+            if ($this->email) {
+                $data[$id]['email'] = $item->email;
+            }
+            if ($this->phone) {
+                $data[$id]['phone'] = $item->phone_first;
+            }
+            if ($this->address) {
+                $data[$id]['address'] = $item->address.' '.$item->number.','. $item->city.'-'.$item->state;
+            }
+            if ($this->rg) {
+                $data[$id]['phone_first'] = $item->rg;
+            }
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
     //SEARCH PERSONALIZADO

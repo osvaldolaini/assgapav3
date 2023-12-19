@@ -173,7 +173,7 @@ return [
 
         Jorenvh\Share\Providers\ShareServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
-        // Mpdf\MpdfServiceProvider::class,
+        Maatwebsite\Excel\ExcelServiceProvider::class,
     ])->toArray(),
 
     /*
@@ -192,7 +192,7 @@ return [
 
         'Share' => Jorenvh\Share\ShareFacade::class,
         'Image' => Intervention\Image\Facades\Image::class,
-        // 'Mpdf' => Mpdf\MpdfFacade::class,
+        'Excel' => Maatwebsite\Excel\Facades\Excel::class,
     ])->toArray(),
 
 ];

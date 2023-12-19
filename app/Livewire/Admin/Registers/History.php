@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Registers;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Financial\Bill;
 use App\Models\Admin\Registers\Partner;
@@ -10,7 +11,7 @@ use Livewire\Component;
 
 use App\Models\Admin\Financial\Received;
 use Illuminate\Support\Facades\Auth;
-
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
@@ -127,6 +128,21 @@ class History extends Component
         $pdfPath = url('storage/livewire-tmp/exportar-em-pdf.pdf');
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
+    }
+    public function excelExport()
+    {
+        $data[] = array('Tipo', 'Motivo','Receita','Despesa','data');
+        foreach ($this->export as $item) {
+            $data[] = [
+                'type'          => $item['type'],
+                'description'   => $item['description'],
+                'received'      => $item['received'],
+                'bill'          => $item['bill'],
+                'date'          => $item['date'],
+            ];
+        }
+
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
     public function convertDate($value)

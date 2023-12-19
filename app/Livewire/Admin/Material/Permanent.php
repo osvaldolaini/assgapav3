@@ -2,12 +2,14 @@
 
 namespace App\Livewire\Admin\Material;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Material\Product;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 
 class Permanent extends Component
@@ -97,6 +99,20 @@ class Permanent extends Component
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
         $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[] =  array('Produtos', 'Código');
+        foreach ($this->getData() as $item) {
+            $data[] = [
+                'title' => $item->title,
+                'code'  => $item->code,
+            ];
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
     public function resetAll()

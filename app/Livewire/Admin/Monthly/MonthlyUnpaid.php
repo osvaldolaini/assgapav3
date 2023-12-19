@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Monthly;
 
+use App\Models\Admin\Financial\Received;
 use App\Models\Admin\Monthly\MonthlyPayment;
 use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
@@ -158,6 +159,7 @@ class MonthlyUnpaid extends Component
         ];
 
         $this->validate();
+
         foreach ($this->pay as $item) {
             $m = MonthlyPayment::find($item);
             MonthlyPayment::updateOrCreate([
@@ -173,7 +175,8 @@ class MonthlyUnpaid extends Component
         }
 
         if ($this->received) {
-            $data = [
+            $this->validate();
+            $received = Received::create([
                 'active' => 1,
                 'title' => $this->title,
                 'paid_in' => $this->paid_in,
@@ -182,15 +185,14 @@ class MonthlyUnpaid extends Component
                 'partner_id' => $this->partner->id,
                 'partner' => $this->partner->name,
                 'created_by' => Auth::user()->name,
-            ];
+            ]);
 
-            $this->dispatch('createReceived', json_encode($data));
+            $this->checkoutReturn($received->id);
         } else {
             $this->openAlert('success', 'Registro atualizado com sucesso.');
         }
     }
 
-    #[On('checkoutReturn')]
     public function checkoutReturn($received_id)
     {
         foreach ($this->pay as $item) {
@@ -203,6 +205,7 @@ class MonthlyUnpaid extends Component
         $this->resetAll();
         $this->showModalPay = false;
         $this->openAlert('success', 'Registro atualizado com sucesso.');
+        redirect()->route('receiveds');
     }
 
     //MESSAGE

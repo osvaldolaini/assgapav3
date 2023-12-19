@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Ambiences;
 
+use App\Exports\AllExports;
 use App\Models\Admin\Ambiences\Ambience;
 use App\Models\Admin\Ambiences\AmbienceUnavailability;
 use App\Models\Admin\Configs;
@@ -9,6 +10,7 @@ use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 use Livewire\WithPagination;
+use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 
 class Ambiences extends Component
@@ -96,6 +98,21 @@ class Ambiences extends Component
         $mpdf->Output($down, 'F');
         $this->dispatch('openPdfExports', pdfPath: $pdfPath);
         $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[] = array('Ambiente', 'Categoria','Capacidade');
+        foreach ($this->getData() as $item) {
+            $data[] = [
+                'name' => $item->title,
+                'category' => $item->category,
+                'capacity'=> $item->capacity,
+            ];
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
     public function resetAll()
