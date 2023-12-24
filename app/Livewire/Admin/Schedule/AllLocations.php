@@ -248,7 +248,7 @@ class AllLocations extends Component
     {
         $this->showModalView = true;
         if (isset($id)) {
-            $data = Location::where('id', $id)->first();
+            $data = Location::find($id);
             $this->detail = [
                 'Locatário'         => $data->partners->name,
                 'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),

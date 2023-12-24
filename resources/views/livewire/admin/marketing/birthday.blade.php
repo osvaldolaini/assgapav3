@@ -66,19 +66,19 @@
                                     <tr>
                                         <td>
                                             <a href="https://www.instagram.com/cssgapa" target="_BLANK">
-                                                <img src="{{url('storage/logos/email/instagram-1.png')}}" alt="Instagram" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/email/instagram-1.png')}}" alt="Instagram" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                         <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
                                         <td>
                                             <a href="http://www.facebook.com/cssgapaoficial" target="_BLANK">
-                                                <img src="{{url('storage/logos/email/facebook-1.png')}}" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/email/facebook-1.png')}}" alt="Facebook" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                         <td style="font-size: 0; line-height: 0;" width="20">&nbsp;</td>
                                         <td>
                                             <a href="http://www.cssgapa.com" target="_BLANK">
-                                                <img src="{{url('storage/logos/email/domain.png')}}" alt="dominio" width="38" height="38" style="display: block;" border="0" />
+                                                <img src="{{url('storage/email/domain.png')}}" alt="dominio" width="38" height="38" style="display: block;" border="0" />
                                             </a>
                                         </td>
                                     </tr>

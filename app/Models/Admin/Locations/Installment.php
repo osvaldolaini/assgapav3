@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Locations;
 
+use App\Models\Admin\Financial\Received;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;

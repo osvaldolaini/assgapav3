@@ -38,7 +38,7 @@ class LogoUploadFile extends Component
         if (isset($this->uploadimage)) {
             Storage::deleteDirectory('public/logos');
             $ext = $this->uploadimage->getClientOriginalExtension();
-            $code = Str::uuid();
+            $code = 'assgapa';
             $new_name = $code . '.' . $ext;
             $this->uploadimage->storeAs('public/logos', $new_name);
             $this->configs->logo_path = $code;

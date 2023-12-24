@@ -473,7 +473,7 @@
         }
     </style>
     <div class="fixed w-full h-screen top-0 right-0 z-50 items-center justify-items-center
-    bg-blue-900 bg-opacity-50 backdrop-brightness-50 backdrop-blur-sm " wire:loading>
+    bg-blue-900 bg-opacity-50 backdrop-brightness-50 backdrop-blur-sm " wire:loading wire:target="updateCalendar">
         <div  class="relative flex flex-col items-center max-w-lg gap-4 p-6 rounded-md top-40
         shadow-md sm:py-8 sm:px-12 bg-blue-900 text-gray-100 mx-auto">
             <div style="color: #64d6e2" class="la-timer la-3x">

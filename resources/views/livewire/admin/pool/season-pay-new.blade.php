@@ -8,6 +8,9 @@
             </div>
         </div>
     </x-breadcrumb>
+    <div class="px-4">
+        @livewire('admin.registers.other-fast',['url' =>'new-seasonPay'])
+    </div>
     <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
         <form wire:submit="save_out">
             <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900 items-start">

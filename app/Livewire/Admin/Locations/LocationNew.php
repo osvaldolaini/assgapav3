@@ -6,6 +6,7 @@ use App\Models\Admin\Ambiences\Ambience;
 use App\Models\Admin\Ambiences\AmbienceTenantPivot;
 use App\Models\Admin\Configs\AmbienceTenant;
 use App\Models\Admin\Configs\ReasonEvent;
+use App\Models\Admin\Locations\Installment;
 use App\Models\Admin\Locations\Location;
 use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
@@ -159,7 +160,7 @@ class LocationNew extends Component
         ];
 
         $this->validate();
-        Location::create([
+        $location = Location::create([
             'active' => 1,
             'guests'=> $this->guests,
             'created_by' => Auth::user()->name,
@@ -182,6 +183,16 @@ class LocationNew extends Component
             'reason_event_id' => $this->reason_event_id,
             'loc_time' => $this->loc_time,
         ]);
+
+        if($location->convert_value($location->value) > 0){
+            Installment::create([
+                'active'        => 0,
+                'title'         => 'Sinal',
+                'value'         => $this->location->value,
+                'location_id'   => $this->id,
+                'created_by'    => Auth::user()->name
+            ]);
+        }
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         redirect()->route('locations');
