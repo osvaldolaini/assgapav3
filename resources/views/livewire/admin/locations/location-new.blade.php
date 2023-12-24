@@ -1,21 +1,26 @@
 <div>
     <x-breadcrumb>
-        <div class="grid grid-cols-7 gap-4 text-gray-600 ">
+        <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
                 <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
                     {{ $breadcrumb_title }}
+
                 </h3>
+            </div>
+            <div class="col-span-2 justify-items-end">
+
             </div>
         </div>
     </x-breadcrumb>
+    <div class="px-4">
+        @livewire('admin.registers.other-fast',['url' =>'new-location'])
+    </div>
     <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
         <form wire:submit="save_out">
-            <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900 items-start">
+            <fieldset class="grid grid-cols-12 gap-2 pb-6 rounded-md dark:bg-gray-900 items-start">
                 <div class="col-span-6 grid grid-cols-12 gap-2">
                     <div class="col-span-12 ">
-                        <label class="flex w-full" for="partner">*Nome completo
-                            @livewire('admin.registers.other-fast',['url' =>'new-location'])
-                        </label>
+                        <label class="flex w-full" for="partner">*Nome completo</label>
                         <div class="grid gap-4 mb-1 grid-cols-1">
                             <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
                                 wire:click="openModalSearch('partner')" wire:ignore>
@@ -272,16 +277,16 @@
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
                                                             @if ($item->imageTitle)
-                                                                <picture>
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
-                                                                    <img src="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}"
-                                                                        alt="{{ $item->name }}">
-                                                                </picture>
+                                                            <picture>
+                                                                <source
+                                                                srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
+                                                                <img src="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}"
+                                                                    alt="{{ $item->name }}">
+                                                            </picture>
                                                             @endif
 
                                                         </div>

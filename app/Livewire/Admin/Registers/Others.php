@@ -129,9 +129,9 @@ class Others extends Component
     {
         redirect()->route('new-other');
     }
-    public function showModalUpdate(Partner $Partner)
+    public function showModalUpdate(Partner $partner)
     {
-        redirect()->route('edit-other', $Partner);
+        redirect()->route('edit-other', $partner);
     }
 
     //DELETE

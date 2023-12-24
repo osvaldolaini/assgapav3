@@ -10,6 +10,7 @@
             </div>
         </div>
     </x-breadcrumb>
+
     <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
 
         <fieldset>
@@ -88,4 +89,5 @@
         </fieldset>
 
     </section>
+
 </div>

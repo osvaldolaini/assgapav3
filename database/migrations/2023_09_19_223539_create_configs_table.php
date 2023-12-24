@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('configs', function (Blueprint $table) {
             $table->id();
             $table->string('title',100)->nullable();
+            $table->string('logo_path',100)->nullable();
             $table->string('acronym',50)->nullable();
             $table->string('president',100)->nullable();
             $table->string('financial',100)->nullable();

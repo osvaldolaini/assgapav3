@@ -643,13 +643,13 @@ class Reports extends Component
             if ($received->active == 0) {
                 $openReceiveds[] = [
                     'number'  => str_pad($received->id, 6, '0', STR_PAD_LEFT),
-                    'paid_in' => date('d/m/Y', strtotime($received->paid_in)),
+                    'paid_in' => $received->paid_in,
                     'title'   => $received->title . $text,
                 ];
             } elseif ($received->active == 3) {
                 $inutilizedReceiveds[] = [
                     'number'  => str_pad($received->id, 6, '0', STR_PAD_LEFT),
-                    'paid_in' => date('d/m/Y', strtotime($received->paid_in)),
+                    'paid_in' => $received->paid_in,
                     'title'   => $received->deleted_because,
                 ];
             }

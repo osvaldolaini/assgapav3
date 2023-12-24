@@ -1,7 +1,9 @@
 <div class="w-full px-0 mx-0 text-gray-900">
-    <fieldset class="w-full space-y-1 px-0 mx-0 dark:text-gray-100" wire:click="openModalSearch()">
+    <fieldset class="w-full space-y-1 px-0 mx-0 dark:text-gray-100"
+        wire:click="openNavModalSearch">
         <label for="Pesquisar" class="hidden">Pesquisar</label>
-        <div class="w-full sm:w-64 h-8 bg-white flex items-center p-2
+        <div
+            class="w-full sm:w-64 h-8 bg-white flex items-center p-2
             rounded-lg shadow cursor-pointer hover:bg-gray-100">
             <svg fill="currentColor" viewBox="0 0 512 512" class="w-4 h-4 dark:text-gray-900">
                 <path
@@ -11,7 +13,7 @@
             <span class="text-gray-600 font-medium text-sm ml-1 sm:ml-4">Pesquisar</span>
         </div>
     </fieldset>
-    <x-dialog-modal wire:model="openModalSearch" class="mt-0">
+    <x-dialog-modal wire:model="navModalSearch" class="mt-0">
         <x-slot name="title">Pesquisar</x-slot>
         <x-slot name="content">
             <div class="grid gap-4 mb-1 grid-cols-1">
@@ -27,18 +29,85 @@
                                 </svg>
                             </button>
                         </span>
-                        <input type="text" placeholder="Pesquisar" wire:model.debounce.500ms="inputSearch"
-                        class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
+                        <input type="text" placeholder="Pesquisar" wire:model.live="navSearch"
+                            class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
                             rounded-2xl  focus:ring-primary-500 dark:bg-gray-700
-                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500" autofocus/>
+                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
+                            autofocus />
                     </div>
                 </fieldset>
+                <div class="">
+                    <table class="table">
+                        <tbody>
+                            @if ($resultSearch)
+                                @foreach ($resultSearch as $partner)
+                                    <tr class="hover:bg-gray-200">
+                                        <td class="flex justify-between">
+                                            <div class="flex items-center gap-3 cursor-pointer "
+                                                    wire:click="goTo({{ $partner->id }})">
+                                                <div class="avatar">
+                                                    <div class="mask mask-squircle w-12 h-12">
+                                                        @if ($partner->imageTitle)
+                                                            <picture>
+                                                                <source
+                                                                srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
 
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
+                                                                <img src="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}"
+                                                                    alt="{{ $partner->name }}">
+                                                            </picture>
+                                                        @else
+                                                            <picture>
+                                                                <source
+                                                                    srcset="{{ url('storage/logos/assgapa.png') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/logo/assgapa.webp') }}" />
+                                                                <img src="{{ url('storage/logo/assgapa.png') }}"
+                                                                    alt="{{ $partner->name }}">
+                                                            </picture>
+                                                        @endif
 
+                                                    </div>
+                                                </div>
+                                                <div>
+                                                    <div class="font-bold text-sm">
+                                                        {{ $partner->name }}
+                                                    </div>
+                                                    <div class="text-sm opacity-50">{{ $partner->partner_category_master }}</div>
+                                                    <div class="text-sm opacity-50">{{ $partner->cpf }} </div>
+                                                </div>
+                                            </div>
+                                            <div class="justify-items-end">
+                                                @if ($partner->partner_category_master == 'Sócio')
+                                                    <x-table-register-buttons id="{{ $partner->id }}" :card="true" :dependent="true"
+                                                        :history="true" :discount="true">
+                                                    </x-table-register-buttons>
+                                                @else
+                                                    @if ($partner->partner_category_master == 'Dependente')
+                                                        <x-table-register-buttons id="{{ $partner->id }}" :card="true" :dependent="false"
+                                                            :history="true" :discount="true">
+                                                        </x-table-register-buttons>
+                                                    @else
+                                                        <x-table-register-buttons id="{{ $partner->id }}" :card="true" :dependent="true"
+                                                            :history="true" :discount="true">
+                                                        </x-table-register-buttons>
+                                                    @endif
+                                                @endif
+                                            </div>
+                                        </td>
+                                    </tr>
+                                @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </x-slot>
         <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('openModalSearch')" class="mx-2">
+            <x-secondary-button wire:click="$toggle('navModalSearch')" class="mx-2">
                 Fechar
             </x-secondary-button>
         </x-slot>

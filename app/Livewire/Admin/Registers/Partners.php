@@ -131,9 +131,9 @@ class Partners extends Component
     {
         redirect()->route('new-partner');
     }
-    public function showModalUpdate(Partner $Partner)
+    public function showModalUpdate(Partner $partner)
     {
-        redirect()->route('edit-partner', $Partner);
+        redirect()->route('edit-partner', $partner);
     }
 
     //DELETE

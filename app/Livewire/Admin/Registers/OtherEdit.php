@@ -80,7 +80,7 @@ class OtherEdit extends Component
     public static function uploadPhoto($image)
     {
         // dd('storage/public/livewire-tmp/' . $image);
-        $img = explode('.',$image);
+        $img = explode('.', $image);
         $logoWebp = Image::make('storage/livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
         $logoWebp->save('storage/partners/' . $img[0] . '.webp');
@@ -93,13 +93,13 @@ class OtherEdit extends Component
     public function updated($property)
     {
         if ($property === 'postalCode') {
-            $cep = str_replace ('-' ,'', $this->postalCode);
+            $cep = str_replace('-', '', $this->postalCode);
             // dd($cep);
-            $ch = curl_init("https://viacep.com.br/ws/".$cep."/json/");
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            $ch = curl_init("https://viacep.com.br/ws/" . $cep . "/json/");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = json_decode(curl_exec($ch));
             curl_close($ch);
-            if($result){
+            if ($result) {
                 $this->address = $result->logradouro;
                 $this->city = $result->localidade;
                 $this->district = $result->bairro;
@@ -112,13 +112,16 @@ class OtherEdit extends Component
     {
         $this->breadcrumb_title = $partner->name;
         $this->registration_at = date('d/m/Y');
-        $this->category = PartnerCategory::select('id','title')->orderBy('title','asc')
-        ->where('active',1)->where('parent_category',$this->partner_category_master)->get();
+        $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
+            ->where('active', 1)->where('parent_category', $this->partner_category_master)->get();
 
         $this->id = $partner->id;
         $this->name = $partner->name;
-        $this->responsible = $partner->responsible;
-        $this->responsible_name = $partner->parent->name . ' ( ' . $partner->parent->cpf . ' )';
+        if ($partner->responsible) {
+            $this->responsible = $partner->responsible;
+            $this->responsible_name = $partner->parent->name . ' ( ' . $partner->parent->cpf . ' )';
+        }
+
         $this->kinship = $partner->kinship;
         $this->image = $partner->image;
         $this->date_of_birth = $partner->date_of_birth;
@@ -147,7 +150,6 @@ class OtherEdit extends Component
         $this->partner_category = $partner->partner_category;
         $this->partner_category_master = $partner->partner_category_master;
         $this->company = $partner->company;
-
     }
 
     public function render()
@@ -158,15 +160,15 @@ class OtherEdit extends Component
                 ->limit(7)->get();
         }
 
-        $this->category = PartnerCategory::select('id','title')->orderBy('title','asc')
-        ->where('active',1)->where('parent_category',$this->partner_category_master)->get();
+        $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
+            ->where('active', 1)->where('parent_category', $this->partner_category_master)->get();
         return view('livewire.admin.registers.register-edit');
     }
     public function save()
     {
         $this->persist();
-        if($this->partner_category_master == 'Dependente') {
-            redirect()->route('edit-dependent',$this->id);
+        if ($this->partner_category_master == 'Dependente') {
+            redirect()->route('edit-dependent', $this->id);
         }
     }
     public function save_out()
@@ -174,9 +176,9 @@ class OtherEdit extends Component
         $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } elseif($this->partner_category_master == 'Dependente') {
-            redirect()->route('dependent',$this->responsible);
-        }else {
+        } elseif ($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent', $this->responsible);
+        } else {
             redirect()->route('others');
         }
     }
@@ -194,7 +196,7 @@ class OtherEdit extends Component
             $this->rules = [
                 'cpf' => 'required|min:11',
             ];
-        }else{
+        } else {
             $this->rules = [
                 'cnpj' => 'required|min:14',
             ];
@@ -202,7 +204,7 @@ class OtherEdit extends Component
         if ($this->partner_category_master == 'Dependente') {
             $this->rules = [
                 'kinship' => 'required',
-                'responsible'=>'required'
+                'responsible' => 'required'
             ];
         }
 
@@ -211,39 +213,39 @@ class OtherEdit extends Component
         Partner::updateOrCreate([
             'id' => $this->id,
         ], [
-            'name'                  =>$this->name,
-            'responsible'           =>$this->responsible,
-            'kinship'               =>$this->kinship,
-            'image'                 =>$this->image,
-            'date_of_birth'         =>$this->date_of_birth,
-            'obs'                   =>$this->obs,
-            'pf_pj'                 =>$this->pf_pj,
-            'cpf'                   =>$this->cpf,
-            'cnpj'                  =>$this->cnpj,
-            'rg'                    =>$this->rg,
-            'phone_first'           =>$this->phone_first,
-            'phone_second'          =>$this->phone_second,
-            'address'               =>$this->address,
-            'city'                  =>$this->city,
-            'district'              =>$this->district,
-            'state'                 =>$this->state,
-            'postalCode'            =>$this->postalCode,
-            'number'                =>$this->number,
-            'email'                 =>$this->email,
-            'email_birthday'        =>date('Y'),
-            'send_email_barthday'   =>$this->send_email_barthday,
-            'needs'                 =>$this->needs,
-            'access_pool'           =>$this->access_pool,
-            'print_date'            =>$this->print_date,
-            'validity_of_card'      =>$this->validity_of_card,
-            'grace_period'          =>$this->grace_period,
-            'registration_at'       =>$this->registration_at,
-            'discount'              =>$this->discount,
-            'partner_category'      =>$this->partner_category,
-            'partner_category_master'=> $this->partner_category_master,
-            'company'               =>$this->company,
+            'name'                  => $this->name,
+            'responsible'           => $this->responsible,
+            'kinship'               => $this->kinship,
+            'image'                 => $this->image,
+            'date_of_birth'         => $this->date_of_birth,
+            'obs'                   => $this->obs,
+            'pf_pj'                 => $this->pf_pj,
+            'cpf'                   => $this->cpf,
+            'cnpj'                  => $this->cnpj,
+            'rg'                    => $this->rg,
+            'phone_first'           => $this->phone_first,
+            'phone_second'          => $this->phone_second,
+            'address'               => $this->address,
+            'city'                  => $this->city,
+            'district'              => $this->district,
+            'state'                 => $this->state,
+            'postalCode'            => $this->postalCode,
+            'number'                => $this->number,
+            'email'                 => $this->email,
+            'email_birthday'        => date('Y'),
+            'send_email_barthday'   => $this->send_email_barthday,
+            'needs'                 => $this->needs,
+            'access_pool'           => $this->access_pool,
+            'print_date'            => $this->print_date,
+            'validity_of_card'      => $this->validity_of_card,
+            'grace_period'          => $this->grace_period,
+            'registration_at'       => $this->registration_at,
+            'discount'              => $this->discount,
+            'partner_category'      => $this->partner_category,
+            'partner_category_master' => $this->partner_category_master,
+            'company'               => $this->company,
 
-            'updated_by'            =>Auth::user()->name,
+            'updated_by'            => Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
     }

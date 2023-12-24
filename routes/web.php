@@ -87,15 +87,17 @@ Route::middleware([
     Route::get('/dashboard', Panel::class)->name('dashboard');
     Route::get('/painel-de-controle-administrador', Master::class)
         ->name('master-panel');
+
+    Route::get('/', Master::class)->name('homepage');
+    Route::get('', Master::class)->name('homepage');
 });
 
-Route::get('/', Homepage::class)->name('homepage');
 
 Route::get('/piscina/{partner}', RegisterAccessPool::class)
-->name('register-access-pool');
+    ->name('register-access-pool');
 
 Route::get('/passe-piscina/{pass}', RegisterPassPool::class)
-->name('pool-pass');
+    ->name('pool-pass');
 
 Route::middleware([
     'auth:sanctum',
@@ -104,7 +106,7 @@ Route::middleware([
     'registerLogging'
 ])->group(function () {
 
-    Route::post('/upload-editor',function(Request $request){
+    Route::post('/upload-editor', function (Request $request) {
         $file = $request->file('file');
         $url = $file->store('public/uploads');
         return Storage::url($url);
@@ -143,7 +145,7 @@ Route::middleware([
 ])->group(function () {
     Route::get('/usuários', ListUser::class)
         ->name('list-users');
-        Route::get('/acessos-do-usuários/{user}', UserAccesses::class)
+    Route::get('/acessos-do-usuários/{user}', UserAccesses::class)
         ->name('user.access');
 });
 // Cadastros pageAccess 3
@@ -181,7 +183,7 @@ Route::middleware([
     Route::get('/cadastros/{partner}/mensalidades', Monthlys::class)
         ->name('monthlys');
 
-        Route::get('/cadastros-sócios-em-atraso', PartnersLate::class)
+    Route::get('/cadastros-sócios-em-atraso', PartnersLate::class)
         ->name('partnersLate');
 });
 // Ambientes pageAccess 4
@@ -204,7 +206,6 @@ Route::middleware([
         ->name('ambience-contracts');
     Route::get('/ambientes/indisponibilidades', AmbienceUnavailabilities::class)
         ->name('ambience-unavailabilities');
-
 });
 // Material pageAccess 5
 Route::middleware([
@@ -261,7 +262,6 @@ Route::middleware([
 
     Route::get('/locações/parcelas-em-atraso', InstallmentsLate::class)
         ->name('installmentsLate');
-
 });
 
 // Financeiro pageAccess 8
@@ -294,7 +294,6 @@ Route::middleware([
         ->name('new-received');
     Route::get('/financeiro-entradas/{received}/editar', ReceivedEdit::class)
         ->name('edit-received');
-
 });
 
 // Locações pageAccess 9

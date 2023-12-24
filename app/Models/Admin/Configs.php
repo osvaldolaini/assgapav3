@@ -13,7 +13,7 @@ class Configs extends Model
     protected $table = 'configs';
 
     protected $fillable = [
-        'title','acronym','president', 'financial','slug','update_by',
+        'title','acronym','president', 'financial','slug','update_by','logo_path',
         'email','email_happy','phone','cellphone','whatsapp','telegram','cnpj',
         'postalCode','number','address','district','city','state','complement',
     ];

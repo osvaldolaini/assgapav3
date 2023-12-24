@@ -5,6 +5,9 @@
 </p>
 
 # Sistema ASSGAPA V3
+## V 3.21 23/12/2023
+    Search Bar
+
 ## V 3.20 19/12/2023
     Botão exportar como EXCEL
 

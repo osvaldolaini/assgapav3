@@ -27,8 +27,7 @@
     <x-dialog-modal wire:model="showModalCreate">
         <x-slot name="title">Cadastro rápido</x-slot>
         <x-slot name="content">
-            <form wire:submit="fast_create" class="grid grid-cols-4 gap-2">
-
+            <form wire:submit="fast_create" class="grid grid-cols-4 gap-2" wire:ignore>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="name">*Nome completo</label>
                     <input

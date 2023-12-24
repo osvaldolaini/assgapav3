@@ -2,35 +2,47 @@
 
 namespace App\Livewire\Admin;
 
-use App\Models\User;
+use App\Models\Admin\Registers\Partner;
 use Livewire\Component;
 
 class SearchBar extends Component
 {
-    public $openModalSearch = false;
+    public $navModalSearch = false;
     public $users;
-    public $inputSearch = '';
-    protected $listeners =
-    [
-        'closeReceived',
-        'openModalSearch',
-    ];
+    public $navSearch = '';
+    public $resultSearch = '';
 
     public function render()
     {
-        if ($this->inputSearch != '') {
-            $this->users = User::where('name', 'LIKE', '%' . $this->inputSearch . '%')
-            ->limit(10)->get();
+        if ($this->navSearch != '') {
+            $this->resultSearch = Partner::select('id','name','cpf','partner_category_master','image')
+            ->where('name', 'LIKE', '%' . $this->navSearch . '%')
+            ->limit(7)->get();
         }
 
         return view('livewire.admin.search-bar');
     }
-    public function openModalSearch()
+    public function goTo(Partner $partner)
     {
-        $this->openModalSearch = true;
+        switch ($partner->partner_category_master) {
+            case 'Dependente':
+                redirect()->route('edit-dependent', $partner->id);
+                break;
+            case 'Não sócio':
+                redirect()->route('edit-other', $partner->id);
+                    break;
+
+            default:
+            redirect()->route('edit-partner', $partner->id);
+                break;
+        }
     }
-    public function closeModalSearch()
+    public function openNavModalSearch()
     {
-        $this->openModalSearch = false;
+        $this->navModalSearch = true;
+    }
+    public function closeNavModalSearch()
+    {
+        $this->navModalSearch = false;
     }
 }

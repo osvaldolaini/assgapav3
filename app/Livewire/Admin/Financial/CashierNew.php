@@ -24,6 +24,8 @@ class CashierNew extends Component
     public $cost_center_id;
     public $type;
 
+
+
     public function mount()
     {
         $this->paid_in = date('d/m/Y');
@@ -33,6 +35,7 @@ class CashierNew extends Component
     {
         return view('livewire.admin.financial.cashier-new');
     }
+
 
     public function save_out()
     {

@@ -20,6 +20,11 @@ class ReceivedNew extends Component
     public $typeSearch;
     public $results;
 
+    //Favorites
+    public $modalFavorites = false;
+    public $inputFavorites;
+    public $favorites;
+
     //Campos
     public $title;
     public $paid_in;
@@ -36,6 +41,14 @@ class ReceivedNew extends Component
     }
     public function render()
     {
+        if ($this->inputFavorites != '') {
+            $this->favorites = Received::select('title','id')
+                ->where('title', 'LIKE', '%' . $this->inputFavorites . '%')
+                ->orderBy('title','ASC')
+                ->limit(7)->get()
+                ->groupBy('title')->toArray();
+        }
+
         if ($this->inputSearch != '') {
             $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master')
                 ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
@@ -61,6 +74,22 @@ class ReceivedNew extends Component
         $this->results = '';
 
         $this->modalSearch = false;
+    }
+
+    //favoritos
+    public function openModalFavorites()
+    {
+        $this->favorites = Received::select('title','id')
+            ->orderBy('title','ASC')
+            ->limit(7)->get()
+            ->groupBy('title')->toArray();
+        $this->modalFavorites = true;
+    }
+
+    public function selectFavorites($id)
+    {
+        $this->title = mb_strtoupper(Received::find($id)->title);
+        $this->modalFavorites = false;
     }
 
     public function save_out()

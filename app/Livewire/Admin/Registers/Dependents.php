@@ -136,9 +136,9 @@ class Dependents extends Component
     {
         redirect()->route('new-dependent');
     }
-    public function showModalUpdate(Partner $Partner)
+    public function showModalUpdate(Partner $partner)
     {
-        redirect()->route('edit-dependent', $Partner);
+        redirect()->route('edit-dependent', $partner);
     }
 
     //DELETE

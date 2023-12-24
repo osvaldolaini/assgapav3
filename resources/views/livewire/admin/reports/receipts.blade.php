@@ -151,7 +151,6 @@
                     <div style="width:35%;float:left;border:solid 2px #fff;">
                         <img style="width:20%;" src="{{ url('storage/logos/assgapa.png') }}">
                     </div>
-
                 </div>
                 <div id="about" style="margin-top:0px; padding-top: 0px;">
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;">{{ $config->title }}</h5>
@@ -227,7 +226,7 @@
                         @foreach ($bills as $bill)
                             <tr >
                                 <td>{{str_pad($bill->id, 5, '0', STR_PAD_LEFT)}}</td>
-                                <td>{{date( 'd/m/Y' , strtotime($bill->paid_in))}}</td>
+                                <td>{{$bill->paid_in}}</td>
                                 <td>{{mb_strtoupper($bill->deleted_because)}}</td>
                             </tr>
                         @endforeach
@@ -250,7 +249,7 @@
                         @foreach ($cashiers as $cashier)
                             <tr >
                                 <td>{{str_pad($cashier->id, 5, '0', STR_PAD_LEFT)}}</td>
-                                <td>{{date( 'd/m/Y' , strtotime($cashier->paid_in))}}</td>
+                                <td>{{$cashier->paid_in}}</td>
                                 <td>{{mb_strtoupper($cashier->deleted_because)}}</td>
                             </tr>
                         @endforeach

@@ -144,16 +144,16 @@
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
                                                             @if ($item->imageTitle)
-                                                                <picture>
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
-                                                                    <img src="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}"
-                                                                        alt="{{ $item->name }}">
-                                                                </picture>
+                                                            <picture>
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
+                                                                <source
+                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
+                                                                <img src="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}"
+                                                                    alt="{{ $item->name }}">
+                                                            </picture>
                                                             @endif
 
                                                         </div>
