@@ -27,7 +27,7 @@ class CreatePartnersTable extends Migration
             $table->string('cpf')->nullable();
             $table->string('cnpj')->nullable();
             $table->string('rg')->nullable();
-            $table->integer('saram')->nullable();
+            $table->string('saram')->nullable();
             $table->string('phone_first',50)->nullable();
             $table->string('phone_second',50)->nullable();
             $table->string('address')->nullable();

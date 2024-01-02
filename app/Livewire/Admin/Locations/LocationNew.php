@@ -93,7 +93,8 @@ class LocationNew extends Component
     public function updated($property)
     {
         if ($property === 'ambience_id') {
-            $selectAmbience = Ambience::select('id', 'title', 'multiple')->find($this->ambience_id);
+            $selectAmbience = Ambience::select('id', 'title', 'multiple')
+            ->find($this->ambience_id);
             $this->multiple = $selectAmbience->multiple;
             $this->ambience_tenant_id = '';
             $this->value = '';
@@ -102,7 +103,6 @@ class LocationNew extends Component
             $this->dependents = '';
             $this->location_date = '';
             $this->ambience = $selectAmbience->title;
-
 
             $this->dispatch('changeAmbience', $this->ambience_id,$this->partner_id);
         }

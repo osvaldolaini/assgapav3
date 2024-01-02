@@ -45,7 +45,8 @@ class LocationCalendar extends Component
     {
         $this->ambience_id = $ambience_id;
         $this->partner_id = $partner_id;
-        $selectAmbience = Ambience::select('id', 'title', 'multiple')->find($this->ambience_id);
+        $selectAmbience = Ambience::select('id', 'title', 'multiple')->
+        find($this->ambience_id);
         $this->multiple = $selectAmbience->multiple;
         $this->dispatch('calendar', $this->getCalendarReservation($this->ambience_id));
     }
@@ -60,7 +61,7 @@ class LocationCalendar extends Component
         $events = Location::select('id', 'ambience_id', 'partner_id', 'location_hour_start', 'location_hour_end', 'location_date')
             ->where('active', 1)
             ->where('ambience_id', $ambience_id)
-            ->where('location_date', '<=', $now)
+            // ->where('location_date', '<=', $now)
             ->get();
         $amb = Ambience::where('id', $ambience_id)->first();
 
@@ -146,8 +147,11 @@ class LocationCalendar extends Component
 
             $this->location_date = Carbon::parse($location_date)
                 ->format('d/m/Y');
+
             $calendar = [];
-            if ($this->multiple == 0) { {
+            if ($this->multiple == 0) {
+                $this->location_date = implode("-", array_reverse(explode("/", $this->location_date)));
+
                     $event = Location::where('active', 1)
                         ->where('ambience_id', $this->ambience_id)
                         ->where('location_date', $this->location_date)
@@ -177,7 +181,7 @@ class LocationCalendar extends Component
                             $this->dispatch('insertDate', $location_date);
                         }
                     }
-                }
+
             } else {
                 $this->dispatch('insertDate', $location_date);
             }
