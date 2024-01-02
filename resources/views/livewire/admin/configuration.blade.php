@@ -35,10 +35,10 @@
                             placeholder="Nome curto" wire:model="acronym" value="{{ old('acronym', $acronym ?? '') }}">
                     </div>
                     <div class="col-span-full sm:col-span-3">
-                        <label for="cpf_cnpj">CNPJ</label>
+                        <label for="cnpj">CNPJ</label>
                         <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00"
                             class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                            wire:model="cpf_cnpj" value="{{ old('cpf_cnpj', $cpf_cnpj ?? '') }}">
+                            wire:model="cnpj" value="{{ old('cnpj', $cnpj ?? '') }}">
                     </div>
                     <div class="col-span-full">
                         <label for="email">E-mail</label>

@@ -19,7 +19,7 @@ class Configuration extends Component
     public $slug;
     public $acronym;
     public $about;
-    public $cpf_cnpj;
+    public $cnpj;
     public $email;
     public $phone;
     public $cellphone;
@@ -49,7 +49,7 @@ class Configuration extends Component
         $this->about            = $this->configs->about;
         $this->slug             = $this->configs->slug;
         $this->acronym          = $this->configs->acronym;
-        $this->cpf_cnpj         = $this->configs->cpf_cnpj;
+        $this->cnpj             = $this->configs->cnpj;
         $this->email            = $this->configs->email;
         $this->phone            = $this->configs->phone;
         $this->cellphone        = $this->configs->cellphone;
@@ -117,7 +117,7 @@ class Configuration extends Component
             'cellphone'         => $this->cellphone,
             'whatsapp'          => $this->whatsapp,
             'telegram'          => $this->telegram,
-            'cpf_cnpj'          => $this->cpf_cnpj,
+            'cnpj'          => $this->cnpj,
             'postalCode'        => $this->postalCode,
             'address'           => $this->address,
             'number'            => $this->number,
