@@ -121,7 +121,7 @@ class DailyReport extends Component
         $dayBalance = $oldBalance + $dayReceiveds - $dayCashiers - $dayBills;
 
 
-        // dd($oldReceiveds,$oldBills,$oldCashiers,$adjustmentSystem);
+        dd($oldReceiveds,$oldBills,$oldCashiers,$adjustmentSystem);
 
         // Crie uma instância do mPDF
         $mpdf = new Mpdf([
