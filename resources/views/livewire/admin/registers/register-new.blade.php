@@ -56,8 +56,8 @@
                     <label class="text-sm" for="discount">Desconto de folha</label>
                     <Select wire:model="discount"
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="0">Sim</option>
-                        <option value="1">Não</option>
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
                     </Select>
                 </div>
                 @if ($partner_category_master == 'Dependente')
