@@ -16,7 +16,6 @@ class DailyReport extends Component
 {
     public $search;
 
-
     public function mount()
     {
         $this->search = date('d/m/Y');
@@ -27,8 +26,8 @@ class DailyReport extends Component
     }
     public function getDaily()
     {
-
         $d=implode("-",array_reverse(explode("/",$this->search)));
+
         /*Valor de ajusta do sistema antigo */
         $adjustmentSystem=4825.06;
         $config = Configs::find(1);
@@ -50,14 +49,14 @@ class DailyReport extends Component
 
         $listReceiveds=array();$oldReceiveds=0;$dayReceiveds=0;
         foreach ($receiveds as $received) {
-
-            if(strtotime($received->paid_in) < strtotime($d)){
+            $paid_in=implode("-",array_reverse(explode("/",$received->paid_in)));
+            if(strtotime($paid_in) < strtotime($d)){
                 /*Entradas anteriores ao dia solicitado*/
                 if($received->form_payment=='DIN'){
                     $oldReceiveds += $received->convert_value($received->value);
                 }
 
-            }elseif(strtotime($received->paid_in) == strtotime($d)){
+            }elseif(strtotime($paid_in) == strtotime($d)){
                 /*Entradas do dia solicitado*/
                 $itens+=1;
                 if(isset($received->location_id)){
@@ -94,10 +93,11 @@ class DailyReport extends Component
 
         $listBill=array();$oldBills=0;$dayBills=0;
         foreach ($bills as $bill) {
-            if(strtotime($bill->paid_in) < strtotime($d)){
+            $b_paid_in=implode("-",array_reverse(explode("/",$bill->paid_in)));
+            if(strtotime($b_paid_in) < strtotime($d)){
                 /*Saídas anteriores ao dia solicitado*/
                 $oldBills += $bill->convert_value($bill->value);
-            }elseif(strtotime($bill->paid_in) == strtotime($d)){
+            }elseif(strtotime($b_paid_in) == strtotime($d)){
                 /*Saídas do dia solicitado*/
                 $itens+=1;
                 if(isset($bill->creditors)){
@@ -122,7 +122,7 @@ class DailyReport extends Component
 
 
         // dd($oldReceiveds,$oldBills,$oldCashiers,$adjustmentSystem);
-        dd($d,$listReceiveds);
+
 
         // Crie uma instância do mPDF
         $mpdf = new Mpdf([
