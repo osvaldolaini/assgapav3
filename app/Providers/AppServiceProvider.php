@@ -22,8 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // $configurations = Configs::find(1);
-        // // Vincule os dados de configuração como uma variável global
-        // config(['app.configs' => $configurations]);
+        $configurations = Configs::find(1);
+        // Vincule os dados de configuração como uma variável global
+        config(['app.configs' => $configurations]);
     }
 }
