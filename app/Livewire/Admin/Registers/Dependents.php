@@ -185,12 +185,11 @@ class Dependents extends Component
     //SEARCH PERSONALIZADO
     private function getData()
     {
-
         if (Auth::user()->group->level <= 5) {
             $query = $this->model::query();
         } else {
             $query = $this->model::query();
-            $query = $query->where('active', '<=', 1);
+            $query = $query->where('partners.active', '<=', 1);
         }
         $query = $query->where('partner_category_master', 'Dependente');
         $query->where('responsible', $this->partner->id);

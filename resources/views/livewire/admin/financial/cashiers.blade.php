@@ -117,7 +117,7 @@
                                                         </x-table-buttons-deleted>
                                                     @else
                                                         <x-table-buttons id="{{ $data->id }}" :update="true"
-                                                            :delete="true" :view="true" :active="$data->active">
+                                                            :delete="true" :view="true" :active="false">
                                                         </x-table-buttons>
                                                     @endif
                                                 </td>

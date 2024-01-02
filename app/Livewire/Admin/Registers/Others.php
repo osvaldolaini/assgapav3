@@ -183,7 +183,7 @@ class Others extends Component
             $query = $this->model::query();
         } else {
             $query = $this->model::query();
-            $query = $query->where('active', '<=', 1);
+            $query = $query->where('partners.active', '<=', 1);
         }
         $query = $query->where('partner_category_master', '!=', 'Dependente');
         $query = $query->where('partner_category_master', '!=', 'Sócio');
