@@ -131,8 +131,10 @@ class PartnerNew extends Component
         $this->rules = [
             'name'              => 'required|unique:partners',
             'email'             => 'email',
-            'date_of_birth'     => 'required',
-            'registration_at'   => 'required',
+            'date_of_birth'     => 'required|date_format:d/m/Y',
+            'registration_at'   => 'required|date_format:d/m/Y',
+            'validity_of_card'  => 'date_format:d/m/Y',
+            'grace_period'      => 'date_format:d/m/Y',
             'phone_first'       => 'required',
         ];
 
