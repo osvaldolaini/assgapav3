@@ -36,7 +36,7 @@ class Partner extends Model
 
     protected $fillable = [
         'id','active','slug','name','responsible','kinship','image',
-        'date_of_birth','obs','pf_pj','cpf','cnpj','rg',
+        'date_of_birth','obs','pf_pj','cpf','cnpj','rg','saram',
         'phone_first','phone_second','address','city','district','state',
         'postalCode','number','email','email_birthday','send_email_barthday','needs','access_pool',
         'print_date','validity_of_card','grace_period','registration_at',
