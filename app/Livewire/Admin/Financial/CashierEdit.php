@@ -60,10 +60,15 @@ class CashierEdit extends Component
             'status' => 'required',
             'paid_in' => 'required|date_format:d/m/Y',
             'value' => 'required',
-            'cost_center_id' => 'required',
             'type' => 'required',
             'updated_because' => 'required',
         ];
+
+        if ($this->type == 2) {
+            $this->rules = [
+                'cost_center_id' => 'required',
+            ];
+        }
 
         $this->validate();
         Cashier::updateOrCreate([
