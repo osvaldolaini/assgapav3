@@ -38,8 +38,8 @@
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
-                    <label for="date_of_birth" class="text-sm">*Data nascimento </label>
-                    <x-datepicker id='date_of_birth' :required="true"></x-datepicker>
+                    <label for="date_of_birth" class="text-sm">Data nascimento </label>
+                    <x-datepicker id='date_of_birth' :required="false"></x-datepicker>
                 </div>
 
                 <div class="col-span-full sm:col-span-2">
@@ -83,7 +83,7 @@
 
                 </div>
                 <div class="col-span-full sm:col-span-2">
-                    <label class="text-sm" for="phone_first">*Contato primário</label>
+                    <label class="text-sm" for="phone_first">Contato primário</label>
                     <input x-mask="(99) 9 9999-9999" type="text"
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="(99) 9 9999-9999" wire:model="phone_first">

@@ -34,9 +34,7 @@ class OtherFast extends Component
         $this->reset(
             'name',
             'email',
-            'date_of_birth',
             'registration_at',
-            'phone_first',
         );
     }
     public function modalRegister()
@@ -61,9 +59,7 @@ class OtherFast extends Component
         $this->rules = [
             'name'              => 'required|unique:partners',
             'email'             => 'email',
-            'date_of_birth'     => 'required',
             'registration_at'   => 'required',
-            'phone_first'       => 'required',
         ];
 
         if ($this->pf_pj == 'pf') {
