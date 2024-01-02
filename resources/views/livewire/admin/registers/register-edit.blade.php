@@ -127,8 +127,8 @@
             </div> --}}
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="saram">SARAM</label>
-                <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                    maxlength="10" placeholder="saram" wire:model="saram">
+                <input x-mask="999999-9" placeholder="000000-0" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                    maxlength="8" placeholder="saram" wire:model="saram">
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="registration_at" class="text-sm">*Data cadastro</label>
