@@ -41,7 +41,7 @@ class Partner extends Model
         'postalCode','number','email','email_birthday','send_email_barthday','needs','access_pool',
         'print_date','validity_of_card','grace_period','registration_at',
         'discount','partner_category','partner_category_master','company',
-        'update_by','created_by'
+        'updated_by','created_by'
     ];
 
     public function setNameAttribute($value)
