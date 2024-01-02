@@ -19,7 +19,7 @@
     </div>
     <div class="p-0 m-0 bg-white w-full h-auto rounded-b-md ">
         <div class="flex w-full items-start justify-center p-3 text-gray-900">
-            <select class="rounded-l-md w-1/2 " wire:model="mounth">
+            <select class="rounded-l-md w-1/2 " wire:model.live="mounth">
                 <option value="1" >Janeiro</option>
                 <option value="2" >Fevereiro</option>
                 <option value="3" >Março</option>
@@ -33,7 +33,7 @@
                 <option value="11" >Novembro</option>
                 <option value="12" >Dezembro</option>
             </select>
-            <select class="rounded-r-md w-1/2 " whire:model="year">
+            <select class="rounded-r-md w-1/2 " whire:model.live="year">
                 @for ($i = 2017; $i <= date('Y'); $i++)
                     <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>{{ $i }}
                     </option>
