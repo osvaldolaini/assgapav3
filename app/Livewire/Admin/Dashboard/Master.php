@@ -24,7 +24,7 @@ class Master extends Component
         }else{
             Log::info('Já passou do período de criação');
         }
-
+        // dd(Auth::user()->dashboard);
         switch (Auth::user()->dashboard) {
             case 1:
                 return view('livewire.admin.dashboard.master');
