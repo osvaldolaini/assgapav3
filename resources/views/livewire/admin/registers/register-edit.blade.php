@@ -107,21 +107,19 @@
                     <option value="pj">Pessoa jurídica</option>
                 </Select>
             </div>
-            @if ($pf_pj == 'pf')
-                <div class="col-span-full sm:col-span-4">
-                    <label class="text-sm" for="cpf">*CPF</label>
-                    <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        wire:model="cpf">
-                </div>
-            @else
-                <div class="col-span-full sm:col-span-4">
-                    <label class="text-sm" for="cnpj">*CNPJ</label>
-                    <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        wire:model="cnpj">
-                </div>
-            @endif
+            <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pf' ? 'block' : 'hidden' }}">
+                <label class="text-sm" for="cpf">*CPF</label>
+                <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
+                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                    wire:model="cpf">
+            </div>
+
+            <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pj' ? 'block' : 'hidden' }}">
+                <label class="text-sm" for="cnpj">*CNPJ</label>
+                <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
+                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                    wire:model="cnpj">
+            </div>
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="rg">RG</label>
                 <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"

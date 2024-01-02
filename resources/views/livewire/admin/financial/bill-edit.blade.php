@@ -42,6 +42,44 @@
                         </fieldset>
                     </div>
                 </div>
+                <div class="col-span-full sm:col-span-6">
+                    <label for="creditor">*Fornecedor / colaborador</label>
+                    <input
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
+                        placeholder="Fornecedor / colaborador" wire:model="creditor" required>
+                    @error('creditor')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
+
+                <div class="col-span-full sm:col-span-3">
+                    <label class="text-sm" for="pf_pj">*Tipo de cadastro</label>
+                    <Select wire:model.live="pf_pj" required
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <option value="pf">Pessoa física</option>
+                        <option value="pj">Pessoa jurídica</option>
+                    </Select>
+                </div>
+                @if ($pf_pj == 'pf')
+                <div class="col-span-full sm:col-span-3" x-data x-init="Inputmask({
+                    'mask': '999.999.999-99'
+                    }).mask($refs.creditor_document)">
+                        <label class="text-sm" for="creditor_document">*CPF</label>
+                        <input x-ref="creditor_document" placeholder="000.000.000-00" required
+                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            wire:model="creditor_document">
+                </div>
+                @else
+                    <div class="col-span-full sm:col-span-3" x-data x-init="Inputmask({
+                        'mask': '99.999.999/9999-99'
+                    }).mask($refs.creditor_document)">
+                        <label class="text-sm" for="creditor_document">*CNPJ</label>
+                        <input x-ref="creditor_document" placeholder="00.000.000/0000-00" required
+                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700
+                             dark:text-gray-900"
+                            wire:model="creditor_document">
+                    </div>
+                @endif
 
                 <div class="col-span-full sm:col-span-4">
                     <label for="cost_center_id">Motivo da despesa</label>

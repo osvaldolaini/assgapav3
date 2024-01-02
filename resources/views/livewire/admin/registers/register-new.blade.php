@@ -84,21 +84,20 @@
                         <option value="pj">Pessoa jurídica</option>
                     </Select>
                 </div>
-                @if ($pf_pj == 'pf')
-                    <div class="col-span-full sm:col-span-4">
-                        <label class="text-sm" for="cpf">*CPF</label>
-                        <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                            wire:model="cpf">
-                    </div>
-                @else
-                    <div class="col-span-full sm:col-span-4">
-                        <label class="text-sm" for="cnpj">*CNPJ</label>
-                        <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                            wire:model="cnpj">
-                    </div>
-                @endif
+
+                <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pf' ? 'block' : 'hidden' }}">
+                    <label class="text-sm" for="cpf">*CPF</label>
+                    <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        wire:model="cpf">
+                </div>
+
+                <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pj' ? 'block' : 'hidden' }}">
+                    <label class="text-sm" for="cnpj">*CNPJ</label>
+                    <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        wire:model="cnpj">
+                </div>
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="rg">RG</label>
                     <input
@@ -192,12 +191,12 @@
                     <label class="text-sm" for="state">Estado</label>
                     <input
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        placeholder="UF" x-mask="aa" wire:model="state" maxlength="2"
-                        >
+                        placeholder="UF" x-mask="aa" wire:model="state" maxlength="2">
                 </div>
                 <div class="col-span-full">
                     <label class="text-sm" for="obs">Observações</label>
-                    <textarea wire:model="obs" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" rows="5"></textarea>
+                    <textarea wire:model="obs"
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" rows="5"></textarea>
                 </div>
             </form>
             <div class="col-span-full">
@@ -243,16 +242,16 @@
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
                                                             @if ($partner->imageTitle)
-                                                            <picture>
-                                                                <source
-                                                                srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
-                                                                <img src="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}"
-                                                                    alt="{{ $partner->name }}">
-                                                            </picture>
+                                                                <picture>
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
+                                                                    <img src="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}"
+                                                                        alt="{{ $partner->name }}">
+                                                                </picture>
                                                             @else
                                                                 <picture>
                                                                     <source

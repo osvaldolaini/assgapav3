@@ -36,6 +36,7 @@ class BillEdit extends Component
 
     public $bill;
     public $id;
+    public $pf_pj = 'pf';
 
     public function mount(Bill $bill)
     {
@@ -53,6 +54,13 @@ class BillEdit extends Component
         $this->creditor_id =  $bill->creditor_id;
         $this->creditor_document =  $bill->creditor_document;
         $this->updated_because =  $bill->updated_because;
+
+        if (strlen($bill->creditor_document) <= 14) {
+            $this->pf_pj = 'pf';
+        } else {
+            $this->pf_pj = 'pj';
+        }
+
 
         $this->categories = CostCenter::select('title', 'id')->get();
     }
@@ -77,7 +85,8 @@ class BillEdit extends Component
 
         $this->creditor          = $partner->name;
         $this->creditor_id       = $partner->id;
-        if ($partner->pf_pj == 'pf') {
+        $this->pf_pj             = $partner->pf_pj;
+        if ($this->pf_pj == 'pf') {
             $this->creditor_document       = $partner->cpf;
         } else {
             $this->creditor_document       = $partner->cnpj;

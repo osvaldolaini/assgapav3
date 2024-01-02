@@ -38,6 +38,7 @@ class BillNew extends Component
     public $creditor;
     public $creditor_id;
     public $creditor_document;
+    public $pf_pj = 'pf';
 
     public function mount()
     {
@@ -73,7 +74,8 @@ class BillNew extends Component
 
         $this->creditor          = $partner->name;
         $this->creditor_id       = $partner->id;
-        if ($partner->pf_pj == 'pf') {
+        $this->pf_pj             = $partner->pf_pj;
+        if ($this->pf_pj == 'pf') {
             $this->creditor_document       = $partner->cpf;
         } else {
             $this->creditor_document       = $partner->cnpj;
@@ -111,6 +113,7 @@ class BillNew extends Component
             'value' => 'required',
             'cost_center_id' => 'required',
             'type' => 'required',
+            'creditor_document' => 'required',
         ];
 
         $this->validate();

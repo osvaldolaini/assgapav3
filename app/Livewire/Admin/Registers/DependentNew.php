@@ -144,6 +144,7 @@ class DependentNew extends Component
             $this->rules = [
                 'cpf' => 'required|unique:partners|min:11',
             ];
+
         }else{
             $this->rules = [
                 'cnpj' => 'required|unique:partners|min:14',
