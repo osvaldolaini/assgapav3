@@ -98,12 +98,16 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         wire:model="cnpj">
                 </div>
-                <div class="col-span-full sm:col-span-2">
-                    <label class="text-sm" for="rg">RG</label>
-                    <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        maxlength="10" placeholder="RG" wire:model="rg">
-                </div>
+                {{-- <div class="col-span-full sm:col-span-2">
+                <label class="text-sm" for="rg">RG</label>
+                <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                    maxlength="10" placeholder="RG" wire:model="rg">
+            </div> --}}
+            <div class="col-span-full sm:col-span-2">
+                <label class="text-sm" for="saram">SARAM</label>
+                <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                    maxlength="10" placeholder="saram" wire:model="saram">
+            </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
                     <x-datepicker id='registration_at' :required="false"></x-datepicker>
