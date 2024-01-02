@@ -15,7 +15,7 @@ use Mpdf\Mpdf;
 class DailyReport extends Component
 {
     public $search;
-    public $today;
+
 
     public function mount()
     {
@@ -27,8 +27,7 @@ class DailyReport extends Component
     }
     public function getDaily()
     {
-        $this->today = Carbon::parse(now())->locale('pt-BR');
-        $this->today = $this->today->translatedFormat('d F Y');
+
         $d=implode("-",array_reverse(explode("/",$this->search)));
         /*Valor de ajusta do sistema antigo */
         $adjustmentSystem=4825.06;
@@ -134,6 +133,7 @@ class DailyReport extends Component
             'default_font_size'  => 9,
             'default_font'  => 'arial',
         ]);
+
         $today = Carbon::parse(now())->locale('pt-BR');
         // Renderize a view do Livewire
         $html = view('livewire.admin.reports.daily',
@@ -150,7 +150,7 @@ class DailyReport extends Component
             'dayCashiers'   => $dayCashiers,
             'dayBalance'    => $dayBalance,
             'oldBalance'    => $oldBalance,
-            'today'         => $this->today->translatedFormat('d F Y'),
+            'today'         => $today->translatedFormat('d F Y'),
         ])->render();
         // Adicione o conteúdo HTML ao PDF
         $mpdf->WriteHTML($html);
