@@ -15,6 +15,7 @@ use Mpdf\Mpdf;
 class DailyReport extends Component
 {
     public $search;
+    public $today;
 
     public function mount()
     {
@@ -26,6 +27,8 @@ class DailyReport extends Component
     }
     public function getDaily()
     {
+        $this->today = Carbon::parse(now())->locale('pt-BR');
+        $this->today = $this->today->translatedFormat('d F Y');
         $d=implode("-",array_reverse(explode("/",$this->search)));
         /*Valor de ajusta do sistema antigo */
         $adjustmentSystem=4825.06;
