@@ -35,7 +35,7 @@ class Bills extends Component
     public $search;
     public $relationTables = "cost_centers,cost_centers.id,bills.cost_center_id"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = 'paid_in|type'; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'paid_in,value,bills.active as active,cost_centers->active as status,creditor,type,bills.title as Bills_title,cost_centers.category,cost_centers.color';
+    public $columnsInclude = 'paid_in,value,bills.active as active,cost_centers.active as status,creditor,type,bills.title as Bills_title,cost_centers.category,cost_centers.color';
     public $searchable = 'bills.id,bills.title,creditor,cost_centers.category,paid_in,type'; //Colunas pesquisadas no banco de dados
     public $sort = "bills.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
