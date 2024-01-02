@@ -8,7 +8,7 @@ use Spatie\Activitylog\Models\Activity;
 if (!function_exists('logging')) {
     //Log
     function logging($subject_id,$subject_type){
-        if(Auth::user()->group->level <= 5){
+        if(Auth::user()->group->level <= 10){
             $logger = Activity::where('subject_id',$subject_id)
             ->where('subject_type',$subject_type)
             ->where('description','updated')->orderBy('id','desc')
