@@ -203,7 +203,7 @@ class Cashiers extends Component
             $query = $this->model::query();
         } else {
             $query = $this->model::query();
-            $query = $query->where('active', '<=', 1);
+            $query = $query->where('cashiers.active', '<=', 1);
         }
         $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
