@@ -4,7 +4,7 @@ namespace App\Livewire\Admin;
 
 use Livewire\Component;
 
-class NavBar extends Component
+class Navbar extends Component
 {
     public function render()
     {
