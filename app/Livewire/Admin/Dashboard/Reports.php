@@ -48,7 +48,7 @@ class Reports extends Component
     }
     public function report($report)
     {
-        dd($this->year,$this->mounth);
+        // dd($this->year,$this->mounth);
         $this->config = Configs::find(1);
         $this->today = Carbon::parse(now())->locale('pt-BR');
         $this->today = $this->today->translatedFormat('d F Y');

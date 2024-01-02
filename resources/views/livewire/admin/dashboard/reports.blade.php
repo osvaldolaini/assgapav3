@@ -18,6 +18,8 @@
         </span>
     </div>
     <div class="p-0 m-0 bg-white w-full h-auto rounded-b-md ">
+
+        <form action="">
         <div class="flex w-full items-start justify-center p-3 text-gray-900">
             <select class="rounded-l-md w-1/2 " wire:model.live="mounth">
                 <option value="1" >Janeiro</option>
@@ -33,13 +35,14 @@
                 <option value="11" >Novembro</option>
                 <option value="12" >Dezembro</option>
             </select>
-            <select class="rounded-r-md w-1/2 " whire:model.live="year">
+            <select class="rounded-r-md w-1/2 " wire:model.live="year">
                 @for ($i = 2017; $i <= date('Y'); $i++)
                     <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>{{ $i }}
                     </option>
                 @endfor
             </select>
         </div>
+    </form>
         <div class="w-full px-3">
             <button wire:click="report('financial')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Financeiro">
                 Financeiro
