@@ -5,7 +5,25 @@
             <div class="h-full bg-white rounded-2xl dark:bg-gray-700 py-2">
                 <nav class="mt-3">
                     <div>
-                        <x-link-simple url="dashboard" active="*painel*" >
+                        <a href="{{ route('dashboard') }}"
+                            class="flex items-center justify-start w-full px-4 py-1 my-0
+                                font-thin uppercase transition-colors duration-200
+                                {{ Request::is('*painel*')
+                                    ? ' bg-gradient-to-r from-white to-blue-100                                                                                                                                                                                                                                    dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
+                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500'
+                                }}">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M1070 1178l306-564h-654l-306 564h654zm722-282q0 182-71 348t-191 286-286 191-348 71-348-71-286-191-191-286-71-348 71-348 191-286 286-191 348-71 348 71 286 191 191 286 71 348z">
+                            </path>
+                        </svg>
+                    </span>
+                    <span class="mx-4 text-sm font-normal">
+                        Dashboard
+                    </span>
+                        </a>
+                        {{-- <x-link-simple url="dashboard" active="*painel*" role='1' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -17,7 +35,7 @@
                             <span class="mx-4 text-sm font-normal">
                                 Dashboard
                             </span>
-                        </x-link-simple>
+                        </x-link-simple> --}}
                         <x-link-simple url="list-users" active="*usuários*" role='2' :pages="$pages">
                             <span class="text-left">
                                 <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
