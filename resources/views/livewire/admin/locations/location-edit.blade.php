@@ -138,7 +138,8 @@
                                 @if ($typeTenant == 1)
                                     <Select wire:model="event_benefited" required
                                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                                        <option value="PRÓPRIO">Selecione...</option>
+                                        <option value="">Selecione...</option>
+                                        <option value="PRÓPRIO">PRÓPRIO</option>
                                         @foreach ($dependents as $item)
                                             <option value="{{ $item->name }}">
                                                 {{ $item->name }}
