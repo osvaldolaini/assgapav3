@@ -59,70 +59,72 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                             @foreach ($users as $user)
-                                <tr>
-                                    <td
-                                        class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                        {{ $user->name }}
-                                    </td>
-                                    <td
-                                        class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500
-                                        dark:text-gray-400">
-                                        @livewire('admin.change-user-groups', ['user' => $user], key($user->id))
-                                    </td>
-                                    <td
-                                        class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
-                                        <div class="w-full">
-                                            <div class="flex justify-between font-medium duration-200 ">
-                                                <div class="tooltip tooltip-top p-0" data-tip="Editar">
-                                                    <button wire:click="showModalUpdate({{ $user->id }})"
-                                                        class="py-2 px-3
-                                                    hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                                                    duration-200 whitespace-nowrap">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24"
-                                                            stroke="currentColor" stroke-width="2">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
-                                                            </path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                                <div class="tooltip tooltip-top p-0" data-tip="Apagar">
-                                                    <button wire:click="showModalDelete({{ $user->id }})"
-                                                        class="py-2 px-3
-                                                        transition-colors dark:hover:bg-red-500 hover:hover:bg-red-500
-                                                        duration-200 hover:text-white -ml-1">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
-                                                            stroke="currentColor" stroke-width="2">
-                                                            <path stroke-linecap="round" stroke-linejoin="round"
-                                                                d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
-                                                            </path>
-                                                        </svg>
-                                                    </button>
-                                                </div>
-                                                <div class="tooltip tooltip-top p-0" data-tip="Acessos">
-                                                    <a href="{{ route('user.access',$user->id) }}"
-                                                        class="py-2 px-3 transition-colors flex
-                                                    dark:hover:bg-teal-500 hover:hover:bg-teal-500
-                                                    duration-200 hover:text-white -ml-1">
-                                                    <svg class="h-6 w-6" viewBox="0 -1.5 20.412 20.412" xmlns="http://www.w3.org/2000/svg">
-                                                        <g id="check-lists" transform="translate(-1.588 -2.588)">
-                                                            <path id="primary" d="M7,4,4.33,7,3,5.5" fill="none" stroke="currentColor"
-                                                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                            <path id="primary-2" data-name="primary" d="M3,11.5,4.33,13,7,10" fill="none"
-                                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                            <path id="primary-3" data-name="primary" d="M3,17.5,4.33,19,7,16" fill="none"
-                                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                            <path id="primary-4" data-name="primary" d="M11,6H21M11,12H21M11,18H21" fill="none"
-                                                                stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
-                                                        </g>
+                            @if ($user->group->level <= Auth::user()->group->level)
+                            <tr>
+                                <td
+                                    class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
+                                    {{ $user->name }}
+                                </td>
+                                <td
+                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500
+                                    dark:text-gray-400">
+                                    @livewire('admin.change-user-groups', ['user' => $user], key($user->id))
+                                </td>
+                                <td
+                                    class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
+                                    <div class="w-full">
+                                        <div class="flex justify-between font-medium duration-200 ">
+                                            <div class="tooltip tooltip-top p-0" data-tip="Editar">
+                                                <button wire:click="showModalUpdate({{ $user->id }})"
+                                                    class="py-2 px-3
+                                                hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
+                                                duration-200 whitespace-nowrap">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                                        </path>
                                                     </svg>
-                                                    </a>
-                                                </div>
+                                                </button>
+                                            </div>
+                                            <div class="tooltip tooltip-top p-0" data-tip="Apagar">
+                                                <button wire:click="showModalDelete({{ $user->id }})"
+                                                    class="py-2 px-3
+                                                    transition-colors dark:hover:bg-red-500 hover:hover:bg-red-500
+                                                    duration-200 hover:text-white -ml-1">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                                                        stroke="currentColor" stroke-width="2">
+                                                        <path stroke-linecap="round" stroke-linejoin="round"
+                                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                                        </path>
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                            <div class="tooltip tooltip-top p-0" data-tip="Acessos">
+                                                <a href="{{ route('user.access',$user->id) }}"
+                                                    class="py-2 px-3 transition-colors flex
+                                                dark:hover:bg-teal-500 hover:hover:bg-teal-500
+                                                duration-200 hover:text-white -ml-1">
+                                                <svg class="h-6 w-6" viewBox="0 -1.5 20.412 20.412" xmlns="http://www.w3.org/2000/svg">
+                                                    <g id="check-lists" transform="translate(-1.588 -2.588)">
+                                                        <path id="primary" d="M7,4,4.33,7,3,5.5" fill="none" stroke="currentColor"
+                                                            stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                        <path id="primary-2" data-name="primary" d="M3,11.5,4.33,13,7,10" fill="none"
+                                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                        <path id="primary-3" data-name="primary" d="M3,17.5,4.33,19,7,16" fill="none"
+                                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                        <path id="primary-4" data-name="primary" d="M11,6H21M11,12H21M11,18H21" fill="none"
+                                                            stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" />
+                                                    </g>
+                                                </svg>
+                                                </a>
                                             </div>
                                         </div>
-                                    </td>
-                                </tr>
-                                </tr>
+                                    </div>
+                                </td>
+                            </tr>
+                            @endif
+
                             @endforeach
                         </tbody>
                     </table>

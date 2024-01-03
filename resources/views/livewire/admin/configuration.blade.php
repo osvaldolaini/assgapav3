@@ -38,10 +38,10 @@
                         @enderror
                     </div>
                     <div class="col-span-full">
-                        <label for="vp">*Vice presidente</label>
+                        <label for="vp">*Vice-presidente</label>
                         <input
                             class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                            placeholder="Vice presidente" wire:model="vp" required >
+                            placeholder="Vice-presidente" wire:model="vp" required >
                         @error('vp')
                             <span class="error">{{ $message }}</span>
                         @enderror
