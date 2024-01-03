@@ -84,24 +84,26 @@
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </div>
-                        <div class="col-span-6 {{ $multiple == 1 ? 'block' : 'hidden' }}">
-                            <label for="location_hour_start">*Hora início</label>
-                            <input placeholder="Hora início" x-mask="99:99"
-                                class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                                wire:model="location_hour_start" required>
-                            @error('location_hour_start')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                        <div class="col-span-6 {{ $multiple == 1 ? 'block' : 'hidden' }}">
-                            <label for="location_hour_end">*Hora termino</label>
-                            <input
-                                class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                                placeholder="Hora termino" x-mask="99:99" wire:model="location_hour_end" required>
-                            @error('location_hour_end')
-                                <span class="error">{{ $message }}</span>
-                            @enderror
-                        </div>
+                        @if ($multiple == 1)
+                            <div class="col-span-6">
+                                <label for="location_hour_start">*Hora início</label>
+                                <input placeholder="Hora início" x-mask="99:99"
+                                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                                    wire:model="location_hour_start" required>
+                                @error('location_hour_start')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-span-6">
+                                <label for="location_hour_end">*Hora termino</label>
+                                <input
+                                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                                    placeholder="Hora termino" x-mask="99:99" wire:model="location_hour_end" required>
+                                @error('location_hour_end')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
                         @if ($ambience_id)
                             <div class="col-span-12">
                                 <label for="ambience_tenant_id">*Tipo de locatário </label>

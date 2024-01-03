@@ -188,7 +188,7 @@ class LocationNew extends Component
             Installment::create([
                 'active'        => 0,
                 'title'         => 'Sinal',
-                'value'         => $this->location->value,
+                'value'         => $location->value,
                 'location_id'   => $this->id,
                 'created_by'    => Auth::user()->name
             ]);

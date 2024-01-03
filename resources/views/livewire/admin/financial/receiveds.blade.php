@@ -92,7 +92,7 @@
                                                     class="py-1.5 px-4 text-sm uppercase font-normal text-left itens-center text-gray-600 dark:text-gray-400">
                                                     {{ $data->name}}
                                                     @if ($data->partners)
-                                                    <div style="background-color:{{ $data->partners->category->color }};"
+                                                    <div style="background-color:{{ ($data->partners->category ? $data->partners->category->color : '') }};"
                                                         class="badge flex-nowarp gap-2 mx-1 text-xs ">
                                                         {{ $data->partners->category->title}}
                                                     </div>
