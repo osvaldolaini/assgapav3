@@ -39,6 +39,10 @@ class Configuration extends Component
     public $uploadimage;
     public $logo;
 
+    public $president;
+    public $vp;
+    public $financial;
+
     public $rules;
 
     public function mount()
@@ -67,6 +71,11 @@ class Configuration extends Component
         $this->complement       = $this->configs->complement;
 
         $this->logo             = $this->configs->logo_path;
+
+        $this->president        = $this->configs->president;
+        $this->vp               = $this->configs->complement;
+        $this->financial        = $this->configs->financial;
+
     }
     public function render()
     {
@@ -99,6 +108,9 @@ class Configuration extends Component
     {
         $this->rules = [
             'title'         => 'required|min:4|max:255',
+            'president'     => 'required|min:4|max:255',
+            'vp'            => 'required|min:4|max:255',
+            'financial'     => 'required|min:4|max:255',
         ];
 
         $this->validate();
@@ -117,7 +129,7 @@ class Configuration extends Component
             'cellphone'         => $this->cellphone,
             'whatsapp'          => $this->whatsapp,
             'telegram'          => $this->telegram,
-            'cnpj'          => $this->cnpj,
+            'cnpj'              => $this->cnpj,
             'postalCode'        => $this->postalCode,
             'address'           => $this->address,
             'number'            => $this->number,
@@ -125,6 +137,9 @@ class Configuration extends Component
             'city'              => $this->city,
             'state'             => $this->state,
             'complement'        => $this->complement,
+            'president'         => $this->president,
+            'vp'                => $this->vp,
+            'financial'         => $this->financial,
             'updated_by '       => Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');

@@ -9,7 +9,7 @@
         </div>
     </x-breadcrumb>
     <section class="p-6 dark:bg-gray-800 dark:text-gray-50">
-        <form wire:submit.prevent="update()" wire.loading.attr='disable'
+        <form wire:submit.prevent="update()"
             class="container flex flex-col mx-auto space-y-12">
             <fieldset class="grid grid-cols-4 gap-6 p-6 rounded-md dark:bg-gray-900">
                 <div class="space-y-2 col-span-full lg:col-span-1">
@@ -25,6 +25,33 @@
                             placeholder="Nome completo" wire:model="title" required maxlength="100"
                             value="{{ old('title', $title ?? '') }}">
                         @error('title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full">
+                        <label for="president">*Presidente</label>
+                        <input
+                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Presidente" wire:model="president" required >
+                        @error('president')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full">
+                        <label for="vp">*Vice presidente</label>
+                        <input
+                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Vice presidente" wire:model="vp" required >
+                        @error('vp')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full">
+                        <label for="financial">*Financeiro</label>
+                        <input
+                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Financeiro" wire:model="financial" required >
+                        @error('financial')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

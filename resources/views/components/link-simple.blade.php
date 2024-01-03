@@ -7,7 +7,7 @@
                     font-thin uppercase transition-colors duration-200
                     {{ Request::is($active)
                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                                                                                                                                                    dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500'
+                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-800'
                     }}">
                 {{ $slot }}
             </a>

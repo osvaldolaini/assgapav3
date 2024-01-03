@@ -10,7 +10,7 @@
                                 font-thin uppercase transition-colors duration-200
                                 {{ Request::is('*painel*')
                                     ? ' bg-gradient-to-r from-white to-blue-100                                                                                                                                                                                                                                    dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500'
+                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-800'
                                 }}">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 2048 1792"
                             xmlns="http://www.w3.org/2000/svg">
@@ -124,7 +124,7 @@
                                     font-thin uppercase transition-colors duration-200 mb-0
                                     {{ Request::is('*piscinas*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                                 type="button">
                                 <span class="text-left">
                                     <svg class="w-6 h-6" viewBox="0 0 15 15" fill="none">
@@ -194,7 +194,7 @@
                                     font-thin uppercase transition-colors duration-200 mb-0
                                     {{ Request::is('*financeiro*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1920 1920"
@@ -258,7 +258,7 @@
                                         font-thin uppercase transition-colors duration-200 mb-0
                                         {{ Request::is('*cadastros*')
                                             ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                            : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                            : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" xml:space="preserve">
@@ -340,7 +340,7 @@
                                 font-thin uppercase transition-colors duration-200
                                 {{ Request::is('*material*')
                                     ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                    : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" version="1.1"
@@ -396,7 +396,7 @@
                                     font-thin uppercase transition-colors duration-200
                                     {{ Request::is('*emails*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16"
@@ -467,7 +467,7 @@
                                     font-thin uppercase transition-colors duration-200
                                     {{ Request::is('*configurações*')
                                         ? ' bg-gradient-to-r from-white to-blue-100                                                                                                  dark:from-gray-700 dark:to-gray-200 text-blue-500 border-r-4 border-blue-500'
-                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}"
+                                        : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}"
                             type="button">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -562,7 +562,7 @@
                         {{ Request::is('*profile*')
                             ? 'bg-gradient-to-r from-white to-blue-100
                                                                                                                                                                                                                                                                         dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
-                            : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }} sm:hidden">
+                            : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }} sm:hidden">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                     xmlns="http://www.w3.org/2000/svg">
@@ -583,7 +583,7 @@
                             {{ Request::is('profile*')
                                 ? 'bg-gradient-to-r from-white to-blue-100
                                                                                                                                                                                                                                                                                                                     dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
-                                : 'dark:text-gray-200 hover:text-blue-500 text-gray-500' }}
+                                : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}
                             sm:hidden">
                                 <span class="text-left">
                                     <svg class="w-6 h-6 " viewBox="0 0 24 24" fill="none"
