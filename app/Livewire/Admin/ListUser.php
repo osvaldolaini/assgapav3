@@ -129,11 +129,11 @@ class ListUser extends Component
             'user_groups_id'  => 'required',
         ];
 
-        // if ($this->password) {
-        //     $this->rules = [
-        //         'password'  => $this->passwordRules(),
-        //     ];
-        // }
+        if ($this->password) {
+            $this->rules = [
+                'password' => 'required|min:8|confirmed',
+            ];
+        }
 
         $this->validate();
 
