@@ -91,12 +91,17 @@
                                                 <td
                                                     class="py-1.5 px-4 text-sm uppercase font-normal text-left itens-center text-gray-600 dark:text-gray-400">
                                                     {{ $data->name}}
-                                                    @if ($data->partners)
-                                                    <div style="background-color:{{ ($data->partners->category ? $data->partners->category->color : '') }};"
-                                                        class="badge flex-nowarp gap-2 mx-1 text-xs ">
-                                                        {{ $data->partners->category->title}}
-                                                    </div>
-                                                @endif
+                                                    @if ($data->partners->category)
+                                                        <div style="background-color:{{ $data->partners->category->color}};"
+                                                            class="badge flex-nowarp gap-2 mx-1 text-xs ">
+                                                            {{ $data->partners->category->title}}
+                                                        </div>
+                                                    @else
+                                                        <div style="background-color:#666;"
+                                                            class="badge flex-nowarp gap-2 mx-1 text-xs">
+                                                            CATEGORIA NÃO DEFINIDA
+                                                        </div>
+                                                    @endif
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-600 dark:text-gray-400">

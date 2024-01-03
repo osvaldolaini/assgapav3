@@ -170,7 +170,7 @@ class LocationInstallment extends Component
         }
         $received = Received::create([
             'active'        => 1,
-            'title'         => $this->title . 'DO CONTRATO Nº ' . $this->location_id,
+            'title'         => $this->title . ' DO CONTRATO Nº ' . $this->location_id,
             'paid_in'       => $this->installment_maturity_date,
             'value'         => $this->value,
             'form_payment'  => $this->form_payment,
