@@ -43,7 +43,8 @@ class ListUser extends Component
 
     public function mount()
     {
-        $this->groups = UserGroups::get();
+        $this->groups = UserGroups::where('level','>=',Auth::user()->group->level)->get();
+        // dd($this->groups);
     }
     public function render()
     {

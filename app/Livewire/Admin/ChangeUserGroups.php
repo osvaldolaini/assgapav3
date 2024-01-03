@@ -4,6 +4,7 @@ namespace App\Livewire\Admin;
 
 use App\Models\Admin\UserGroups;
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 
 class ChangeUserGroups extends Component
@@ -15,7 +16,7 @@ class ChangeUserGroups extends Component
     public function mount(User $user)
     {
         $this->user = $user;
-        $this->groups = UserGroups::get();
+        $this->groups = UserGroups::where('level','>=',Auth::user()->group->level)->get();
         $this->user_groups_id = $this->user->user_groups_id;
     }
     public function render()

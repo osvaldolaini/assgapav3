@@ -59,7 +59,7 @@
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
                             @foreach ($users as $user)
-                            @if ($user->group->level <= Auth::user()->group->level)
+                            @if (Auth::user()->group->level <= $user->group->level)
                             <tr>
                                 <td
                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
