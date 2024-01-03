@@ -1,6 +1,6 @@
 <div class="grid grid-cols-4 gap-2 w-full">
     @if ($partners)
-        <a href="{{ route('partners') }}" class="col-span-1">
+        <a href="{{ route('partners') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
