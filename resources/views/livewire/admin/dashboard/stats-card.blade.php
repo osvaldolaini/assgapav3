@@ -22,7 +22,7 @@
         </a>
     @endif
     @if ($locations)
-        <a href="{{ route('locations') }}" class="col-span-1">
+        <a href="{{ route('locations') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -54,7 +54,7 @@
         </a>
     @endif
     @if ($partnerLate)
-        <a href="{{ route('partnersLate') }}" class="col-span-1">
+        <a href="{{ route('partnersLate') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -97,7 +97,7 @@
         </a>
     @endif
     @if ($installmentLates)
-        <a href="{{ route('installmentsLate') }}" class="col-span-1">
+        <a href="{{ route('installmentsLate') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -122,7 +122,7 @@
         </a>
     @endif
     @if ($bill)
-        <a href="{{ route('paidMonth') }}" class="col-span-1">
+        <a href="{{ route('paidMonth') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -147,7 +147,7 @@
         </a>
     @endif
     @if ($cashier)
-        <a href="{{ route('cashier') }}" class="col-span-1">
+        <a href="{{ route('cashier') }}" class="col-span-full sm:col-span-1">
             <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
                 <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
                     fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
@@ -189,22 +189,22 @@
         </a>
     @endif
     @if ($dailyreports)
-        <div class="col-span-1">
+        <div class="col-span-full sm:col-span-1">
             @livewire('admin.dashboard.daily-report')
         </div>
     @endif
     @if ($reports)
-        <div class=" col-span-2">
+        <div class="col-span-full sm:col-span-2">
             @livewire('admin.dashboard.reports', ['full'])
         </div>
     @endif
     @if ($reportsTiny)
-        <div class="col-span-2">
+        <div class="col-span-full sm:col-span-2">
             @livewire('admin.dashboard.reports', ['tiny'])
         </div>
     @endif
     @if ($lastReceiveds)
-        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             <div class="flex items-center justify-between p-3">
                 <div class="flex items-center space-x-1">
                     <div class="-space-y-1">
@@ -258,7 +258,7 @@
         </div>
     @endif
     @if ($accessesPool)
-        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             <div class="flex items-center justify-between p-3">
                 <div class="flex items-center space-x-1">
                     <div class="-space-y-1">
@@ -315,19 +315,19 @@
 
     @endif
     @if ($charts)
-        <div class="col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.income-expenses')
         </div>
-        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.spending-by-sector')
         </div>
-        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.revenue-by-sector')
         </div>
-        <div class="row-span-2 col-span-4 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-4 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.location-by-environment')
         </div>
-        <div class="row-span-2 col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
             @livewire('admin.charts.new-partner')
         </div>
     @endif
