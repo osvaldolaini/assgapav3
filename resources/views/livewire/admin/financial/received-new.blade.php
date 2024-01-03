@@ -15,10 +15,10 @@
         <fieldset>
             <form wire:submit="save_out" class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                 <div class="col-span-full">
-                    <label for="creditor">*Fornecedor / colaborador</label>
+                    <label for="partner">*Cliente</label>
                     <div class="grid gap-4 mb-1 grid-cols-1">
                         <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
-                            wire:click="openModalSearch('creditor')" wire:ignore>
+                            wire:click="openModalSearch('partner')" wire:ignore>
                             <label for="Search" class="hidden">Pesquisar </label>
                             <div class="relative w-full">
                                 <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -31,13 +31,13 @@
                                         </svg>
                                     </button>
                                 </span>
-                                <input type="text" readonly placeholder="Pesquisar" wire:model.live="creditor"
+                                <input type="text" readonly placeholder="Pesquisar" wire:model.live="partner"
                                     class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
                                     rounded-2xl  focus:ring-primary-500 dark:bg-gray-700
                                     dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
                                     autofocus />
                             </div>
-                            @error('creditor_id')
+                            @error('partner_id')
                                 <span class="error">{{ $message }}</span>
                             @enderror
                         </fieldset>

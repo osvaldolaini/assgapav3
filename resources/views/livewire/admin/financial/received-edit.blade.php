@@ -15,7 +15,7 @@
         <fieldset>
             <form wire:submit="save_out" class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                 <div class="col-span-full">
-                    <label for="partner">*Fornecedor / colaborador</label>
+                    <label for="partner">*Cliente</label>
                     <div class="grid gap-4 mb-1 grid-cols-1">
                         <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
                             wire:click="openModalSearch('partner')" wire:ignore>
