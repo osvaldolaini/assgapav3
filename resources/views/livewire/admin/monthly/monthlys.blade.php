@@ -1,5 +1,4 @@
 <div class="w-100">
-
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
@@ -29,5 +28,6 @@
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg ">
         @livewire('admin.monthly.monthly-unpaid', ['partner' => $partner])
         @livewire('admin.monthly.monthly-paid', ['partner' => $partner])
+        @livewire('admin.monthly.monthly-released', ['partner' => $partner])
     </div>
 </div>

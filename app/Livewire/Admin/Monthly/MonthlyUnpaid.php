@@ -146,7 +146,7 @@ class MonthlyUnpaid extends Component
         ]);
         $this->resetAll();
         $this->showModalEdit = false;
-
+        $this->dispatch('checkoutReturn');
         $this->openAlert('success', 'Registro atualizado com sucesso.');
     }
     public function checkout()
@@ -205,6 +205,7 @@ class MonthlyUnpaid extends Component
         $this->resetAll();
         $this->showModalPay = false;
         $this->openAlert('success', 'Registro atualizado com sucesso.');
+        $this->dispatch('checkoutReturn');
         redirect()->route('receiveds');
     }
 
