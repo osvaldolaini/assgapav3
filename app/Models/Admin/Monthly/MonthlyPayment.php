@@ -84,6 +84,7 @@ class MonthlyPayment extends Model
                 break;
         }
     }
+
     public function getMonthlyRefAttribute()
     {
         $today = Carbon::parse($this->ref)->locale('pt-BR');

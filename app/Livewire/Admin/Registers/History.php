@@ -36,18 +36,25 @@ class History extends Component
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $location->location_date,
+                    'realDate'      => implode("-",array_reverse(explode("/",$location->location_date))),
                     'link'          => route('edit-location', $location->id)
                 ];
             }
         }
-        if ($partner->monthlys->where('active', 1)) {
+        if ($partner->monthlys->where('status','!=', 0)) {
             foreach ($partner->monthlys as $monthly) {
+                if ($monthly->status == 1) {
+                    $text = 'Pagamento da mendalidade de: ' . $monthly->monthlyRef;
+                }else{
+                    $text = 'Liberação da mendalidade de: ' . $monthly->monthlyRef;
+                }
                 $this->dataTable[] = [
-                    'description'   => 'Mendalidade de: ' . $monthly->monthlyRef,
+                    'description'   => $text,
                     'type'          => 'Mensalidades',
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $monthly->paid_in,
+                    'realDate'      => implode("-",array_reverse(explode("/",$monthly->paid_in))),
                     'link'          => route('monthlys', $monthly->partner_id)
                 ];
             }
@@ -60,6 +67,7 @@ class History extends Component
                     'received'      => $received->id,
                     'bill'          => '',
                     'date'          => $received->paid_in,
+                    'realDate'      => implode("-",array_reverse(explode("/",$received->paid_in))),
                     'link'          => ''
                 ];
             }
@@ -72,12 +80,13 @@ class History extends Component
                     'received'      => '',
                     'bill'          => $bill->id,
                     'date'          => $bill->paid_in,
+                    'realDate'      => implode("-",array_reverse(explode("/",$bill->paid_in))),
                     'link'          => ''
                 ];
             }
         }
-        $this->export = collect($this->dataTable)->sortByDesc('date');
-        $this->dataTable = json_encode(collect($this->dataTable)->sortByDesc('date'));
+        $this->export = collect($this->dataTable)->sortByDesc('realDate');
+        $this->dataTable = json_encode(collect($this->dataTable)->sortByDesc('realDate'));
     }
     public function render()
     {
