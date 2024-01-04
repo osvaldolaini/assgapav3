@@ -292,7 +292,7 @@
                 <table class="table-signature">
                     <tr>
                         <td style="text-align:left;">Canoas, {{ $today }}.</td>
-                        <td style="border-top: solid thin #000;">{{ $responsible }}></td>
+                        <td style="border-top: solid thin #000;">{{ $responsible }}</td>
                     </tr>
                     <tr>
                         <td></td>
