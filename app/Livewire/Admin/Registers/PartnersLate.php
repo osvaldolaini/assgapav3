@@ -2,10 +2,15 @@
 
 namespace App\Livewire\Admin\Registers;
 
+use App\Exports\AllExports;
+use App\Models\Admin\Configs;
 use App\Models\Admin\Configs\PartnerCategory;
 use App\Models\Admin\Registers\Partner;
+use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
+use Mpdf\Mpdf;
+use Maatwebsite\Excel\Facades\Excel;
 
 class PartnersLate extends Component
 {
@@ -45,6 +50,66 @@ class PartnersLate extends Component
             'dataTable' => $this->getData(),
         ]);
     }
+    //EXPORT
+    public function printExport()
+    {
+        $title = $this->breadcrumb_title;
+        $config = Configs::find(1);
+        $today = Carbon::parse(now())->locale('pt-BR');
+        $today = $today->translatedFormat('d F Y');
+        $body = array();
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        foreach ($this->getData() as $item) {
+            $body[] = [
+                'name' => $item->name,
+                'category' => $item->category,
+            ];
+        }
+        $html = view(
+            'livewire.admin.exports.pdf',
+            [
+                'title_postfix' => 'Relatório financeiro',
+                'subtext'       => $title,
+                'today'         => $today,
+                'responsible'   => Auth::user()->name,
+                'config'        => $config,
+                'heads'         => array('Sócio', 'Categoria'),
+                'body'          => $body,
+            ]
+        )->render();
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            'margin_left'   => 10,
+            'margin_right'  => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/exportar-em-pdf.pdf');
+        $pdfPath = url('storage/livewire-tmp/exportar-em-pdf.pdf');
+        $mpdf->Output($down, 'F');
+        $this->dispatch('openPdfExports', pdfPath: $pdfPath);
+        $this->paginate = 15;
+    }
+    public function excelExport()
+    {
+        $this->paginate = 'single';
+        $this->paginate = $this->getData()->count();
+        $data[] =  array('Sócio', 'Categoria');
+        foreach ($this->getData() as $item) {
+            $data[] = [
+                'name' => $item->name,
+                'category' => $item->category,
+            ];
+        }
+        $this->paginate = 15;
+        return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
+    }
+    //END EXPORT
 
     //READ
     public function showModalRead($id)
@@ -152,10 +217,11 @@ class PartnersLate extends Component
             $this->search($query);
         }
 
-        // dd($query->paginate($this->paginate));
-        // $query->take(3);
-        // return $query->simplePaginate($this->paginate);
-        return $query->paginate($this->paginate);
+        if ($this->paginate == 'single') {
+            return $query;
+        } else {
+            return $query->paginate($this->paginate);
+        }
     }
     #PRICIPAL FUNCTIONS
         public function search($query)
