@@ -8,6 +8,7 @@ use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Attributes\On;
 use Livewire\Component;
+use PhpParser\Node\Stmt\Else_;
 
 class MonthlyUnpaid extends Component
 {
@@ -128,6 +129,7 @@ class MonthlyUnpaid extends Component
         $this->value = $m->value;
         $this->label = $m->monthlyRef;
         $this->status = $m->status;
+        $this->paid_in = $m->paid_in;
         $this->showModalEdit = true;
     }
     public function update()
@@ -136,6 +138,9 @@ class MonthlyUnpaid extends Component
             'value' => 'required',
         ];
 
+        if ($this->status == 2) {
+            $this->paid_in =  date('d/m/Y');
+        }
         $this->validate();
         MonthlyPayment::updateOrCreate([
             'id' => $this->monthly_id,
@@ -143,7 +148,9 @@ class MonthlyUnpaid extends Component
             'updated_by' => Auth::user()->name,
             'value' => $this->value,
             'status' => $this->status,
+            'paid_in' => $this->paid_in,
         ]);
+
         $this->resetAll();
         $this->showModalEdit = false;
         $this->dispatch('checkoutReturn');
