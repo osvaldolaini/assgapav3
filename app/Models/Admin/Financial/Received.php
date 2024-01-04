@@ -92,6 +92,17 @@ class Received extends Model
         }
         return $payment;
     }
+    public function getPaymentCategoryAttribute()
+    {
+        switch ($this->form_payment) {
+            case "DIN": $background= 'background-color:#fff';   break;
+            case "PIX": $background= 'background-color:#ffa';   break;
+            case "BOL": $background= 'background-color:#aff';   break;
+            case "CAR": $background= 'background-color:#aaf';   break;
+            default:    $background= 'background-color:#fff';   break;
+        }
+        return $background;
+    }
 
     public function getActivitylogOptions(): LogOptions
     {

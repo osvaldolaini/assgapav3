@@ -84,6 +84,7 @@ class DailyReport extends Component
                     'exit'          => '',
                     'form_payment'  => $received->form_payment,
                     'payment'       => $received->payment,
+                    'paymentCategory' => $received->paymentCategory,
                 ];
             }
         }

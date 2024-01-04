@@ -184,7 +184,7 @@
                     <tbody>
 
                         @foreach ($receiveds as $received)
-                            <tr style="{{ $received['payment'] }}">
+                            <tr style="{{ $received['paymentCategory'] }}">
                                 <td>{{ $received['item'] }}</td>
                                 <td>{{ $received['tenant'] }}</td>
                                 <td style="text-align: justify;">
