@@ -139,7 +139,7 @@ class DependentNew extends Component
             'date_of_birth'     => 'required',
             'registration_at'   => 'required',
             'phone_first'       => 'required',
-            'cpf' => 'required|unique:partners|min:11',
+            'cpf'               => 'required|unique:partners|min:11',
         ];
 
         $this->validate();
