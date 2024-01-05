@@ -8,7 +8,7 @@
                 <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
             </div>
             <div class="stat ">
-                <div class="max-w-xs px-6 rounded-lg">
+                <div class="max-w-xs px-6 rounded-lg items-center justify-center">
                     <img class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500"
                         src="{{ url('storage/partners/' . $partner->image) }}">
                 </div>
