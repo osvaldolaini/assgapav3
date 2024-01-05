@@ -134,10 +134,11 @@
                     <input type="email"
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="E-mail" wire:model="email" value="{{ old('email', $email ?? '') }}">
-                </div>
-                @error('email')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+                        @error('email')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                    </div>
+
                 <div class="col-span-full sm:col-span-2">
                     <label for="send_email_barthday" class="text-sm">Enviar email</label>
                     <Select wire:model="send_email_barthday"
