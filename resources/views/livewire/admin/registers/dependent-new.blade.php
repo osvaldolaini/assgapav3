@@ -88,7 +88,6 @@
                     <Select wire:model.live="pf_pj" required
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value="pf">Pessoa física</option>
-                        <option value="pj">Pessoa jurídica</option>
                     </Select>
                     @error('pf_pj')
                         <span class="error">{{ $message }}</span>
@@ -100,13 +99,9 @@
                     <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         wire:model="cpf">
-                </div>
-
-                <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pj' ? 'block' : 'hidden' }}">
-                    <label class="text-sm" for="cnpj">*CNPJ</label>
-                    <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        wire:model="cnpj">
+                        @error('cpf')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 {{-- <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="rg">RG</label>
