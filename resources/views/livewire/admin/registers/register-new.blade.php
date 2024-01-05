@@ -37,6 +37,9 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value="Dependente">Dependente</option>
                     </Select>
+                    @error('partner_category_master')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label for="partner_category" class="text-sm">*Categoria sócio</label>
@@ -49,6 +52,9 @@
                             </option>
                         @endforeach
                     </Select>
+                    @error('partner_category')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="discount">Desconto de folha</label>
@@ -57,6 +63,9 @@
                         <option value="1">Sim</option>
                         <option value="0">Não</option>
                     </Select>
+                    @error('discount')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 @if ($partner_category_master == 'Dependente')
                     <div class="col-span-full sm:col-span-6">
@@ -81,6 +90,9 @@
                         <option value="pf">Pessoa física</option>
                         <option value="pj">Pessoa jurídica</option>
                     </Select>
+                    @error('pf_pj')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
 
                 <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pf' ? 'block' : 'hidden' }}">
@@ -101,14 +113,21 @@
                 <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     maxlength="10" placeholder="RG" wire:model="rg">
             </div> --}}
-            <div class="col-span-full sm:col-span-2">
-                <label class="text-sm" for="saram">SARAM</label>
-                <input x-mask="999999-9" placeholder="000000-0" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                    maxlength="8" placeholder="saram" wire:model="saram">
-            </div>
+                <div class="col-span-full sm:col-span-2">
+                    <label class="text-sm" for="saram">SARAM</label>
+                    <input x-mask="999999-9" placeholder="000000-0"
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        maxlength="8" placeholder="saram" wire:model="saram">
+                    @error('saram')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
+                </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
                     <x-datepicker id='registration_at' :required="false"></x-datepicker>
+                    @error('registration_at')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="email">E-mail</label>
@@ -116,6 +135,9 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="E-mail" wire:model="email" value="{{ old('email', $email ?? '') }}">
                 </div>
+                @error('email')
+                    <span class="error">{{ $message }}</span>
+                @enderror
                 <div class="col-span-full sm:col-span-2">
                     <label for="send_email_barthday" class="text-sm">Enviar email</label>
                     <Select wire:model="send_email_barthday"
@@ -123,12 +145,18 @@
                         <option value="0">Não</option>
                         <option value="1">Sim</option>
                     </Select>
+                    @error('send_email_barthday')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="phone_first">*Contato primário</label>
                     <input x-mask="(99) 9 9999-9999" type="text"
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="(99) 9 9999-9999" wire:model="phone_first">
+                    @error('phone_first')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="phone_second">Contato secundário</label>
@@ -140,6 +168,9 @@
                 <div class="col-span-full sm:col-span-2">
                     <label for="validity_of_card" class="text-sm">Val Carteirinha</label>
                     <x-datepicker id='validity_of_card' :required="false"></x-datepicker>
+                    @error('validity_of_card')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="access_pool" class="text-sm">Prazo piscinas</label>
