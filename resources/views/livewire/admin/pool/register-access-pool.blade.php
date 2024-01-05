@@ -2,7 +2,7 @@
     @if ($status == '')
         <div class="shadow h-screen w-full text-center py-6">
             <div class="stat-title flex justify-center p-0">
-                <img class="w-15 h-15 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
+                <img class="w-12 h-12 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
             </div>
             <div class="stat-value py-0">
                 <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
