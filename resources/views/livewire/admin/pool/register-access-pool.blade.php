@@ -2,7 +2,7 @@
     @if ($status == '')
         <div class="shadow h-screen w-full text-center py-6">
             <div class="stat-title flex justify-center p-0">
-                <img class="w-20 h-20 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
+                <img class="w-15 h-15 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
             </div>
             <div class="stat-value py-0">
                 <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
@@ -12,25 +12,25 @@
                     <img class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500"
                         src="{{ url('storage/partners/' . $partner->image) }}">
                 </div>
-                <div class="mt-4 mb-2">
+                <div class="mt-2 mb-2">
                     <h1 class="text-4xl font-bold">Dados do associado</h1>
-                    <div class="mt-4 ">
-                        <p class="flex items-center text-md p-1">
+                    <div class="mt-2 ">
+                        <p class="flex items-center text-xs p-1">
                             Associado:
                             <span class="font-bold px-2">{{ $partner->name }}</span>
                         </p>
-                        <p class="flex items-center text-md p-1">
+                        <p class="flex items-center text-xs p-1">
                             Contato:
                             <span class="font-bold px-2">{{ $partner->phone_first }}</span>
                         </p>
                         @if ($partner->partner_category_master == 'Dependente')
-                            <p class="flex items-center text-md">
+                            <p class="flex items-center text-xs">
                                 Responsável:
                                 <span class="font-bold px-2">{{ $partner->parent->name }}</span>
                             </p>
                         @endif
                         <p
-                            class="flex items-center text-md {{ date('Y-m-d') > $access_pool ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
+                            class="flex items-center text-xs {{ date('Y-m-d') > $access_pool ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
                             Validade piscina:
                             <span class="font-bold px-2">{{ $partner->access_pool }}</span>
                         </p>
