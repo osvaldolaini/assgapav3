@@ -45,7 +45,7 @@
                             </div>
                         </div>
                     @else
-                    <div class="bg-green-500 text-white py-2 px-1 rounded-md">
+                    <div class="bg-green-500 text-white py-2 px-1 rounded-md mb-3">
                         <div class="text-center">
                             <label for="obs">Acesso autorizado</label>
                         </div>

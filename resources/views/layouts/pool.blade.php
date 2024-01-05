@@ -23,7 +23,6 @@
 
 <body class="font-sans antialiased">
     <div class="mockup-phone h-screen w-full">
-        <div class="camera"></div>
         <div class="display ">
             {{ $slot }}
         </div>
