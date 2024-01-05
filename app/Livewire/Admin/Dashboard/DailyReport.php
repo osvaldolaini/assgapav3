@@ -35,13 +35,15 @@ class DailyReport extends Component
         $cashiers = Cashier::where('active',1)->where('status',1)->get();
         $oldCashiers=0;$dayCashiers=0;
         foreach ($cashiers  as $cashier ) {
-            if(strtotime($cashier->paid_in) < strtotime($d)){
+            $c_paid_in=implode("-",array_reverse(explode("/",$cashier->paid_in)));
+            if(strtotime($c_paid_in) < strtotime($d)){
                 /*Recolhimentos de caixa anteriores ao dia solicitado*/
                 $oldCashiers += $cashier->convert_value($cashier->value);
-            }elseif(strtotime($cashier->paid_in) == strtotime($d)){
+            }elseif(strtotime($c_paid_in) == strtotime($d)){
                 $dayCashiers += $cashier->convert_value($cashier->value);
             }
         }
+
 
         $itens=0;
         /*Entradas */
@@ -138,6 +140,7 @@ class DailyReport extends Component
 
         $today = Carbon::parse(now())->locale('pt-BR');
         // Renderize a view do Livewire
+
         $html = view('livewire.admin.reports.daily',
         [
             'title_postfix' => 'Relatório diário',

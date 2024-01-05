@@ -1,5 +1,4 @@
-<div class="artboard artboard-demo  w-full bg-white ">
-
+<div class="w-full bg-white ">
     @if ($status == '')
         <div class="shadow h-screen w-full text-center py-6">
             <div class="stat-title flex justify-center p-0">
