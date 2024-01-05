@@ -45,6 +45,11 @@
                             </div>
                         </div>
                     @else
+                    <div class="bg-green-500 text-white py-2 px-1 rounded-md">
+                        <div class="text-center">
+                            <label for="obs">Acesso autorizado</label>
+                        </div>
+                    </div>
                         <div wire:click="registerAccessPool()"
                             class="inline-flex items-center divide-x rounded bg-blue-500 text-white divide-gray-300">
                             <button type="button" class="px-8 py-3">Registrar</button>
