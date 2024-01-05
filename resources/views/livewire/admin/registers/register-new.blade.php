@@ -32,11 +32,9 @@
                     <x-datepicker id='date_of_birth' :required="true"></x-datepicker>
                 </div>
                 <div class="col-span-full sm:col-span-2">
-                    <label for="partner_category_master" class="text-sm">Sócio?</label>
+                    <label for="partner_category_master" class="text-sm">Categoria master</label>
                     <Select wire:model.live="partner_category_master" required
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="Sócio">Sim</option>
-                        <option value="Não sócio">Não</option>
                         <option value="Dependente">Dependente</option>
                     </Select>
                 </div>
@@ -111,7 +109,6 @@
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
                     <x-datepicker id='registration_at' :required="false"></x-datepicker>
-
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="email">E-mail</label>

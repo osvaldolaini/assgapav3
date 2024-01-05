@@ -25,6 +25,7 @@ class DependentNew extends Component
     public $cpf;
     public $cnpj;
     public $rg;
+    public $saram;
     public $phone_first;
     public $phone_second;
     public $address;
@@ -171,6 +172,7 @@ class DependentNew extends Component
             'cpf'                   =>$this->cpf,
             'cnpj'                  =>$this->cnpj,
             'rg'                    =>$this->rg,
+            'saram'                 => $this->saram,
             'phone_first'           =>$this->phone_first,
             'phone_second'          =>$this->phone_second,
             'address'               =>$this->address,
