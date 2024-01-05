@@ -22,10 +22,8 @@
 </head>
 
 <body class="font-sans antialiased">
-    <div class="mockup-phone h-screen w-full">
-        <div class="display ">
-            {{ $slot }}
-        </div>
+    <div class="h-screen w-full">
+        {{ $slot }}
     </div>
 
 
