@@ -129,7 +129,7 @@ class PartnerNew extends Component
     public function save_out()
     {
         $this->rules = [
-            'name'              => 'required|unique:partners',
+            'name'              => 'required',
             'email'             => 'email',
             'date_of_birth'     => 'required|date_format:d/m/Y',
             'registration_at'   => 'required|date_format:d/m/Y',

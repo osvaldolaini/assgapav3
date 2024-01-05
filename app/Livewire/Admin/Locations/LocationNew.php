@@ -189,7 +189,7 @@ class LocationNew extends Component
                 'active'        => 0,
                 'title'         => 'Sinal',
                 'value'         => $location->value,
-                'location_id'   => $this->id,
+                'location_id'   => $location->id,
                 'created_by'    => Auth::user()->name
             ]);
         }

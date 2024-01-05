@@ -134,25 +134,15 @@ class DependentNew extends Component
     public function save_out()
     {
         $this->rules = [
-            'name'              => 'required|unique:partners',
+            'name'              => 'required',
             'email'             => 'email',
-            'date_of_birth'     => 'required|date_format:d/m/Y',
-            'registration_at'   => 'required|date_format:d/m/Y',
-            'validity_of_card'  => 'date_format:d/m/Y',
-            'grace_period'      => 'date_format:d/m/Y',
+            'date_of_birth'     => 'required',
+            'registration_at'   => 'required',
             'phone_first'       => 'required',
+            'cpf' => 'required|unique:partners|min:11',
         ];
 
-        if ($this->pf_pj == 'pf') {
-            $this->rules = [
-                'cpf' => 'required|unique:partners|min:11',
-            ];
-
-        }else{
-            $this->rules = [
-                'cnpj' => 'required|unique:partners|min:14',
-            ];
-        }
+        $this->validate();
 
         if ($this->newImg) {
             $this->image = $this->newImg;
@@ -164,7 +154,7 @@ class DependentNew extends Component
             'active'                =>1,
             'name'                  =>$this->name,
             'responsible'           =>$this->responsible,
-            'kinship'               =>'PRÓPRIO',
+            'kinship'               =>$this->kinship,
             'image'                 =>$this->image,
             'date_of_birth'         =>$this->date_of_birth,
             'obs'                   =>$this->obs,
@@ -172,7 +162,7 @@ class DependentNew extends Component
             'cpf'                   =>$this->cpf,
             'cnpj'                  =>$this->cnpj,
             'rg'                    =>$this->rg,
-            'saram'                 => $this->saram,
+            'saram'                 =>$this->saram,
             'phone_first'           =>$this->phone_first,
             'phone_second'          =>$this->phone_second,
             'address'               =>$this->address,
@@ -198,7 +188,7 @@ class DependentNew extends Component
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
-        redirect()->route('partners');
+        redirect()->route('dependent', $this->responsible);
     }
 
     //MESSAGE
