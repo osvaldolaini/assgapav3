@@ -128,7 +128,7 @@ class DependentNew extends Component
 
         $this->category = PartnerCategory::select('id','title')->orderBy('title','asc')
         ->where('active',1)->where('parent_category',$this->partner_category_master)->get();
-        return view('livewire.admin.registers.register-new');
+        return view('livewire.admin.registers.dependent-new');
     }
 
     public function save_out()
