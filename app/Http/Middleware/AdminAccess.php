@@ -16,7 +16,7 @@ class AdminAccess
      */
     public function handle(Request $request, Closure $next): Response
     {
-        if (Auth::user()->group->level >= 10) {
+        if (Auth::user()->group->level > 10) {
             return redirect()->route('dashboard');
         }
 
