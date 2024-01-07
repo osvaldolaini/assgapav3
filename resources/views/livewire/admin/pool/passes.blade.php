@@ -314,11 +314,36 @@
     </x-dialog-modal>
     {{-- MODAL UPDATE --}}
     <x-dialog-modal wire:model="showModalEdit">
-        <x-slot name="title">Editar</x-slot>
+        <x-slot name="title">Editar: {{ $title }}
+            <div class="badge bg-red-400 gap-1 py-1 text-white cursor-pointer"
+                wire:click='clean()'>
+                <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 32 32" xml:space="preserve">
+                    <style type="text/css">
+                        .st0 {
+                            fill: none;
+                            stroke: #FFFFFF;
+                            stroke-width: 2;
+                            stroke-linecap: round;
+                            stroke-linejoin: round;
+                            stroke-miterlimit: 10;
+                        }
+                    </style>
+                    <g>
+                        <path d="M18,14h-4c-0.6,0-1-0.4-1-1V3c0-1.7,1.3-3,3-3s3,1.3,3,3v10C19,13.6,18.6,14,18,14z" />
+                    </g>
+                    <g>
+                        <path d="M24.7,20l-0.3-1.6C24,17,22.8,16,21.4,16H10.6c-1.4,0-2.6,1-2.9,2.4L7.3,20H24.7z" />
+                        <path d="M6.9,22L5,30.8c-0.1,0.3,0,0.6,0.2,0.8C5.4,31.9,5.7,32,6,32h4v-5c0-0.6,0.4-1,1-1s1,0.4,1,1v5h8v-3c0-0.6,0.4-1,1-1
+                        s1,0.4,1,1v3h4c0.3,0,0.6-0.1,0.8-0.4c0.2-0.2,0.3-0.5,0.2-0.8L25.1,22H6.9z" />
+                    </g>
+                </svg>
+                Limpar
+            </div>
+        </x-slot>
         <x-slot name="content">
             <form wire:submit="update">
-                <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-                    <div class="col-span-2 ">
+                <div class="grid grid-cols-6 gap-2 mb-3">
+                    {{-- <div class="col-span-2 ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Título</label>
                         <input type="text" wire:model="title" placeholder="Título" required
@@ -326,10 +351,19 @@
                         @error('title')
                             <span class="error">{{ $message }}</span>
                         @enderror
+                    </div> --}}
+                    <div class="col-span-full sm:col-span-4">
+                        <label for="partner" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            Cliente</label>
+                        <input type="text" wire:model="partner" placeholder="Cliente" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('partner')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
-
-                    <div class="col-span-full sm:col-span-1">
-                        <label for="validity_of_card">Validade</label>
+                    <div class="col-span-full sm:col-span-2">
+                        <label for="validity_of_card"
+                            class="block text-sm font-medium text-gray-900 dark:text-white">Validade</label>
                         <div class="flex">
                             <input type="text" wire:model.lazy="validity_of_card" required x-mask="99/99/9999"
                                 placeholder="99/99/9999"
@@ -347,7 +381,18 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-full sm:col-span-1">
+                    <div class="col-span-6 ">
+                        <label for="obs" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            Observação</label>
+                        <input type="text" wire:model="obs" placeholder="Observação" required
+                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                        @error('obs')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+
+                    {{-- <div class="col-span-full sm:col-span-1">
                         <label for="validity">*Período</label>
                         <select wire:model="validity"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
@@ -395,7 +440,7 @@
                         @error('color')
                             <span class="error">{{ $message }}</span>
                         @enderror
-                    </div>
+                    </div> --}}
 
                 </div>
 

@@ -39,12 +39,15 @@
                 <input class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     placeholder="Nome completo" wire:model="name" required maxlength="100">
                 @error('name')
-                    <span class="error">{{ $message }}</span>
+                    <span class="error text-red-500">{{ $message }}</span>
                 @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="date_of_birth" class="text-sm">*Data nascimento </label>
                 <x-datepicker id='date_of_birth' :required="true"></x-datepicker>
+                @error('date_of_birth')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="partner_category_master" class="text-sm">Sócio?</label>
@@ -54,6 +57,9 @@
                     <option value="Não sócio">Não</option>
                     <option value="Dependente">Dependente</option>
                 </Select>
+                @error('partner_category_master')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-4">
                 <label for="partner_category" class="text-sm">*Categoria sócio</label>
@@ -66,6 +72,9 @@
                         </option>
                     @endforeach
                 </Select>
+                @error('partner_category')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="discount">Desconto de folha</label>
@@ -86,7 +95,7 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Parentesco" wire:model="kinship" required maxlength="100">
                     @error('kinship')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
@@ -106,12 +115,18 @@
                     <option value="pf">Pessoa física</option>
                     <option value="pj">Pessoa jurídica</option>
                 </Select>
+                @error('pf_pj')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pf' ? 'block' : 'hidden' }}">
                 <label class="text-sm" for="cpf">*CPF</label>
                 <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     wire:model="cpf">
+                @error('cpf')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
 
             <div class="col-span-full sm:col-span-4 {{ $pf_pj == 'pj' ? 'block' : 'hidden' }}">
@@ -119,6 +134,9 @@
                 <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     wire:model="cnpj">
+                @error('cnpj')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             {{-- <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="rg">RG</label>
@@ -127,12 +145,16 @@
             </div> --}}
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="saram">SARAM</label>
-                <input x-mask="999999-9" placeholder="000000-0" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                <input x-mask="999999-9" placeholder="000000-0"
+                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     maxlength="8" placeholder="saram" wire:model="saram">
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="registration_at" class="text-sm">*Data cadastro</label>
                 <x-datepicker id='registration_at' :required="false"></x-datepicker>
+                @error('registration_at')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
 
             </div>
             <div class="col-span-full sm:col-span-4">
@@ -140,6 +162,9 @@
                 <input type="email"
                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     placeholder="E-mail" wire:model="email" value="{{ old('email', $email ?? '') }}">
+                @error('email')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="send_email_barthday" class="text-sm">Enviar email</label>
@@ -154,6 +179,9 @@
                 <input x-mask="(99) 9 9999-9999" type="text"
                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                     placeholder="(99) 9 9999-9999" wire:model="phone_first">
+                @error('phone_first')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-4">
                 <label class="text-sm" for="phone_second">Contato secundário</label>
@@ -165,18 +193,30 @@
             <div class="col-span-full sm:col-span-2">
                 <label for="validity_of_card" class="text-sm">Val Carteirinha</label>
                 <x-datepicker id='validity_of_card' :required="false"></x-datepicker>
+                @error('validity_of_card')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="access_pool" class="text-sm">Prazo piscinas</label>
                 <x-datepicker id='access_pool' :required="false"></x-datepicker>
+                @error('access_pool')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="print_date" class="text-sm">Data impressão</label>
                 <x-datepicker id='print_date' :required="false"></x-datepicker>
+                @error('print_date')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label for="grace_period" class="text-sm">Carência</label>
                 <x-datepicker id='grace_period' :required="false"></x-datepicker>
+                @error('grace_period')
+                    <span class="error text-red-500">{{ $message }}</span>
+                @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="postalCode">CEP</label>
@@ -216,7 +256,8 @@
             </div>
             <div class="col-span-full">
                 <label class="text-sm" for="obs">Observações</label>
-                <textarea wire:model="obs" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" rows="5"></textarea>
+                <textarea wire:model="obs"
+                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900" rows="5"></textarea>
             </div>
         </form>
         <div class="col-span-full">
@@ -263,16 +304,16 @@
                                                     <div class="avatar">
                                                         <div class="mask mask-squircle w-12 h-12">
                                                             @if ($partner->imageTitle)
-                                                            <picture>
-                                                                <source
-                                                                srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
-                                                                <img src="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}"
-                                                                    alt="{{ $partner->name }}">
-                                                            </picture>
+                                                                <picture>
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.webp') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $partner->imageTitle . '.png') }}" />
+                                                                    <img src="{{ url('storage/partners/' . $partner->imageTitle . '.jpg') }}"
+                                                                        alt="{{ $partner->name }}">
+                                                                </picture>
                                                             @else
                                                                 <picture>
                                                                     <source

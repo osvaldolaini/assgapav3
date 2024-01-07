@@ -17,7 +17,9 @@ class Pass extends Model
     protected $table = 'passes';
 
     protected $fillable = [
-        'title','slug','category','active','validity','color','validity_of_card','updated_by','created_by',
+        'title','slug','category','active','validity','color',
+        'partner','obs',
+        'validity_of_card','updated_by','created_by',
     ];
 
     public function setTitleAttribute($value)

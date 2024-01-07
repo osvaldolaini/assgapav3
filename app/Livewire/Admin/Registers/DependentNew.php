@@ -142,6 +142,7 @@ class DependentNew extends Component
             'cpf'               => 'required|unique:partners|min:11',
         ];
 
+
         $this->validate();
 
         if ($this->newImg) {

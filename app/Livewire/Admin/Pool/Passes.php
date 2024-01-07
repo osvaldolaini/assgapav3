@@ -45,6 +45,8 @@ class Passes extends Component
     public $category = 'Diário';
     public $validity = 0;
     public $color;
+    public $partner;
+    public $obs;
     public $validity_of_card;
 
 
@@ -53,6 +55,17 @@ class Passes extends Component
         return view('livewire.admin.pool.passes', [
             'dataTable' => $this->getData(),
         ]);
+    }
+    public function clean()
+    {
+        Pass::updateOrCreate([
+            'id' => $this->model_id,
+        ], [
+            'partner'   => null,
+            'obs'       => null,
+        ]);
+        $this->partner = null;
+        $this->obs = null;
     }
     public function printCards(Pass $pass)
     {
@@ -186,6 +199,8 @@ class Passes extends Component
         if (isset($id)) {
             $data = Pass::where('id', $id)->first();
             $this->detail = [
+                'Cliente'           => $data->partner,
+                'Observação'        => $data->obs,
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
                 'Atualizada'        => $data->updated,
@@ -203,6 +218,8 @@ class Passes extends Component
 
         $this->model_id = $pass->id;
         $this->title = $pass->title;
+        $this->partner = $pass->partner;
+        $this->obs = $pass->obs;
         $this->category = $pass->category;
         $this->validity = $pass->validity;
         $this->color = $pass->color;
@@ -212,10 +229,10 @@ class Passes extends Component
     public function update()
     {
         $this->rules = [
-            'title' => 'required',
-            'category' => 'required',
-            'validity' => 'required',
-            'color' => 'required',
+            // 'title' => 'required',
+            // 'category' => 'required',
+            // 'validity' => 'required',
+            // 'color' => 'required',
             'validity_of_card' => 'required|date_format:d/m/Y',
         ];
 
@@ -224,10 +241,12 @@ class Passes extends Component
         Pass::updateOrCreate([
             'id' => $this->model_id,
         ], [
-            'title' => $this->title,
-            'category' => $this->category,
-            'validity' => $this->validity,
-            'color' => $this->color,
+            // 'title'     => $this->title,
+            'partner'   => $this->partner,
+            'obs'       => $this->obs,
+            // 'category'  => $this->category,
+            // 'validity'  => $this->validity,
+            // 'color'     => $this->color,
             'validity_of_card' => $this->validity_of_card,
             'updated_by' => Auth::user()->name,
         ]);

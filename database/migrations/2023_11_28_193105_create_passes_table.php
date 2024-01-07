@@ -16,6 +16,8 @@ class CreatePassesTable extends Migration
         Schema::create('passes', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->string('partner')->nullable();
+            $table->string('obs')->nullable();
             $table->string('slug')->nullable();
             $table->string('category')->nullable();
             $table->boolean('active')->nullable();

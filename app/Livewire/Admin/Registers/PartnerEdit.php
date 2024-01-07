@@ -198,19 +198,13 @@ class PartnerEdit extends Component
         ];
 
         if ($this->pf_pj == 'pf') {
-            $this->rules = [
-                'cpf' => 'required|min:11',
-            ];
+            $this->rules['cpf'] = 'required|min:11';
         } else {
-            $this->rules = [
-                'cnpj' => 'required|min:14',
-            ];
+            $this->rules['cnpj'] = 'required|min:11';
         }
         if ($this->partner_category_master == 'Dependente') {
-            $this->rules = [
-                'kinship' => 'required',
-                'responsible'=>'required'
-            ];
+            $this->rules['kinship'] = 'required';
+            $this->rules['responsible'] = 'required';
         }
 
         $this->validate();

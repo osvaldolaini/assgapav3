@@ -139,14 +139,11 @@ class PartnerNew extends Component
         ];
 
         if ($this->pf_pj == 'pf') {
-            $this->rules = [
-                'cpf' => 'required|unique:partners|min:11',
-            ];
-        }else{
-            $this->rules = [
-                'cnpj' => 'required|unique:partners|min:14',
-            ];
+            $this->rules['cpf'] = 'required|min:11';
+        } else {
+            $this->rules['cnpj'] = 'required|min:11';
         }
+
 
         if ($this->newImg) {
             $this->image = $this->newImg;

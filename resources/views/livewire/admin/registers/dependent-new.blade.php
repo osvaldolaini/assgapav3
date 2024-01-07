@@ -24,7 +24,7 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Nome completo" wire:model="name" required maxlength="100">
                     @error('name')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
@@ -38,7 +38,7 @@
                         <option value="Dependente">Dependente</option>
                     </Select>
                     @error('partner_category_master')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
@@ -53,7 +53,7 @@
                         @endforeach
                     </Select>
                     @error('partner_category')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
@@ -64,7 +64,7 @@
                         <option value="0">Não</option>
                     </Select>
                     @error('discount')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 @if ($partner_category_master == 'Dependente')
@@ -78,7 +78,7 @@
                             class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                             placeholder="Parentesco" wire:model="kinship" required maxlength="100">
                         @error('kinship')
-                            <span class="error">{{ $message }}</span>
+                            <span class="error text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
                 @endif
@@ -90,7 +90,7 @@
                         <option value="pf">Pessoa física</option>
                     </Select>
                     @error('pf_pj')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
 
@@ -100,7 +100,7 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         wire:model="cpf">
                         @error('cpf')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 {{-- <div class="col-span-full sm:col-span-2">
@@ -114,14 +114,14 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         maxlength="8" placeholder="saram" wire:model="saram">
                     @error('saram')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
                     <x-datepicker id='registration_at' :required="false"></x-datepicker>
                     @error('registration_at')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
@@ -130,7 +130,7 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="E-mail" wire:model="email" value="{{ old('email', $email ?? '') }}">
                         @error('email')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                     </div>
 
@@ -142,7 +142,7 @@
                         <option value="1">Sim</option>
                     </Select>
                     @error('send_email_barthday')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
@@ -151,7 +151,7 @@
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="(99) 9 9999-9999" wire:model="phone_first">
                     @error('phone_first')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-4">
@@ -165,7 +165,7 @@
                     <label for="validity_of_card" class="text-sm">Val Carteirinha</label>
                     <x-datepicker id='validity_of_card' :required="false"></x-datepicker>
                     @error('validity_of_card')
-                        <span class="error">{{ $message }}</span>
+                        <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
