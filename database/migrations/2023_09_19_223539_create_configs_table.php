@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('acronym',50)->nullable();
             $table->string('president',100)->nullable();
             $table->string('vp',100)->nullable();
+            $table->string('signature',100)->nullable();
             $table->string('financial',100)->nullable();
             $table->string('slug',150)->nullable();
             $table->string('update_by',50)->nullable();

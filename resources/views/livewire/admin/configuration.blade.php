@@ -37,12 +37,24 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-full">
+                    <div class="col-span-full sm:col-span-4">
                         <label for="vp">*Vice-presidente</label>
                         <input
                             class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                             placeholder="Vice-presidente" wire:model="vp" required >
                         @error('vp')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label for="signature">Quem assina?</label>
+                        <Select wire:model="signature" required
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <option value="">Selecione...</option>
+                        <option value="{{ $president }}">{{ $president }}</option>
+                        <option value="{{ $vp }}">{{ $vp }}</option>
+                    </Select>
+                        @error('signature')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

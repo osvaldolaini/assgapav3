@@ -42,6 +42,7 @@ class Configuration extends Component
     public $president;
     public $vp;
     public $financial;
+    public $signature;
 
     public $rules;
 
@@ -75,6 +76,7 @@ class Configuration extends Component
         $this->president        = $this->configs->president;
         $this->vp               = $this->configs->vp;
         $this->financial        = $this->configs->financial;
+        $this->signature        = $this->configs->signature;
 
     }
     public function render()
@@ -139,6 +141,7 @@ class Configuration extends Component
             'complement'        => $this->complement,
             'president'         => $this->president,
             'vp'                => $this->vp,
+            'signature'         => $this->signature,
             'financial'         => $this->financial,
             'updated_by '       => Auth::user()->name,
         ]);
