@@ -73,7 +73,7 @@ class Configuration extends Component
         $this->logo             = $this->configs->logo_path;
 
         $this->president        = $this->configs->president;
-        $this->vp               = $this->configs->complement;
+        $this->vp               = $this->configs->vp;
         $this->financial        = $this->configs->financial;
 
     }
