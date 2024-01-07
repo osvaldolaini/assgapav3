@@ -194,7 +194,7 @@
                 <table class="table-signature">
                     <tr>
                         <td style="text-align: right;">
-                            <p style="border-top: solid thin #000; width:100%;">{{ $config->president }}</p>
+                            <p style="border-top: solid thin #000; width:100%;">{{ $config->signature }}</p>
                         </td>
                         <!--<td ><p style="border-top: solid thin #000; width:100%;">{{ $config->financial }}</p></td>-->
                     </tr>

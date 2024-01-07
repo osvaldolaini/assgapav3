@@ -48,8 +48,7 @@
                     </div>
                     <div class="col-span-full sm:col-span-2">
                         <label for="signature">Quem assina?</label>
-                        <Select wire:model="signature" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <Select wire:model="signature" class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value="">Selecione...</option>
                         <option value="{{ $president }}">{{ $president }}</option>
                         <option value="{{ $vp }}">{{ $vp }}</option>
