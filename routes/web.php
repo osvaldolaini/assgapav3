@@ -26,6 +26,7 @@ use App\Livewire\Admin\Financial\PaidMonth;
 use App\Livewire\Admin\Financial\ReceivedEdit;
 use App\Livewire\Admin\Financial\ReceivedNew;
 use App\Livewire\Admin\Financial\Receiveds;
+use App\Livewire\Admin\Locations\MultipleLocation;
 use App\Livewire\Admin\Locations\InstallmentsLate;
 use App\Livewire\Admin\Locations\LocationEdit;
 use App\Livewire\Admin\Locations\LocationExtras;
@@ -262,6 +263,9 @@ Route::middleware([
 
     Route::get('/locações/parcelas-em-atraso', InstallmentsLate::class)
         ->name('installmentsLate');
+
+    Route::get('/multiplas-locaçoes', MultipleLocation::class)
+        ->name('multiple');
 });
 
 // Financeiro pageAccess 8
