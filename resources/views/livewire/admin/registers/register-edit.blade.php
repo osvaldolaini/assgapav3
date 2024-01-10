@@ -15,7 +15,7 @@
                 @else
                     @if ($partner_category_master == 'Dependente')
                         <x-table-register-buttons id="{{ $id }}" :card="true" :dependent="false"
-                            :history="true" :discount="true">
+                            :history="true" :discount="true" :responsible="$responsible">
                         </x-table-register-buttons>
                     @else
                         <x-table-register-buttons id="{{ $id }}" :card="true" :dependent="true"

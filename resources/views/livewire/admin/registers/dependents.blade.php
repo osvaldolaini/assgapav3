@@ -7,7 +7,10 @@
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-
+                <x-table-register-buttons id="{{ $responsible }}" :card="false" :dependent="false"
+                    :history="false"
+                    :discount="true" :responsible="$responsible">
+                </x-table-register-buttons>
             </div>
         </div>
     </x-breadcrumb>
@@ -45,7 +48,7 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 <div
                     class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
                     <div class="group flex ">
-                        <a href="{{ route('new-dependent',$responsible) }}"
+                        <a href="{{ route('new-dependent', $responsible) }}"
                             class="flex items-center justify-center w-1/2 px-5
                                 py-3 text-sm tracking-wide text-white transition-colors
                                 duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2

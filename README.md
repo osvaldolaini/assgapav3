@@ -5,6 +5,12 @@
 </p>
 
 # Sistema ASSGAPA V3
+## V 3.22 07/01/2024
+    -Novo
+        Multiplas Locações
+    -Melhorias
+        Editar passe de piscina (cliente, obs)
+
 ## V 3.21 23/12/2023
     Search Bar
 

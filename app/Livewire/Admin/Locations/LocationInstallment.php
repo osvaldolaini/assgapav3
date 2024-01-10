@@ -163,9 +163,12 @@ class LocationInstallment extends Component
         ];
 
         $this->validate();
-        if ($this->installment->value > $this->installment->location->convert_value($this->installment->location->remaining)) {
+
+        if ($this->installment->location->convert_value($this->installment->value) > $this->installment->location->convert_value($this->installment->location->remaining)) {
             $this->openAlert('error', 'O valor informado é de R$ ' . $this->installment->value . '. Portanto maior que o valor restante!');
             $this->value = $this->installment->location->remaining;
+
+            $this->checkoutModal = false;
             return;
         }
         $received = Received::create([
