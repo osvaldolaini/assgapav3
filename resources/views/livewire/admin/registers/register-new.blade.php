@@ -131,7 +131,7 @@
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
-                    <x-datepicker id='registration_at' :required="false"></x-datepicker>
+                    <x-datepicker x-mask="99/99/9999" id='registration_at' :required="false"></x-datepicker>
                     @error('registration_at')
                         <span class="error text-red-500">{{ $message }}</span>
                     @enderror
@@ -172,28 +172,87 @@
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="validity_of_card" class="text-sm">Val Carteirinha</label>
-                    <x-datepicker id='validity_of_card' :required="false"></x-datepicker>
+                    <div class="flex">
+                        <input
+                            type="text"
+                            wire:model="validity_of_card"
+                            x-mask="99/99/9999"
+                            placeholder="99/99/9999"
+                            class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span
+                            class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
                     @error('validity_of_card')
                         <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="access_pool" class="text-sm">Prazo piscinas</label>
-                    <x-datepicker id='access_pool' :required="false"></x-datepicker>
+                    <div class="flex">
+                        <input
+                            type="text"
+                            wire:model="access_pool"
+                            x-mask="99/99/9999"
+                            placeholder="99/99/9999"
+                            class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span
+                            class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
                     @error('access_pool')
                         <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="print_date" class="text-sm">Data impressão</label>
-                    <x-datepicker id='print_date' :required="false"></x-datepicker>
+                    <div class="flex">
+                        <input
+                            type="text"
+                            wire:model="print_date"
+                            x-mask="99/99/9999"
+                            placeholder="99/99/9999"
+                            class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span
+                            class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
                     @error('print_date')
                         <span class="error text-red-500">{{ $message }}</span>
                     @enderror
                 </div>
                 <div class="col-span-full sm:col-span-2">
-                    <label for="grace_period" class="text-sm">Carência</label>
-                    <x-datepicker id='grace_period' :required="false"></x-datepicker>
+                    <label for="grace_period" class="text-sm">Carência</label><div class="flex">
+                        <input
+                            type="text"
+                            wire:model="grace_period"
+                            x-mask="99/99/9999"
+                            placeholder="99/99/9999"
+                            class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span
+                            class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
                     @error('grace_period')
                         <span class="error text-red-500">{{ $message }}</span>
                     @enderror

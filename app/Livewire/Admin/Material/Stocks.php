@@ -26,6 +26,7 @@ class Stocks extends Component
         $this->description = $product->title;
         $this->inStock = $product->inStock;
         $this->productStatus = $product->active;
+        $this->date = date('d/m/Y');
     }
     public function render()
     {
@@ -84,11 +85,15 @@ class Stocks extends Component
 
     public function showModalIn()
     {
+        $this->resetAll();
+        $this->date = date('d/m/Y');
         $this->modalIn = true;
     }
 
     public function showModalOut()
     {
+        $this->resetAll();
+        $this->date = date('d/m/Y');
         $this->modalOut = true;
     }
 }
