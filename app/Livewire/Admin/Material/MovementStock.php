@@ -15,6 +15,7 @@ class MovementStock extends Component
 
 {
     public Stock $stock;
+    public $breadcrumb_title = 'MOVIMENTOS DO MATERIAL DE CONSUMO';
 
     public $showJetModal = false;
     public $showModalView = false;
