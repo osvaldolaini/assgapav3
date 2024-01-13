@@ -103,7 +103,9 @@
                         required>
                         <option value="">Selecione</option>
                         <option value="SEC">SECRETARIA</option>
-                        <option value="FIN">FINANCEIRO</option>
+                        @if (in_array(12, $pages) == true)
+                            <option value="FIN">FINANCEIRO</option>
+                        @endif
                         <option value="DIR">DIRETOR</option>
                     </select>
                     @error('type')

@@ -242,6 +242,7 @@
                                         divide-gray-100 rounded-es-lg shadow dark:bg-gray-700 ">
                             <ul class="text-sm ml-5 mt-0 rounded-ee-sm text-gray-700 dark:text-gray-200"
                                 aria-labelledby="dropdownFinancial">
+                                @if (in_array(12, $pages) == true)
                                 <x-link-dropdown url="cashier" active="*financeiro-caixa*">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4"
@@ -252,6 +253,7 @@
                                     </svg>
                                     Caixa
                                 </x-link-dropdown>
+                                @endif
                                 <x-link-dropdown url="receiveds" active="*financeiro-entradas*">
                                     <svg class="w-6 h-6 mr-2" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
                                         <path opacity="0.4"

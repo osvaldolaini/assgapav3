@@ -16,7 +16,7 @@ class Bills extends Component
 {
     use WithPagination;
     public Bill $bill;
-    public $breadcrumb_title = 'CAIXA';
+    public $breadcrumb_title = 'SAÍDAS';
 
     public $showJetModal = false;
     public $showModalView = false;

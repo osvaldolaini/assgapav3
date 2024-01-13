@@ -12,6 +12,7 @@ use Livewire\Component;
 class BillNew extends Component
 {
 
+    public $pages;
     public $rules;
     public $categories;
 
@@ -44,6 +45,7 @@ class BillNew extends Component
     {
         $this->paid_in = date('d/m/Y');
         $this->categories = CostCenter::select('title', 'id')->get();
+        $this->pages = Auth::user()->access->pluck('page_id')->toArray();
     }
 
     public function render()

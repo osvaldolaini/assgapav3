@@ -11,6 +11,7 @@ use Livewire\Component;
 class BillEdit extends Component
 {
 
+    public $pages;
     public $rules;
     public $categories;
 
@@ -63,6 +64,8 @@ class BillEdit extends Component
 
 
         $this->categories = CostCenter::select('title', 'id')->get();
+
+        $this->pages = Auth::user()->access->pluck('page_id')->toArray();
     }
     public function render()
     {
