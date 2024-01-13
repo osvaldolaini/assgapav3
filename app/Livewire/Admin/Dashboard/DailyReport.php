@@ -159,7 +159,13 @@ class DailyReport extends Component
         ])->render();
         // Adicione o conteúdo HTML ao PDF
         $mpdf->WriteHTML($html);
-
+        $mpdf->SetHTMLFooter('
+        <table width="100%">
+            <tr>
+                <td width="66%">Gerado em {DATE j/m/Y} às {DATE H:i:s}</td>
+                <td width="33%" style="text-align: right;">{PAGENO}/{nbpg}</td>
+            </tr>
+        </table>');
         // Salve o PDF temporariamente
         $down = storage_path('app/public/livewire-tmp/relatorio-diario.pdf');
         $pdfPath = url('storage/livewire-tmp/relatorio-diario.pdf');
