@@ -93,6 +93,7 @@ class PartnerNew extends Component
                 $this->state = $result->uf;
             }
         }
+
     }
     public static function uploadPhoto($image)
     {

@@ -35,6 +35,23 @@ class CashierNew extends Component
     {
         return view('livewire.admin.financial.cashier-new');
     }
+    public function updated($property)
+    {
+        if ($property === 'value') {
+            // Remove tudo que não for número
+            $rawValue = preg_replace('/[^\d]/', '', $this->value);
+
+            // Adapte conforme a quantidade de caracteres
+            if (strlen($rawValue) <= 2) {
+                $this->value = $rawValue;
+            } elseif (strlen($rawValue) <= 5) {
+                $this->value = substr($rawValue, 0, -2) . ',' . substr($rawValue, -2);
+            } else {
+                $this->value = substr($rawValue, 0, -5) . '.' . substr($rawValue, -5, 3) . ',' . substr($rawValue, -2);
+            }
+        }
+        $this->dispatch('updateAmount', ['value' => $this->value]);
+    }
 
 
     public function save_out()

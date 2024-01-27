@@ -25,18 +25,27 @@
             <div class="grid grid-cols-3 gap-1 w-full">
                 @foreach ($monthlys as $item)
                     <div class="indicator w-full">
-                        <span
-                            class="indicator-item indicator-center
-                             badge badge-primary cursor-pointer "
-                            wire:click="showModalUpdate({{ $item->id }})">
-                            <svg class="w-4 h-4 mr-1 text-white" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M8 9.00006H6.2C5.0799 9.00006 4.51984 9.00006 4.09202 9.21805C3.71569 9.40979 3.40973 9.71575 3.21799 10.0921C3 10.5199 3 11.08 3 12.2001V17.8001C3 18.9202 3 19.4802 3.21799 19.908C3.40973 20.2844 3.71569 20.5903 4.09202 20.7821C4.51984 21.0001 5.07989 21.0001 6.2 21.0001H17.787C18.9071 21.0001 19.4671 21.0001 19.895 20.7821C20.2713 20.5903 20.5772 20.2844 20.769 19.908C20.987 19.4802 20.987 18.9202 20.987 17.8001V12.0001M6 15.0001H6.01M10 15H10.01M11.5189 12.8946L12.8337 12.6347C13.5432 12.4945 13.8979 12.4244 14.2287 12.2953C14.5223 12.1807 14.8013 12.0318 15.06 11.8516C15.3514 11.6487 15.607 11.393 16.1184 10.8816L21.2668 5.73321C21.9541 5.04596 21.9541 3.9317 21.2668 3.24444C20.5796 2.55719 19.4653 2.55719 18.7781 3.24445L13.5416 8.48088C13.0625 8.96004 12.8229 9.19963 12.6294 9.47121C12.4576 9.71232 12.3131 9.97174 12.1986 10.2447C12.0696 10.5522 11.9921 10.8821 11.837 11.5417L11.5189 12.8946Z"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
+                        <span class="indicator-item indicator-center">
+                            <span class="badge badge-primary cursor-pointer" wire:click="showModalUpdate({{ $item->id }})">
+                                <svg class="w-4 h-4 mr-1 text-white" viewBox="0 0 24 24" fill="none"
+                                    xmlns="http://www.w3.org/2000/svg">
+                                    <path
+                                        d="M8 9.00006H6.2C5.0799 9.00006 4.51984 9.00006 4.09202 9.21805C3.71569 9.40979 3.40973 9.71575 3.21799 10.0921C3 10.5199 3 11.08 3 12.2001V17.8001C3 18.9202 3 19.4802 3.21799 19.908C3.40973 20.2844 3.71569 20.5903 4.09202 20.7821C4.51984 21.0001 5.07989 21.0001 6.2 21.0001H17.787C18.9071 21.0001 19.4671 21.0001 19.895 20.7821C20.2713 20.5903 20.5772 20.2844 20.769 19.908C20.987 19.4802 20.987 18.9202 20.987 17.8001V12.0001M6 15.0001H6.01M10 15H10.01M11.5189 12.8946L12.8337 12.6347C13.5432 12.4945 13.8979 12.4244 14.2287 12.2953C14.5223 12.1807 14.8013 12.0318 15.06 11.8516C15.3514 11.6487 15.607 11.393 16.1184 10.8816L21.2668 5.73321C21.9541 5.04596 21.9541 3.9317 21.2668 3.24444C20.5796 2.55719 19.4653 2.55719 18.7781 3.24445L13.5416 8.48088C13.0625 8.96004 12.8229 9.19963 12.6294 9.47121C12.4576 9.71232 12.3131 9.97174 12.1986 10.2447C12.0696 10.5522 11.9921 10.8821 11.837 11.5417L11.5189 12.8946Z"
+                                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                        stroke-linejoin="round" />
+                                </svg>
+                                <span class="">Editar</span>
+                            </span>
+                            <span class="badge badge-error cursor-pointer" wire:click="showModalDelete({{ $item->id }})"">
+                                <svg class="w-4 h-4 mr-1 text-white" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor" stroke-width="2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                </path>
                             </svg>
-                            <span class="">Editar</span>
+                                <span class="text-white">Excluir</span>
+                            </span>
+
                         </span>
                         <div class="flex  w-full">
                             <input type="checkbox" wire:model="pay" id="monthly-{{ $item->id }}-s"
@@ -201,8 +210,8 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
-     {{-- MODAL CREATE --}}
-     <x-dialog-modal wire:model="showModalCreate">
+    {{-- MODAL CREATE --}}
+    <x-dialog-modal wire:model="showModalCreate">
         <x-slot name="title">Inserir nova mensalidade</x-slot>
         <x-slot name="content">
             <form wire:submit="store">
@@ -210,28 +219,29 @@
                     <div class="col-span-2 ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Mês / Ano da mensalidade</label>
-                            <div class="flex w-full items-start justify-center p-3 text-gray-900">
-                                <select class="rounded-l-md w-1/2 " wire:model="mounth">
-                                    <option value="1" >Janeiro</option>
-                                    <option value="2" >Fevereiro</option>
-                                    <option value="3" >Março</option>
-                                    <option value="4" >Abril</option>
-                                    <option value="5" >Maio</option>
-                                    <option value="6" >Junho</option>
-                                    <option value="7" >Julho</option>
-                                    <option value="8" >Agosto</option>
-                                    <option value="9" >Setembro</option>
-                                    <option value="10" >Outubro</option>
-                                    <option value="11" >Novembro</option>
-                                    <option value="12" >Dezembro</option>
-                                </select>
-                                <select class="rounded-r-md w-1/2 " whire:model="year">
-                                    @for ($i = 2017; $i <= date('Y')+1; $i++)
-                                        <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>{{ $i }}
-                                        </option>
-                                    @endfor
-                                </select>
-                            </div>
+                        <div class="flex w-full items-start justify-center p-3 text-gray-900">
+                            <select class="rounded-l-md w-1/2 " wire:model="mounth">
+                                <option value="1">Janeiro</option>
+                                <option value="2">Fevereiro</option>
+                                <option value="3">Março</option>
+                                <option value="4">Abril</option>
+                                <option value="5">Maio</option>
+                                <option value="6">Junho</option>
+                                <option value="7">Julho</option>
+                                <option value="8">Agosto</option>
+                                <option value="9">Setembro</option>
+                                <option value="10">Outubro</option>
+                                <option value="11">Novembro</option>
+                                <option value="12">Dezembro</option>
+                            </select>
+                            <select class="rounded-r-md w-1/2 " whire:model="year">
+                                @for ($i = 2017; $i <= date('Y') + 1; $i++)
+                                    <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
+                                        {{ $i }}
+                                    </option>
+                                @endfor
+                            </select>
+                        </div>
                         @error('mounth')
                             <span class="error">{{ $message }}</span>
                         @enderror
@@ -258,5 +268,26 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
+    {{-- MODAL DELETE --}}
+    <x-confirmation-modal wire:model="showJetModal">
+        <x-slot name="title">
+            Excluir registro
+        </x-slot>
+
+        <x-slot name="content">
+            <h2 class="h2">Deseja realmente excluir a mensalidade?</h2>
+            <p>Não será possível reverter esta ação!</p>
+        </x-slot>
+
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('showJetModal')" wire:loading.attr="disabled">
+                Cancelar
+            </x-secondary-button>
+
+            <x-danger-button class="ml-2" wire:click="delete({{ $monthly_id }})" wire:loading.attr="disabled">
+                Apagar registro
+            </x-danger-button>
+        </x-slot>
+    </x-confirmation-modal>
 
 </div>

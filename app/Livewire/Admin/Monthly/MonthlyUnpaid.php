@@ -15,6 +15,7 @@ class MonthlyUnpaid extends Component
     public $showModalPay = false;
     public $showModalEdit = false;
     public $showModalCreate= false;
+    public $showJetModal = false;
 
     public $monthlys;
     public $partner;
@@ -181,7 +182,7 @@ class MonthlyUnpaid extends Component
             ]);
         }
 
-        if ($this->received) {
+        if ($this->received == 1) {
             $this->validate();
             $received = Received::create([
                 'active' => 1,
@@ -196,6 +197,7 @@ class MonthlyUnpaid extends Component
 
             $this->checkoutReturn($received->id);
         } else {
+            $this->showModalEdit = false;
             $this->openAlert('success', 'Registro atualizado com sucesso.');
         }
     }
@@ -220,5 +222,24 @@ class MonthlyUnpaid extends Component
     public function openAlert($status, $msg)
     {
         $this->dispatch('openAlert', $status, $msg);
+    }
+    //DELETE
+    public function showModalDelete($id)
+    {
+        $this->showJetModal = true;
+
+        if (isset($id)) {
+            $this->monthly_id = $id;
+        } else {
+            $this->monthly_id = $id;
+        }
+    }
+
+    public function delete($id)
+    {
+        $data = MonthlyPayment::find($id);
+        $data->delete();
+        $this->openAlert('success', 'Registro excluido com sucesso.');
+        $this->showJetModal = false;
     }
 }

@@ -112,14 +112,34 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-span-full sm:col-span-2">
+                <div class="col-span-full sm:col-span-6" >
                     <label for="value">*Valor</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
-                        placeholder="Valor" x-mask:dynamic="$money($input, ',')" wire:model="value" required>
+                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        placeholder="Valor" wire:model="value" id="value" required >
                     @error('value')
                         <span class="error">{{ $message }}</span>
                     @enderror
+                    <script>
+                        // Receber o seletor do campo valor
+                        let inputValor = document.getElementById('value');
+
+                        // Aguardar o usuário digitar valor no campo
+                        inputValor.addEventListener('input', function(){
+                            // Obter o valor atual removendo qualquer caractere que não seja número
+                            let valueValor = this.value.replace(/[^\d]/g, '');
+
+                            // Adicionar os separadores de milhares
+                            var formattedValor = (valueValor.slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')) + '' + valueValor.slice(-2);
+
+                            // Adicionar a vírgula e até dois dígitos se houver centavos
+                            formattedValor = formattedValor.slice(0, -2) + ',' + formattedValor.slice(-2);
+
+                            // Atualizar o valor do campo
+                            this.value = formattedValor;
+
+                        });
+                    </script>
                 </div>
                 <div class="col-span-full sm:col-span-3">
                     <label for="paid_in">*Pagamento / vencimento</label>
