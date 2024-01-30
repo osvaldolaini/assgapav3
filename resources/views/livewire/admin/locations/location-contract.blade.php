@@ -271,7 +271,7 @@ th {
                 <table class="table-signature" style="width: 100%;" >
                         <tr>
                             <td ><p style="border-top: solid thin #000; width:100%;">{{$location->partners->name}}</p></td>
-                            <td ><p style="border-top: solid thin #000; width:100%;">{{$parent}}</p></td>
+                            <td ><p style="border-top: solid thin #000; width:100%;">{{$responsible}}</p></td>
                         </tr>
                         <tr>
                             <td>Contratante</td>
