@@ -5,7 +5,7 @@
 </p>
 
 # Sistema ASSGAPA V3
-## V 3.22 26/01/2024
+## V 3.23 26/01/2024
 -Melhorias
         -Troca da mascara de dinheiro ( caixa, recibo e contas)
         -Possibilidade de excluir mensalidade criada indevidamente

@@ -560,7 +560,7 @@ class Reports extends Component
             }
             $listReceiveds[] = [
                 'item'    => str_pad($itens, 3, '0', STR_PAD_LEFT),
-                'paid_in' => date('d/m/Y', strtotime($received->paid_in)),
+                'paid_in' => $received->paid_in,
                 'title'   => $received->title . $text,
                 'number'  => str_pad($received->id, 6, '0', STR_PAD_LEFT),
                 'value'   => 'R$ ' . $received->value,
@@ -602,7 +602,7 @@ class Reports extends Component
             }
             $listReceiveds[] = [
                 'item'    => str_pad($itens, 3, '0', STR_PAD_LEFT),
-                'paid_in' => date('d/m/Y', strtotime($received->paid_in)),
+                'paid_in' => $received->paid_in,
                 'title'   => $received->title . $text,
                 'number'  => str_pad($received->id, 6, '0', STR_PAD_LEFT),
                 'value'   => 'R$ ' . $received->value,

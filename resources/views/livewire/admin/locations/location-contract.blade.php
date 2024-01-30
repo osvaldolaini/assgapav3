@@ -140,8 +140,8 @@ th {
                     <tr><th colspan="5">Dados do Contratante</th></tr>
                     <tr>
                         <td colspan="4">Contratante: {{$location->partners->name}}
-                            @if ($location->partners->responsible)
-                                <br/> (<span style='font-size:8pt;'>Associado:{{$location->partners->responsible->name}}</span>)
+                            @if ($location->partners->parent)
+                                <br/> (<span style='font-size:8pt;'>Associado:{{$location->partners->parent->name}}</span>)
                             @endif
                         </td>
                         <td>CPF/CNPJ: {{$location->partners->cpf}}</td>
@@ -271,7 +271,7 @@ th {
                 <table class="table-signature" style="width: 100%;" >
                         <tr>
                             <td ><p style="border-top: solid thin #000; width:100%;">{{$location->partners->name}}</p></td>
-                            <td ><p style="border-top: solid thin #000; width:100%;">{{$responsible}}</p></td>
+                            <td ><p style="border-top: solid thin #000; width:100%;">{{$parent}}</p></td>
                         </tr>
                         <tr>
                             <td>Contratante</td>
