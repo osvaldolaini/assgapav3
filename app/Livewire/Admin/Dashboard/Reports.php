@@ -12,6 +12,7 @@ use App\Models\Admin\Pool\Pass;
 use App\Models\Admin\Pool\Pool;
 use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
+use DateTime;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Livewire\Component;
@@ -65,8 +66,12 @@ class Reports extends Component
         } else {
             $this->day = '31';
         }
-        $this->end = date('Y-m-d', strtotime($this->year . '-' . $this->mounth . '-' . $this->day));
 
+        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day. ' 00:00:00'));
+        $end_date = new DateTime($this->end);
+        $end_date->modify('+1 day');
+        $this->end = $end_date;
+        // dd($this->end);
         switch ($report) {
             case 'financial':
                 $this->title .= 'FINANCEIRO';
@@ -787,7 +792,7 @@ class Reports extends Component
                 $line[] = array(
                     'date'     => date('d/m/Y', strtotime($access->created_at)),
                     'hour'     => date('H:i', strtotime($access->created_at)),
-                    'name'     => mb_strtoupper($pass->title),
+                    'name'     => mb_strtoupper($pass->title). '('.mb_strtoupper($pass->partner).')',
                     'color'    => $pass->color,
                     'category' => 'PASSE ' . mb_strtoupper($pass->category),
                 );
