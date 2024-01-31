@@ -17,7 +17,7 @@ class Pool extends Model
     protected $table = 'pools';
 
     protected $fillable = [
-        'table','register_id','created_at'
+        'table','register_id','client','partner','created_at'
     ];
 
     public function getCreatedAttribute($value)

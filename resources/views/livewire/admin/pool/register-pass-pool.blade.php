@@ -35,6 +35,21 @@
                         <p class="flex items-center text-md p-1">
                             <span class="font-bold px-2">{{ $pass->title }}</span>
                         </p>
+                        @if (date('Y-m-d') <= $validity_of_card)
+                            <p
+                                class="flex items-center text-md {{ date('Y-m-d') > $validity_of_card ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
+                                Cliente autorizado:
+                                <span class="font-bold px-2">{{ $pass->partner }}</span>
+                            </p>
+                            @if ($pass->indication_id)
+                            <p
+                                class="flex items-center text-md {{ date('Y-m-d') > $validity_of_card ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
+                                Indicado por:
+                                <span class="font-bold px-2">{{ $pass->partners->name }}</span>
+                            </p>
+                            @endif
+                        @endif
+
                         <p
                             class="flex items-center text-md {{ date('Y-m-d') > $validity_of_card ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
                             Validade piscina:

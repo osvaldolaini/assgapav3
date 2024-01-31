@@ -100,7 +100,6 @@ class MonthlyUnpaid extends Component
             'year' => 'required',
         ];
         $ref = $this->year.'-'.$this->mounth;
-
         $this->validate();
         if (!MonthlyPayment::monthlyExists($ref,$this->partner->id)) {
             MonthlyPayment::create([

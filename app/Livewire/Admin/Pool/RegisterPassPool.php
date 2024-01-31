@@ -14,10 +14,16 @@ class RegisterPassPool extends Component
     public $table = 'passes';
     public $pass;
     public $validity_of_card;
+    public $partner;
 
     public $status;
     public function mount(Pass $pass)
     {
+        if ($pass->indication_id) {
+            $this->partner = $pass->partners->name;
+        }else{
+            $this->partner = '';
+        }
         $this->config = Configs::find(1);
         $this->pass = $pass;
         $this->validity_of_card = implode("-",array_reverse(explode("/",$pass->validity_of_card)));
@@ -31,6 +37,8 @@ class RegisterPassPool extends Component
         $register = Pool::create([
             'table'         => $this->table,
             'register_id'   => $this->pass->id,
+            'client'   => $this->pass->partner,
+            'partner'   => $this->partner,
         ]);
 
         if($register){

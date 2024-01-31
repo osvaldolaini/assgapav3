@@ -17,6 +17,7 @@ class CreatePassesTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('partner')->nullable();
+            $table->foreignId('indication_id')->nullable()->constrained();
             $table->string('obs')->nullable();
             $table->string('slug')->nullable();
             $table->string('category')->nullable();

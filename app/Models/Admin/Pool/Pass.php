@@ -1,6 +1,8 @@
 <?php
 
 namespace App\Models\Admin\Pool;
+
+use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,8 +20,7 @@ class Pass extends Model
 
     protected $fillable = [
         'title','slug','category','active','validity','color',
-        'partner','obs',
-        'validity_of_card','updated_by','created_by',
+        'partner','obs','indication_id','validity_of_card','updated_by','created_by',
     ];
 
     public function setTitleAttribute($value)
@@ -41,6 +42,10 @@ class Pass extends Model
             return Carbon::createFromFormat('Y-m-d', $value)
                 ->format('d/m/Y');
         }
+    }
+    public function partners()
+    {
+        return $this->belongsTo(Partner::class, 'indication_id', 'id');
     }
     public function scopeFilterFields($query, $filters)
     {

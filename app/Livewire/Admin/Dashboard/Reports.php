@@ -783,7 +783,7 @@ class Reports extends Component
             ->orderBy('id', 'desc')->get();
         foreach ($accesses as $access) {
             if ($access->table == 'passes') {
-                $pass = Pass::where('id', $access->register_id)->first();
+                $pass = Pass::find($access->register_id);
                 $line[] = array(
                     'date'     => date('d/m/Y', strtotime($access->created_at)),
                     'hour'     => date('H:i', strtotime($access->created_at)),

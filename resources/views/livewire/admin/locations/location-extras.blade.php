@@ -7,7 +7,7 @@
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-                @livewire('admin.locations.location-buttons', ['location' => $location], key($location->id))
+                @livewire('admin.locations.location-buttons', ['location' => $location,'update'=>true], key($location->id))
             </div>
         </div>
     </x-breadcrumb>

@@ -234,7 +234,7 @@
                                 <option value="11">Novembro</option>
                                 <option value="12">Dezembro</option>
                             </select>
-                            <select class="rounded-r-md w-1/2 " whire:model="year">
+                            <select class="rounded-r-md w-1/2 " wire:model="year">
                                 @for ($i = 2017; $i <= date('Y') + 1; $i++)
                                     <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>
                                         {{ $i }}

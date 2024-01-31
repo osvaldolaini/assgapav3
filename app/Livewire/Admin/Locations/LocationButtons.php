@@ -17,11 +17,13 @@ class LocationButtons extends Component
     public $id;
     public $location;
     public $config;
-    public function mount(Location $location)
+    public $update;
+    public function mount(Location $location,$update=null)
     {
-       $this->location = $location;
-       $this->id = $location->id;
-       $this->config = Configs::find(1);
+        $this->update = $update;
+        $this->location = $location;
+        $this->id = $location->id;
+        $this->config = Configs::find(1);
     }
     public function render()
     {

@@ -17,6 +17,8 @@ class CreatePoolsTable extends Migration
             $table->id();
             $table->string('table')->nullable();
             $table->integer('register_id')->nullable();
+            $table->string('client')->nullable();
+            $table->string('partner')->nullable();
             $table->timestamps();
         });
     }

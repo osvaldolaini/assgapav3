@@ -50,6 +50,7 @@ class AllLocations extends Component
         $this->events = $this->getCalendarReservation($this->year);
         $this->date = now();
         $this->nextyear = date('Y') + 1;
+        $this->mounth = date('m'); // Ateração realizada em 31/01/2024 solicitação do clube
 
     }
 

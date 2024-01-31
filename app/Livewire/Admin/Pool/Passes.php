@@ -5,6 +5,7 @@ namespace App\Livewire\Admin\Pool;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Pool\Pass;
 use App\Models\Admin\Pool\Pool;
+use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -49,9 +50,44 @@ class Passes extends Component
     public $obs;
     public $validity_of_card;
 
+    public $indication_id;
+    public $indication;
+
+    //Search
+    public $modalSearch = false;
+    public $inputSearch;
+    public $typeSearch;
+    public $results;
+
+
+    public function openModalSearch($typeSearch)
+    {
+        $this->modalSearch = true;
+        $this->typeSearch = $typeSearch;
+    }
+    public function selectPartner($id)
+    {
+        $partner = Partner::find($id);
+
+        if ($this->typeSearch == 'partner') {
+            $this->indication = $partner->name;
+            $this->indication_id = $partner->id;
+        }
+
+        $this->typeSearch = '';
+        $this->inputSearch = '';
+        $this->results = '';
+
+        $this->modalSearch = false;
+    }
 
     public function render()
     {
+        if ($this->inputSearch != '') {
+            $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master')
+                ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
+                ->limit(5)->get();
+        }
         return view('livewire.admin.pool.passes', [
             'dataTable' => $this->getData(),
         ]);
@@ -62,9 +98,14 @@ class Passes extends Component
             'id' => $this->model_id,
         ], [
             'partner'   => null,
+            'indication_id'   => null,
+            'indication'   => null,
             'obs'       => null,
         ]);
+
         $this->partner = null;
+        $this->indication = null;
+        $this->indication_id = null;
         $this->obs = null;
     }
     public function printCards(Pass $pass)
@@ -225,6 +266,12 @@ class Passes extends Component
         $this->color = $pass->color;
         $this->validity_of_card = $pass->validity_of_card;
         $this->showModalEdit = true;
+
+        if ($pass->indication_id) {
+            $indication_p = Partner::find($pass->indication_id);
+            $this->indication = $indication_p->name;
+        }
+
     }
     public function update()
     {
@@ -243,6 +290,7 @@ class Passes extends Component
         ], [
             // 'title'     => $this->title,
             'partner'   => $this->partner,
+            'indication_id'   => $this->indication_id,
             'obs'       => $this->obs,
             // 'category'  => $this->category,
             // 'validity'  => $this->validity,
