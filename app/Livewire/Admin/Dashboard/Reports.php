@@ -790,7 +790,7 @@ class Reports extends Component
             if ($access->table == 'passes') {
                 $pass = Pass::find($access->register_id);
                 if ($pass->partner) {
-                    $name =  mb_strtoupper($pass->title). '(Cliente: '.mb_strtoupper($pass->client).' - Indicado por: '.$pass->partner.')';
+                    $name =  mb_strtoupper($pass->title). '(Cliente: '.mb_strtoupper($access->client).' - Indicado por: '.$access->partner.')';
                 }else{
                     $name =  mb_strtoupper($pass->title);
                 }
