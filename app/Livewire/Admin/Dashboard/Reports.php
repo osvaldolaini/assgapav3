@@ -789,10 +789,16 @@ class Reports extends Component
         foreach ($accesses as $access) {
             if ($access->table == 'passes') {
                 $pass = Pass::find($access->register_id);
+                if ($pass->partner) {
+                    $name =  mb_strtoupper($pass->title). '(Cliente: '.mb_strtoupper($pass->client).' - Indicado por: '.$pass->partner.')';
+                }else{
+                    $name =  mb_strtoupper($pass->title);
+                }
+
                 $line[] = array(
                     'date'     => date('d/m/Y', strtotime($access->created_at)),
                     'hour'     => date('H:i', strtotime($access->created_at)),
-                    'name'     => mb_strtoupper($pass->title). '('.mb_strtoupper($pass->partner).')',
+                    'name'     => $name,
                     'color'    => $pass->color,
                     'category' => 'PASSE ' . mb_strtoupper($pass->category),
                 );
