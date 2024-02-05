@@ -23,6 +23,7 @@ class SpendingBySector extends Component
         $start = new DateTime("-1 months");
         $end = date('Y-m-d');
         $total = 0;
+        $data = array();
         $bills = Bill::select('*')
             ->whereBetween('paid_in', [$start, $end])
             ->where('active', 1)

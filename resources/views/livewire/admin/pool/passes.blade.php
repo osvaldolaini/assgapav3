@@ -245,21 +245,21 @@
                         @enderror
                     </div>
                     <div class="col-span-full sm:col-span-1">
-                        <label for="validity">*Período</label>
-                        <select wire:model="validity"
+                        <label for="category">*Período</label>
+                        <select wire:model="category"
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option value="Diário">DIÁRIO</option>
                             <option value="Mensal">MENSAL</option>
                             <option value="Temporada">TEMPORADA</option>
                         </select>
-                        @error('validity')
+                        @error('category')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
                     <div class="col-span-full sm:col-span-1">
                         <label for="validity" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Mostrar validade</label>
-                        <select wire:model="validity"
+                            *Mostrar validade</label>
+                        <select wire:model="validity" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <option value="">Selecione uma opção</option>
                             <option value="0">NÃO</option>
