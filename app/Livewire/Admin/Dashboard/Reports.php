@@ -785,6 +785,10 @@ class Reports extends Component
     public function accessPool()
     {
         $line = array();
+        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day. ' 00:00:00'));
+        $end_date = new DateTime($this->end);
+        $end_date->modify('+1 day');
+        $this->end = $end_date;
         $accesses = Pool::whereBetween('created_at', [$this->start, $this->end])
             ->orderBy('id', 'desc')->get();
         foreach ($accesses as $access) {
