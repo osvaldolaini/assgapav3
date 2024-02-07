@@ -69,7 +69,7 @@ class Reports extends Component
 
         $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day. ' 00:00:00'));
         $end_date = new DateTime($this->end);
-        $end_date->modify('+1 day');
+        // $end_date->modify('+1 day');
         $this->end = $end_date;
 
         // dd($this->end);
