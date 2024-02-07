@@ -202,7 +202,7 @@ class Reports extends Component
         foreach ($cashiers as $cashier) {
             $spending[] = array(
                 'paid_in' => date('d', strtotime(implode("-",array_reverse(explode("/",$cashier->paid_in))))),
-                'id' => 'XXXXX',
+                'id' => str_pad($cashier->id, 5, '0', STR_PAD_LEFT),,
                 'color' => 'background-color:#888;',
                 'title' => mb_strtoupper($cashier->title),
                 'enter' => 'R$ ' . $cashier->value,
