@@ -196,7 +196,8 @@ class MonthlyUnpaid extends Component
 
             $this->checkoutReturn($received->id);
         } else {
-            $this->showModalEdit = false;
+            $this->showModalPay = false;
+            $this->pay = [];
             $this->openAlert('success', 'Registro atualizado com sucesso.');
         }
     }
