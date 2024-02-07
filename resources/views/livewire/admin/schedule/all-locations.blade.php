@@ -143,6 +143,7 @@
                             var calendar = new Calendar(calendarEl, {
                                 plugins: [dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin],
                                 navLinks: true,
+                                selectable: true,
                                 buttonText: {
                                     today: 'Hoje'
                                 },
@@ -168,7 +169,8 @@
 
                         var calendar = new Calendar(calendarEl, {
                             plugins: [dayGridPlugin, timeGridPlugin, listPlugin, multiMonthPlugin],
-                            // navLinks: true,
+                            navLinks: true,
+                            selectable: true,
                             buttonText: {
                                 today: 'Hoje'
                             },
@@ -183,7 +185,11 @@
                             multiMonthMinWidth: @this.mounthWidth,
                             eventDisplay: 'block',
                             events: @this.events,
-
+                            eventClick: function(info) {
+                                    Livewire.dispatch('showModalRead', {
+                                        id: info.event.id
+                                    })
+                                },
                         });
                         calendar.render();
                     });
