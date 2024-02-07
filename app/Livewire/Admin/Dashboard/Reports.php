@@ -71,6 +71,7 @@ class Reports extends Component
         $end_date = new DateTime($this->end);
         $end_date->modify('+1 day');
         $this->end = $end_date;
+
         // dd($this->end);
         switch ($report) {
             case 'financial':
@@ -167,7 +168,7 @@ class Reports extends Component
                 $creditor = $bill->creditor;
             }
             $spending[] = array(
-                'paid_in' => date('d', strtotime($bill->paid_in)),
+                'paid_in' => date('d', strtotime(implode("-",array_reverse(explode("/",$bill->paid_in))))),
                 'id' => str_pad($bill->id, 5, '0', STR_PAD_LEFT),
                 'color' => 'background-color:#fff;',
                 'title' => mb_strtoupper($bill->title . " ( " . $creditor . " )"),
@@ -200,7 +201,7 @@ class Reports extends Component
         $cashierValue = 0;
         foreach ($cashiers as $cashier) {
             $spending[] = array(
-                'paid_in' => date('d', strtotime($cashier->paid_in)),
+                'paid_in' => date('d', strtotime(implode("-",array_reverse(explode("/",$cashier->paid_in))))),
                 'id' => 'XXXXX',
                 'color' => 'background-color:#888;',
                 'title' => mb_strtoupper($cashier->title),
