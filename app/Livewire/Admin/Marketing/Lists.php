@@ -192,7 +192,7 @@ class Lists extends Component
             $query = $this->model::query();
         } else {
             $query = $this->model::query();
-            $query = $query->where('active', '<=', 1);
+            $query = $query->where('partners.active', '<=', 1);
         }
         $query->where('partner_category_master', 'Sócio');
 
