@@ -117,6 +117,9 @@ class LocationEdit extends Component
                 ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
                 ->limit(5)->get();
         }
+        if ($this->typeTenant == 1) {
+            $this->dependents = Partner::find($this->partner_id)->dependents;
+        }
 
         // dd($this->events);
         return view('livewire.admin.locations.location-edit');
