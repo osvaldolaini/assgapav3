@@ -176,17 +176,17 @@ font-size: 10pt;
                         <th >Motivo</th>
                     </tr>
                     @foreach ($data as $key)
-                        <tr style="background-color:{{ $key->ambiences->category->color }};" >
-                            <td style="color:#FFFFFF;">{{$key->location_date}}</td>
-                            <td style="color:#FFFFFF;">
+                        <tr  >
+                            <td >{{$key->location_date}}</td>
+                            <td >
                                 @if ($key->ambiences->multiple)
                                     DAS {{ date('H:i',strtotime($key->location_hour_start)) }} ÀS {{ date('H:i',strtotime($key->location_hour_end)) }}
                                 @endif
                             </td>
-                            <td style="color:#FFFFFF;">{{mb_strtoupper($key->ambiences->title)}}</td>
-                            <td style="color:#FFFFFF;">{{mb_strtoupper(($key->partners ? $key->partners->name : $key->partner))}}</td>
-                            <td style="color:#FFFFFF;">{{mb_strtoupper($key->event_benefited)}}</td>
-                            <td style="color:#FFFFFF;">{{mb_strtoupper(($key->reason ? $key->reason->title : $key->reason_event_id))}}</td>
+                            <td >{{mb_strtoupper($key->ambiences->title)}}</td>
+                            <td >{{mb_strtoupper(($key->partners ? $key->partners->name : $key->partner))}}</td>
+                            <td >{{mb_strtoupper($key->event_benefited)}}</td>
+                            <td >{{mb_strtoupper(($key->reason ? $key->reason->title : $key->reason_event_id))}}</td>
                         </tr>
                     @endforeach
 
