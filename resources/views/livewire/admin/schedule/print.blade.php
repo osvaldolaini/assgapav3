@@ -175,7 +175,18 @@ font-size: 10pt;
                         <th >Beneficiado</th>
                         <th >Motivo</th>
                     </tr>
+                    @php
+                        $d=0;
+                    @endphp
                     @foreach ($data as $key)
+                    @php
+                        $d1 = $key->location_date;
+                    @endphp
+                    @if ($d != $d1)
+                        <tr style="background-color: #ffff00;">
+                            <td colspan="6" >{{$key->location_date}}</td>
+                        </tr>
+                    @endif
                         <tr  >
                             <td >{{$key->location_date}}</td>
                             <td >
@@ -188,6 +199,9 @@ font-size: 10pt;
                             <td >{{mb_strtoupper($key->event_benefited)}}</td>
                             <td >{{mb_strtoupper(($key->reason ? $key->reason->title : $key->reason_event_id))}}</td>
                         </tr>
+                        @php
+                            $d = $d1;
+                        @endphp
                     @endforeach
 
                 </table>
