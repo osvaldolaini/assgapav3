@@ -184,7 +184,7 @@ font-size: 10pt;
                     @endphp
                     @if ($d != $d1)
                         <tr style="background-color: #ffff00; text-align:center;">
-                            <td colspan="5" >{{$key->location_date}}</td>
+                            <td colspan="5" style="text-align:center;">{{$key->location_date}}</td>
                         </tr>
                     @endif
                         <tr  >
