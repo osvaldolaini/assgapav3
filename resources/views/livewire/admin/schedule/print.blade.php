@@ -168,7 +168,7 @@ font-size: 10pt;
                 <!--Dados do cliente-->
                 <table class='schedule' cellspacing="0" >
                     <tr id="head">
-                        <th >Dia</th>
+                        {{-- <th >Dia</th> --}}
                         <th >Horário</th>
                         <th >Local</th>
                         <th >Locatário</th>
@@ -183,12 +183,12 @@ font-size: 10pt;
                         $d1 = $key->location_date;
                     @endphp
                     @if ($d != $d1)
-                        <tr style="background-color: #ffff00;">
-                            <td colspan="6" >{{$key->location_date}}</td>
+                        <tr style="background-color: #ffff00; text-align:center;">
+                            <td colspan="5" >{{$key->location_date}}</td>
                         </tr>
                     @endif
                         <tr  >
-                            <td >{{$key->location_date}}</td>
+                            {{-- <td >{{$key->location_date}}</td> --}}
                             <td >
                                 @if ($key->ambiences->multiple)
                                     DAS {{ date('H:i',strtotime($key->location_hour_start)) }} ÀS {{ date('H:i',strtotime($key->location_hour_end)) }}
