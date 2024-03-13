@@ -60,6 +60,7 @@ class LocationEdit extends Component
 
     public $reason_event_id;
     public $loc_time;
+    public $obs;
 
     protected $listeners =
     [
@@ -91,6 +92,7 @@ class LocationEdit extends Component
 
         $this->reason_event_id = $location->reason_event_id;
         $this->loc_time = $location->loc_time;
+        $this->obs = $location->obs;
 
         $this->multiple = $location->ambiences->multiple;
 
@@ -235,6 +237,7 @@ class LocationEdit extends Component
             'indication' => $this->indication,
             'reason_event_id' => $this->reason_event_id,
             'loc_time' => $this->loc_time,
+            'obs' => $this->obs,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');

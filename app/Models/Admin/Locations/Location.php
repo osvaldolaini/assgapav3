@@ -24,7 +24,7 @@ class Location extends Model
         'ambience', 'guests','ambience_id', 'partner', 'partner_id', 'ambience_tenant', 'ambience_tenant_id',
         'location_date', 'location_hour_start', 'location_hour_end', 'event_type', 'event_benefited',
         'value', 'deposit', 'lighting', 'dressing_room', 'security', 'janitor', 'indication_id',
-        'reason_event_id', 'value_extra', 'loc_time', 'updated_because', 'deleted_at',
+        'reason_event_id', 'value_extra', 'loc_time', 'obs','updated_because', 'deleted_at',
         'deleted_because', 'deleted_by', 'updated_by', 'created_by','active'
     ];
 

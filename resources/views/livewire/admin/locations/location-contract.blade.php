@@ -242,7 +242,13 @@ th {
                     </tr>
 
                     <tr>
-                        <td colspan="5">Obs: <?= $location->ambiences->obs?></td>
+                        <td colspan="5">Obs: <?= $location->ambiences->obs?>
+
+                        @if($location->obs)
+                        <p style="color:#f00; margin-bottom:5px;">
+                                ** {{ $location->obs }}
+                            </p>
+                        @endif</td>
                     </tr>
 
                     @if($location->updated_because)

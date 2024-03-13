@@ -276,25 +276,47 @@ class LocationCalendar extends Component
         return json_encode($calendar);
     }
     //READ
+    // public function showModalRead($id)
+    // {
+    //     $this->showModalView = true;
+    //     if (isset($id)) {
+    //         $data = Location::where('id', $id)->first();
+    //         $this->detail = [
+    //             'Locatário'         => $data->partners->name,
+    //             'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
+    //             'Beneficiado'       => $data->event_benefited,
+    //             'Criada em'         => $data->updated,
+    //             'Criada por'        => $data->created_by,
+    //             'Atualizada'        => $data->updated,
+    //             'Atualizada por'    => $data->updated_by,
+    //         ];
+    //         //   $this->logs = logging($data->id,$this->model);
+    //     } else {
+    //         $this->detail = '';
+    //     }
+    //     $this->getFullCalendar();
+    // }
+    //READ
     public function showModalRead($id)
     {
-        $this->showModalView = true;
-        if (isset($id)) {
-            $data = Location::where('id', $id)->first();
-            $this->detail = [
-                'Locatário'         => $data->partners->name,
-                'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
-                'Beneficiado'       => $data->event_benefited,
-                'Criada em'         => $data->updated,
-                'Criada por'        => $data->created_by,
-                'Atualizada'        => $data->updated,
-                'Atualizada por'    => $data->updated_by,
-            ];
-            //   $this->logs = logging($data->id,$this->model);
-        } else {
-            $this->detail = '';
-        }
-        $this->getFullCalendar();
+        redirect()->route('edit-location',$id);
+        // $this->showModalView = true;
+        // if (isset($id)) {
+        //     $data = Location::find($id);
+        //     $this->detail = [
+        //         'Locatário'         => $data->partners->name,
+        //         'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
+        //         'Beneficiado'       => $data->event_benefited,
+        //         'Criada em'         => $data->updated,
+        //         'Criada por'        => $data->created_by,
+        //         'Atualizada'        => $data->updated,
+        //         'Atualizada por'    => $data->updated_by,
+        //     ];
+        //     //   $this->logs = logging($data->id,$this->model);
+        // } else {
+        //     $this->detail = '';
+        // }
+        // $this->getFullCalendar();
     }
     //MESSAGE
     public function openAlert($status, $msg)

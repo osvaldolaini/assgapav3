@@ -44,6 +44,8 @@ class CreateLocationsTable extends Migration
 
             $table->decimal('value_extra', $precision = 10, $scale = 2)->nullable();
             $table->string('loc_time')->nullable();
+            $table->text('obs')->nullable();
+
 
             /*Alteração */
             $table->text('updated_because')->nullable();

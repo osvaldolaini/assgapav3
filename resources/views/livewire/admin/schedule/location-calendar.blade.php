@@ -45,6 +45,7 @@
                 var calendar = new Calendar(calendarEl, {
                     plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
                     navLinks: true,
+                    selectable: true,
                     buttonText: {
                         today: 'Hoje'
                     },

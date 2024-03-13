@@ -241,6 +241,12 @@
                                     class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
                                     id="value_extra" wire:model="value_extra">
                             </div>
+                            <div class="col-span-12 ">
+                                <label for="obs">Observação</label>
+                                <textarea class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                                placeholder="Observação" wire:model="obs" rows="3">{{ $obs }}</textarea>
+
+                            </div>
                         @endif
                     @endif
 
