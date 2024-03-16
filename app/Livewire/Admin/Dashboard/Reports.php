@@ -33,6 +33,8 @@ class Reports extends Component
 
     public $type;
 
+    public $bisexto = [2024,2028,2032,2036];
+
     public function mount($type)
     {
         $this->mounth = date('m');
@@ -60,7 +62,11 @@ class Reports extends Component
 
         $this->start = date('Y-m-d', strtotime($this->year . '-' . $this->mounth . '-01'));
         if ($this->mounth == 2) {
-            $this->day = '28';
+            if (in_array($this->year,$this->bisexto)) {
+                $this->day = '29';
+            }else{
+                $this->day = '28';
+            }
         } elseif ($this->mounth == '4' or $this->mounth == '6' or $this->mounth == '9' or $this->mounth == '11') {
             $this->day = '30';
         } else {
