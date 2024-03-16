@@ -57,7 +57,7 @@
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-span-full sm:col-span-6" >
+                <div class="col-span-full sm:col-span-3" >
                     <label for="value">*Valor</label>
                     <input
                         class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
