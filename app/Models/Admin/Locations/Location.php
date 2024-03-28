@@ -21,11 +21,11 @@ class Location extends Model
     protected $table = 'locations';
 
     protected $fillable = [
-        'ambience', 'guests','ambience_id', 'partner', 'partner_id', 'ambience_tenant', 'ambience_tenant_id',
+        'ambience', 'guests', 'ambience_id', 'partner', 'partner_id', 'ambience_tenant', 'ambience_tenant_id',
         'location_date', 'location_hour_start', 'location_hour_end', 'event_type', 'event_benefited',
         'value', 'deposit', 'lighting', 'dressing_room', 'security', 'janitor', 'indication_id',
-        'reason_event_id', 'value_extra', 'loc_time', 'obs','updated_because', 'deleted_at',
-        'deleted_because', 'deleted_by', 'updated_by', 'created_by','active'
+        'reason_event_id', 'value_extra', 'loc_time', 'obs', 'updated_because', 'deleted_at',
+        'deleted_because', 'deleted_by', 'updated_by', 'created_by', 'active'
     ];
 
     public function setLocationDateAttribute($value)
@@ -42,6 +42,37 @@ class Location extends Model
             return Carbon::createFromFormat('Y-m-d', $value)
                 ->format('d/m/Y');
         }
+    }
+    public function getDayWeekAttribute()
+    {
+        $day =  date("l", strtotime(implode("-", array_reverse(explode("/", $this->location_date)))));
+        // Converter o dia da semana para português
+        switch ($day) {
+            case 'Monday':
+                $dia_semana_pt = 'Segunda-feira';
+                break;
+            case 'Tuesday':
+                $dia_semana_pt = 'Terça-feira';
+                break;
+            case 'Wednesday':
+                $dia_semana_pt = 'Quarta-feira';
+                break;
+            case 'Thursday':
+                $dia_semana_pt = 'Quinta-feira';
+                break;
+            case 'Friday':
+                $dia_semana_pt = 'Sexta-feira';
+                break;
+            case 'Saturday':
+                $dia_semana_pt = 'Sábado';
+                break;
+            case 'Sunday':
+                $dia_semana_pt = 'Domingo';
+                break;
+            default:
+                $dia_semana_pt = 'Erro ao converter';
+        }
+        return $dia_semana_pt;
     }
 
 
@@ -77,14 +108,14 @@ class Location extends Model
 
     public function getPaidAttribute()
     {
-        $paids = $this->installments->where('active',1);
-        if($paids){
-            $p=0;
+        $paids = $this->installments->where('active', 1);
+        if ($paids) {
+            $p = 0;
             foreach ($paids as $item) {
-                $p+=$item->value_db;
+                $p += $item->value_db;
             }
             return number_format($p, 2, ',', '.');
-        }else{
+        } else {
             return 0;
         }
     }
@@ -92,17 +123,17 @@ class Location extends Model
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
         }
     }
 
     public function getRemainingAttribute()
     {
-        $paids = $this->installments->where('active',1);
-        if($paids){
+        $paids = $this->installments->where('active', 1);
+        if ($paids) {
             $remaing = $this->value_db - $this->convert_value($this->paid);
             return number_format($remaing, 2, ',', '.');
-        }else{
+        } else {
             return $this->value;
         }
     }
@@ -117,11 +148,11 @@ class Location extends Model
     }
     public function installments()
     {
-        return $this->hasMany(Installment::class,  'location_id','id');
+        return $this->hasMany(Installment::class,  'location_id', 'id');
     }
     public function extras()
     {
-        return $this->hasOne(Extras::class,  'location_id','id');
+        return $this->hasOne(Extras::class,  'location_id', 'id');
     }
     public function indication()
     {
@@ -133,16 +164,15 @@ class Location extends Model
     }
     public function ambiences()
     {
-        return $this->belongsTo(Ambience::class,  'ambience_id','id');
+        return $this->belongsTo(Ambience::class,  'ambience_id', 'id');
     }
     public function getCashbackAttribute()
     {
-        if($this->indication_id && $this->ambiences->cashback != '' && $this->value_db > 0)
-        {
-            $cash = $this->ambiences->cashback/100;
+        if ($this->indication_id && $this->ambiences->cashback != '' && $this->value_db > 0) {
+            $cash = $this->ambiences->cashback / 100;
             $cashback =  $this->value_db * $cash;
             // $cashback = $this->ambiences->cashback;
-        }else{
+        } else {
             $cashback = 0;
         }
 

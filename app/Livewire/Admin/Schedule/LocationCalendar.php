@@ -149,9 +149,11 @@ class LocationCalendar extends Component
                 ->format('d/m/Y');
 
             $calendar = [];
+
+
             if ($this->multiple == 0) {
                 $this->location_date = implode("-", array_reverse(explode("/", $this->location_date)));
-
+// dd($this->location_date);
                     $event = Location::where('active', 1)
                         ->where('ambience_id', $this->ambience_id)
                         ->where('location_date', $this->location_date)
