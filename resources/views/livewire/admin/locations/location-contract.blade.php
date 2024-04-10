@@ -177,11 +177,11 @@ th {
                         <td colspan="2">Valor caução: R$ {{$location->deposit}}</td>
                     </tr>
 
-                    @if($location->location_hour_start != '00:00:00')
-                    <tr>
-                        <td colspan="2">Hora do início: {{date( 'H:i' , strtotime($location->location_hour_start))}}</td>
-                        <td colspan="3">Hora do término: {{date( 'H:i' , strtotime($location->location_hour_end))}}</td>
-                    </tr>
+                    @if($location->ambiences->multiple)
+                        <tr>
+                            <td colspan="2">Hora do início: {{date( 'H:i' , strtotime($location->location_hour_start))}}</td>
+                            <td colspan="3">Hora do término: {{date( 'H:i' , strtotime($location->location_hour_end))}}</td>
+                        </tr>
                     @else
                         <tr>
                             <td colspan="3">Horário: {{$location->loc_time}}</td>
