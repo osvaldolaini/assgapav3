@@ -214,8 +214,11 @@ class LocationInstallment extends Component
         $this->openAlert('error', 'Excluir esse registro não exclui o
         recibo ' . $data->received_id . '
         automaticamente.');
-        $this->dispatch('updateInstallments',$this->location_id);
-        // redirect()->route('installments-location', $this->location_id);
+        redirect()->to('/locações/'.$this->location_id.'/parcelas')->with('success', 'Registro excluido com sucesso.')->with('error', 'Excluir esse registro não exclui o
+        recibo ' . $data->received_id . '
+        automaticamente.');
+        // $this->dispatch('updateInstallments',$this->location_id);
+        // redirect()->to('installments-location', $this->location_id);
     }
     //MESSAGE
     public function openAlert($status, $msg)

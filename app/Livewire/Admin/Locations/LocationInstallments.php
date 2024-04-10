@@ -15,6 +15,7 @@ class LocationInstallments extends Component
     public $config;
     public $installments;
     public $breadcrumb_title;
+    public $max_installments = 4;
 
     public function mount(Location $location)
     {
@@ -35,6 +36,11 @@ class LocationInstallments extends Component
     #[On('updateInstallments')]
     public function render()
     {
+        $pages = Auth::user()->access->pluck('page_id')->toArray();
+        if (in_array(13, $pages) == true){
+            $this->max_installments = 6;
+        }
+
         if($this->location->installments->count() < 1 && $this->location->convert_value($this->location->value) > 0){
             Installment::create([
                 'active'        => 0,

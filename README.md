@@ -5,6 +5,10 @@
 </p>
 
 # Sistema ASSGAPA V3
+## V 3.24 09/04/2024
+
+-Correção
+    Horário no contrato estava aparecendo indevidamente em ambiente sem multipla locação
 ## V 3.23 26/01/2024
 -Melhorias
         -Troca da mascara de dinheiro ( caixa, recibo e contas)

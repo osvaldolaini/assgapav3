@@ -30,7 +30,7 @@
             <div class="stat">
                 <div class="stat-figure text-secondary">
                     @if ($location->convert_value($location->value) > 0)
-                        @if ($installments->count() < 3 && $location->convert_value($location->remaining) > 0)
+                        @if ($installments->count() < $max_installments && $location->convert_value($location->remaining) > 0)
                             <h2 class="mb-4 text-2xl font-semibold leadi">
                                 <button wire:click="insertParcel()"
                                     class="flex items-center justify-center w-1/2 px-5
