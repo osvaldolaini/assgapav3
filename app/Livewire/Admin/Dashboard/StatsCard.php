@@ -20,6 +20,7 @@ class StatsCard extends Component
     public $installmentLates;
     public $bill;
     public $locations;
+    public $deleteLocations;
     public $cashier;
     public $reports;
     public $reportsTiny;
@@ -34,6 +35,7 @@ class StatsCard extends Component
         $bill,
         $partnerLate,
         $locations,
+        $deleteLocations,
         $lastReceiveds,
         $cashier,
         $reports,
@@ -89,6 +91,10 @@ class StatsCard extends Component
             /**Locações */
             $this->locations = Location::where('location_date', '>=', date('Y-m-d'))
                 ->where('active', 1)->get()->count();
+        }
+        if ($deleteLocations) {
+            /**Locações */
+            $this->deleteLocations = Location::where('active', 2)->get()->count();
         }
         if ($bill) {
             /**Contas pagas no mês*/

@@ -88,7 +88,8 @@ p{
 <div class="receipt-body">
     <table>
         <tr>
-            <td colspan="3" ><b>Recebemos de:</b> {{mb_strtoupper($received->partners->name)}}</td>
+            <td colspan="2" ><b>Recebemos de:</b> {{mb_strtoupper($received->partners->name)}}</td>
+            <td ><b>Forma de pagamento:</b> {{mb_strtoupper($received->form_payment)}}</td>
         </tr>
         <tr>
             <td colspan="3"><b>Endereço:</b> {{mb_strtoupper($received->partners->address)}}, {{mb_strtoupper($received->partners->district)}} - {{mb_strtoupper($received->partners->city)}} / {{mb_strtoupper($received->partners->state)}} </td>

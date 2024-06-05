@@ -43,6 +43,13 @@ class Location extends Model
                 ->format('d/m/Y');
         }
     }
+    public function getExcludedDateAttribute()
+    {
+        if ($this->deleted_at != "") {
+            return Carbon::createFromFormat('Y-m-d H:i:s', $this->deleted_at)
+                ->format('d/m/Y');
+        }
+    }
     public function getDayWeekAttribute()
     {
         $day =  date("l", strtotime(implode("-", array_reverse(explode("/", $this->location_date)))));

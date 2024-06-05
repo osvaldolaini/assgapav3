@@ -5,8 +5,15 @@
 </p>
 
 # Sistema ASSGAPA V3
+## v 3.25 05/06/2024
+-Melhorias
+    -Botão de excluir locação na aba editar locação
+    -Dados de tipo de sócio no contrato
+    -Tipo de pagamento na via do cliente
+    -Locações canceladas
 ## V 3.24 09/04/2024
-
+-Melhorias
+    -Aumento do número de parcelas
 -Correção
     Horário no contrato estava aparecendo indevidamente em ambiente sem multipla locação
 ## V 3.23 26/01/2024

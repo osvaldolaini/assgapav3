@@ -20,6 +20,8 @@ class LocationEdit extends Component
     public $dependents;
     public $location;
 
+    public $showJetModal = false;
+
     public $breadcrumb_title;
     //Calendar
     public $events = [];
@@ -61,6 +63,12 @@ class LocationEdit extends Component
     public $reason_event_id;
     public $loc_time;
     public $obs;
+
+
+    public $model_id;
+    public $registerId;
+    public $deleted_because;
+    public $deleted_at;
 
     protected $listeners =
     [
@@ -126,6 +134,37 @@ class LocationEdit extends Component
         // dd($this->events);
         return view('livewire.admin.locations.location-edit');
     }
+     //DELETE
+   public function showModalDelete($id)
+   {
+       $this->showJetModal = true;
+
+       if (isset($id)) {
+           $this->registerId = $id;
+       } else {
+           $this->registerId = '';
+       }
+   }
+
+   public function delete($id)
+   {
+       $this->rules = [
+           'deleted_because' => 'required',
+       ];
+
+       $this->validate();
+
+       $data = Location::where('id', $id)->first();
+       $data->deleted_because = $this->deleted_because;
+       $data->deleted_at = date('Y-m-d');
+       $data->active = 2;
+       $data->save();
+
+       $this->openAlert('success', 'Registro excluido com sucesso.');
+       redirect()->route('locations')->with('success', 'Registro excluido com sucesso.');
+
+    //    $this->showJetModal = false;
+   }
 
     public function openModalSearch($typeSearch)
     {

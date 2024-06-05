@@ -53,10 +53,43 @@
             </div>
         </a>
     @endif
+
+    @if ($deleteLocations)
+        <a href="{{ route('delete-locations') }}" class="col-span-full sm:col-span-1">
+            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
+                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
+                    viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M8 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M15 2V4" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M2 8H21" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <path d="M18.5 15.6429L17 17.1429" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" />
+                    <circle cx="17" cy="17" r="5" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+                <div class="p-4 ">
+                    <dl>
+                        <dt class="text-sm font-medium leading-5 text-white truncate">
+                            Locações canceladas
+                        </dt>
+                        <dd class="mt-1 text-5xl font-bold leading-9 text-white">
+                            {{ $deleteLocations }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </a>
+    @endif
     @if ($partnerLate)
         <a href="{{ route('partnersLate') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
+                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
                     viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <style>
@@ -98,8 +131,8 @@
     @endif
     @if ($installmentLates)
         <a href="{{ route('installmentsLate') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
+                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M17.6667 2H6.33333C6.02379 2 5.86902 2 5.73853 2.01198C4.28819 2.14511 3.1383 3.35155 3.01142 4.87321C3 5.01012 3 5.1725 3 5.49727V20.2598C3 21.1323 4.05871 21.5026 4.55769 20.8045C4.90385 20.3203 5.59615 20.3203 5.94231 20.8045L6.375 21.4098C6.9375 22.1967 8.0625 22.1967 8.625 21.4098C9.1875 20.623 10.3125 20.623 10.875 21.4098C11.4375 22.1967 12.5625 22.1967 13.125 21.4098C13.6875 20.623 14.8125 20.623 15.375 21.4098C15.9375 22.1967 17.0625 22.1967 17.625 21.4098L18.0577 20.8045C18.4038 20.3203 19.0962 20.3203 19.4423 20.8045C19.9413 21.5026 21 21.1323 21 20.2598V5.49727C21 5.1725 21 5.01012 20.9886 4.87321C20.8617 3.35155 19.7118 2.14511 18.2615 2.01198C18.131 2 17.9762 2 17.6667 2Z"

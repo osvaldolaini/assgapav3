@@ -6,6 +6,7 @@
                 'bill'              => false,
                 'partnerLate'       => false,
                 'locations'         => true,
+                'deleteLocations'   => false,
                 'lastReceiveds'     => true,
                 'cashier'           => false,
                 'reports'           => false,

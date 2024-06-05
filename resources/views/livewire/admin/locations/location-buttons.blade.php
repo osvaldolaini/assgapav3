@@ -1,6 +1,7 @@
 <div>
     <div class="w-full">
         <div class="flex justify-end font-medium duration-200 ">
+
             @if ($update == true)
                 <div class="tooltip tooltip-top p-0" data-tip="Editar">
                     <a href="{{ route('edit-location',$id) }}"
