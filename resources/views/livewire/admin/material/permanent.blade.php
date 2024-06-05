@@ -13,7 +13,64 @@
     <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
+            <div class="w-full flex justify-start items-start px-3 pt-2 space-x-1">
+                <button class="btn" wire:click="c_sort('title')">Ordenar por Produto
+                    @if ($s == 'title')
+                        @if ($t == 'desc')
+                            <svg fill="#000000" class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Circle_Chev_Down" data-name="Circle Chev Down">
+                                    <g>
+                                        <path
+                                            d="M12.35,13.85a.492.492,0,0,1-.7,0l-3-3a.495.495,0,0,1,.7-.7L12,12.79l2.65-2.64a.495.495,0,0,1,.7.7Z" />
+                                        <path
+                                            d="M21.933,12A9.933,9.933,0,1,1,12,2.067,9.944,9.944,0,0,1,21.933,12ZM3.067,12A8.933,8.933,0,1,0,12,3.067,8.943,8.943,0,0,0,3.067,12Z" />
+                                    </g>
+                                </g>
+                            </svg>
+                        @else
+                            <svg fill="#000000" class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Circle_Chev_Up" data-name="Circle Chev Up">
+                                    <g>
+                                        <path
+                                            d="M11.65,10.15a.492.492,0,0,1,.7,0l3,3a.495.495,0,0,1-.7.7L12,11.21,9.35,13.85a.495.495,0,0,1-.7-.7Z" />
+                                        <path
+                                            d="M2.067,12A9.933,9.933,0,1,1,12,21.934,9.944,9.944,0,0,1,2.067,12Zm18.866,0A8.933,8.933,0,1,0,12,20.934,8.943,8.943,0,0,0,20.933,12Z" />
+                                    </g>
+                                </g>
+                            </svg>
+                        @endif
 
+                    @endif
+                </button>
+                <button class="btn" wire:click="c_sort('code')">Ordenar por Código
+                    @if ($s == 'code')
+                        @if ($t == 'desc')
+
+                            <svg fill="#000000" class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Circle_Chev_Down" data-name="Circle Chev Down">
+                                    <g>
+                                        <path
+                                            d="M12.35,13.85a.492.492,0,0,1-.7,0l-3-3a.495.495,0,0,1,.7-.7L12,12.79l2.65-2.64a.495.495,0,0,1,.7.7Z" />
+                                        <path
+                                            d="M21.933,12A9.933,9.933,0,1,1,12,2.067,9.944,9.944,0,0,1,21.933,12ZM3.067,12A8.933,8.933,0,1,0,12,3.067,8.943,8.943,0,0,0,3.067,12Z" />
+                                    </g>
+                                </g>
+                            </svg>
+                        @else
+                            <svg fill="#000000" class="w-5 h-5" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <g id="Circle_Chev_Up" data-name="Circle Chev Up">
+                                    <g>
+                                        <path
+                                            d="M11.65,10.15a.492.492,0,0,1,.7,0l3,3a.495.495,0,0,1-.7.7L12,11.21,9.35,13.85a.495.495,0,0,1-.7-.7Z" />
+                                        <path
+                                            d="M2.067,12A9.933,9.933,0,1,1,12,21.934,9.944,9.944,0,0,1,2.067,12Zm18.866,0A8.933,8.933,0,1,0,12,20.934,8.943,8.943,0,0,0,20.933,12Z" />
+                                    </g>
+                                </g>
+                            </svg>
+                        @endif
+                    @endif
+                </button>
+            </div>
             <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
                 <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
@@ -235,4 +292,3 @@
         </x-slot>
     </x-dialog-modal>
 </div>
-

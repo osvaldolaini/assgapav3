@@ -29,6 +29,9 @@ class Permanent extends Component
     public $model_id;
     public $registerId;
 
+    public $s = 'title';
+    public $t = 'asc';
+
     //Dados da tabela
     public $model = "App\Models\Admin\Material\Product"; //Model principal
     public $modelId="id"; //Ex: 'table.id' or 'id'
@@ -52,6 +55,19 @@ class Permanent extends Component
         return view('livewire.admin.material.permanent', [
             'dataTable' => $this->getData(),
         ]);
+    }
+    public function c_sort($s)
+    {
+        $exp = explode(',',$this->sort);
+
+        $this->s = $s;
+        if ($exp[1] == 'asc') {
+            $this->t = 'desc';
+            $this->sort = $s.',desc';
+        }else{
+            $this->t = 'asc';
+            $this->sort = $s.',asc';
+        }
     }
     //EXPORT
     public function printExport()
