@@ -34,7 +34,7 @@ class Permanent extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Material\Product"; //Model principal
-    public $modelId="id"; //Ex: 'table.id' or 'id'
+    public $modelId = "id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
@@ -58,17 +58,18 @@ class Permanent extends Component
     }
     public function c_sort($s)
     {
-        $exp = explode(',',$this->sort);
+        $exp = explode(',', $this->sort);
 
         $this->s = $s;
         if ($exp[1] == 'asc') {
             $this->t = 'desc';
-            $this->sort = $s.',desc';
-        }else{
+            $this->sort = $s . ',desc';
+        } else {
             $this->t = 'asc';
-            $this->sort = $s.',asc';
+            $this->sort = $s . ',asc';
         }
     }
+
     //EXPORT
     public function printExport()
     {
@@ -134,8 +135,8 @@ class Permanent extends Component
     public function resetAll()
     {
         $this->reset(
-    'title',
-    'code',
+            'title',
+            'code',
         );
     }
     //CREATE
@@ -148,8 +149,8 @@ class Permanent extends Component
     public function store()
     {
         $this->rules = [
-            'title'=>'required',
-            'code'=>'required',
+            'title' => 'required',
+            'code' => 'required',
         ];
         $this->validate();
 
@@ -178,7 +179,7 @@ class Permanent extends Component
                 'Atualizada'        => $data->updated,
                 'Atualizada por'    => $data->updated_by,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -196,8 +197,8 @@ class Permanent extends Component
     public function update()
     {
         $this->rules = [
-            'title'=>'required',
-            'code'=>'required',
+            'title' => 'required',
+            'code' => 'required',
         ];
 
         $this->validate();
@@ -207,7 +208,7 @@ class Permanent extends Component
         ], [
             'title'         =>  $this->title,
             'code'          =>  $this->code,
-            'updated_by'    =>Auth::user()->name,
+            'updated_by'    => Auth::user()->name,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
@@ -265,7 +266,7 @@ class Permanent extends Component
             $query = $query->where('active', '<=', 1);
         }
         $query = $query->where('type', $this->type);
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -293,59 +294,59 @@ class Permanent extends Component
         }
     }
     #PRICIPAL FUNCTIONS
-        public function search($query)
-        {
-            $searchTerms = explode(',', $this->searchable);
-            $query->where(function ($innerQuery) use ($searchTerms) {
-                foreach ($searchTerms as $term) {
-                    if ($this->customSearch) {
-                        $fields = explode('|', $this->customSearch);
-                        if (in_array($term, $fields)) {
-                            $search = array($term => $this->search);
-                            $formattedSearch = $this->model::filterFields($search);
-                            if ($formattedSearch['converted'] != '%0%') {
-                                $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
-                            } else {
-                                $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
-                            }
+    public function search($query)
+    {
+        $searchTerms = explode(',', $this->searchable);
+        $query->where(function ($innerQuery) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if ($this->customSearch) {
+                    $fields = explode('|', $this->customSearch);
+                    if (in_array($term, $fields)) {
+                        $search = array($term => $this->search);
+                        $formattedSearch = $this->model::filterFields($search);
+                        if ($formattedSearch['converted'] != '%0%') {
+                            $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
                         } else {
                             $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                         }
                     } else {
                         $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                     }
+                } else {
+                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                 }
-            });
-            // dd($query);
-        }
+            }
+        });
+        // dd($query);
+    }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 }

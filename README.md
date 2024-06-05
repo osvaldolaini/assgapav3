@@ -11,6 +11,7 @@
     -Dados de tipo de sócio no contrato
     -Tipo de pagamento na via do cliente
     -Locações canceladas
+    -Botão ordenar no material permanente
 ## V 3.24 09/04/2024
 -Melhorias
     -Aumento do número de parcelas
