@@ -12,6 +12,8 @@
     -Tipo de pagamento na via do cliente
     -Locações canceladas
     -Botão ordenar no material permanente
+-Correção
+    -Restrição de locação no mesmo dia
 ## V 3.24 09/04/2024
 -Melhorias
     -Aumento do número de parcelas
