@@ -29,7 +29,9 @@ class LocationCalendar extends Component
     public function mount($ambience_id)
     {
         if ($ambience_id) {
-            $this->ambience_id = $ambience_id;
+            $this->ambience_id = $ambience_id;$selectAmbience = Ambience::select('id', 'title', 'multiple')->
+            find($this->ambience_id);
+            $this->multiple = $selectAmbience->multiple;
             $this->events = $this->getCalendarReservation($this->ambience_id);
         }
     }
@@ -127,6 +129,8 @@ class LocationCalendar extends Component
     }
     public function checkDate($location_date)
     {
+// dd($location_date);
+
         $limit = date('Y-m-d', strtotime("+12 month", strtotime(now())));
         $initial = date('Y-m-d',  strtotime($location_date));
         $start = date('Y-m-d');
@@ -149,11 +153,11 @@ class LocationCalendar extends Component
                 ->format('d/m/Y');
 
             $calendar = [];
-
+            // dd($this->multiple);
 
             if ($this->multiple == 0) {
                 $this->location_date = implode("-", array_reverse(explode("/", $this->location_date)));
-// dd($this->location_date);
+                // dd($this->location_date);
                     $event = Location::where('active', 1)
                         ->where('ambience_id', $this->ambience_id)
                         ->where('location_date', $this->location_date)

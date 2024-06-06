@@ -73,36 +73,36 @@
                 });
                 calendar.render();
             });
-
             var calendar = new Calendar(calendarEl, {
-                plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
-                navLinks: true,
-                buttonText: {
-                    today: 'Hoje'
-                },
-                weekends: true,
-                showNonCurrentDates: false,
-                eventColor: '#D30E28',
-                locale: 'br',
-                timeZone: 'local',
-                initialView: 'dayGridMonth',
-                height: 650,
-                eventDisplay: 'block',
-                events: @this.events,
+                    plugins: [dayGridPlugin, timeGridPlugin, listPlugin],
+                    navLinks: true,
+                    selectable: true,
+                    buttonText: {
+                        today: 'Hoje'
+                    },
+                    weekends: true,
+                    showNonCurrentDates: false,
+                    eventColor: '#D30E28',
+                    locale: 'br',
+                    timeZone: 'local',
+                    initialView: 'dayGridMonth',
+                    height: 650,
+                    eventDisplay: 'block',
+                    events: @this.events,
 
-                eventClick: function(info) {
-                    Livewire.dispatch('showModalRead', {
-                        id: info.event.id
-                    })
-                },
-                navLinkDayClick: function(date, jsEvent) {
-                    Livewire.dispatch('checkDate', {
-                        location_date: date.toISOString()
-                    })
-                },
+                    eventClick: function(info) {
+                        Livewire.dispatch('showModalRead', {
+                            id: info.event.id
+                        })
+                    },
+                    navLinkDayClick: function(date, jsEvent) {
+                        Livewire.dispatch('checkDate', {
+                            location_date: date.toISOString()
+                        })
+                    },
 
-            });
-            calendar.render();
+                });
+                calendar.render();
 
 
         });
