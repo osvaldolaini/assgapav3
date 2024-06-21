@@ -29,8 +29,8 @@ class LocationCalendar extends Component
     public function mount($ambience_id)
     {
         if ($ambience_id) {
-            $this->ambience_id = $ambience_id;$selectAmbience = Ambience::select('id', 'title', 'multiple')->
-            find($this->ambience_id);
+            $this->ambience_id = $ambience_id;
+            $selectAmbience = Ambience::select('id', 'title', 'multiple')->find($this->ambience_id);
             $this->multiple = $selectAmbience->multiple;
             $this->events = $this->getCalendarReservation($this->ambience_id);
         }
@@ -43,12 +43,11 @@ class LocationCalendar extends Component
         }
         return view('livewire.admin.schedule.location-calendar');
     }
-    public function changeAmbience($ambience_id,$partner_id)
+    public function changeAmbience($ambience_id, $partner_id)
     {
         $this->ambience_id = $ambience_id;
         $this->partner_id = $partner_id;
-        $selectAmbience = Ambience::select('id', 'title', 'multiple')->
-        find($this->ambience_id);
+        $selectAmbience = Ambience::select('id', 'title', 'multiple')->find($this->ambience_id);
         $this->multiple = $selectAmbience->multiple;
         $this->dispatch('calendar', $this->getCalendarReservation($this->ambience_id));
     }
@@ -77,7 +76,7 @@ class LocationCalendar extends Component
                 $ambience = $event->ambience;
             }
             if ($event->partner_id) {
-                $partner = ($event->partners ? $event->partners->name:$event->partner);
+                $partner = ($event->partners ? $event->partners->name : $event->partner);
             } else {
                 $partner = $event->partner;
             }
@@ -129,9 +128,9 @@ class LocationCalendar extends Component
     }
     public function checkDate($location_date)
     {
-// dd($location_date);
+        // dd($location_date);
 
-        $limit = date('Y-m-d', strtotime("+12 month", strtotime(now())));
+        $limit = date('Y-m-d', strtotime("+24 month", strtotime(now())));
         $initial = date('Y-m-d',  strtotime($location_date));
         $start = date('Y-m-d');
         if ($initial > $limit) {
@@ -144,82 +143,80 @@ class LocationCalendar extends Component
         }
         if ($this->partner_id) {
             if ($this->verifyGracePeriod()) {
-                $this->openAlert('error', 'Sócio em período de carência até '. $this->grace_period);
+                $this->openAlert('error', 'Sócio em período de carência até ' . $this->grace_period);
                 return;
             }
         }
 
-            $this->location_date = Carbon::parse($location_date)
-                ->format('d/m/Y');
+        $this->location_date = Carbon::parse($location_date)
+            ->format('d/m/Y');
 
-            $calendar = [];
-            // dd($this->multiple);
+        $calendar = [];
+        // dd($this->multiple);
 
-            if ($this->multiple == 0) {
-                $this->location_date = implode("-", array_reverse(explode("/", $this->location_date)));
-                // dd($this->location_date);
-                    $event = Location::where('active', 1)
-                        ->where('ambience_id', $this->ambience_id)
-                        ->where('location_date', $this->location_date)
-                        ->first();
-                    $unavailabilities = AmbienceUnavailability::where('active', 1)
-                        ->where('ambience_id', $this->ambience_id)
-                        ->get();
-                    foreach ($unavailabilities as $key) {
-                        $c = strtotime($key->end) - strtotime($key->start);
-                        $dias = floor($c / (60 * 60 * 24));
-                        $calendar[] = $key->start->format('Y-m-d');
-                        for ($i = 0; $i < $dias; $i++) {
-                            $date = date('Y-m-d', strtotime($key->end . '-' . $i . ' day'));
-                            $calendar[] = $date;
-                        }
-                    }
-                    if (!empty($calendar)) {
-                        array_multisort($calendar);
-                    }
-
-                    if ($event) {
-                        $this->openAlert('error', 'Infelizmente já existe uma locação neste dia.');
-                    } else {
-                        if (in_array($this->location_date, $calendar)) {
-                            $this->openAlert('error', 'Infelizmente já existe uma locação neste dia.');
-                        } else {
-                            $this->dispatch('insertDate', $location_date);
-                        }
-                    }
-
-            } else {
-                $this->dispatch('insertDate', $location_date);
+        if ($this->multiple == 0) {
+            $this->location_date = implode("-", array_reverse(explode("/", $this->location_date)));
+            // dd($this->location_date);
+            $event = Location::where('active', 1)
+                ->where('ambience_id', $this->ambience_id)
+                ->where('location_date', $this->location_date)
+                ->first();
+            $unavailabilities = AmbienceUnavailability::where('active', 1)
+                ->where('ambience_id', $this->ambience_id)
+                ->get();
+            foreach ($unavailabilities as $key) {
+                $c = strtotime($key->end) - strtotime($key->start);
+                $dias = floor($c / (60 * 60 * 24));
+                $calendar[] = $key->start->format('Y-m-d');
+                for ($i = 0; $i < $dias; $i++) {
+                    $date = date('Y-m-d', strtotime($key->end . '-' . $i . ' day'));
+                    $calendar[] = $date;
+                }
+            }
+            if (!empty($calendar)) {
+                array_multisort($calendar);
             }
 
+            if ($event) {
+                $this->openAlert('error', 'Infelizmente já existe uma locação neste dia.');
+            } else {
+                if (in_array($this->location_date, $calendar)) {
+                    $this->openAlert('error', 'Infelizmente já existe uma locação neste dia.');
+                } else {
+                    $this->dispatch('insertDate', $location_date);
+                }
+            }
+        } else {
+            $this->dispatch('insertDate', $location_date);
+        }
     }
-     //Testar carência
-     public function verifyGracePeriod()
-     {
-         if (isset($this->ambience_id)) {
-             $ambience = Ambience::where('active', 1)
-                 ->where('id', $this->ambience_id)
-                 ->first();
-             if ($ambience->need == 0) {
-                 return false;
-             } else {
-                 if (isset($this->partner_id)) {
-                     $partner = Partner::select('grace_period')
-                         ->find($this->partner_id);
-                        $period = date('Y-m-d', strtotime(implode("-",array_reverse(explode("/",$partner->grace_period)))));
+    //Testar carência
+    public function verifyGracePeriod()
+    {
+        if (isset($this->ambience_id)) {
+            $ambience = Ambience::where('active', 1)
+                ->where('id', $this->ambience_id)
+                ->first();
+            if ($ambience->need == 0) {
+                return false;
+            } else {
+                if (isset($this->partner_id)) {
+                    $partner = Partner::select('grace_period')
+                        ->find($this->partner_id);
+                    $period = date('Y-m-d', strtotime(implode("-", array_reverse(explode("/", $partner->grace_period)))));
 
-                     if ($period > date('Y-m-d')) {
+                    if ($period > date('Y-m-d')) {
                         $this->grace_period = $partner->grace_period;
                         return true;
-                     } else {
-                         return false;
-                     }
-                 } else {
-                     return false;
-                 }
-             }
-         }
-     }
+                    } else {
+                        return false;
+                    }
+                } else {
+                    return false;
+                }
+            }
+        }
+    }
     public function getFullCalendar()
     {
         $calendar = array();
@@ -305,7 +302,7 @@ class LocationCalendar extends Component
     //READ
     public function showModalRead($id)
     {
-        redirect()->route('edit-location',$id);
+        redirect()->route('edit-location', $id);
         // $this->showModalView = true;
         // if (isset($id)) {
         //     $data = Location::find($id);
