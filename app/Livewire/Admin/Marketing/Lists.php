@@ -14,6 +14,7 @@ use Mpdf\Mpdf;
 
 class Lists extends Component
 {
+
     public Partner $partner;
     public $breadcrumb_title = 'LISTAS';
 
@@ -21,7 +22,8 @@ class Lists extends Component
     public $email = false;
     public $phone = false;
     public $address = false;
-    public $rg= false;
+    public $rg = false;
+    public $date_of_birth = false;
 
     public $model_id;
 
@@ -31,7 +33,7 @@ class Lists extends Component
     public $search;
     public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'partners.name,partners.cpf,pf_pj,cnpj,rg,phone_first,address,city,state,number,email,partner_category_master,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
+    public $columnsInclude = 'partners.name,date_of_birth,partners.cpf,pf_pj,cnpj,rg,phone_first,address,city,state,number,email,partner_category_master,partners.discount,partner_categories.title as category,partner_categories.color as color,partners.active';
     public $searchable = 'partners.name,partners.cpf,partner_categories.title'; //Colunas pesquisadas no banco de dados
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 15; //Qtd de registros por página
@@ -50,7 +52,6 @@ class Lists extends Component
         $today = Carbon::parse(now())->locale('pt-BR');
         $today = $today->translatedFormat('d F Y');
         $body = array();
-        $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
         $heads = array('Sócio');
 
@@ -65,10 +66,14 @@ class Lists extends Component
             $body[$id] = [
                 'name' => $item->name,
             ];
+            if ($this->date_of_birth) {
+                $body[$id]['date_of_birth'] =
+                    ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
+            }
             if ($this->pf_pj) {
-                if ($item->pf_pj == 'pf'){
+                if ($item->pf_pj == 'pf') {
                     $body[$id]['cpf'] = $item->cpf;
-                }else{
+                } else {
                     $body[$id]['cnpj'] = $item->cnpj;
                 }
             }
@@ -79,11 +84,14 @@ class Lists extends Component
                 $body[$id]['phone'] = $item->phone_first;
             }
             if ($this->address) {
-                $body[$id]['address'] = $item->address.' '.$item->number.','. $item->city.'-'.$item->state;
+                $body[$id]['address'] = $item->address . ' ' . $item->number . ',' . $item->city . '-' . $item->state;
             }
             if ($this->rg) {
                 $body[$id]['phone_first'] = $item->rg;
             }
+        }
+        if ($this->date_of_birth) {
+            $heads[] = 'Data de Nascimento';
         }
         if ($this->pf_pj) {
             $heads[] = 'CPF / CNPJ';
@@ -132,23 +140,26 @@ class Lists extends Component
     }
     public function excelExport()
     {
-        $this->paginate = 'single';
+        // $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
         $data[0] =  array('Sócio');
+        if ($this->date_of_birth) {
+            array_push($data[0], 'Data de Nascimento');
+        }
         if ($this->pf_pj) {
-            array_push($data[0],'CPF / CNPJ');
+            array_push($data[0], 'CPF / CNPJ');
         }
         if ($this->email) {
-            array_push($data[0],'email');
+            array_push($data[0], 'email');
         }
         if ($this->phone) {
-            array_push($data[0],'Telefones');
+            array_push($data[0], 'Telefones');
         }
         if ($this->address) {
-            array_push($data[0],'Endereço');
+            array_push($data[0], 'Endereço');
         }
         if ($this->rg) {
-            array_push($data[0],'RG');
+            array_push($data[0], 'RG');
         }
         foreach ($this->getData() as $item) {
             $id = $item->id;
@@ -161,10 +172,14 @@ class Lists extends Component
             $data[$id] = [
                 'name' => $item->name,
             ];
+            if ($this->date_of_birth) {
+                $body[$id]['date_of_birth'] =
+                    ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
+            }
             if ($this->pf_pj) {
-                if ($item->pf_pj == 'pf'){
+                if ($item->pf_pj == 'pf') {
                     $data[$id]['cpf'] = $item->cpf;
-                }else{
+                } else {
                     $data[$id]['cnpj'] = $item->cnpj;
                 }
             }
@@ -175,7 +190,7 @@ class Lists extends Component
                 $data[$id]['phone'] = $item->phone_first;
             }
             if ($this->address) {
-                $data[$id]['address'] = $item->address.' '.$item->number.','. $item->city.'-'.$item->state;
+                $data[$id]['address'] = $item->address . ' ' . $item->number . ',' . $item->city . '-' . $item->state;
             }
             if ($this->rg) {
                 $data[$id]['phone_first'] = $item->rg;
