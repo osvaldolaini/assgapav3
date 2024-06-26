@@ -52,6 +52,7 @@ class Lists extends Component
         $today = Carbon::parse(now())->locale('pt-BR');
         $today = $today->translatedFormat('d F Y');
         $body = array();
+        $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
         $heads = array('Sócio');
 
@@ -140,7 +141,7 @@ class Lists extends Component
     }
     public function excelExport()
     {
-        // $this->paginate = 'single';
+        $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
         $data[0] =  array('Sócio');
         if ($this->date_of_birth) {
