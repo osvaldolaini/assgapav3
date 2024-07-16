@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Admin\Ambiences\Ambience;
 use Illuminate\Http\Request;
 
-class AmbiencesController extends Controller
+class ApiAmbiencesController extends Controller
 {
     /**
      * Display a listing of the resource.

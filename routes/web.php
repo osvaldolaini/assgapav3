@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ApiAmbiencesController;
 use App\Livewire\Admin\Configs\AmbienceCategories;
 use App\Livewire\Admin\Configs\AmbienceTenants;
 use App\Livewire\Admin\Configs\CostCenters;
@@ -100,6 +101,9 @@ Route::get('/piscina/{partner}', RegisterAccessPool::class)
 
 Route::get('/passe-piscina/{pass}', RegisterPassPool::class)
     ->name('pool-pass');
+
+
+Route::get('/api/apiAmbiences/{any}', ApiAmbiencesController::class)->name('apiAmbiences.show');
 
 Route::middleware([
     'auth:sanctum',
