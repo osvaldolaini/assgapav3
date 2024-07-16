@@ -103,7 +103,7 @@ Route::get('/passe-piscina/{pass}', RegisterPassPool::class)
     ->name('pool-pass');
 
 
-Route::get('/api/apiAmbiences/{any}', ApiAmbiencesController::class)->name('apiAmbiences.show');
+// Route::get('/api/apiAmbiences/{any}', ApiAmbiencesController::class)->name('apiAmbiences.show');
 
 Route::middleware([
     'auth:sanctum',
