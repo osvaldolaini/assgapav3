@@ -219,8 +219,8 @@
                         <td colspan="3">{{ $location->ambiences->time_week }}</td>
                     <tr>
                         <td>Dia do evento: {{ $location->location_date }}</td>
-                        <td colspan="2">Valor da locação: R$ {{ $location->value }}</td>
-                        <td colspan="2">Valor caução: R$ {{ $location->deposit }}</td>
+                        <td colspan="4">Valor da locação: R$ {{ $location->value }}</td>
+                        {{-- <td colspan="2">Valor caução: R$ {{ $location->deposit }}</td> --}}
                     </tr>
 
                     @if ($location->ambiences->multiple)
