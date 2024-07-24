@@ -4,6 +4,7 @@ namespace App\Livewire\Admin\Ambiences;
 
 use App\Models\Admin\Ambiences\AmbienceUnavailability;
 use App\Models\Admin\Ambiences\Ambience;
+use App\Models\Admin\Locations\Location;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
 
@@ -79,19 +80,24 @@ class AmbienceUnavailabilities extends Component
         ];
         $this->validate();
 
-        AmbienceUnavailability::create([
-            'title'          => $this->title,
-            'start'          => $this->start,
-            'end'            => $this->end,
-            'ambience_id'    => $this->ambience_id,
-            'active'         => 1,
-            'created_by' => Auth::user()->name,
-        ]);
+        $this->validates();
 
-        $this->openAlert('success', 'Registro criado com sucesso.');
+        dd($this->validates());
+        if ($this->validates() == true) {
+            AmbienceUnavailability::create([
+                'title'          => $this->title,
+                'start'          => $this->start,
+                'end'            => $this->end,
+                'ambience_id'    => $this->ambience_id,
+                'active'         => 1,
+                'created_by' => Auth::user()->name,
+            ]);
 
-        $this->showModalCreate = false;
-        $this->resetAll();
+            $this->openAlert('success', 'Registro criado com sucesso.');
+
+            $this->showModalCreate = false;
+            $this->resetAll();
+        }
     }
     //READ
     public function showModalRead($id)
@@ -132,21 +138,58 @@ class AmbienceUnavailabilities extends Component
         ];
 
         $this->validate();
+        $this->validates();
 
-        AmbienceUnavailability::updateOrCreate([
-            'id' => $this->model_id,
-        ], [
-            'title'          => $this->title,
-            'start'          => $this->start,
-            'end'            => $this->end,
-            'ambience_id'    => $this->ambience_id,
-            'updated_by' => Auth::user()->name,
-        ]);
+        // dd($this->validates());
+        if ($this->validates() == true) {
+            AmbienceUnavailability::updateOrCreate([
+                'id' => $this->model_id,
+            ], [
+                'title'          => $this->title,
+                'start'          => $this->start,
+                'end'            => $this->end,
+                'ambience_id'    => $this->ambience_id,
+                'updated_by' => Auth::user()->name,
+            ]);
 
-        $this->openAlert('success', 'Registro atualizado com sucesso.');
+            $this->openAlert('success', 'Registro atualizado com sucesso.');
 
-        $this->showModalEdit = false;
-        $this->resetAll();
+            $this->showModalEdit = false;
+            $this->resetAll();
+        }
+    }
+    public function validates()
+    {
+        $start = implode("-", array_reverse(explode("/", $this->start))) . ' 00:00:00';
+        $end = implode("-", array_reverse(explode("/", $this->end))) . ' 00:00:00';
+        $now = date('Y-m-d H:i:s');
+        if ($start > $end) {
+            $this->openAlert('error', 'Término maior que a data de início');
+            return false;
+        }
+        if ($start <= $now) {
+            $this->openAlert('error', 'A ação não pode ser realizada com data inferior ao dia atual.');
+            return false;
+        }
+        $replay = AmbienceUnavailability::where('start', $start)
+            ->where('id', '!=', $this->model_id)
+            ->where('active', 1)
+            ->where('ambience_id', $this->ambience_id)
+            ->first();
+        if ($replay) {
+            $this->openAlert('error', 'Essa data "' . $replay->start . '" já está ocupada para: ' . $replay->title);
+            return false;
+        }
+
+        $location = Location::where('location_date', $start)
+            ->where('active', 1)
+            ->where('ambience_id', $this->ambience_id)
+            ->first();
+        if ($location) {
+            $this->openAlert('error', 'Existe uma locação nesta data "' . $location->location_date . '" para: ' . $location->partners->name);
+            return false;
+        }
+        return true;
     }
     //DELETE
     public function showModalDelete($id)
