@@ -22,45 +22,45 @@ class AmbienceUnavailability extends Model
     protected $table = 'unavailabilities';
 
     protected $fillable = [
-        'id','ambience_id','start','end','title','updated_because','deleted_at','deleted_because',
-        'deleted_by','updated_by','created_by'
+        'id', 'ambience_id', 'start', 'end', 'title', 'updated_because', 'deleted_at', 'deleted_because',
+        'deleted_by', 'updated_by', 'created_by'
     ];
-    // protected $casts = [
-    //     'start' => 'datetime:Y-m-d H:i:s',
-    //     'end' => 'datetime:Y-m-d H:i:s',
-    // ];
+    protected $casts = [
+        'start' => 'datetime:Y-m-d H:i:s',
+        'end' => 'datetime:Y-m-d H:i:s',
+    ];
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
     }
-    public function getStartAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)
-            ->format('d/m/Y');
-    }
+    // public function getStartAttribute($value)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $value)
+    //         ->format('d/m/Y');
+    // }
     public function setStartAttribute($value)
     {
-        $this->attributes['start']=implode("-",array_reverse(explode("/",$value))). ' 00:00:00';
+        $this->attributes['start'] = implode("-", array_reverse(explode("/", $value))) . ' 00:00:00';
     }
-    public function getEndAttribute($value)
-    {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)
-            ->format('d/m/Y');
-    }
+    // public function getEndAttribute($value)
+    // {
+    //     return Carbon::createFromFormat('Y-m-d H:i:s', $value)
+    //         ->format('d/m/Y');
+    // }
     public function setEndAttribute($value)
     {
-        $this->attributes['end']=implode("-",array_reverse(explode("/",$value))). ' 00:00:00';
+        $this->attributes['end'] = implode("-", array_reverse(explode("/", $value))) . ' 00:00:00';
     }
 
-    public function ambience():BelongsTo
+    public function ambience(): BelongsTo
     {
-        return $this->belongsTo(Ambience::class,'ambience_id','id');
+        return $this->belongsTo(Ambience::class, 'ambience_id', 'id');
     }
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
 }
