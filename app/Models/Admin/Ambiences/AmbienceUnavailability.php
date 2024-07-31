@@ -22,7 +22,7 @@ class AmbienceUnavailability extends Model
     protected $table = 'unavailabilities';
 
     protected $fillable = [
-        'id', 'ambience_id', 'start', 'end', 'title', 'updated_because', 'deleted_at', 'deleted_because',
+        'id', 'ambience_id', 'type', 'start', 'end', 'title', 'updated_because', 'deleted_at', 'deleted_because',
         'deleted_by', 'updated_by', 'created_by', 'active'
     ];
     // protected $casts = [
@@ -33,6 +33,7 @@ class AmbienceUnavailability extends Model
     {
         $this->attributes['title'] = mb_strtoupper($value);
     }
+
     public function getStartAttribute($value)
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $value)
@@ -55,6 +56,23 @@ class AmbienceUnavailability extends Model
     public function ambience(): BelongsTo
     {
         return $this->belongsTo(Ambience::class, 'ambience_id', 'id');
+    }
+
+    public function getTypeListAttribute($value)
+    {
+        switch ($this->type) {
+            case 0:
+                $type = 'Pré reserva';
+                break;
+            case 1:
+                $type = 'Indisponibilidade';
+                break;
+
+            default:
+                $type = 'Indisponibilidade';
+                break;
+        }
+        return $type;
     }
 
     public function getActivitylogOptions(): LogOptions

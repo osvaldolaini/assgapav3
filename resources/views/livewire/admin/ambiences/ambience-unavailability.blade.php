@@ -2,18 +2,18 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     INDISPONIBILIDADES
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
 
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
@@ -28,7 +28,12 @@
                                                     dark:text-gray-400">
                                             Ambiente
                                         </th>
-
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                text-center text-gray-500
+                                                dark:text-gray-400">
+                                            Tipo
+                                        </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
@@ -39,7 +44,7 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
                                                     dark:text-gray-400">
-                                            Período
+                                            Período / Data
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -64,19 +69,26 @@
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
                                                     {{ $data->ambience->title }}
                                                     @if ($data->active == 2)
-                                                        <div class="badge badge-error gap-2 mx-1">
+                                                        <div class="gap-2 mx-1 badge badge-error">
                                                             Excluido
                                                         </div>
                                                     @endif
                                                 </td>
-
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->type_list }}
+                                                </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->motive }}
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->start }} à  {{ $data->end }}
+                                                    @if ($data->type == 0)
+                                                        {{ $data->start }}
+                                                    @else
+                                                        {{ $data->start }} à {{ $data->end }}
+                                                    @endif
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
@@ -93,7 +105,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -125,7 +137,7 @@
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)
@@ -157,10 +169,24 @@
     </x-dialog-modal>
     {{-- MODAL CREATE --}}
     <x-dialog-modal wire:model="showModalCreate">
-        <x-slot name="title">Inserir novo</x-slot>
+        <x-slot name="title">Inserir novo </x-slot>
         <x-slot name="content">
             <form wire:submit="store">
                 <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                    <div class="col-span-full ">
+                        <label for="type" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            *Tipo</label>
+                        <Select wire:model.live="type" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="">Selecione</option>
+                            <option value="0">Pré reserva</option>
+                            <option value="1">Indisponibilidade</option>
+                        </Select>
+                        @error('type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="col-span-full ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
                             *Motivo</label>
@@ -170,36 +196,57 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Início</label>
-                        <input type="text" x-mask="99/99/9999" wire:model="start" placeholder="Início" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('title')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="end"  class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Término</label>
-                        <input type="text" x-mask="99/99/9999" wire:model="end" placeholder="Término" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('title')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-full sm:col-span-2">
-                        <label for="ambience_id" class="text-sm">*Ambiente</label>
-                        <Select wire:model="ambience_id" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                            <option value="">Selecione...</option>
-                            @foreach ($ambience as $item)
-                                <option value="{{ $item->id }}">
-                                    {{ $item->title }}
-                                </option>
-                            @endforeach
-                        </Select>
-                    </div>
+                    @if ($type != '')
+                        <div class="{{ $type == 0 ? 'sm:col-span-1' : 'col-span-full sm:col-span-2' }}">
+                            <label for="ambience_id" class="text-sm">*Ambiente</label>
+                            <Select wire:model.live="ambience_id" required
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                                <option value="">Selecione...</option>
+                                @foreach ($ambience as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->title }}
+                                    </option>
+                                @endforeach
+                            </Select>
+                        </div>
+                        @if ($type == 0 && $ambience_id)
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Data <span class="text-red-500">{{ $alert }}</span></label>
+                                <input type="text" x-mask="99/99/9999" wire:model.live="start" placeholder="Data"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('start')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
+                        @if ($type == 1 && $ambience_id)
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Início <span class="text-red-500">{{ $alert }}</span></label>
+                                <input type="text" x-mask="99/99/9999" wire:model.live="start"
+                                    placeholder="Início" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('title')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="end" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Término</label>
+                                <input type="text" x-mask="99/99/9999" wire:model="end" placeholder="Término"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('title')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
+
+                    @endif
+
+
                 </div>
             </form>
         </x-slot>
@@ -225,6 +272,20 @@
             <form wire:submit="update">
                 <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="col-span-full ">
+                        <label for="type" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            *Tipo</label>
+                        <Select wire:model.live="type" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="">Selecione</option>
+                            <option value="0">Pré reserva</option>
+                            <option value="1">Indisponibilidade</option>
+                        </Select>
+                        @error('type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-full ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
                             *Motivo</label>
                         <input type="text" wire:model="title" placeholder="Motivo" required
@@ -233,36 +294,57 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Início</label>
-                        <input type="text" x-mask="99/99/9999" wire:model="start" placeholder="Início" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('title')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="end"  class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Término</label>
-                        <input type="text" x-mask="99/99/9999" wire:model="end" placeholder="Término" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('title')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-full sm:col-span-2">
-                        <label for="ambience_id" class="text-sm">*Ambiente</label>
-                        <Select wire:model="ambience_id" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                            <option value="">Selecione...</option>
-                            @foreach ($ambience as $item)
-                                <option value="{{ $item->id }}">
-                                    {{ $item->title }}
-                                </option>
-                            @endforeach
-                        </Select>
-                    </div>
+                    @if ($type != '')
+                        <div class="{{ $type == 0 ? 'sm:col-span-1' : 'col-span-full sm:col-span-2' }}">
+                            <label for="ambience_id" class="text-sm">*Ambiente</label>
+                            <Select wire:model.live="ambience_id" required
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                                <option value="">Selecione...</option>
+                                @foreach ($ambience as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->title }}
+                                    </option>
+                                @endforeach
+                            </Select>
+                        </div>
+                        @if ($type == 0 && $ambience_id)
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Data <span class="text-red-500">{{ $alert }}</span></label>
+                                <input type="text" x-mask="99/99/9999" wire:model.live="start" placeholder="Data"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('start')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
+                        @if ($type == 1 && $ambience_id)
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Início <span class="text-red-500">{{ $alert }}</span></label>
+                                <input type="text" x-mask="99/99/9999" wire:model.live="start"
+                                    placeholder="Início" required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('title')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="end" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Término</label>
+                                <input type="text" x-mask="99/99/9999" wire:model="end" placeholder="Término"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('title')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
+
+                    @endif
+
+
                 </div>
             </form>
         </x-slot>

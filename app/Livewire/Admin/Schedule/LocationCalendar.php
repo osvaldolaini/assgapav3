@@ -107,22 +107,38 @@ class LocationCalendar extends Component
                 'end' => $end,
                 'id' => $event->id,
                 'ambience_id' => $ambience_id,
+                'type_event' => 1
             );
         }
+
         $unavailabilities = AmbienceUnavailability::where('active', 1)
             ->where('ambience_id', $ambience_id)
             ->get();
 
-        foreach ($unavailabilities as $key) {
-            $calendar[] = array(
-                'color' => '#dc3545',
-                'title' => 'Motivo: ' . $key->title,
-                'start' => $key->start,
-                'end' => $key->end,
-                'id'  => $key->id,
-                'ambience_id' => '',
-            );
+
+        if ($unavailabilities) {
+            foreach ($unavailabilities as $key) {
+
+                $start = implode("-", array_reverse(explode("/", $key->start))) . ' 00:00:00';
+                $end = implode("-", array_reverse(explode("/", $key->end))) . ' 23:59:59';
+
+                if ($key->type == 0) {
+                    $text = 'Pré-reserva: ' . $key->title;
+                } else {
+                    $text = 'Motivo: ' . $key->title;
+                }
+                $calendar[] = array(
+                    'color' => '#dc3545',
+                    'title' => $text,
+                    'start' => $start,
+                    'end' => $end,
+                    'id'  => $key->id,
+                    'ambience_id' => $ambience_id,
+                    'type_event' => 0
+                );
+            }
         }
+        // dd($calendar);
 
         return $calendar;
     }
@@ -134,7 +150,7 @@ class LocationCalendar extends Component
         $initial = date('Y-m-d',  strtotime($location_date));
         $start = date('Y-m-d');
         if ($initial > $limit) {
-            $this->openAlert('error', 'A data excede o limite de um ano.');
+            $this->openAlert('error', 'A data excede o limite de dois ano.');
             return;
         }
         if ($initial < $start) {
@@ -146,6 +162,23 @@ class LocationCalendar extends Component
                 $this->openAlert('error', 'Sócio em período de carência até ' . $this->grace_period);
                 return;
             }
+        }
+
+        $unavailabilities = AmbienceUnavailability::where('active', 1)
+            ->where('ambience_id', $this->ambience_id)
+            ->where('start', 'LIKE', '%' . $initial . '%')
+            ->first();
+        // dd($unavailabilities);
+        if ($unavailabilities) {
+            $created_at = Carbon::parse($unavailabilities->created_at)
+                ->format('d/m/Y H:i:s');
+            if ($unavailabilities->type == 0) {
+                $this->openAlert('error', 'Existe uma pré-reserva para: ' . $unavailabilities->title . ' realizada no dia ' . $created_at . ' por ' . $unavailabilities->created_by);
+            } else {
+                $unavailabilities->openAlert('error', 'Existe uma indisponibilidade por: ' . $unavailabilities->title);
+            }
+
+            return;
         }
 
         $this->location_date = Carbon::parse($location_date)
@@ -161,18 +194,18 @@ class LocationCalendar extends Component
                 ->where('ambience_id', $this->ambience_id)
                 ->where('location_date', $this->location_date)
                 ->first();
-            $unavailabilities = AmbienceUnavailability::where('active', 1)
-                ->where('ambience_id', $this->ambience_id)
-                ->get();
-            foreach ($unavailabilities as $key) {
-                $c = strtotime($key->end) - strtotime($key->start);
-                $dias = floor($c / (60 * 60 * 24));
-                $calendar[] = $key->start->format('Y-m-d');
-                for ($i = 0; $i < $dias; $i++) {
-                    $date = date('Y-m-d', strtotime($key->end . '-' . $i . ' day'));
-                    $calendar[] = $date;
-                }
-            }
+            // $unavailabilities = AmbienceUnavailability::where('active', 1)
+            //     ->where('ambience_id', $this->ambience_id)
+            //     ->get();
+            // foreach ($unavailabilities as $key) {
+            //     $c = strtotime($key->end) - strtotime($key->start);
+            //     $dias = floor($c / (60 * 60 * 24));
+            //     $calendar[] = $key->start->format('Y-m-d');
+            //     for ($i = 0; $i < $dias; $i++) {
+            //         $date = date('Y-m-d', strtotime($key->end . '-' . $i . ' day'));
+            //         $calendar[] = $date;
+            //     }
+            // }
             if (!empty($calendar)) {
                 array_multisort($calendar);
             }
@@ -273,36 +306,59 @@ class LocationCalendar extends Component
                 'start' => $start,
                 'end' => $end,
                 'id' => $event->id,
+                'type_event' => 1
             );
         }
         // dd($calendar);
         return json_encode($calendar);
     }
-    //READ
-    // public function showModalRead($id)
-    // {
-    //     $this->showModalView = true;
-    //     if (isset($id)) {
-    //         $data = Location::where('id', $id)->first();
-    //         $this->detail = [
-    //             'Locatário'         => $data->partners->name,
-    //             'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
-    //             'Beneficiado'       => $data->event_benefited,
-    //             'Criada em'         => $data->updated,
-    //             'Criada por'        => $data->created_by,
-    //             'Atualizada'        => $data->updated,
-    //             'Atualizada por'    => $data->updated_by,
-    //         ];
-    //         //   $this->logs = logging($data->id,$this->model);
-    //     } else {
-    //         $this->detail = '';
-    //     }
-    //     $this->getFullCalendar();
-    // }
-    //READ
-    public function showModalRead($id)
+    //READ MODAL
+    public function showModalView($id, $type)
     {
-        redirect()->route('edit-location', $id);
+
+        $this->showModalView = true;
+        if (isset($id)) {
+            // dd($id);
+            if ($type == 0) {
+                $data = AmbienceUnavailability::where('active', 1)
+                    ->where('id', $id)
+                    ->first();
+                $this->detail = [
+                    'Locatário'         => $data->title,
+                    'Criada em'         => $data->updated,
+                    'Criada por'        => $data->created_by,
+                    'Atualizada'        => $data->updated,
+                    'Atualizada por'    => $data->updated_by,
+                ];
+            } else {
+                $data = Location::where('id', $id)->first();
+                $this->detail = [
+                    'Locatário'         => $data->partners->name,
+                    'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
+                    'Beneficiado'       => $data->event_benefited,
+                    'Criada em'         => $data->updated,
+                    'Criada por'        => $data->created_by,
+                    'Atualizada'        => $data->updated,
+                    'Atualizada por'    => $data->updated_by,
+                ];
+            }
+
+            //   $this->logs = logging($data->id,$this->model);
+        } else {
+            $this->detail = '';
+        }
+        $this->getFullCalendar();
+    }
+    //READ
+    public function showModalRead($id, $type)
+    {
+        // dd($id);
+        if ($type == 0) {
+            redirect()->route('ambience-unavailabilities');
+        } else {
+            redirect()->route('edit-location', $id);
+        }
+
         // $this->showModalView = true;
         // if (isset($id)) {
         //     $data = Location::find($id);

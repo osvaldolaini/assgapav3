@@ -6,6 +6,7 @@ use App\Exports\AllExports;
 use App\Models\Admin\Ambiences\Ambience;
 use App\Models\Admin\Ambiences\AmbienceUnavailability;
 use App\Models\Admin\Configs;
+use App\Models\Admin\Locations\Location;
 use Carbon\Carbon;
 use Livewire\Component;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class Ambiences extends Component
     public $logs;
     public $model_id;
     public $registerId;
+    public $alert;
 
     //Dados da tabela
     public $model = "App\Models\Admin\Ambiences\Ambience"; //Model principal
@@ -67,7 +69,7 @@ class Ambiences extends Component
             $body[] = [
                 'name' => $item->title,
                 'category' => $item->category,
-                'capacity'=> $item->capacity,
+                'capacity' => $item->capacity,
             ];
         }
         $html = view(
@@ -78,7 +80,7 @@ class Ambiences extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Ambiente', 'Categoria','Capacidade'),
+                'heads'         => array('Ambiente', 'Categoria', 'Capacidade'),
                 'body'          => $body,
             ]
         )->render();
@@ -103,12 +105,12 @@ class Ambiences extends Component
     {
         $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
-        $data[] = array('Ambiente', 'Categoria','Capacidade');
+        $data[] = array('Ambiente', 'Categoria', 'Capacidade');
         foreach ($this->getData() as $item) {
             $data[] = [
                 'name' => $item->title,
                 'category' => $item->category,
-                'capacity'=> $item->capacity,
+                'capacity' => $item->capacity,
             ];
         }
         $this->paginate = 15;
@@ -240,24 +242,28 @@ class Ambiences extends Component
             'end' => 'required',
         ];
         $this->validate();
+        $this->validates();
 
-        AmbienceUnavailability::create([
-            'title'          => $this->title,
-            'start'          => $this->start,
-            'end'            => $this->end,
-            'ambience_id'    => $this->registerId,
-            'active'         => 1,
-            'created_by' => Auth::user()->name,
-        ]);
+        // dd($this->validates());
+        if ($this->validates() == true) {
+            AmbienceUnavailability::create([
+                'title'          => $this->title,
+                'start'          => $this->start,
+                'end'            => $this->end,
+                'type'           => 1,
+                'ambience_id'    => $this->registerId,
+                'active'         => 1,
+                'created_by' => Auth::user()->name,
+            ]);
+            $this->openAlert('success', 'Indisponibilidade criada com sucesso.');
 
-        $this->openAlert('success', 'Registro criado com sucesso.');
-
-        $this->showModalUnavailability = false;
-        $this->reset(
-            'title',
-            'start',
-            'end',
-        );
+            $this->showModalUnavailability = false;
+            $this->reset(
+                'title',
+                'start',
+                'end',
+            );
+        }
     }
     //SEARCH PERSONALIZADO
     private function getData()
@@ -351,5 +357,46 @@ class Ambiences extends Component
             }
         }
         return $query;
+    }
+    public function validates()
+    {
+        $start = implode("-", array_reverse(explode("/", $this->start))) . ' 00:00:00';
+        $end = implode("-", array_reverse(explode("/", $this->end))) . ' 00:00:00';
+        $now = date('Y-m-d H:i:s');
+
+        if ($start > $end) {
+            $this->openAlert('error', 'Término maior que a data de início');
+            $this->alert = 'Término maior que a data de início.';
+            return false;
+        }
+
+        if ($start <= $now) {
+            $this->openAlert('error', 'A ação não pode ser realizada com data inferior ao dia atual.');
+            $this->alert = 'A data deve ser maior que o dia de hoje.';
+            return false;
+        }
+
+        $replay = AmbienceUnavailability::where('start', $start)
+            ->where('id', '!=', $this->model_id)
+            ->where('active', 1)
+            ->where('ambience_id', $this->registerId)
+            ->first();
+        if ($replay) {
+            $this->openAlert('error', 'Essa data "' . $replay->start . '" já está ocupada para: ' . $replay->title);
+            $this->alert = 'Já existe pré reserva nessa data.';
+            return false;
+        }
+
+        $location = Location::where('location_date', $start)
+            ->where('active', 1)
+            ->where('ambience_id', $this->registerId)
+            ->first();
+        if ($location) {
+            $this->openAlert('error', 'Existe uma locação nesta data "' . $location->location_date . '" para: ' . $location->partners->name);
+            $this->alert = 'Já existe reserva nessa data.';
+            return false;
+        }
+        $this->alert = '';
+        return true;
     }
 }
