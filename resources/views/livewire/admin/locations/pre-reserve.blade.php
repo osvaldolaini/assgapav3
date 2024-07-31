@@ -15,8 +15,7 @@
         <x-slot name="title">Pré reserva </x-slot>
         <x-slot name="content">
             <form wire:submit="store">
-                <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
-
+                <div class="grid gap-4 mb-1 text-left sm:grid-cols-2 sm:gap-6 sm:mb-5">
                     <div class="col-span-full ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
                             *Cliente</label>
