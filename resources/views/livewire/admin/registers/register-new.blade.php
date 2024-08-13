@@ -133,11 +133,12 @@
                         class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         maxlength="8" placeholder="saram" wire:model="saram">
                 </div>
+                {{-- Saram novo --}}
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="saram_novo">NOVO SARAM</label>
                     <input x-mask="99999999-99" placeholder="00000000-00"
                         class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
-                        maxlength="8" placeholder="saram_novo" wire:model="saram_novo">
+                        maxlength="11" placeholder="saram_novo" wire:model="saram_novo">
                 </div>
 
                 <div class="col-span-full sm:col-span-4">
