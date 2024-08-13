@@ -27,6 +27,7 @@ class PartnerEdit extends Component
     public $cnpj;
     public $rg;
     public $saram;
+    public $saram_novo;
     public $phone_first;
     public $phone_second;
     public $address;
@@ -81,7 +82,7 @@ class PartnerEdit extends Component
     public static function uploadPhoto($image)
     {
         // dd('storage/public/livewire-tmp/' . $image);
-        $img = explode('.',$image);
+        $img = explode('.', $image);
         $logoWebp = Image::make('storage/livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
         $logoWebp->save('storage/partners/' . $img[0] . '.webp');
@@ -94,13 +95,13 @@ class PartnerEdit extends Component
     public function updated($property)
     {
         if ($property === 'postalCode') {
-            $cep = str_replace ('-' ,'', $this->postalCode);
+            $cep = str_replace('-', '', $this->postalCode);
             // dd($cep);
-            $ch = curl_init("https://viacep.com.br/ws/".$cep."/json/");
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            $ch = curl_init("https://viacep.com.br/ws/" . $cep . "/json/");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = json_decode(curl_exec($ch));
             curl_close($ch);
-            if($result){
+            if ($result) {
                 $this->address = $result->logradouro;
                 $this->city = $result->localidade;
                 $this->district = $result->bairro;
@@ -131,6 +132,7 @@ class PartnerEdit extends Component
         $this->cnpj = $partner->cnpj;
         $this->rg = $partner->rg;
         $this->saram = $partner->saram;
+        $this->saram_novo = $partner->saram_novo;
         $this->phone_first = $partner->phone_first;
         $this->phone_second = $partner->phone_second;
         $this->address = $partner->address;
@@ -170,8 +172,8 @@ class PartnerEdit extends Component
     public function save()
     {
         $this->persist();
-        if($this->partner_category_master == 'Dependente') {
-            redirect()->route('edit-dependent',$this->id);
+        if ($this->partner_category_master == 'Dependente') {
+            redirect()->route('edit-dependent', $this->id);
         }
     }
     public function save_out()
@@ -179,9 +181,9 @@ class PartnerEdit extends Component
         $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } elseif($this->partner_category_master == 'Dependente') {
-            redirect()->route('dependent',$this->responsible);
-        }else {
+        } elseif ($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent', $this->responsible);
+        } else {
             redirect()->route('others');
         }
     }
@@ -229,7 +231,8 @@ class PartnerEdit extends Component
             'cpf'                   => $this->cpf,
             'cnpj'                  => $this->cnpj,
             'rg'                    => $this->rg,
-            'saram'                 =>$this->saram,
+            'saram'                 => $this->saram,
+            'saram_novo'            => $this->saram_novo,
             'phone_first'           => $this->phone_first,
             'phone_second'          => $this->phone_second,
             'address'               => $this->address,

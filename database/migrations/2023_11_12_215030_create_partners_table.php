@@ -28,8 +28,9 @@ class CreatePartnersTable extends Migration
             $table->string('cnpj')->nullable();
             $table->string('rg')->nullable();
             $table->string('saram')->nullable();
-            $table->string('phone_first',50)->nullable();
-            $table->string('phone_second',50)->nullable();
+            $table->string('saram_novo')->nullable();
+            $table->string('phone_first', 50)->nullable();
+            $table->string('phone_second', 50)->nullable();
             $table->string('address')->nullable();
             $table->string('city')->nullable();
             $table->string('district')->nullable();
@@ -54,8 +55,8 @@ class CreatePartnersTable extends Migration
 
             /*Padrão */
             $table->timestamps();
-            $table->string('updated_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
 
             /*RELACIONAMENTOS*/
             $table->foreign('partner_category')->references('id')->on('partner_categories')->onDelete('SET NULL');
