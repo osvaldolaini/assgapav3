@@ -169,7 +169,8 @@
                                     style='font-size:8pt;'>Associado:{{ $location->partners->parent->name }}</span>)
                             @endif
                         </td>
-                        <td>CPF/CNPJ:
+                        <td>
+                            {{ $location->partners->pf_pj == 'pf' ? 'CPF' : 'CNPJ' }}:
                             {{ $location->partners->pf_pj == 'pf' ? $location->partners->cpf : $location->partners->cnpj }}
                         </td>
                     </tr>
