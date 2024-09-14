@@ -150,7 +150,7 @@
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;">{{ $config->title }}</h5>
                     <h6 style="margin-bottom:0px; padding-bottom: 0px;">
                         {{ $config->address . ' - ' . $config->city . '/' . $config->state . ', Fone/Fax: ' . $config->phone }}
-                        {{ $config->whatsapp ? '- ' . $config->whatsapp : '' }}
+                        {{ $config->whatsapp ? ',Whatsapp: ' . $config->whatsapp : '' }}
                     </h6>
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;"><strong>{{ $subtext }}</strong></h5>
                 </div>
