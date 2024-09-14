@@ -143,13 +143,14 @@
                     </div>
                     @if (isset($contract_number))
                         <div style="width:20%;float:right;border:solid thin #fff;text-align:right;">
-                            {{ $contract_number }}</div>
+                            {{ $contract_number }} -</div>
                     @endif
                 </div>
                 <div id="about" style="margin-top:0px; padding-top: 0px;">
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;">{{ $config->title }}</h5>
                     <h6 style="margin-bottom:0px; padding-bottom: 0px;">
                         {{ $config->address . ' - ' . $config->city . '/' . $config->state . ', Fone/Fax: ' . $config->phone }}
+                        {{ $config->whatsapp ? '- ' . $config->whatsapp : '' }}
                     </h6>
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;"><strong>{{ $subtext }}</strong></h5>
                 </div>
