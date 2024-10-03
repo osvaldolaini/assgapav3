@@ -247,7 +247,7 @@ class AllLocations extends Component
     //READ
     public function showModalRead($id)
     {
-        redirect()->route('edit-location',$id);
+        redirect()->route('edit-location', $id);
         // $this->showModalView = true;
         // if (isset($id)) {
         //     $data = Location::find($id);

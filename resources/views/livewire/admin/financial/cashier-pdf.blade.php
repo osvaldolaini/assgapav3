@@ -86,40 +86,51 @@
         <img src="{{ url('storage/logos/assgapa.png') }}">
     </div>
     <div class="titulo">
-        <h5 >
-            {{$config->title}}
+        <h5>
+            {{ $config->title }}
         </h5>
-        <h5 style="margin-bottom: 10px;">CNPJ {{$config->cnpj}}</h5>
-        <p>{{$config->address}} - {{$config->city}} / {{$config->state}} - CEP {{$config->postalCode}}</p>
+        <h5 style="margin-bottom: 10px;">CNPJ {{ $config->cnpj }}</h5>
+        <p>{{ $config->address }} - {{ $config->city }} / {{ $config->state }} - CEP {{ $config->postalCode }}</p>
 
-        <p>Contato(s): {{$config->phone}}</p>
+        <p>Contato(s): {{ $config->phone }}</p>
     </div>
     <div class="rec">
         <h2>RECIBO</h2>
-        <h3>Nº <b>ASSG{{str_pad($cashier->id, 6, '0', STR_PAD_LEFT)}}CX</b></h3>
-        <div class="valor"><h3>R$ {{$cashier->value}}</h3></div>
+        <h3>Nº <b>ASSG{{ str_pad($cashier->id, 6, '0', STR_PAD_LEFT) }}CX</b></h3>
+        <div class="valor">
+            <h3>R$ {{ $cashier->value }}</h3>
+        </div>
     </div>
 </div>
 <div class="receipt-body">
     <table>
         <tr>
-            <td colspan="3" ><b>Movimentado por:</b> {{mb_strtoupper($responsible)}}</td>
+            <td colspan="3"><b>Movimentado por:</b>
+                @if ($cashier->updated_by)
+                    {{ mb_strtoupper($cashier->updated_by) }}
+                @else
+                    {{ mb_strtoupper($cashier->created_by) }}
+                @endif
+                {{-- {{mb_strtoupper($responsible)}} alteração realizada em 03/10/2024 --}}
+            </td>
         </tr>
         <tr>
-            <td style="width:40%;"><b>A importância de:</b> R$ {{$cashier->value}}</td>
-            <td colspan="2"><b>Data:</b> {{$cashier->paid_in}}
-            @if($cashier->type==1)
-                (  )<b>SAÍDA</b> ( X )<b>ENTRADA</b></td>
-            @else
-                ( x )<b>SAÍDA</b> (   )<b>ENTRADA</b></td>
+            <td style="width:40%;"><b>A importância de:</b> R$ {{ $cashier->value }}</td>
+            <td colspan="2"><b>Data:</b> {{ $cashier->paid_in }}
+                @if ($cashier->type == 1)
+                    ( )<b>SAÍDA</b> ( X )<b>ENTRADA</b>
+            </td>
+        @else
+            ( x )
+            <b>SAÍDA</b> ( )<b>ENTRADA</b></td>
             @endif
         </tr>
         <tr>
-            <td colspan="3"><b>Referente à(ao):</b> {{mb_strtoupper($cashier->title)}}</td>
+            <td colspan="3"><b>Referente à(ao):</b> {{ mb_strtoupper($cashier->title) }}</td>
         </tr>
         <tr>
             <td colspan="2"><b>Assinatura:</b> </td>
-            <td ><b>Fone:</b> </td>
+            <td><b>Fone:</b> </td>
         </tr>
 
     </table>
@@ -130,53 +141,64 @@
         <img src="{{ url('storage/logos/assgapa.png') }}">
     </div>
     <div class="titulo">
-        <h5 >
-            {{$config->title}}
+        <h5>
+            {{ $config->title }}
         </h5>
-        <h5 style="margin-bottom: 10px;">CNPJ {{$config->cnpj}}</h5>
-        <p>{{$config->address}} - {{$config->city}} / {{$config->state}} - CEP {{$config->postalCode}}</p>
+        <h5 style="margin-bottom: 10px;">CNPJ {{ $config->cnpj }}</h5>
+        <p>{{ $config->address }} - {{ $config->city }} / {{ $config->state }} - CEP {{ $config->postalCode }}</p>
 
-        <p>Contato(s): {{$config->phone}}</p>
+        <p>Contato(s): {{ $config->phone }}</p>
     </div>
     <div class="rec">
         <h2>RECIBO</h2>
-        <h3>Nº <b>ASSG{{str_pad($cashier->id, 6, '0', STR_PAD_LEFT)}}CX</b></h3>
-        <div class="valor"><h3>R$ {{$cashier->value}}</h3></div>
+        <h3>Nº <b>ASSG{{ str_pad($cashier->id, 6, '0', STR_PAD_LEFT) }}CX</b></h3>
+        <div class="valor">
+            <h3>R$ {{ $cashier->value }}</h3>
+        </div>
     </div>
 </div>
 <div class="receipt-body">
     <table>
         <tr>
-            <td colspan="3" ><b>Movimentado por:</b> {{mb_strtoupper($responsible)}}</td>
+            <td colspan="3"><b>Movimentado por:</b>
+                @if ($cashier->updated_by)
+                    {{ mb_strtoupper($cashier->updated_by) }}
+                @else
+                    {{ mb_strtoupper($cashier->created_by) }}
+                @endif
+                {{-- {{mb_strtoupper($responsible)}} alteração realizada em 03/10/2024 --}}
+            </td>
         </tr>
         <tr>
-            <td style="width:40%;"><b>A importância de:</b> R$ {{$cashier->value}}</td>
-            <td colspan="2"><b>Data:</b> {{$cashier->paid_in}}
-            @if($cashier->type==1)
-                (  )<b>SAÍDA</b> ( X )<b>ENTRADA</b></td>
-            @else
-                ( x )<b>SAÍDA</b> (   )<b>ENTRADA</b></td>
+            <td style="width:40%;"><b>A importância de:</b> R$ {{ $cashier->value }}</td>
+            <td colspan="2"><b>Data:</b> {{ $cashier->paid_in }}
+                @if ($cashier->type == 1)
+                    ( )<b>SAÍDA</b> ( X )<b>ENTRADA</b>
+            </td>
+        @else
+            ( x )
+            <b>SAÍDA</b> ( )<b>ENTRADA</b></td>
             @endif
         </tr>
         <tr>
-            <td colspan="3"><b>Referente à(ao):</b> {{mb_strtoupper($cashier->title)}}</td>
+            <td colspan="3"><b>Referente à(ao):</b> {{ mb_strtoupper($cashier->title) }}</td>
         </tr>
         <tr>
             <td colspan="2"><b>Assinatura:</b> </td>
-            <td ><b>Fone:</b> </td>
+            <td><b>Fone:</b> </td>
         </tr>
 
     </table>
 </div>
 
-    @if($cashier->updated_because)
-        <div style="margin-top: 100px;">
-            <h4>Alterações</h4>
-            <p>
-                {{$cashier->updated_because}}
-            </p>
-            <p>Alterado em: {{$cashier->updated_at}}, por: {{$cashier->updated_by}}.</p>
-        </div>
-    @endif
+@if ($cashier->updated_because)
+    <div style="margin-top: 100px;">
+        <h4>Alterações</h4>
+        <p>
+            {{ $cashier->updated_because }}
+        </p>
+        <p>Alterado em: {{ $cashier->updated_at }}, por: {{ $cashier->updated_by }}.</p>
+    </div>
+@endif
 
 </html>
