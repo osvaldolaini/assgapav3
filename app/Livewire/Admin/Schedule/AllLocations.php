@@ -227,18 +227,44 @@ class AllLocations extends Component
                 'id' => $event->id,
             );
         }
-        // dd($calendar);
+        // // dd($calendar);
+        // $unavailabilities = AmbienceUnavailability::where('active', 1)
+        //     ->get();
+
+        // foreach ($unavailabilities as $key) {
+        //     $calendar[] = array(
+        //         'color' => '#dc3545',
+        //         'title' => 'Motivo: ' . $key->title,
+        //         'start' => $key->start,
+        //         'end' => $key->end,
+        //         'id'  => $key->id,
+        //     );
+        // }
+        //  // dd($calendar);
         $unavailabilities = AmbienceUnavailability::where('active', 1)
             ->get();
 
-        foreach ($unavailabilities as $key) {
-            $calendar[] = array(
-                'color' => '#dc3545',
-                'title' => 'Motivo: ' . $key->title,
-                'start' => $key->start,
-                'end' => $key->end,
-                'id'  => $key->id,
-            );
+
+        if ($unavailabilities) {
+            foreach ($unavailabilities as $key) {
+
+                $start = implode("-", array_reverse(explode("/", $key->start))) . ' 00:00:00';
+                $end = implode("-", array_reverse(explode("/", $key->end))) . ' 23:59:59';
+
+                if ($key->type == 0) {
+                    $text = 'Pré-reserva: ' . $key->title;
+                } else {
+                    $text = 'Motivo: ' . $key->title;
+                }
+                $calendar[] = array(
+                    'color' => '#dc3545',
+                    'title' => $text,
+                    'start' => $start,
+                    'end' => $end,
+                    'id'  => $key->id,
+                    'type_event' => 0
+                );
+            }
         }
 
         return $calendar;
