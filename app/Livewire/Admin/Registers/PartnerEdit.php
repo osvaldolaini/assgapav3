@@ -56,6 +56,8 @@ class PartnerEdit extends Component
 
     public $newImg = '';
 
+    public $seeResponsible = false;
+
     protected $listeners =
     [
         'uploadingImage',
@@ -108,6 +110,14 @@ class PartnerEdit extends Component
                 $this->state = $result->uf;
             }
         }
+        if ($property === 'partner_category') {
+            $category = PartnerCategory::find($this->partner_category);
+            if ($category->responsible == 1) {
+                $this->seeResponsible = true;
+            } else {
+                $this->seeResponsible = false;
+            }
+        }
     }
 
 
@@ -153,6 +163,13 @@ class PartnerEdit extends Component
         $this->partner_category = $partner->partner_category;
         $this->partner_category_master = $partner->partner_category_master;
         $this->company = $partner->company;
+
+        $category = PartnerCategory::find($this->partner_category);
+        if ($category->responsible == 1) {
+            $this->seeResponsible = true;
+        } else {
+            $this->seeResponsible = false;
+        }
     }
 
     public function render()

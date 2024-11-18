@@ -53,6 +53,8 @@ class PartnerNew extends Component
     public $responsible_name = 'Pesquisar';
     public $modalSearch = false;
 
+    public $seeResponsible = false;
+
     public $newImg = '';
 
     protected $listeners =
@@ -92,6 +94,14 @@ class PartnerNew extends Component
                 $this->city = $result->localidade;
                 $this->district = $result->bairro;
                 $this->state = $result->uf;
+            }
+        }
+        if ($property === 'partner_category') {
+            $category = PartnerCategory::find($this->partner_category);
+            if ($category->responsible == 1) {
+                $this->seeResponsible = true;
+            } else {
+                $this->seeResponsible = false;
             }
         }
     }

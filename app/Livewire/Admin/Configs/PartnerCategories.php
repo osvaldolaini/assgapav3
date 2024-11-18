@@ -26,7 +26,7 @@ class PartnerCategories extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Configs\PartnerCategory"; //Model principal
-    public $modelId="id"; //Ex: 'table.id' or 'id'
+    public $modelId = "id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
@@ -40,6 +40,7 @@ class PartnerCategories extends Component
     public $title;
     public $value;
     public $color;
+    public $responsible;
     public $parent_category;
 
     public function render()
@@ -55,6 +56,7 @@ class PartnerCategories extends Component
             'value',
             'parent_category',
             'color',
+            'responsible',
         );
     }
     //CREATE
@@ -71,6 +73,7 @@ class PartnerCategories extends Component
             'value' => 'required',
             'parent_category'  => 'required',
             'color' => 'required',
+            'responsible' => 'required',
         ];
         $this->validate();
 
@@ -79,6 +82,7 @@ class PartnerCategories extends Component
             'value'                 => $this->value,
             'parent_category'       => $this->parent_category,
             'color'                 => $this->color,
+            'responsible'           => $this->responsible,
             'active'                => 1,
             'created_by' => Auth::user()->name,
         ]);
@@ -100,7 +104,7 @@ class PartnerCategories extends Component
                 'Atualizada'        => $data->updated,
                 'Atualizada por'    => $data->updated_by,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -115,6 +119,7 @@ class PartnerCategories extends Component
         $this->value            = $partnerCategory->value;
         $this->parent_category  = $partnerCategory->parent_category;
         $this->color            = $partnerCategory->color;
+        $this->responsible      = $partnerCategory->responsible;
         $this->showModalEdit = true;
     }
     public function update()
@@ -124,6 +129,7 @@ class PartnerCategories extends Component
             'value' => 'required',
             'parent_category'  => 'required',
             'color'  => 'required',
+            'responsible'  => 'required',
         ];
 
         $this->validate();
@@ -133,6 +139,7 @@ class PartnerCategories extends Component
         ], [
             'title'                 => $this->title,
             'value'                 => $this->value,
+            'responsible'           => $this->responsible,
             'color'                 => $this->color,
             'parent_category'       => $this->parent_category,
             'updated_by' => Auth::user()->name,
@@ -192,7 +199,7 @@ class PartnerCategories extends Component
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -217,59 +224,59 @@ class PartnerCategories extends Component
         return $query->paginate($this->paginate);
     }
     #PRICIPAL FUNCTIONS
-        public function search($query)
-        {
-            $searchTerms = explode(',', $this->searchable);
-            $query->where(function ($innerQuery) use ($searchTerms) {
-                foreach ($searchTerms as $term) {
-                    if ($this->customSearch) {
-                        $fields = explode('|', $this->customSearch);
-                        if (in_array($term, $fields)) {
-                            $search = array($term => $this->search);
-                            $formattedSearch = $this->model::filterFields($search);
-                            if ($formattedSearch['converted'] != '%0%') {
-                                $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
-                            } else {
-                                $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
-                            }
+    public function search($query)
+    {
+        $searchTerms = explode(',', $this->searchable);
+        $query->where(function ($innerQuery) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if ($this->customSearch) {
+                    $fields = explode('|', $this->customSearch);
+                    if (in_array($term, $fields)) {
+                        $search = array($term => $this->search);
+                        $formattedSearch = $this->model::filterFields($search);
+                        if ($formattedSearch['converted'] != '%0%') {
+                            $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
                         } else {
                             $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                         }
                     } else {
                         $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                     }
+                } else {
+                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                 }
-            });
-            // dd($query);
-        }
+            }
+        });
+        // dd($query);
+    }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 }

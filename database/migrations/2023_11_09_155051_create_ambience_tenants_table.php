@@ -22,8 +22,8 @@ class CreateAmbienceTenantsTable extends Migration
             $table->text('obs')->nullable();
 
             /*Padrão */
-            $table->string('updated_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
             $table->timestamps();
         });
     }

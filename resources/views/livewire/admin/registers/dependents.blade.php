@@ -2,13 +2,12 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-                <x-table-register-buttons id="{{ $responsible }}" :card="false" :dependent="false"
-                    :history="false"
+                <x-table-register-buttons id="{{ $responsible }}" :card="false" :dependent="false" :history="false"
                     :discount="true" :responsible="$responsible">
                 </x-table-register-buttons>
             </div>
@@ -16,16 +15,12 @@
     </x-breadcrumb>
     <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
     </x-table-buttons-relatories>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
-            <div class="flex flex-col items-center justify-between px-4
-space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+            <div class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 <div class="flex w-full">
                     <div
-                        class="bg-gray-50 text-gray-900 text-sm
-            focus:ring-blue-500 block w-full
-            dark:bg-gray-700 dark:placeholder-gray-400
-            dark:text-white dark:focus:ring-blue-500 ">
+                        class="block w-full text-sm text-gray-900 bg-gray-50 focus:ring-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
                         <label for="simple-search" class="sr-only">
                             Pesquisar
                         </label>
@@ -39,21 +34,16 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                                 </svg>
                             </div>
                             <input type="text" placeholder="Pesquisar" wire:model.live="search"
-                                class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
-                    rounded-2xl bg-gray-50 focus:ring-primary-500 dark:bg-gray-700
-                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500" />
+                                class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl bg-gray-50 focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500" />
                         </div>
                     </div>
                 </div>
                 <div
                     class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-                    <div class="group flex ">
+                    <div class="flex group ">
                         <a href="{{ route('new-dependent', $responsible) }}"
-                            class="flex items-center justify-center w-1/2 px-5
-                                py-3 text-sm tracking-wide text-white transition-colors
-                                duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2
-                                hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                            <svg class="h-4 w-4 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                            class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                            <svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
                                 <path clip-rule="evenodd" fill-rule="evenodd"
                                     d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
@@ -64,8 +54,8 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                 </div>
             </div>
 
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
@@ -78,7 +68,7 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                                             class="py-3.5 px-4 text-xs font-normal
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
-                                            Dependente
+                                            Dependentes / indicados
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -110,7 +100,7 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                                                     {{ $data->name }}
                                                     @if ($data->category)
                                                         <div style="background-color:{{ $data->color }};"
-                                                            class="badge flex-warp gap-2 mx-1 text-xs ">
+                                                            class="gap-2 mx-1 text-xs badge flex-warp ">
                                                             {{ $data->category }}
                                                         </div>
                                                     @endif
@@ -140,7 +130,7 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -172,7 +162,7 @@ space-y-3 md:flex-row md:space-y-0 md:space-x-4">
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)

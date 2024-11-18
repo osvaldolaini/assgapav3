@@ -84,7 +84,7 @@
                     <option value="0">Não</option>
                 </Select>
             </div>
-            @if ($partner_category_master == 'Dependente')
+            @if ($partner_category_master == 'Dependente' or $seeResponsible == true)
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="responsible_name">*Responsável </label>
                     <x-search-responsible name="{{ $responsible_name }}"></x-search-responsible>

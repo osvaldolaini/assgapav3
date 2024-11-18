@@ -241,9 +241,14 @@ class AllLocations extends Component
         //     );
         // }
         //  // dd($calendar);
-        $unavailabilities = AmbienceUnavailability::where('active', 1)
-            ->get();
-
+        if ($this->ambience_id) {
+            $unavailabilities = AmbienceUnavailability::where('active', 1)
+                ->where('ambience_id', $this->ambience_id)
+                ->get();
+        } else {
+            $unavailabilities = AmbienceUnavailability::where('active', 1)
+                ->get();
+        }
 
         if ($unavailabilities) {
             foreach ($unavailabilities as $key) {

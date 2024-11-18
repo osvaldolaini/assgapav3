@@ -18,12 +18,19 @@ class AmbienceTenant extends Model
     protected $table = 'ambience_tenants';
 
     protected $fillable = [
-        'id', 'title', 'slug', 'type', 'obs', 'active', 'update_by', 'created_by'
+        'id',
+        'title',
+        'slug',
+        'type',
+        'obs',
+        'active',
+        'update_by',
+        'created_by'
     ];
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
         $this->attributes['slug'] = Str::slug($value);
     }
 
@@ -72,7 +79,7 @@ class AmbienceTenant extends Model
             //             break;
             //     }
             // }
-            return array('f'=>'LIKE','converted'=>'%' . $converted . '%');
+            return array('f' => 'LIKE', 'converted' => '%' . $converted . '%');
         }
     }
 }

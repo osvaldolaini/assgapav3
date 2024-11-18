@@ -191,8 +191,8 @@ class Dependents extends Component
             $query = $this->model::query();
             $query = $query->where('partners.active', '<=', 1);
         }
-        $query = $query->where('partner_category_master', 'Dependente');
-        $query->where('responsible', $this->partner->id);
+        // $query = $query->where('partner_category_master', 'Dependente'); mudança feita pos solicitação
+        $query->where('partners.responsible', $this->partner->id);
 
         $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {

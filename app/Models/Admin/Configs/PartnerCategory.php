@@ -18,13 +18,22 @@ class PartnerCategory extends Model
     protected $table = 'partner_categories';
 
     protected $fillable = [
-        'id','title','slug','color','parent_category','value','active','update_by','created_by'
+        'id',
+        'title',
+        'slug',
+        'color',
+        'responsible',
+        'parent_category',
+        'value',
+        'active',
+        'update_by',
+        'created_by'
     ];
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
-        $this->attributes['slug']=Str::slug($value);
+        $this->attributes['title'] = mb_strtoupper($value);
+        $this->attributes['slug'] = Str::slug($value);
     }
 
     public function setValueAttribute($value)
@@ -40,7 +49,7 @@ class PartnerCategory extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
 }

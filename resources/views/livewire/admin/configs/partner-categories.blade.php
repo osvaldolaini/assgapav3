@@ -2,18 +2,18 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     CATEGORIAS DE SÓCIO
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
 
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
@@ -69,7 +69,7 @@
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
                                                     {{ $data->title }}
                                                     @if ($data->active == 2)
-                                                        <div class="badge badge-error gap-2 mx-1">
+                                                        <div class="gap-2 mx-1 badge badge-error">
                                                             Excluido
                                                         </div>
                                                     @endif
@@ -83,8 +83,9 @@
                                                     {{ $data->value }}</td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
-                                                    <svg class="h-6 w-6 mx-auto" fill="{{ $data->color }}" viewBox="0 0 32 32"
-                                                        version="1.1" xmlns="http://www.w3.org/2000/svg">
+                                                    <svg class="w-6 h-6 mx-auto" fill="{{ $data->color }}"
+                                                        viewBox="0 0 32 32" version="1.1"
+                                                        xmlns="http://www.w3.org/2000/svg">
                                                         <title>user-card</title>
                                                         <path
                                                             d="M0 26.016q0 2.496 1.76 4.224t4.256 1.76h20q2.464 0 4.224-1.76t1.76-4.224v-20q0-2.496-1.76-4.256t-4.224-1.76h-20q-2.496 0-4.256 1.76t-1.76 4.256v20zM4 24v-17.984q0-0.832 0.576-1.408t1.44-0.608h20q0.8 0 1.408 0.608t0.576 1.408v17.984h-24zM10.016 19.008q0 1.248 0.864 2.144t2.112 0.864h6.016q1.248 0 2.112-0.864t0.896-2.144q-0.256-1.344-1.088-2.464t-2.048-1.792q1.12-1.152 1.12-2.752v-1.984q0-1.664-1.184-2.848t-2.816-1.152-2.816 1.152-1.184 2.848v1.984q0 1.6 1.12 2.752-1.216 0.672-2.048 1.792t-1.056 2.464z">
@@ -93,11 +94,8 @@
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
-                                                    <x-table-buttons id="{{ $data->id }}"
-                                                        :update="true"
-                                                        :delete="true"
-                                                        :view="true"
-                                                        :active="$data->active">
+                                                    <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                        :delete="true" :view="true" :active="$data->active">
                                                     </x-table-buttons>
                                                 </td>
                                             </tr>
@@ -109,7 +107,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -141,7 +139,7 @@
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)
@@ -186,7 +184,7 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-2 ">
+                    <div class="col-span-full sm:col-span-1 ">
                         <label for="parent_category"
                             class="block text-sm font-medium text-gray-900 dark:text-white">Categoria master</label>
                         <select wire:model="parent_category"
@@ -196,6 +194,18 @@
                             <option value="Não sócio">Não sócio</option>
                         </select>
                         @error('parent_category')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-full sm:col-span-1">
+                        <label for="responsible" class="text-sm">Mostrar responsável</label>
+                        <Select wire:model="responsible" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </Select>
+                        @error('responsible')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -215,12 +225,10 @@
                             Cor</label>
                         <div class="flex">
                             <input type="color" wire:model.live="color" placeholder="Cor" required
-                                class="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg
-                                focus:ring-primary-600 focus:border-primary-600 block w-full
-                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                class="block w-full h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <span
                                 class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md dark:bg-gray-700">
-                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
+                                <svg class="w-8 h-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <title>user-card</title>
                                     <path
@@ -268,7 +276,7 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-2 ">
+                    <div class="col-span-full sm:col-span-1 ">
                         <label for="parent_category"
                             class="block text-sm font-medium text-gray-900 dark:text-white">Categoria master</label>
                         <select wire:model="parent_category"
@@ -278,6 +286,18 @@
                             <option value="Não sócio">Não sócio</option>
                         </select>
                         @error('parent_category')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
+                    <div class="col-span-full sm:col-span-1">
+                        <label for="responsible" class="text-sm">Mostrar responsável</label>
+                        <Select wire:model="responsible" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </Select>
+                        @error('responsible')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -297,12 +317,10 @@
                             Cor</label>
                         <div class="flex">
                             <input type="color" wire:model.live="color" placeholder="Cor" required
-                                class="bg-gray-50 h-10 border border-gray-300 text-gray-900 text-sm rounded-lg
-                                focus:ring-primary-600 focus:border-primary-600 block w-full
-                                dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                class="block w-full h-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-primary-600 focus:border-primary-600 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                             <span
                                 class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md dark:bg-gray-700">
-                                <svg class="h-8 w-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
+                                <svg class="w-8 h-8" fill="{{ $color }}" viewBox="0 0 32 32" version="1.1"
                                     xmlns="http://www.w3.org/2000/svg">
                                     <title>user-card</title>
                                     <path

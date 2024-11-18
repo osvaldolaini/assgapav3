@@ -25,7 +25,7 @@ class AmbienceTenants extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Configs\AmbienceTenant"; //Model principal
-    public $modelId="id"; //Ex: 'table.id' or 'id'
+    public $modelId = "id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = 'searchType->type'; //Colunas personalizadas, customizar no model
@@ -92,7 +92,7 @@ class AmbienceTenants extends Component
                 'Atualizada'        => $data->updated,
                 'Atualizada por'    => $data->updated_by,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -178,7 +178,7 @@ class AmbienceTenants extends Component
             $query = $this->model::query();
             $query = $query->where('active', '<=', 1);
         }
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -203,66 +203,65 @@ class AmbienceTenants extends Component
         return $query->paginate($this->paginate);
     }
     #PRICIPAL FUNCTIONS
-        public function search($query)
-        {
-            $searchTerms = explode(',', $this->searchable);
-            $query->where(function ($innerQuery) use ($searchTerms) {
-                foreach ($searchTerms as $term) {
-                    if ($this->customSearch) {
-                        $fields = explode('|', $this->customSearch);
+    public function search($query)
+    {
+        $searchTerms = explode(',', $this->searchable);
+        $query->where(function ($innerQuery) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if ($this->customSearch) {
+                    $fields = explode('|', $this->customSearch);
 
-                        if (in_array($term, $fields)) {
-                            for ($i=0; $i < count($fields); $i++) {
-                                $sfild = explode('->', $this->customSearch);
+                    if (in_array($term, $fields)) {
+                        for ($i = 0; $i < count($fields); $i++) {
+                            $sfild = explode('->', $this->customSearch);
 
-                                $search = array($sfild[0] => $this->search);
-                                $formattedSearch = $this->model::filterFields($search);
-                                if ($formattedSearch['converted'] != '%0%') {
-                                    $innerQuery->orWhere($sfild[1], $formattedSearch['f'], $formattedSearch['converted']);
-                                    // dd($innerQuery);
-                                } else {
-                                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
-                                }
+                            $search = array($sfild[0] => $this->search);
+                            $formattedSearch = $this->model::filterFields($search);
+                            if ($formattedSearch['converted'] != '%0%') {
+                                $innerQuery->orWhere($sfild[1], $formattedSearch['f'], $formattedSearch['converted']);
+                                // dd($innerQuery);
+                            } else {
+                                $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                             }
-
-                        } else {
-                            $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                         }
                     } else {
                         $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                     }
+                } else {
+                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                 }
-            });
-            // dd($query);
-        }
+            }
+        });
+        // dd($query);
+    }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 }

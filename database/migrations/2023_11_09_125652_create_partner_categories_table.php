@@ -17,14 +17,15 @@ class CreatePartnerCategoriesTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
+            $table->boolean('responsible')->nullable();
             $table->string('parent_category')->nullable();
             $table->decimal('value', $precision = 10, $scale = 2);
             $table->string('color')->nullable();
             $table->boolean('active')->nullable();
             /*Padrão */
             $table->timestamps();
-            $table->string('update_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
+            $table->string('update_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
         });
     }
 
