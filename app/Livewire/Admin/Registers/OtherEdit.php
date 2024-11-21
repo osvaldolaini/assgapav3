@@ -55,6 +55,10 @@ class OtherEdit extends Component
 
     public $newImg = '';
 
+
+
+    public $seeResponsible = false;
+
     protected $listeners =
     [
         'uploadingImage',
@@ -107,6 +111,14 @@ class OtherEdit extends Component
                 $this->state = $result->uf;
             }
         }
+        if ($property === 'partner_category') {
+            $category = PartnerCategory::find($this->partner_category);
+            if ($category->responsible == 1) {
+                $this->seeResponsible = true;
+            } else {
+                $this->seeResponsible = false;
+            }
+        }
     }
 
     public function mount(Partner $partner)
@@ -152,6 +164,13 @@ class OtherEdit extends Component
         $this->partner_category = $partner->partner_category;
         $this->partner_category_master = $partner->partner_category_master;
         $this->company = $partner->company;
+
+        $category = PartnerCategory::find($this->partner_category);
+        if ($category->responsible == 1) {
+            $this->seeResponsible = true;
+        } else {
+            $this->seeResponsible = false;
+        }
     }
 
     public function render()
@@ -227,7 +246,7 @@ class OtherEdit extends Component
             'cpf'                   => $this->cpf,
             'cnpj'                  => $this->cnpj,
             'rg'                    => $this->rg,
-            'saram'                 =>$this->saram,
+            'saram'                 => $this->saram,
             'phone_first'           => $this->phone_first,
             'phone_second'          => $this->phone_second,
             'address'               => $this->address,
