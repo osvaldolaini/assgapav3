@@ -227,6 +227,11 @@ class DependentEdit extends Component
 
         $this->validate();
 
+        $category = PartnerCategory::find($this->partner_category);
+        if ($category->responsible == 0) {
+            $this->responsible = '';
+        }
+
         Partner::updateOrCreate([
             'id' => $this->id,
         ], [
