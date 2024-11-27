@@ -55,6 +55,9 @@ class DependentEdit extends Component
 
     public $newImg = '';
 
+
+    public $seeResponsible = false;
+
     protected $listeners =
     [
         'uploadingImage',
@@ -81,7 +84,7 @@ class DependentEdit extends Component
     public static function uploadPhoto($image)
     {
         // dd('storage/public/livewire-tmp/' . $image);
-        $img = explode('.',$image);
+        $img = explode('.', $image);
         $logoWebp = Image::make('storage/livewire-tmp/' . $image);
         $logoWebp->encode('webp', 80);
         $logoWebp->save('storage/partners/' . $img[0] . '.webp');
@@ -94,17 +97,25 @@ class DependentEdit extends Component
     public function updated($property)
     {
         if ($property === 'postalCode') {
-            $cep = str_replace ('-' ,'', $this->postalCode);
+            $cep = str_replace('-', '', $this->postalCode);
             // dd($cep);
-            $ch = curl_init("https://viacep.com.br/ws/".$cep."/json/");
-            curl_setopt($ch,CURLOPT_RETURNTRANSFER,true);
+            $ch = curl_init("https://viacep.com.br/ws/" . $cep . "/json/");
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
             $result = json_decode(curl_exec($ch));
             curl_close($ch);
-            if($result){
+            if ($result) {
                 $this->address = $result->logradouro;
                 $this->city = $result->localidade;
                 $this->district = $result->bairro;
                 $this->state = $result->uf;
+            }
+        }
+        if ($property === 'partner_category') {
+            $category = PartnerCategory::find($this->partner_category);
+            if ($category->responsible == 1) {
+                $this->seeResponsible = true;
+            } else {
+                $this->seeResponsible = false;
             }
         }
     }
@@ -174,9 +185,9 @@ class DependentEdit extends Component
         $this->persist();
         if ($this->partner_category_master == 'Sócio') {
             redirect()->route('partners');
-        } elseif($this->partner_category_master == 'Dependente') {
-            redirect()->route('dependent',$this->responsible);
-        }else {
+        } elseif ($this->partner_category_master == 'Dependente') {
+            redirect()->route('dependent', $this->responsible);
+        } else {
             redirect()->route('others');
         }
     }
@@ -204,7 +215,7 @@ class DependentEdit extends Component
         if ($this->partner_category_master == 'Dependente') {
             $this->rules = [
                 'kinship' => 'required',
-                'responsible'=>'required'
+                'responsible' => 'required'
             ];
         }
         if ($this->newImg) {
