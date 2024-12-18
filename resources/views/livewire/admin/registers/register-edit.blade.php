@@ -174,7 +174,7 @@
                 </Select>
             </div>
             <div class="col-span-full sm:col-span-2">
-                <label for="registration_at" class="text-sm">*Data cadastro</label>
+                <label for="registration_at" x-mask="99/99/9999" class="text-sm">*Data cadastro</label>
                 <x-datepicker id='registration_at' :required="false"></x-datepicker>
                 @error('registration_at')
                     <span class="text-red-500 error">{{ $message }}</span>
