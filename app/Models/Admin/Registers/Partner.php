@@ -65,6 +65,7 @@ class Partner extends Model
         'access_pool',
         'print_date',
         'validity_of_card',
+        'version_card',
         'grace_period',
         'registration_at',
         'discount',

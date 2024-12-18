@@ -1,57 +1,58 @@
 <div class="w-full bg-white ">
     @if ($status == '')
-        <div class="shadow h-screen w-full text-center py-6">
-            <div class="stat-title flex justify-center p-0">
+        <div class="w-full h-screen py-6 text-center shadow">
+            <div class="flex justify-center p-0 stat-title">
                 <img class="w-12 h-12 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
             </div>
-            <div class="stat-value py-0">
-                <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
+            <div class="py-0 stat-value">
+                <h5 class="font-bold text-md ">{{ $config->acronym }}</h5>
             </div>
             <div class="stat ">
-                <div class="max-w-xs px-6 rounded-lg items-center justify-center">
+                <div class="items-center justify-center max-w-xs px-6 rounded-lg">
                     <img class="object-cover object-center w-full rounded-md h-72 dark:bg-gray-500"
                         src="{{ url('storage/partners/' . $partner->image) }}">
                 </div>
                 <div class="mt-2 mb-2">
                     <h1 class="text-4xl font-bold">Dados do associado</h1>
+                    <h1 class="text-lg font-bold">Versão da carterinha {{ $version_card }}</h1>
                     <div class="mt-2 ">
-                        <p class="flex items-center text-xs p-1">
+                        <p class="flex items-center p-1 text-xs">
                             Associado:
-                            <span class="font-bold px-2">{{ $partner->name }}</span>
+                            <span class="px-2 font-bold">{{ $partner->name }}</span>
                         </p>
-                        <p class="flex items-center text-xs p-1">
+                        <p class="flex items-center p-1 text-xs">
                             Contato:
-                            <span class="font-bold px-2">{{ $partner->phone_first }}</span>
+                            <span class="px-2 font-bold">{{ $partner->phone_first }}</span>
                         </p>
                         @if ($partner->partner_category_master == 'Dependente')
                             <p class="flex items-center text-xs">
                                 Responsável:
-                                <span class="font-bold px-2">{{ $partner->parent->name }}</span>
+                                <span class="px-2 font-bold">{{ $partner->parent->name }}</span>
                             </p>
                         @endif
                         <p
                             class="flex items-center text-xs {{ date('Y-m-d') > $access_pool ? 'bg-red-500 text-white py-2 px-1 rounded-md' : ' p-1' }}">
                             Validade piscina:
-                            <span class="font-bold px-2">{{ $partner->access_pool }}</span>
+                            <span class="px-2 font-bold">{{ $partner->access_pool }}</span>
                         </p>
                     </div>
                 </div>
                 <div class="mt-4 mb-2">
                     @if (date('Y-m-d') > $access_pool)
-                        <div class="bg-red-500 text-white py-2 px-1 rounded-md">
+                        <div class="px-1 py-2 text-white bg-red-500 rounded-md">
                             <div class="text-center">
                                 <label for="obs">Observação</label>
                                 <h2>Passar na secretaria!</h2>
                             </div>
                         </div>
                     @else
-                    <div class="bg-green-500 text-white py-2 px-1 rounded-md mb-3">
-                        <div class="text-center">
-                            <label for="obs">Acesso autorizado</label>
+                        <div class="px-1 py-2 mb-3 text-white bg-green-500 rounded-md">
+                            <div class="text-center">
+                                <label for="obs">Acesso autorizado</label>
+                            </div>
                         </div>
-                    </div>
                         <div wire:click="registerAccessPool()"
-                            class="inline-flex items-center divide-x rounded bg-blue-500 text-white divide-gray-300">
+                            class="inline-flex items-center text-white bg-blue-500 divide-x divide-gray-300 rounded">
                             <button type="button" class="px-8 py-3">Registrar</button>
                             <button type="button" title="Toggle dropdown" class="p-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 512 512"
@@ -63,21 +64,20 @@
                         </div>
                     @endif
                 </div>
-
             </div>
         </div>
-        @else
+    @else
         @if ($status == 'success')
-            <div class="shadow h-screen w-full text-center py-6">
-                <div class="stat-title flex justify-center p-0">
+            <div class="w-full h-screen py-6 text-center shadow">
+                <div class="flex justify-center p-0 stat-title">
                     <img class="w-20 h-20 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
                 </div>
-                <div class="stat-value py-0">
-                    <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
+                <div class="py-0 stat-value">
+                    <h5 class="font-bold text-md ">{{ $config->acronym }}</h5>
                 </div>
                 <div class="stat ">
                     <div class="max-w-xs px-6 rounded-lg">
-                        <svg class="object-cover object-center w-full rounded-md h-72 text-green-500"
+                        <svg class="object-cover object-center w-full text-green-500 rounded-md h-72"
                             fill="currentColor" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512"
                             version="1.1" xmlns="http://www.w3.org/2000/svg"
                             xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -101,16 +101,16 @@
                 </div>
             </div>
         @else
-            <div class="shadow h-screen w-full text-center py-6">
-                <div class="stat-title flex justify-center p-0">
+            <div class="w-full h-screen py-6 text-center shadow">
+                <div class="flex justify-center p-0 stat-title">
                     <img class="w-20 h-20 py-0 my-0" src="{{ url('storage/logos/assgapa.png') }}">
                 </div>
-                <div class="stat-value py-0">
-                    <h5 class="text-md font-bold ">{{ $config->acronym }}</h5>
+                <div class="py-0 stat-value">
+                    <h5 class="font-bold text-md ">{{ $config->acronym }}</h5>
                 </div>
                 <div class="stat ">
                     <div class="max-w-xs px-6 rounded-lg">
-                        <svg class="object-cover object-center w-full rounded-md h-72 text-red-500" fill="currentColor"
+                        <svg class="object-cover object-center w-full text-red-500 rounded-md h-72" fill="currentColor"
                             xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 512 512" version="1.1"
                             xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                             <title>alarm</title>

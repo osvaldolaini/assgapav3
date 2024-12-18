@@ -13,13 +13,15 @@ class RegisterAccessPool extends Component
     public $table = 'partners';
     public $partner;
     public $access_pool;
+    public $version;
 
     public $status;
     public function mount(Partner $partner)
     {
         $this->config = Configs::find(1);
         $this->partner = $partner;
-        $this->access_pool = implode("-",array_reverse(explode("/",$partner->access_pool)));
+        $this->access_pool = implode("-", array_reverse(explode("/", $partner->access_pool)));
+        $this->version = implode("-", array_reverse(explode("/", $partner->access_pool)));
     }
     public function render()
     {
@@ -32,9 +34,9 @@ class RegisterAccessPool extends Component
             'register_id'   => $this->partner->id,
         ]);
 
-        if($register){
+        if ($register) {
             $this->status = 'success';
-        }else{
+        } else {
             $this->status = 'error';
         }
     }
