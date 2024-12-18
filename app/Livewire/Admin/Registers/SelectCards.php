@@ -55,6 +55,7 @@ class SelectCards extends Component
 
                 $cards[] = array(
                     'id'  => $partner->id,
+                    'version' => $partner->version_card,
                     'name'  => $partner->name,
                     'category'  => $partner->category->title,
                     'cpf'  => $partner->cpf,
