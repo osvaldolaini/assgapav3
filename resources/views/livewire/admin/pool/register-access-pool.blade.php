@@ -14,7 +14,7 @@
                 </div>
                 <div class="mt-2 mb-2">
                     <h1 class="text-4xl font-bold">Dados do associado</h1>
-                    <h1 class="text-lg font-bold">Versão da carterinha {{ $version_card }}</h1>
+                    <h1 class="text-lg font-bold">Versão da carterinha {{ $version }}</h1>
                     <div class="mt-2 ">
                         <p class="flex items-center p-1 text-xs">
                             Associado:
