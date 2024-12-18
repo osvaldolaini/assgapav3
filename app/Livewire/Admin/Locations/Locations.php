@@ -122,9 +122,8 @@ class Locations extends Component
         $this->showModalView = true;
         if (isset($id)) {
             $data = Location::where('id', $id)->first();
-            dd($data->reason->title);
             $this->detail = [
-                'Motivo'            => $data->reason_event_id ? $data->reason->title : $data->event_type,
+                'Motivo da locação' => $data->reason_event_id ? $data->reason->title : $data->event_type,
                 'Beneficiado'       => $data->event_benefited,
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
