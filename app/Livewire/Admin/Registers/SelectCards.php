@@ -45,6 +45,8 @@ class SelectCards extends Component
             $cards = [];
             for ($i = 0; $i < count($this->print); $i++) {
                 $partner = Partner::find($this->print[$i]);
+                $partner->version_card += 1;
+                $partner->save();
                 if ($partner->partner_category_master == 'Dependente') {
                     $responsável = $partner->parent->name;
                 } else {
