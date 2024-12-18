@@ -21,7 +21,7 @@ class RegisterAccessPool extends Component
         $this->config = Configs::find(1);
         $this->partner = $partner;
         $this->access_pool = implode("-", array_reverse(explode("/", $partner->access_pool)));
-        $this->version = implode("-", array_reverse(explode("/", $partner->access_pool)));
+        $this->version = $partner->version_card;
     }
     public function render()
     {
