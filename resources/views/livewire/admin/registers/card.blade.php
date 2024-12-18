@@ -154,7 +154,7 @@
 
                 </div>
                 <p style="margin-left: 0.125cm; margin-top:3px;"><b>Emissão: </b> {{ date('d/m/Y') }} (versão
-                    {{ $version }})</p>
+                    {{ $card['version'] }})</p>
                 <p style="margin-left: 0.125cm; margin-top:3px;"><b>Validade: </b> {{ $card['validity_of_card'] }}</p>
             </div>
         </div>
@@ -162,7 +162,8 @@
             <div class="verso"
                 style="background-color:{{ $card['color'] }};  border:double 0.2cm {{ $card['color'] }};  ">
                 <div class="dadosVerso">
-                    <img style="height: 2cm;padding-top:5px;" src="{{ url('storage/livewire-tmp/' . $card['qrcode']) }}">
+                    <img style="height: 2cm;padding-top:5px;"
+                        src="{{ url('storage/livewire-tmp/' . $card['qrcode']) }}">
                     <?php
                     if ($card['responsavel'] != '') {
                         echo '<div style="font-family:arial;float: right;"><b>Responsável: </b> ' . $card['responsavel'] . '</div>';
