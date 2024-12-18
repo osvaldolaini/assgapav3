@@ -123,7 +123,7 @@ class Locations extends Component
         if (isset($id)) {
             $data = Location::where('id', $id)->first();
             $this->detail = [
-                'Motivo'            => $data->event_type,
+                'Motivo'            => $data->reason_event_id ? $data->reason->title : $data->event_type,
                 'Beneficiado'       => $data->event_benefited,
                 'Criada'            => $data->created,
                 'Criada por'        => $data->created_by,
