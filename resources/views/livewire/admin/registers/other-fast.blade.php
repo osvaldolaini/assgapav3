@@ -1,5 +1,5 @@
 <div>
-    <div class="badge bg-blue-400 gap-1 py-1 text-white cursor-pointer" wire:click='modalRegister()'>
+    <div class="gap-1 py-1 text-white bg-blue-400 cursor-pointer badge" wire:click='modalRegister()'>
         <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 24 24" xml:space="preserve">
             <g id="article">
                 <g>
@@ -31,7 +31,7 @@
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="name">*Nome completo</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Nome completo" wire:model="name" required maxlength="100">
                     @error('name')
                         <span class="error">{{ $message }}</span>
@@ -39,13 +39,21 @@
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="date_of_birth" class="text-sm">Data nascimento </label>
-                    <x-datepicker id='date_of_birth' :required="false"></x-datepicker>
+                    <input type="text" wire:model="date_of_birth" x-mask="99/99/9999" placeholder="99/99/9999"
+                        class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                    <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                        </svg>
+                    </span>
                 </div>
 
                 <div class="col-span-full sm:col-span-2">
                     <label for="partner_category" class="text-sm">*Categoria sócio</label>
                     <Select wire:model.live="partner_category" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value="">Selecione...</option>
                         @foreach ($category as $item)
                             <option value="{{ $item->id }}">
@@ -57,7 +65,7 @@
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="pf_pj">*Tipo de cadastro</label>
                     <Select wire:model.live="pf_pj" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value="pf">Pessoa física</option>
                         <option value="pj">Pessoa jurídica</option>
                     </Select>
@@ -66,32 +74,39 @@
                     <div class="col-span-full sm:col-span-2">
                         <label class="text-sm" for="cpf">*CPF</label>
                         <input x-mask="999.999.999-99" placeholder="000.000.000-00" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                             wire:model="cpf">
                     </div>
                 @else
                     <div class="col-span-full sm:col-span-2">
                         <label class="text-sm" for="cnpj">*CNPJ</label>
                         <input x-mask="99.999.999/9999-99" placeholder="00.000.000/0000-00" required
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                             wire:model="cnpj">
                     </div>
                 @endif
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
-                    <x-datepicker id='registration_at' :required="false"></x-datepicker>
-
+                    <input type="text" wire:model="registration_at" x-mask="99/99/9999" placeholder="99/99/9999"
+                        class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                    <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
+                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                            fill="currentColor" viewBox="0 0 20 20">
+                            <path
+                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                        </svg>
+                    </span>
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="phone_first">Contato primário</label>
                     <input x-mask="(99) 9 9999-9999" type="text"
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="(99) 9 9999-9999" wire:model="phone_first">
                 </div>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="email">E-mail</label>
                     <input type="email"
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="E-mail" wire:model="email" value="{{ old('email', $email ?? '') }}">
                 </div>
             </form>
