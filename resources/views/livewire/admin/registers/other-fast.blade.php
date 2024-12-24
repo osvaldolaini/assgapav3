@@ -30,8 +30,7 @@
             <form wire:submit="fast_create" class="grid grid-cols-4 gap-2" wire:ignore>
                 <div class="col-span-full sm:col-span-4">
                     <label class="text-sm" for="name">*Nome completo</label>
-                    <input
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                    <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Nome completo" wire:model="name" required maxlength="100">
                     @error('name')
                         <span class="error">{{ $message }}</span>
@@ -39,15 +38,18 @@
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="date_of_birth" class="text-sm">Data nascimento </label>
-                    <input type="text" wire:model="date_of_birth" x-mask="99/99/9999" placeholder="99/99/9999"
-                        class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                    <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
-                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </span>
+                    <div class="flex">
+                        <input type="text" wire:model="date_of_birth" x-mask="99/99/9999" placeholder="99/99/9999"
+                            class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
+
                 </div>
 
                 <div class="col-span-full sm:col-span-2">
@@ -87,15 +89,17 @@
                 @endif
                 <div class="col-span-full sm:col-span-2">
                     <label for="registration_at" class="text-sm">*Data cadastro</label>
-                    <input type="text" wire:model="registration_at" x-mask="99/99/9999" placeholder="99/99/9999"
-                        class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                    <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
-                        <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                            fill="currentColor" viewBox="0 0 20 20">
-                            <path
-                                d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
-                        </svg>
-                    </span>
+                    <div class="flex">
+                        <input type="text" wire:model="registration_at" x-mask="99/99/9999" placeholder="99/99/9999"
+                            class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
+                            <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+                                fill="currentColor" viewBox="0 0 20 20">
+                                <path
+                                    d="M20 4a2 2 0 0 0-2-2h-2V1a1 1 0 0 0-2 0v1h-3V1a1 1 0 0 0-2 0v1H6V1a1 1 0 0 0-2 0v1H2a2 2 0 0 0-2 2v2h20V4ZM0 18a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8H0v10Zm5-8h10a1 1 0 0 1 0 2H5a1 1 0 0 1 0-2Z" />
+                            </svg>
+                        </span>
+                    </div>
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="phone_first">Contato primário</label>
