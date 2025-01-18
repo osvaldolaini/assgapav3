@@ -50,7 +50,7 @@ class StatsCard extends Component
         $this->charts = $charts;
 
         if ($accessesPool) {
-            $accesses = Pool::select('table', 'register_id', 'created_at')->orderBy('id','desc')->limit(5)->get();
+            $accesses = Pool::select('table', 'register_id', 'created_at')->orderBy('id', 'desc')->limit(5)->get();
             foreach ($accesses as $access) {
                 if ($access->table == 'passes') {
                     $pass = Pass::where('id', $access->register_id)->first();
@@ -86,6 +86,8 @@ class StatsCard extends Component
         }
         if ($partnerLate) {
             $this->partnerLate = count($this->partnerLate());
+
+            dd($this->partnerLate());
         }
         if ($locations) {
             /**Locações */
@@ -150,39 +152,49 @@ class StatsCard extends Component
 
         foreach ($partners as $partner) {
             $refs = array();
-            $day = date('d', strtotime($partner->registration_at));
-            if (date('Y', strtotime($partner->registration_at)) >= 2017) {
-                $start = date('Y', strtotime($partner->registration_at));
-                $mStart = date('m', strtotime($partner->registration_at)) + 1;
-            } else {
-                $start = 2017;
-                $mStart = 1;
-            }
-            for ($i = $start; $i < date('Y') + 1; $i++) {
-                if ($start == $i) {
-                    for ($m = $mStart; $m < 13; $m++) {
-                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                        }
-                    }
-                } else {
-                    for ($m = 1; $m < 13; $m++) {
-                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                        }
-                    }
-                }
-            }
+            // $day = date('d', strtotime($partner->registration_at));
+            // if (date('Y', strtotime($partner->registration_at)) >= 2017) {
+            //     $start = date('Y', strtotime($partner->registration_at));
+            //     $mStart = date('m', strtotime($partner->registration_at)) + 1;
+            // } else {
+            //     $start = 2017;
+            //     $mStart = 1;
+            // }
+            // for ($i = $start; $i < date('Y') + 1; $i++) {
+            //     if ($start == $i) {
+            //         for ($m = $mStart; $m < 13; $m++) {
+            //             if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+            //                 $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
+            //             }
+            //         }
+            //     } else {
+            //         for ($m = 1; $m < 13; $m++) {
+            //             if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+            //                 $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
+            //             }
+            //         }
+            //     }
+            // }
 
+            // foreach ($partner->monthlys as $monthly) {
+            //     if ($monthly->status != 0) {
+            //         if (array_search($monthly->ref, $refs)) {
+            //             unset($refs[$monthly->ref]);
+            //         }
+            //     }
+            // }
+            // if ($refs) {
+            //     $row[] = $refs;
+            // }
             foreach ($partner->monthlys as $monthly) {
-                if ($monthly->status != 0) {
-                    if (array_search($monthly->ref, $refs)) {
-                        unset($refs[$monthly->ref]);
+                foreach ($partner->monthlys as $monthly) {
+                    if ($monthly->status == 0) {
+                        $refs[$monthly->ref] = $monthly->ref;
                     }
                 }
-            }
-            if ($refs) {
-                $row[] = $refs;
+                if ($refs) {
+                    $row[] = $refs;
+                }
             }
         }
 
