@@ -43,7 +43,7 @@ class ListUser extends Component
 
     public function mount()
     {
-        $this->groups = UserGroups::where('level','>=',Auth::user()->group->level)->get();
+        $this->groups = UserGroups::where('level', '>=', Auth::user()->group->level)->get();
         // dd($this->groups);
     }
     public function render()
@@ -125,7 +125,7 @@ class ListUser extends Component
     {
         $this->rules = [
             'name'      => 'required',
-            'email'     => 'required|email|'.Rule::unique('users')->ignore($this->model_id),
+            'email'     => 'required|email|' . Rule::unique('users')->ignore($this->model_id),
             'user_groups_id'  => 'required',
         ];
 
@@ -171,6 +171,9 @@ class ListUser extends Component
     public function delete($id)
     {
         $data = User::find($id);
+        foreach ($data->access as $access) {
+            $access->delete();
+        }
         $data->delete();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');
