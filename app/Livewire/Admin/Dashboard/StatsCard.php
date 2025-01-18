@@ -152,29 +152,30 @@ class StatsCard extends Component
 
         foreach ($partners as $partner) {
             $refs = array();
-            // $day = date('d', strtotime($partner->registration_at));
-            // if (date('Y', strtotime($partner->registration_at)) >= 2017) {
-            //     $start = date('Y', strtotime($partner->registration_at));
-            //     $mStart = date('m', strtotime($partner->registration_at)) + 1;
-            // } else {
-            //     $start = 2017;
-            //     $mStart = 1;
-            // }
-            // for ($i = $start; $i < date('Y') + 1; $i++) {
-            //     if ($start == $i) {
-            //         for ($m = $mStart; $m < 13; $m++) {
-            //             if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-            //                 $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-            //             }
-            //         }
-            //     } else {
-            //         for ($m = 1; $m < 13; $m++) {
-            //             if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-            //                 $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-            //             }
-            //         }
-            //     }
-            // }
+            $nrefs = array();
+            $day = date('d', strtotime($partner->registration_at));
+            if (date('Y', strtotime($partner->registration_at)) >= 2017) {
+                $start = date('Y', strtotime($partner->registration_at));
+                $mStart = date('m', strtotime($partner->registration_at)) + 1;
+            } else {
+                $start = 2017;
+                $mStart = 1;
+            }
+            for ($i = $start; $i < date('Y') + 1; $i++) {
+                if ($start == $i) {
+                    for ($m = $mStart; $m < 13; $m++) {
+                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
+                        }
+                    }
+                } else {
+                    for ($m = 1; $m < 13; $m++) {
+                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
+                        }
+                    }
+                }
+            }
 
             // foreach ($partner->monthlys as $monthly) {
             //     if ($monthly->status != 0) {
@@ -189,11 +190,11 @@ class StatsCard extends Component
             foreach ($partner->monthlys as $monthly) {
                 foreach ($partner->monthlys as $monthly) {
                     if ($monthly->status == 0) {
-                        $refs[$monthly->ref] = $monthly->ref;
+                        $nrefs[$monthly->ref] = $monthly->ref;
                     }
                 }
-                if ($refs) {
-                    $row[] = $refs;
+                if ($nrefs) {
+                    $row[] = $nrefs;
                 }
             }
         }
