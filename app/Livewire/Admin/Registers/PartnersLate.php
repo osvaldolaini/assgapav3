@@ -16,7 +16,7 @@ class PartnersLate extends Component
 {
     public Partner $partner;
 
-    PUBLIC $partnerLate;
+    public $partnerLate;
     public $breadcrumb_title = 'SÓCIOS EM ATRASO';
 
     public $showModalUnavailability = false;
@@ -33,7 +33,7 @@ class PartnersLate extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Registers\Partner"; //Model principal
-    public $modelId="partners.id"; //Ex: 'table.id' or 'id'
+    public $modelId = "partners.id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
@@ -123,7 +123,7 @@ class PartnersLate extends Component
                 'Atualizada'        => $data->updated,
                 'Atualizada por'    => $data->updated_by,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -135,7 +135,7 @@ class PartnersLate extends Component
     }
     public function showModalUpdate(Partner $Partner)
     {
-        redirect()->route('edit-partner',$Partner);
+        redirect()->route('edit-partner', $Partner);
     }
 
     //DELETE
@@ -164,7 +164,7 @@ class PartnersLate extends Component
     }
     public function delete($id)
     {
-        $master = PartnerCategory::where('parent_category','Não sócio')->first();
+        $master = PartnerCategory::where('parent_category', 'Não sócio')->first();
         $data = Partner::where('id', $id)->first();
         $data->partner_category = $master->id;
         $data->active = 0;
@@ -193,7 +193,7 @@ class PartnersLate extends Component
         }
         $query->where('partner_category_master', 'Sócio');
 
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -224,117 +224,131 @@ class PartnersLate extends Component
         }
     }
     #PRICIPAL FUNCTIONS
-        public function search($query)
-        {
-            $searchTerms = explode(',', $this->searchable);
-            $query->where(function ($innerQuery) use ($searchTerms) {
-                foreach ($searchTerms as $term) {
-                    if ($this->customSearch) {
-                        $fields = explode('|', $this->customSearch);
-                        if (in_array($term, $fields)) {
-                            $search = array($term => $this->search);
-                            $formattedSearch = $this->model::filterFields($search);
-                            if ($formattedSearch['converted'] != '%0%') {
-                                $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
-                            } else {
-                                $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
-                            }
+    public function search($query)
+    {
+        $searchTerms = explode(',', $this->searchable);
+        $query->where(function ($innerQuery) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if ($this->customSearch) {
+                    $fields = explode('|', $this->customSearch);
+                    if (in_array($term, $fields)) {
+                        $search = array($term => $this->search);
+                        $formattedSearch = $this->model::filterFields($search);
+                        if ($formattedSearch['converted'] != '%0%') {
+                            $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
                         } else {
                             $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                         }
                     } else {
                         $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                     }
+                } else {
+                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                 }
-            });
-            // dd($query);
-        }
+            }
+        });
+        // dd($query);
+    }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 
-        public function partnerLate()
-        {
-            $row = array();
-            $late = array();
-            $partners = Partner::select('id', 'registration_at', 'partner_category')
-                ->where('active', 1)
-                //->where('id',8246)
-                ->with(['category'])
-                ->where('discount', 0)
-                ->where('partner_category_master', 'Sócio')
-                ->orderBy('partner_category', 'asc')
-                ->orderBy('name', 'asc')
-                ->get();
+    public function partnerLate()
+    {
+        $row = array();
+        $late = array();
+        $partners = Partner::select('id', 'registration_at', 'partner_category')
+            ->where('active', 1)
+            //->where('id',8246)
+            ->with(['category'])
+            ->where('discount', 0)
+            ->where('partner_category_master', 'Sócio')
+            ->orderBy('partner_category', 'asc')
+            ->orderBy('name', 'asc')
+            ->get();
 
 
-            foreach ($partners as $partner) {
-                $refs = array();
-                $day = date('d', strtotime($partner->registration_at));
-                if (date('Y', strtotime($partner->registration_at)) >= 2017) {
-                    $start = date('Y', strtotime($partner->registration_at));
-                    $mStart = date('m', strtotime($partner->registration_at)) + 1;
+        foreach ($partners as $partner) {
+            $refs = array();
+            $day = date('d', strtotime($partner->registration_at));
+            if (date('Y', strtotime($partner->registration_at)) >= 2017) {
+                $start = date('Y', strtotime($partner->registration_at));
+                $mStart = date('m', strtotime($partner->registration_at)) + 1;
+            } else {
+                $start = 2017;
+                $mStart = 1;
+            }
+            for ($i = $start; $i < date('Y') + 1; $i++) {
+                if ($start == $i) {
+                    for ($m = $mStart; $m < 13; $m++) {
+                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
+                        }
+                    }
                 } else {
-                    $start = 2017;
-                    $mStart = 1;
-                }
-                for ($i = $start; $i < date('Y') + 1; $i++) {
-                    if ($start == $i) {
-                        for ($m = $mStart; $m < 13; $m++) {
-                            if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                                $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                            }
-                        }
-                    } else {
-                        for ($m = 1; $m < 13; $m++) {
-                            if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                                $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                            }
+                    for ($m = 1; $m < 13; $m++) {
+                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
+                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
                         }
                     }
-                }
-
-                foreach ($partner->monthlys as $monthly) {
-                    if ($monthly->status != 0) {
-                        if (array_search($monthly->ref, $refs)) {
-                            unset($refs[$monthly->ref]);
-                        }
-                    }
-                }
-                if ($refs) {
-                    $row[] = $refs;
-                    $late[] = $partner->id;
                 }
             }
 
-
-            return $late;
+            // foreach ($partner->monthlys as $monthly) {
+            //     if ($monthly->status != 0) {
+            //         if (array_search($monthly->ref, $refs)) {
+            //             unset($refs[$monthly->ref]);
+            //         }
+            //     }
+            // }
+            // if ($refs) {
+            //     $row[] = $refs;
+            //     $late[] = $partner->id;
+            // }
+            /**Modificação feita por solicitação do clube em 17/01/25 */
+            foreach ($partner->monthlys as $monthly) {
+                foreach ($partner->monthlys as $monthly) {
+                    if ($monthly->status == 0) {
+                        if (array_search($monthly->ref, $refs)) {
+                            $nrefs[$monthly->ref] = $monthly->ref;
+                        }
+                    }
+                }
+            }
+            if ($nrefs) {
+                $row[] = $nrefs;
+                $late[] = $partner->id;
+            }
         }
+
+
+        return $late;
+    }
 }

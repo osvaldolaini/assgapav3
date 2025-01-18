@@ -187,6 +187,7 @@ class StatsCard extends Component
             // if ($refs) {
             //     $row[] = $refs;
             // }
+            /**Modificação feita por solicitação do clube em 17/01/25 */
             foreach ($partner->monthlys as $monthly) {
                 foreach ($partner->monthlys as $monthly) {
                     if ($monthly->status == 0) {
