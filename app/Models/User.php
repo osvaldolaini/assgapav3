@@ -68,7 +68,10 @@ class User extends Authenticatable
     protected $appends = [
         'profile_photo_url',
     ];
-
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = mb_strtoupper($value);
+    }
     public function getCreatedAttribute()
     {
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->created_at)
@@ -81,13 +84,13 @@ class User extends Authenticatable
             ->format('d/m/Y H:i:s');
     }
 
-    public function group():BelongsTo
+    public function group(): BelongsTo
     {
-        return $this->belongsTo(UserGroups::class,'user_groups_id','id');
+        return $this->belongsTo(UserGroups::class, 'user_groups_id', 'id');
     }
 
-    public function access():HasMany
+    public function access(): HasMany
     {
-        return $this->hasMany(UserAccess::class,'user_id','id');
+        return $this->hasMany(UserAccess::class, 'user_id', 'id');
     }
 }
