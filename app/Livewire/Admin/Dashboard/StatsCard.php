@@ -190,7 +190,10 @@ class StatsCard extends Component
             foreach ($partner->monthlys as $monthly) {
                 foreach ($partner->monthlys as $monthly) {
                     if ($monthly->status == 0) {
-                        $nrefs[$monthly->ref] = $monthly->ref;
+                        if (array_search($monthly->ref, $refs)) {
+
+                            $nrefs[$monthly->ref] = $monthly->ref;
+                        }
                     }
                 }
                 if ($nrefs) {
