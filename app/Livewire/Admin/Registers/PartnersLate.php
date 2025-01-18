@@ -297,6 +297,7 @@ class PartnersLate extends Component
 
         foreach ($partners as $partner) {
             $refs = array();
+            $nrefs = array();
             $day = date('d', strtotime($partner->registration_at));
             if (date('Y', strtotime($partner->registration_at)) >= 2017) {
                 $start = date('Y', strtotime($partner->registration_at));
