@@ -77,7 +77,7 @@ class LocationNew extends Component
             ->where('active', 1)->get();
 
         if ($this->inputSearch != '') {
-            $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master')
+            $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master', 'discount')
                 ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
                 ->limit(5)->get();
         }
@@ -94,7 +94,7 @@ class LocationNew extends Component
     {
         if ($property === 'ambience_id') {
             $selectAmbience = Ambience::select('id', 'title', 'multiple')
-            ->find($this->ambience_id);
+                ->find($this->ambience_id);
             $this->multiple = $selectAmbience->multiple;
             $this->ambience_tenant_id = '';
             $this->value = '';
@@ -104,7 +104,7 @@ class LocationNew extends Component
             $this->location_date = '';
             $this->ambience = $selectAmbience->title;
 
-            $this->dispatch('changeAmbience', $this->ambience_id,$this->partner_id);
+            $this->dispatch('changeAmbience', $this->ambience_id, $this->partner_id);
         }
 
         if ($property === 'ambience_tenant_id') {
@@ -162,7 +162,7 @@ class LocationNew extends Component
         $this->validate();
         $location = Location::create([
             'active' => 1,
-            'guests'=> $this->guests,
+            'guests' => $this->guests,
             'created_by' => Auth::user()->name,
             'ambience' => $this->ambience,
             'ambience_id' => $this->ambience_id,
@@ -184,7 +184,7 @@ class LocationNew extends Component
             'loc_time' => $this->loc_time,
         ]);
 
-        if($location->convert_value($location->value) > 0){
+        if ($location->convert_value($location->value) > 0) {
             Installment::create([
                 'active'        => 0,
                 'title'         => 'Sinal',
