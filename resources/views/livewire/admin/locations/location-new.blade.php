@@ -286,6 +286,9 @@
                                                         <div class="font-bold">{{ $item->name }} -
                                                             {{ $item->partner_category_master }}</div>
                                                         <div class="text-sm opacity-50">{{ $item->cpf }} </div>
+                                                        @if ($item->discount)
+                                                            <span>aqui</span>
+                                                        @endif
                                                     </div>
                                                 </div>
                                             </td>
