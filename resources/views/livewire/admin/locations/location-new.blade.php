@@ -288,7 +288,10 @@
                                                         <div class="text-sm opacity-50">{{ $item->cpf }} </div>
                                                         @if ($item->discount == 0)
                                                             @if ($item->lateMonthly())
-                                                                <span>aqui</span>
+                                                                <div style="background-color:red;"
+                                                                    class="gap-2 mx-1 text-xs badge badge-error flex-warp ">
+                                                                    {{ $data->category }}
+                                                                </div>
                                                             @endif
                                                         @endif
                                                     </div>
