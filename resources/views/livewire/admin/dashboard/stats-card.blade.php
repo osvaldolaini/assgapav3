@@ -1,4 +1,29 @@
 <div class="grid w-full grid-cols-4 gap-2">
+    @if ($releasePool)
+        <a href="{{ route('passes') }}" class="col-span-full sm:col-span-1">
+            <div class="relative h-32 overflow-hidden bg-green-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-green-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
+                    viewBox="0 0 15 15" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.63639 1C4.14922 1 3 2.20269 3 3.72724V4H9V3.63639C9 1.56904 10.6333 0 12.6818 0V1C11.1667 1 10 2.14011 10 3.63639V10H9V9H3V12H2V3.72724C2 1.68816 3.55993 0 5.63639 0V1ZM3 8H9V5H3V8Z"
+                        fill="currentColor" />
+                    <path
+                        d="M7.43931 13.4416C6.54499 13.9461 5.56317 14.5 3.95454 14.5C2.47163 14.5 1.34063 13.7381 0.625824 12.9317L1.37417 12.2683C1.95937 12.9286 2.83745 13.5 3.95454 13.5C5.29393 13.5 6.0834 13.0584 6.95888 12.5645L6.96977 12.5584C7.8641 12.0539 8.84591 11.5 10.4545 11.5C11.9851 11.5 13.3377 12.3202 14.3064 13.0716L13.6936 13.8618C12.7714 13.1465 11.6421 12.5 10.4545 12.5C9.11516 12.5 8.32568 12.9416 7.4502 13.4355L7.43931 13.4416Z"
+                        fill="currentColor" />
+                </svg>
+                <div class="p-4 ">
+                    <dl>
+                        <dt class="text-sm font-medium leading-5 text-white truncate">
+                            Liberação Passe piscina
+                        </dt>
+                        <dd class="mt-1 text-5xl font-bold leading-9 text-white">
+                            {{ $bill }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </a>
+    @endif
     @if ($partners)
         <a href="{{ route('partners') }}" class="col-span-full sm:col-span-1">
             <div class="relative h-32 overflow-hidden bg-blue-500 rounded-lg shadow-md">
