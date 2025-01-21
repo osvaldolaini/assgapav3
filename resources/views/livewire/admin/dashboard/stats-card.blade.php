@@ -1,8 +1,8 @@
-<div class="grid grid-cols-4 gap-2 w-full">
+<div class="grid w-full grid-cols-4 gap-2">
     @if ($partners)
         <a href="{{ route('partners') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative h-32 overflow-hidden bg-blue-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-blue-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M13 20V18C13 15.2386 10.7614 13 8 13C5.23858 13 3 15.2386 3 18V20H13ZM13 20H21V19C21 16.0545 18.7614 14 16 14C14.5867 14 13.3103 14.6255 12.4009 15.6311M11 7C11 8.65685 9.65685 10 8 10C6.34315 10 5 8.65685 5 7C5 5.34315 6.34315 4 8 4C9.65685 4 11 5.34315 11 7ZM18 9C18 10.1046 17.1046 11 16 11C14.8954 11 14 10.1046 14 9C14 7.89543 14.8954 7 16 7C17.1046 7 18 7.89543 18 9Z"
@@ -23,8 +23,8 @@
     @endif
     @if ($locations)
         <a href="{{ route('locations') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative h-32 overflow-hidden bg-blue-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-blue-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
@@ -56,8 +56,8 @@
 
     @if ($deleteLocations)
         <a href="{{ route('delete-locations') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
+            <div class="relative h-32 overflow-hidden bg-red-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-red-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
@@ -88,8 +88,8 @@
     @endif
     @if ($partnerLate)
         <a href="{{ route('partnersLate') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
+            <div class="relative h-32 overflow-hidden bg-red-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-red-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <defs>
                         <style>
@@ -131,8 +131,8 @@
     @endif
     @if ($installmentLates)
         <a href="{{ route('installmentsLate') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-red-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-red-800"
+            <div class="relative h-32 overflow-hidden bg-red-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-red-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M17.6667 2H6.33333C6.02379 2 5.86902 2 5.73853 2.01198C4.28819 2.14511 3.1383 3.35155 3.01142 4.87321C3 5.01012 3 5.1725 3 5.49727V20.2598C3 21.1323 4.05871 21.5026 4.55769 20.8045C4.90385 20.3203 5.59615 20.3203 5.94231 20.8045L6.375 21.4098C6.9375 22.1967 8.0625 22.1967 8.625 21.4098C9.1875 20.623 10.3125 20.623 10.875 21.4098C11.4375 22.1967 12.5625 22.1967 13.125 21.4098C13.6875 20.623 14.8125 20.623 15.375 21.4098C15.9375 22.1967 17.0625 22.1967 17.625 21.4098L18.0577 20.8045C18.4038 20.3203 19.0962 20.3203 19.4423 20.8045C19.9413 21.5026 21 21.1323 21 20.2598V5.49727C21 5.1725 21 5.01012 20.9886 4.87321C20.8617 3.35155 19.7118 2.14511 18.2615 2.01198C18.131 2 17.9762 2 17.6667 2Z"
@@ -156,8 +156,8 @@
     @endif
     @if ($bill)
         <a href="{{ route('paidMonth') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative h-32 overflow-hidden bg-blue-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-blue-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path
                         d="M16.755 2H7.24502C6.08614 2 5.50671 2 5.03939 2.16261C4.15322 2.47096 3.45748 3.18719 3.15795 4.09946C3 4.58055 3 5.17705 3 6.37006V20.3742C3 21.2324 3.985 21.6878 4.6081 21.1176C4.97417 20.7826 5.52583 20.7826 5.8919 21.1176L6.375 21.5597C7.01659 22.1468 7.98341 22.1468 8.625 21.5597C9.26659 20.9726 10.2334 20.9726 10.875 21.5597C11.5166 22.1468 12.4834 22.1468 13.125 21.5597C13.7666 20.9726 14.7334 20.9726 15.375 21.5597C16.0166 22.1468 16.9834 22.1468 17.625 21.5597L18.1081 21.1176C18.4742 20.7826 19.0258 20.7826 19.3919 21.1176C20.015 21.6878 21 21.2324 21 20.3742V6.37006C21 5.17705 21 4.58055 20.842 4.09946C20.5425 3.18719 19.8468 2.47096 18.9606 2.16261C18.4933 2 17.9139 2 16.755 2Z"
@@ -181,8 +181,8 @@
     @endif
     @if ($cashier)
         <a href="{{ route('cashier') }}" class="col-span-full sm:col-span-1">
-            <div class="relative overflow-hidden bg-blue-500 rounded-lg shadow-md h-32">
-                <svg class="absolute w-24 h-24 rounded-md opacity-50 -top-6 -right-6 md:-right-4 text-blue-800"
+            <div class="relative h-32 overflow-hidden bg-blue-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-blue-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
                     fill="currentColor" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg"
                     xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 491.52 491.52" xml:space="preserve">
                     <g>
@@ -236,8 +236,34 @@
             @livewire('admin.dashboard.reports', ['tiny'])
         </div>
     @endif
+    @if ($releasePool)
+        <a href="{{ route('passes') }}" class="col-span-full sm:col-span-1">
+            <div class="relative h-32 overflow-hidden bg-green-500 rounded-lg shadow-md">
+                <svg class="absolute w-24 h-24 text-green-800 rounded-md opacity-50 -top-6 -right-6 md:-right-4"
+                    viewBox="0 0 15 15" fill="none">
+                    <path fill-rule="evenodd" clip-rule="evenodd"
+                        d="M5.63639 1C4.14922 1 3 2.20269 3 3.72724V4H9V3.63639C9 1.56904 10.6333 0 12.6818 0V1C11.1667 1 10 2.14011 10 3.63639V10H9V9H3V12H2V3.72724C2 1.68816 3.55993 0 5.63639 0V1ZM3 8H9V5H3V8Z"
+                        fill="currentColor" />
+                    <path
+                        d="M7.43931 13.4416C6.54499 13.9461 5.56317 14.5 3.95454 14.5C2.47163 14.5 1.34063 13.7381 0.625824 12.9317L1.37417 12.2683C1.95937 12.9286 2.83745 13.5 3.95454 13.5C5.29393 13.5 6.0834 13.0584 6.95888 12.5645L6.96977 12.5584C7.8641 12.0539 8.84591 11.5 10.4545 11.5C11.9851 11.5 13.3377 12.3202 14.3064 13.0716L13.6936 13.8618C12.7714 13.1465 11.6421 12.5 10.4545 12.5C9.11516 12.5 8.32568 12.9416 7.4502 13.4355L7.43931 13.4416Z"
+                        fill="currentColor" />
+                </svg>
+                <div class="p-4 ">
+                    <dl>
+                        <dt class="text-sm font-medium leading-5 text-white truncate">
+                            Liberação Passe piscina
+                        </dt>
+                        <dd class="mt-1 text-5xl font-bold leading-9 text-white">
+                            {{ $bill }}
+                        </dd>
+                    </dl>
+                </div>
+            </div>
+        </a>
+    @endif
     @if ($lastReceiveds)
-        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             <div class="flex items-center justify-between p-3">
                 <div class="flex items-center space-x-1">
                     <div class="-space-y-1">
@@ -252,31 +278,31 @@
                     </svg>
                 </span>
             </div>
-            <div class="p-0 m-0 bg-white text-gray-900 w-full h-full rounded-b-md ">
+            <div class="w-full h-full p-0 m-0 text-gray-900 bg-white rounded-b-md ">
                 <div class="w-full px-1">
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs">
                             <thead>
                                 <tr class="text-left">
-                                    <th class="py-3 px-2">Cliente</th>
-                                    <th class="py-3 px-2">Responsável</th>
-                                    <th class="py-3 px-2 ">Valor</th>
-                                    <th class="py-3 px-2">Recibo</th>
+                                    <th class="px-2 py-3">Cliente</th>
+                                    <th class="px-2 py-3">Responsável</th>
+                                    <th class="px-2 py-3 ">Valor</th>
+                                    <th class="px-2 py-3">Recibo</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($lastReceiveds as $item)
                                     <tr class="border-b border-opacity-20 ">
-                                        <td class="py-3 px-2">
+                                        <td class="px-2 py-3">
                                             {{ $item->partners->name }}
                                         </td>
-                                        <td class="py-3 px-2">
+                                        <td class="px-2 py-3">
                                             {{ $item->created_by }}
                                         </td>
-                                        <td class="py-3 px-2 text-center flex flex-nowrap">
+                                        <td class="flex px-2 py-3 text-center flex-nowrap">
                                             R$ {{ $item->value }}
                                         </td>
-                                        <td class="py-3 px-2 text-center">
+                                        <td class="px-2 py-3 text-center">
                                             @if ($item->active == 1)
                                                 @livewire('admin.financial.voucher', ['data' => $item, 'type' => 'received'], key($item->id))
                                             @endif
@@ -291,7 +317,8 @@
         </div>
     @endif
     @if ($accessesPool)
-        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             <div class="flex items-center justify-between p-3">
                 <div class="flex items-center space-x-1">
                     <div class="-space-y-1">
@@ -309,31 +336,31 @@
                     </svg>
                 </span>
             </div>
-            <div class="p-0 m-0 bg-white text-gray-900 w-full h-full rounded-b-md ">
+            <div class="w-full h-full p-0 m-0 text-gray-900 bg-white rounded-b-md ">
                 <div class="w-full px-1">
                     <div class="overflow-x-auto">
                         <table class="w-full text-xs">
                             <thead>
                                 <tr class="text-left">
-                                    <th class="py-3 px-2">Data</th>
-                                    <th class="py-3 px-2">Hora</th>
-                                    <th class="py-3 px-2 ">Cliente</th>
-                                    <th class="py-3 px-2">Passe</th>
+                                    <th class="px-2 py-3">Data</th>
+                                    <th class="px-2 py-3">Hora</th>
+                                    <th class="px-2 py-3 ">Cliente</th>
+                                    <th class="px-2 py-3">Passe</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (json_decode($accessesPool) as $item)
                                     <tr class="border-b border-opacity-20 ">
-                                        <td class="py-3 px-2">
+                                        <td class="px-2 py-3">
                                             {{ $item->date }}
                                         </td>
-                                        <td class="py-3 px-2">
+                                        <td class="px-2 py-3">
                                             {{ $item->hour }}
                                         </td>
-                                        <td class="py-3 px-2 text-center flex flex-nowrap">
+                                        <td class="flex px-2 py-3 text-center flex-nowrap">
                                             {{ $item->name }}
                                         </td>
-                                        <td class="py-3 px-2 text-center">
+                                        <td class="px-2 py-3 text-center">
                                             {{ $item->category }}
                                         </td>
                                     </tr>
@@ -348,19 +375,24 @@
 
     @endif
     @if ($charts)
-        <div class="col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             @livewire('admin.charts.income-expenses')
         </div>
-        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             @livewire('admin.charts.spending-by-sector')
         </div>
-        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             @livewire('admin.charts.revenue-by-sector')
         </div>
-        <div class="row-span-2 col-span-full sm:col-span-4 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-4">
             @livewire('admin.charts.location-by-environment')
         </div>
-        <div class="row-span-2 col-span-full sm:col-span-2 relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full">
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             @livewire('admin.charts.new-partner')
         </div>
     @endif

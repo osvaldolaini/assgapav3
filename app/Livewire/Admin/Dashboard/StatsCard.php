@@ -27,6 +27,7 @@ class StatsCard extends Component
     public $charts;
     public $dailyreports;
     public $lastReceiveds;
+    public $releasePool;
     public $accessesPool = [];
 
     public function mount(
@@ -42,6 +43,7 @@ class StatsCard extends Component
         $reportsTiny,
         $dailyreports,
         $accessesPool,
+        $releasePool,
         $charts
     ) {
         $this->reports = $reports;
@@ -130,6 +132,9 @@ class StatsCard extends Component
         }
         if ($cashier) {
             $this->cashier = number_format($this->balance(), 2, ",", ".");
+        }
+        if ($releasePool) {
+            $releasePool = true;
         }
     }
     public function render()
