@@ -287,7 +287,9 @@
                                                             {{ $item->partner_category_master }}</div>
                                                         <div class="text-sm opacity-50">{{ $item->cpf }} </div>
                                                         @if ($item->discount == 0)
-                                                            <span>aqui</span>
+                                                            @if ($item->lateMonthly())
+                                                                <span>aqui</span>
+                                                            @endif
                                                         @endif
                                                     </div>
                                                 </div>

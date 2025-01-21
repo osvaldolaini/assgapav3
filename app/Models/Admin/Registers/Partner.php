@@ -116,6 +116,17 @@ class Partner extends Model
     {
         return $this->hasMany(MonthlyPayment::class);
     }
+    public function lateMonthly()
+    {
+        $late = false;
+        foreach ($this->monthlys as $monthly) {
+            if ($monthly->status == 0) {
+                $late = true;
+                break;
+            }
+        }
+        return $late;
+    }
     /*Setar a categoria master */
     public function setActiveAttribute($value)
     {
