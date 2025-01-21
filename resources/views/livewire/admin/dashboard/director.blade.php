@@ -1,8 +1,8 @@
 <div class="pt-0 bg-white dark:bg-gray-800 sm:rounded-lg">
-    <div class="px-4 my-2 bg-white  dark:bg-gray-800 sm:rounded-lg">
+    <div class="px-4 my-2 bg-white dark:bg-gray-800 sm:rounded-lg">
         @livewire('admin.dashboard.stats-card', [
             'partners' => true,
-            'installmentLates' => true,
+            'installmentLates' => false,
             'bill' => false,
             'partnerLate' => false,
             'locations' => true,
