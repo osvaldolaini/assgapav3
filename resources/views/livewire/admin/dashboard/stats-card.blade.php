@@ -16,9 +16,9 @@
                         <dt class="text-sm font-medium leading-5 text-white truncate">
                             Liberação Passe piscina
                         </dt>
-                        <dd class="mt-1 text-5xl font-bold leading-9 text-white">
+                        {{-- <dd class="mt-1 text-5xl font-bold leading-9 text-white">
                             {{ $bill }}
-                        </dd>
+                        </dd> --}}
                     </dl>
                 </div>
             </div>

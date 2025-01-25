@@ -13,7 +13,7 @@
             'reportsTiny' => true,
             'dailyreports' => true,
             'accessesPool' => true,
-            'releasePool' => true,
+            'releasePool' => false,
             'charts' => false,
         ])
     </div>
