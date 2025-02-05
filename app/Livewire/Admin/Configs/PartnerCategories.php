@@ -41,6 +41,7 @@ class PartnerCategories extends Component
     public $value;
     public $color;
     public $responsible;
+    public $see_validity;
     public $parent_category;
 
     public function render()
@@ -57,6 +58,7 @@ class PartnerCategories extends Component
             'parent_category',
             'color',
             'responsible',
+            'see_validity'
         );
     }
     //CREATE
@@ -74,6 +76,7 @@ class PartnerCategories extends Component
             'parent_category'  => 'required',
             'color' => 'required',
             'responsible' => 'required',
+            'see_validity' => 'required',
         ];
         $this->validate();
 
@@ -83,6 +86,7 @@ class PartnerCategories extends Component
             'parent_category'       => $this->parent_category,
             'color'                 => $this->color,
             'responsible'           => $this->responsible,
+            'see_validity'           => $this->see_validity,
             'active'                => 1,
             'created_by' => Auth::user()->name,
         ]);
@@ -120,6 +124,7 @@ class PartnerCategories extends Component
         $this->parent_category  = $partnerCategory->parent_category;
         $this->color            = $partnerCategory->color;
         $this->responsible      = $partnerCategory->responsible;
+        $this->see_validity      = $partnerCategory->see_validity;
         $this->showModalEdit = true;
     }
     public function update()
@@ -130,6 +135,7 @@ class PartnerCategories extends Component
             'parent_category'  => 'required',
             'color'  => 'required',
             'responsible'  => 'required',
+            'see_validity'  => 'required',
         ];
 
         $this->validate();
@@ -141,6 +147,7 @@ class PartnerCategories extends Component
             'value'                 => $this->value,
             'responsible'           => $this->responsible,
             'color'                 => $this->color,
+            'see_validity'           => $this->see_validity,
             'parent_category'       => $this->parent_category,
             'updated_by' => Auth::user()->name,
         ]);

@@ -18,6 +18,7 @@ class CreatePartnerCategoriesTable extends Migration
             $table->string('title')->nullable();
             $table->string('slug')->nullable();
             $table->boolean('responsible')->nullable();
+            $table->boolean('see_validity')->nullable();
             $table->string('parent_category')->nullable();
             $table->decimal('value', $precision = 10, $scale = 2);
             $table->string('color')->nullable();
