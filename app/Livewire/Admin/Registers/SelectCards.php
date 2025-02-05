@@ -62,6 +62,7 @@ class SelectCards extends Component
                     'date_of_birth'  => $partner->date_of_birth,
                     'validity_of_card'  => $partner->validity_of_card,
                     'color' => $partner->category->color,
+                    'see_validity' => $partner->category->see_validity,
                     'responsavel' =>  $responsável,
                     'qrcode' => 'qrcode-' . $i . '.png',
                     'image' => $partner->image,

@@ -155,7 +155,11 @@
                 </div>
                 <p style="margin-left: 0.125cm; margin-top:3px;"><b>Emissão: </b> {{ date('d/m/Y') }} (versão
                     {{ $card['version'] }})</p>
-                <p style="margin-left: 0.125cm; margin-top:3px;"><b>Validade: </b> {{ $card['validity_of_card'] }}</p>
+                @if ($card['see_validity'])
+                    <p style="margin-left: 0.125cm; margin-top:3px;"><b>Validade: </b> {{ $card['validity_of_card'] }}
+                    </p>
+                @endif
+
             </div>
         </div>
         <div class="cartao" style="margin-top: 0px;">
