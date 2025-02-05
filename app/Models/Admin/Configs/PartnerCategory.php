@@ -23,6 +23,7 @@ class PartnerCategory extends Model
         'slug',
         'color',
         'responsible',
+        'see_validity',
         'parent_category',
         'value',
         'active',
