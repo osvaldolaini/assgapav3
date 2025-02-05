@@ -311,8 +311,19 @@ class LocationCalendar extends Component
         }
 
         // dd($calendar);
-        $unavailabilities = AmbienceUnavailability::where('active', 1)
-            ->get();
+        if ($this->ambience_id) {
+            $unavailabilities = AmbienceUnavailability::where('active', 1)
+                ->where('ambience_id', $this->ambience_id)
+                ->where('validity', '>=', $this->validity)
+                ->get();
+        } else {
+            $unavailabilities = AmbienceUnavailability::where('active', 1)
+                ->where('validity', '>=', $this->validity)
+                ->get();
+        }
+        // $unavailabilities = AmbienceUnavailability::where('active', 1)
+        //     ->where('validity', '>=', $this->validity)
+        //     ->get();
 
 
         if ($unavailabilities) {
