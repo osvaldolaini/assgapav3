@@ -49,8 +49,10 @@ class SelectCards extends Component
                 $partner->save();
                 if ($partner->partner_category_master == 'Dependente') {
                     $responsável = $partner->parent->name;
+                    $see_validity = $partner->parent->category->see_validity;
                 } else {
                     $responsável = "";
+                    $see_validity = $partner->category->see_validity;
                 }
 
                 $cards[] = array(
@@ -62,7 +64,7 @@ class SelectCards extends Component
                     'date_of_birth'  => $partner->date_of_birth,
                     'validity_of_card'  => $partner->validity_of_card,
                     'color' => $partner->category->color,
-                    'see_validity' => $partner->category->see_validity,
+                    'see_validity' => $see_validity,
                     'responsavel' =>  $responsável,
                     'qrcode' => 'qrcode-' . $i . '.png',
                     'image' => $partner->image,
