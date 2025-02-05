@@ -49,7 +49,6 @@ class AmbienceUnavailabilities extends Component
     {
         $this->ambience = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
-        $dataAtual = date('Y-m-d'); // Obtém a data atual
         $this->validity = date('d/m/Y', strtotime(date('Y-m-d') . ' +1 day'));
     }
 
