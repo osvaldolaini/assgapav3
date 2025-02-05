@@ -22,8 +22,20 @@ class AmbienceUnavailability extends Model
     protected $table = 'unavailabilities';
 
     protected $fillable = [
-        'id', 'ambience_id', 'type', 'start', 'end', 'title', 'updated_because', 'deleted_at', 'deleted_because',
-        'deleted_by', 'updated_by', 'created_by', 'active'
+        'id',
+        'ambience_id',
+        'type',
+        'start',
+        'end',
+        'title',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'created_by',
+        'active',
+        'validity'
     ];
     // protected $casts = [
     //     'start' => 'datetime:Y-m-d H:i:s',
@@ -32,6 +44,15 @@ class AmbienceUnavailability extends Model
     public function setTitleAttribute($value)
     {
         $this->attributes['title'] = mb_strtoupper($value);
+    }
+    public function getValidityAttribute($value)
+    {
+        return Carbon::createFromFormat('Y-m-d', $value)
+            ->format('d/m/Y');
+    }
+    public function setValidityAttribute($value)
+    {
+        $this->attributes['validity'] = implode("-", array_reverse(explode("/", $value)));
     }
 
     public function getStartAttribute($value)

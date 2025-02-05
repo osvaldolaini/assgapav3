@@ -29,7 +29,7 @@ class AmbienceUnavailabilities extends Component
     public $search;
     public $relationTables = "ambiences,ambiences.id,unavailabilities.ambience_id"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'unavailabilities.title as motive,type,start,end,ambience_id,ambiences.title';
+    public $columnsInclude = 'unavailabilities.title as motive,type,start,end,ambience_id,ambiences.title,validity';
     public $searchable = 'unavailabilities.title'; //Colunas pesquisadas no banco de dados
     public $sort = "unavailabilities.end,desc|ambiences.title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
@@ -43,11 +43,14 @@ class AmbienceUnavailabilities extends Component
     public $type = '';
     public $ambience;
     public $alert;
+    public $validity;
 
     public function mount()
     {
         $this->ambience = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
+        $dataAtual = date('Y-m-d'); // Obtém a data atual
+        $this->validity = date('d/m/Y', strtotime(date('Y-m-d') . ' +1 day'));
     }
 
     public function render()
@@ -94,6 +97,7 @@ class AmbienceUnavailabilities extends Component
                 'start' => 'required',
                 'end' => 'required',
                 'ambience_id' => 'required',
+                'validity' => 'required'
             ];
         }
 
@@ -110,6 +114,7 @@ class AmbienceUnavailabilities extends Component
                 'start'          => $this->start,
                 'end'            => $this->end,
                 'ambience_id'    => $this->ambience_id,
+                'validity'       => $this->validity,
                 'active'         => 1,
                 'created_by' => Auth::user()->name,
             ]);
@@ -166,6 +171,7 @@ class AmbienceUnavailabilities extends Component
                 'start' => 'required',
                 'end' => 'required',
                 'ambience_id' => 'required',
+                'validity' => 'required',
             ];
         }
 
@@ -182,6 +188,8 @@ class AmbienceUnavailabilities extends Component
                 'type'           => $this->type,
                 'end'            => $this->end,
                 'ambience_id'    => $this->ambience_id,
+                'validity'       => $this->validity,
+
                 'updated_by' => Auth::user()->name,
             ]);
 
