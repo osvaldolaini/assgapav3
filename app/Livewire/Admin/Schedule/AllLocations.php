@@ -244,11 +244,11 @@ class AllLocations extends Component
         if ($this->ambience_id) {
             $unavailabilities = AmbienceUnavailability::where('active', 1)
                 ->where('ambience_id', $this->ambience_id)
-                ->where('validity', '>=', $this->validity)
+                ->where('validity', '>=', date('Y-m-d'))
                 ->get();
         } else {
             $unavailabilities = AmbienceUnavailability::where('active', 1)
-                ->where('validity', '>=', $this->validity)
+                ->where('validity', '>=', date('Y-m-d'))
                 ->get();
         }
 

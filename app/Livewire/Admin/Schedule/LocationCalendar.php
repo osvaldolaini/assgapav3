@@ -113,7 +113,9 @@ class LocationCalendar extends Component
 
         $unavailabilities = AmbienceUnavailability::where('active', 1)
             ->where('ambience_id', $ambience_id)
+            ->where('validity', '>=', date('Y-m-d'))
             ->get();
+
 
 
         if ($unavailabilities) {
@@ -314,11 +316,11 @@ class LocationCalendar extends Component
         if ($this->ambience_id) {
             $unavailabilities = AmbienceUnavailability::where('active', 1)
                 ->where('ambience_id', $this->ambience_id)
-                ->where('validity', '>=', $this->validity)
+                ->where('validity', '>=', date('Y-m-d'))
                 ->get();
         } else {
             $unavailabilities = AmbienceUnavailability::where('active', 1)
-                ->where('validity', '>=', $this->validity)
+                ->where('validity', '>=', date('Y-m-d'))
                 ->get();
         }
         // $unavailabilities = AmbienceUnavailability::where('active', 1)
