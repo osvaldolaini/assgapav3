@@ -16,12 +16,12 @@ class Master extends Component
     public function render()
     {
         $dataAtual = Carbon::now();
-        if (Auth::user()->dashboard == 4) {
-            // $this->sentEmail();
+        if (Auth::user()->dashboard == 3) {
+            $this->sentEmail();
         }
         if ($dataAtual->day <= 7) {
             $this->generateMonthly();
-        }else{
+        } else {
             Log::info('Já passou do período de criação');
         }
         // dd(Auth::user()->dashboard);
@@ -46,15 +46,15 @@ class Master extends Component
     public function generateMonthly()
     {
         $tot = 0;
-        $partners = Partner::select('id','partner_category')
-        ->where('active', 1)
-        ->with(['category'])
-        ->where('discount', 0)
-        ->where('partner_category_master', 'Sócio')
-        ->orderBy('partner_category', 'asc')
-        ->orderBy('name', 'asc')
-        // ->limit(20)
-        ->get();
+        $partners = Partner::select('id', 'partner_category')
+            ->where('active', 1)
+            ->with(['category'])
+            ->where('discount', 0)
+            ->where('partner_category_master', 'Sócio')
+            ->orderBy('partner_category', 'asc')
+            ->orderBy('name', 'asc')
+            // ->limit(20)
+            ->get();
 
         $ref = date('Y-m');
 
@@ -66,36 +66,37 @@ class Master extends Component
         }
         foreach ($monthlys as $monthly) {
             // Verifica se já existe uma mensalidade para o mês desejado
-            if (!MonthlyPayment::monthlyExists($ref,$monthly['partner_id'])) {
+            if (!MonthlyPayment::monthlyExists($ref, $monthly['partner_id'])) {
                 MonthlyPayment::create([
                     'partner_id'    => $monthly['partner_id'],
                     'status'        => 0,
                     'ref'           => date('Y-m'),
-                    'paid_in'       => date('Y-m').'-02',
+                    'paid_in'       => date('Y-m') . '-02',
                     'value'         => $monthly['value'],
                     'created_by'    => 'automático',
                 ]);
                 $tot++;
             }
         }
-        Log::info('Criadas '.$tot.' novas mensalidades');
+        Log::info('Criadas ' . $tot . ' novas mensalidades');
     }
     public function sentEmail()
     {
         // $email = Configs::find(1)->email_happy;
         $date = date('Y');
-        $date_of_birth = date('Y-m-d');
+        // $date_of_birth = date('Y-m-d');
+        $date_of_birth = '1984-01-23';
         $countMail = 0;
-        $partners = Partner::select('id','email', 'name','email_birthday')
+        $partners = Partner::select('id', 'email', 'name', 'email_birthday')
             ->where('email', '!=', '')
-            ->where('email_birthday','<',$date)
-            ->where('date_of_birth','<=',$date_of_birth)
+            ->where('email_birthday', '<', $date)
+            ->where('date_of_birth', '=', $date_of_birth)
             ->where('send_email_barthday', 1)
             // ->where('partner_category_master', 'Sócio')
             // ->limit(10)
             ->get();
         $totalEmails = $partners->count();
-        if($partners->count() > 0){
+        if ($partners->count() > 0) {
             foreach ($partners as $partner) {
                 if (filter_var($partner->email, FILTER_VALIDATE_EMAIL)) {
                     Mail::send(
@@ -104,7 +105,6 @@ class Master extends Component
                         ])
                     );
                     $countMail++;
-
                 }
 
                 $partner->email_birthday = $date;
@@ -112,11 +112,10 @@ class Master extends Component
             }
 
             $error = $totalEmails - $countMail;
-            Log::info('Enviados '.$countMail.' emails de aniversário');
+            Log::info('Enviados ' . $countMail . ' emails de aniversário');
             $this->openAlert('success', $countMail . ' emails de aniversário enviados com sucesso.');
             $this->openAlert('error', $error . ' emails não foram por erro no cadastro ou falta de email.');
         }
-
     }
     //MESSAGE
     public function openAlert($status, $msg)
