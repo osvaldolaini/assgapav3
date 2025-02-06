@@ -26,6 +26,6 @@ class AppServiceProvider extends ServiceProvider
         $configurations = Configs::find(1);
         // Vincule os dados de configuração como uma variável global
         config(['app.configs' => $configurations]);
-        dd($configurations);
+        // dd($configurations);
     }
 }
