@@ -24,6 +24,7 @@ class Lists extends Component
     public $address = false;
     public $rg = false;
     public $date_of_birth = false;
+    public $birthdays = false;
 
     public $model_id;
 
@@ -71,6 +72,10 @@ class Lists extends Component
                 $body[$id]['date_of_birth'] =
                     ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
             }
+            if ($this->birthdays) {
+                $body[$id]['date_of_birth'] =
+                    ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
+            }
             if ($this->pf_pj) {
                 if ($item->pf_pj == 'pf') {
                     $body[$id]['cpf'] = $item->cpf;
@@ -92,6 +97,9 @@ class Lists extends Component
             }
         }
         if ($this->date_of_birth) {
+            $heads[] = 'Data de Nascimento';
+        }
+        if ($this->birthdays) {
             $heads[] = 'Data de Nascimento';
         }
         if ($this->pf_pj) {
@@ -147,6 +155,9 @@ class Lists extends Component
         if ($this->date_of_birth) {
             array_push($data[0], 'Data de Nascimento');
         }
+        if ($this->birthdays) {
+            array_push($data[0], 'Data de Nascimento');
+        }
         if ($this->pf_pj) {
             array_push($data[0], 'CPF / CNPJ');
         }
@@ -174,6 +185,10 @@ class Lists extends Component
                 'name' => $item->name,
             ];
             if ($this->date_of_birth) {
+                $body[$id]['date_of_birth'] =
+                    ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
+            }
+            if ($this->birthdays) {
                 $body[$id]['date_of_birth'] =
                     ($item->date_of_birth ? $item->date_of_birth . ' ( ' .  $item->age . ' anos)' : '');
             }
@@ -211,6 +226,11 @@ class Lists extends Component
             $query = $query->where('partners.active', '<=', 1);
         }
         $query->where('partner_category_master', 'Sócio');
+
+        if ($this->birthdays) {
+            $query->where('date_of_birth', 'LIKE', '%-' . date('m') . '-%');
+            // $query->where('date_of_birth', 'LIKE', '%-01-%');
+        }
 
         $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
