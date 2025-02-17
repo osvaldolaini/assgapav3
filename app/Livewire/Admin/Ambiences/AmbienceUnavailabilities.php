@@ -152,6 +152,7 @@ class AmbienceUnavailabilities extends Component
         $this->end              = $ambienceUnavailability->end;
         $this->ambience_id      = $ambienceUnavailability->ambience_id;
         $this->type             = $ambienceUnavailability->type;
+        $this->validity         = $ambienceUnavailability->validity;
         $this->showModalEdit    = true;
     }
     public function update()
