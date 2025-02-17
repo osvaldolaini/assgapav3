@@ -87,6 +87,7 @@ class AmbienceUnavailabilities extends Component
                 'title' => 'required',
                 'start' => 'required',
                 'ambience_id' => 'required',
+                'validity' => 'required',
             ];
             $this->end = $this->start;
         } else {
@@ -96,7 +97,6 @@ class AmbienceUnavailabilities extends Component
                 'start' => 'required',
                 'end' => 'required',
                 'ambience_id' => 'required',
-                'validity' => 'required'
             ];
         }
 
@@ -163,6 +163,7 @@ class AmbienceUnavailabilities extends Component
                 'title' => 'required',
                 'start' => 'required',
                 'ambience_id' => 'required',
+                'validity' => 'required',
             ];
         } else {
             $this->rules = [
@@ -171,7 +172,6 @@ class AmbienceUnavailabilities extends Component
                 'start' => 'required',
                 'end' => 'required',
                 'ambience_id' => 'required',
-                'validity' => 'required',
             ];
         }
 
