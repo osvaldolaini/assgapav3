@@ -89,7 +89,7 @@
         <h5>
             {{ $config->title }}
         </h5>
-        <h5 style="margin-bottom: 10px;">CNPJ {{ $config->cnpj }}</h5>
+        <h5 style="margin-bottom: 10px;">Chave PIX - CNPJ {{ $config->cnpj }}</h5>
         <p>{{ $config->address }} - {{ $config->city }} / {{ $config->state }} - CEP {{ $config->postalCode }}</p>
 
         <p>Contato(s): {{ $config->phone }}</p>
