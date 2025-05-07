@@ -116,8 +116,13 @@ class Reports extends Component
                 $orientation = 'P';
                 break;
             case 'pix':
-                $this->title .= 'PIX';
+                $this->title .= 'PIX caixa';
                 $this->pix();
+                $orientation = 'P';
+                break;
+            case 'pixm':
+                $this->title .= 'PIX maquininha';
+                $this->pixm();
                 $orientation = 'P';
                 break;
             case 'accessPool':
