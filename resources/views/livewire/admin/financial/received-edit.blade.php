@@ -50,7 +50,7 @@
                         <option value='CAR'>Cartões</option>
                         <option value='BOL'>Boleto</option>
                         <option value='PIX'>PIX caixa</option>
-                        <option value='PIXM'>PIX Maquina</option>
+                        <option value='PIXM'>PIX maquina</option>
                     </Select>
                     @error('form_payment')
                         <span class="error">{{ $message }}</span>

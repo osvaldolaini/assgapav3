@@ -63,7 +63,7 @@
                         <option value='BOL'>Boleto</option>
 
                         <option value='PIX'>PIX caixa</option>
-                        <option value='PIXM'>PIX Maquina</option>
+                        <option value='PIXM'>PIX maquina</option>
                     </Select>
                 @endif
 
