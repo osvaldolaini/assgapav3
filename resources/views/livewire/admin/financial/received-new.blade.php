@@ -49,7 +49,8 @@
                         <option value='DIN'>Dinheiro</option>
                         <option value='CAR'>Cartões</option>
                         <option value='BOL'>Boleto</option>
-                        <option value='PIX'>PIX</option>
+                        <option value='PIX'>PIX caixa</option>
+                        <option value='PIXM'>PIX Maquina</option>
                     </Select>
                     @error('form_payment')
                         <span class="error">{{ $message }}</span>
@@ -57,8 +58,7 @@
                 </div>
                 <div class="col-span-full sm:col-span-3">
                     <label for="value">*Valor</label>
-                    <input
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                    <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Valor" wire:model="value" id="value" required>
                     @error('value')
                         <span class="error">{{ $message }}</span>

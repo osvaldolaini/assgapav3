@@ -33,7 +33,7 @@ class Reports extends Component
 
     public $type;
 
-    public $bisexto = [2024,2028,2032,2036];
+    public $bisexto = [2024, 2028, 2032, 2036];
 
     public function mount($type)
     {
@@ -45,7 +45,7 @@ class Reports extends Component
     {
         if ($this->type == 'full') {
             return view('livewire.admin.dashboard.reports');
-        }else{
+        } else {
             return view('livewire.admin.dashboard.reportsTiny');
         }
     }
@@ -62,9 +62,9 @@ class Reports extends Component
 
         $this->start = date('Y-m-d', strtotime($this->year . '-' . $this->mounth . '-01'));
         if ($this->mounth == 2) {
-            if (in_array($this->year,$this->bisexto)) {
+            if (in_array($this->year, $this->bisexto)) {
                 $this->day = '29';
-            }else{
+            } else {
                 $this->day = '28';
             }
         } elseif ($this->mounth == '4' or $this->mounth == '6' or $this->mounth == '9' or $this->mounth == '11') {
@@ -73,7 +73,7 @@ class Reports extends Component
             $this->day = '31';
         }
 
-        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day. ' 00:00:00'));
+        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day . ' 00:00:00'));
         $end_date = new DateTime($this->end);
         // $end_date->modify('+1 day');
         $this->end = $end_date;
@@ -174,7 +174,7 @@ class Reports extends Component
                 $creditor = $bill->creditor;
             }
             $spending[] = array(
-                'paid_in' => date('d', strtotime(implode("-",array_reverse(explode("/",$bill->paid_in))))),
+                'paid_in' => date('d', strtotime(implode("-", array_reverse(explode("/", $bill->paid_in))))),
                 'id' => str_pad($bill->id, 5, '0', STR_PAD_LEFT),
                 'color' => 'background-color:#fff;',
                 'title' => mb_strtoupper($bill->title . " ( " . $creditor . " )"),
@@ -207,7 +207,7 @@ class Reports extends Component
         $cashierValue = 0;
         foreach ($cashiers as $cashier) {
             $spending[] = array(
-                'paid_in' => date('d', strtotime(implode("-",array_reverse(explode("/",$cashier->paid_in))))),
+                'paid_in' => date('d', strtotime(implode("-", array_reverse(explode("/", $cashier->paid_in))))),
                 'id' => str_pad($cashier->id, 5, '0', STR_PAD_LEFT),
                 'color' => 'background-color:#888;',
                 'title' => mb_strtoupper($cashier->title),
@@ -223,7 +223,8 @@ class Reports extends Component
         if ($spending != '') {
             array_multisort($spending);
         }
-        $this->html = view('livewire.admin.reports.financial',
+        $this->html = view(
+            'livewire.admin.reports.financial',
             [
                 'title_postfix' => 'Relatório financeiro',
                 'subtext'       => $this->title,
@@ -745,7 +746,7 @@ class Reports extends Component
             ]
         )->render();
     }
-    /*Relatório de pagamentos com pix */
+    /*Relatório de pagamentos com pix caixa*/
     public function pix()
     {
         $receiveds = Received::whereBetween('paid_in', [$this->start, $this->end])
@@ -787,11 +788,53 @@ class Reports extends Component
             ]
         )->render();
     }
+    /*Relatório de pagamentos com pix maquininha*/
+    public function pixm()
+    {
+        $receiveds = Received::whereBetween('paid_in', [$this->start, $this->end])
+            ->where('active', 1)
+            ->where('form_payment', 'PIXM')
+            ->orderBy('paid_in', 'asc')
+            ->get();
+        $tot = 0;
+        $itens = 0;
+        foreach ($receiveds as $received) {
+            $itens += 1;
+            $tot += $received->convert_value($received->value);
+            if ($received->location_id) {
+                $contact = str_pad($received->location->id, 6, '0', STR_PAD_LEFT);
+                $text = " - " . $received->ambiences->title . '  ( Contrato nº ' . $contact . ' )';
+            } else {
+                $text = '';
+            }
+            $listReceiveds[] = [
+                'item'    => str_pad($itens, 3, '0', STR_PAD_LEFT),
+                'paid_in' => $received->paid_in,
+                'title'   => $received->title . $text,
+                'number'  => str_pad($received->id, 6, '0', STR_PAD_LEFT),
+                'value'   => 'R$ ' . $received->value,
+            ];
+        }
+
+        $this->html = view(
+            'livewire.admin.reports.pixm',
+            [
+                'title_postfix' => 'Relatório de pagamentos com pix maquininha',
+                'subtext'       => $this->title,
+                'today'         => $this->today,
+                'responsible'   => Auth::user()->name,
+                'config'        => $this->config,
+
+                'receiveds'     => $listReceiveds,
+                'total'   => 'R$ ' . number_format($tot, 2, ",", "."),
+            ]
+        )->render();
+    }
     /*Relatório de acesso à piscina */
     public function accessPool()
     {
         $line = array();
-        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day. ' 00:00:00'));
+        $this->end = date('Y-m-d H:i:s', strtotime($this->year . '-' . $this->mounth . '-' . $this->day . ' 00:00:00'));
         $end_date = new DateTime($this->end);
         $end_date->modify('+1 day');
         $this->end = $end_date;
@@ -801,8 +844,8 @@ class Reports extends Component
             if ($access->table == 'passes') {
                 $pass = Pass::find($access->register_id);
                 if ($pass->partner) {
-                    $name =  mb_strtoupper($pass->title). '(Cliente: '.mb_strtoupper($access->client).' - Indicado por: '.$access->partner.')';
-                }else{
+                    $name =  mb_strtoupper($pass->title) . '(Cliente: ' . mb_strtoupper($access->client) . ' - Indicado por: ' . $access->partner . ')';
+                } else {
                     $name =  mb_strtoupper($pass->title);
                 }
 
@@ -831,7 +874,8 @@ class Reports extends Component
         // print_r($line);
         // exit;
 
-        $this->html = view('livewire.admin.reports.accessPool',
+        $this->html = view(
+            'livewire.admin.reports.accessPool',
             [
                 'title_postfix' => 'Relatório de acesso das piscinas',
                 'subtext'       => $this->title,
@@ -843,6 +887,5 @@ class Reports extends Component
                 'year'          => $this->year,
             ]
         )->render();
-
     }
 }

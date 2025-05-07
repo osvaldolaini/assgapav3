@@ -2,22 +2,22 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
-            <div class="col-span-2 flex justify-end">
+            <div class="flex justify-end col-span-2">
             </div>
         </div>
     </x-breadcrumb>
-    <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
+    <section class="container flex flex-col px-4 mx-auto space-y-12 dark:bg-gray-800 dark:text-gray-50">
 
         <fieldset>
             <form wire:submit="save_out" class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                 <div class="col-span-full">
                     <label for="partner">*Cliente</label>
-                    <div class="grid gap-4 mb-1 grid-cols-1">
-                        <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
+                    <div class="grid grid-cols-1 gap-4 mb-1">
+                        <fieldset class="w-full col-span-1 space-y-1 dark:text-gray-100"
                             wire:click="openModalSearch('partner')" wire:ignore>
                             <label for="Search" class="hidden">Pesquisar </label>
                             <div class="relative w-full">
@@ -32,9 +32,7 @@
                                     </button>
                                 </span>
                                 <input type="text" readonly placeholder="Pesquisar" wire:model.live="partner"
-                                    class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
-                                    rounded-2xl  focus:ring-primary-500 dark:bg-gray-700
-                                    dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
+                                    class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
                                     autofocus />
                             </div>
                             @error('partner_id')
@@ -46,22 +44,22 @@
                 <div class="col-span-6 text-left">
                     <label for="form_payment">*Forma de pagamento</label>
                     <Select wire:model="form_payment" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                         <option value=''>Selecione...</option>
                         <option value='DIN'>Dinheiro</option>
                         <option value='CAR'>Cartões</option>
                         <option value='BOL'>Boleto</option>
-                        <option value='PIX'>PIX</option>
+                        <option value='PIX'>PIX caixa</option>
+                        <option value='PIXM'>PIX Maquina</option>
                     </Select>
                     @error('form_payment')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-span-full sm:col-span-3" >
+                <div class="col-span-full sm:col-span-3">
                     <label for="value">*Valor</label>
-                    <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"
-                        placeholder="Valor" wire:model="value" id="value" required >
+                    <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                        placeholder="Valor" wire:model="value" id="value" required>
                     @error('value')
                         <span class="error">{{ $message }}</span>
                     @enderror
@@ -70,12 +68,13 @@
                         let inputValor = document.getElementById('value');
 
                         // Aguardar o usuário digitar valor no campo
-                        inputValor.addEventListener('input', function(){
+                        inputValor.addEventListener('input', function() {
                             // Obter o valor atual removendo qualquer caractere que não seja número
                             let valueValor = this.value.replace(/[^\d]/g, '');
 
                             // Adicionar os separadores de milhares
-                            var formattedValor = (valueValor.slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')) + '' + valueValor.slice(-2);
+                            var formattedValor = (valueValor.slice(0, -2).replace(/\B(?=(\d{3})+(?!\d))/g, '.')) + '' + valueValor
+                                .slice(-2);
 
                             // Adicionar a vírgula e até dois dígitos se houver centavos
                             formattedValor = formattedValor.slice(0, -2) + ',' + formattedValor.slice(-2);
@@ -96,7 +95,7 @@
                 <div class="col-span-full">
                     <label for="title">*Descrição</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
                         placeholder="Descrição" wire:model="title" required>
                     @error('title')
                         <span class="error">{{ $message }}</span>
@@ -105,8 +104,8 @@
                 <div class="col-span-full">
                     <label for="obs">Observação</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
-                        placeholder="Observação" wire:model="obs" >
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        placeholder="Observação" wire:model="obs">
                     @error('obs')
                         <span class="error">{{ $message }}</span>
                     @enderror
@@ -114,14 +113,14 @@
                 <div class="col-span-full">
                     <label for="updated_because">*Motivo da alteração</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
                         placeholder="Motivo" wire:model="updated_because" required>
                     @error('updated_because')
                         <span class="error">{{ $message }}</span>
                     @enderror
                 </div>
             </form>
-            <div class="flex col-span-full items-center space-x-4 mt-10 justify-end">
+            <div class="flex items-center justify-end mt-10 space-x-4 col-span-full">
                 <button class="btn btn-neutral" wire:click="save">Salvar</button>
                 <button class="btn btn-success" wire:click="save_out">Salvar e sair</button>
             </div>
@@ -131,8 +130,8 @@
     <x-dialog-modal wire:model="modalSearch" class="mt-0">
         <x-slot name="title">Pesquisar</x-slot>
         <x-slot name="content">
-            <div class="grid gap-4 mb-1 grid-cols-1">
-                <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100">
+            <div class="grid grid-cols-1 gap-4 mb-1">
+                <fieldset class="w-full col-span-1 space-y-1 dark:text-gray-100">
                     <label for="Search" class="hidden">Pesquisar </label>
                     <div class="relative w-full">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -145,9 +144,7 @@
                             </button>
                         </span>
                         <input type="text" placeholder="Pesquisar" wire:model.live="inputSearch"
-                            class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
-                            rounded-2xl  focus:ring-primary-500 dark:bg-gray-700
-                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
+                            class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
                             autofocus />
                     </div>
                 </fieldset>
@@ -162,18 +159,18 @@
                                                 <div class="flex items-center gap-3 cursor-pointer "
                                                     wire:click="selectPartner({{ $item->id }})">
                                                     <div class="avatar">
-                                                        <div class="mask mask-squircle w-12 h-12">
+                                                        <div class="w-12 h-12 mask mask-squircle">
                                                             @if ($item->imageTitle)
-                                                            <picture>
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
-                                                                <source
-                                                                    srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
-                                                                <img src="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}"
-                                                                    alt="{{ $item->name }}">
-                                                            </picture>
+                                                                <picture>
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
+                                                                    <source
+                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
+                                                                    <img src="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}"
+                                                                        alt="{{ $item->name }}">
+                                                                </picture>
                                                             @endif
 
                                                         </div>

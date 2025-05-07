@@ -1,5 +1,5 @@
-<div class="relative overflow-hidden bg-blue-500 text-white rounded-lg shadow-md w-full ">
-    <div class="col-span-2 flex justify-end">
+<div class="relative w-full overflow-hidden text-white bg-blue-500 rounded-lg shadow-md ">
+    <div class="flex justify-end col-span-2">
         <x-action-loading-calendar></x-action-loading-calendar>
 
     </div>
@@ -17,58 +17,75 @@
             </svg>
         </span>
     </div>
-    <div class="p-0 m-0 bg-white w-full h-auto rounded-b-md ">
+    <div class="w-full h-auto p-0 m-0 bg-white rounded-b-md ">
 
         <form action="">
-        <div class="flex w-full items-start justify-center p-3 text-gray-900">
-            <select class="rounded-l-md w-1/2 " wire:model.live="mounth">
-                <option value="01" >Janeiro</option>
-                <option value="02" >Fevereiro</option>
-                <option value="03" >Março</option>
-                <option value="04" >Abril</option>
-                <option value="05" >Maio</option>
-                <option value="06" >Junho</option>
-                <option value="07" >Julho</option>
-                <option value="08" >Agosto</option>
-                <option value="09" >Setembro</option>
-                <option value="10" >Outubro</option>
-                <option value="11" >Novembro</option>
-                <option value="12" >Dezembro</option>
-            </select>
-            <select class="rounded-r-md w-1/2 " wire:model.live="year">
-                @for ($i = 2017; $i <= date('Y'); $i++)
-                    <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>{{ $i }}
-                    </option>
-                @endfor
-            </select>
-        </div>
-    </form>
+            <div class="flex items-start justify-center w-full p-3 text-gray-900">
+                <select class="w-1/2 rounded-l-md " wire:model.live="mounth">
+                    <option value="01">Janeiro</option>
+                    <option value="02">Fevereiro</option>
+                    <option value="03">Março</option>
+                    <option value="04">Abril</option>
+                    <option value="05">Maio</option>
+                    <option value="06">Junho</option>
+                    <option value="07">Julho</option>
+                    <option value="08">Agosto</option>
+                    <option value="09">Setembro</option>
+                    <option value="10">Outubro</option>
+                    <option value="11">Novembro</option>
+                    <option value="12">Dezembro</option>
+                </select>
+                <select class="w-1/2 rounded-r-md " wire:model.live="year">
+                    @for ($i = 2017; $i <= date('Y'); $i++)
+                        <option value="{{ $i }}" {{ date('Y') == $i ? 'selected' : '' }}>{{ $i }}
+                        </option>
+                    @endfor
+                </select>
+            </div>
+        </form>
         <div class="w-full px-3">
-            <button wire:click="report('financial')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Financeiro">
+            <button wire:click="report('financial')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Financeiro">
                 Financeiro
             </button>
-            <button wire:click="report('spendingBySector')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Gastos por setor">
+            <button wire:click="report('spendingBySector')"
+                class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info" data-trigger="hover"
+                data-tooltip="tooltip" data-placement="top" title="Gastos por setor">
                 Gastos por setor
             </button>
-            <button  wire:click="report('revenueBySector')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Receitas por setor">
+            <button wire:click="report('revenueBySector')"
+                class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info" data-trigger="hover"
+                data-tooltip="tooltip" data-placement="top" title="Receitas por setor">
                 Receitas por setor
             </button>
-            <button  wire:click="report('cardMachine')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Maquininha">
+            <button wire:click="report('cardMachine')"
+                class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info" data-trigger="hover"
+                data-tooltip="tooltip" data-placement="top" title="Maquininha">
                 Maquininha
             </button>
-            <button  wire:click="report('tickets')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Boletos">
+            <button wire:click="report('tickets')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Boletos">
                 Boletos
             </button>
-            <button  wire:click="report('receipts')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Recibos">
+            <button wire:click="report('receipts')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Recibos">
                 Recibos
             </button>
-            <button  wire:click="report('monthlyPayment')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Mensalidade">
+            <button wire:click="report('monthlyPayment')"
+                class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info" data-trigger="hover"
+                data-tooltip="tooltip" data-placement="top" title="Mensalidade">
                 Mensalidade
             </button>
-            <button  wire:click="report('pix')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Pix">
-                Pix
+            <button wire:click="report('pix')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Pix">
+                Pix caixa
             </button>
-            <button  wire:click="report('accessPool')" class="btn-search btn btn-sm btn-info text-white shadow mx-1 my-1" data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Acesso Piscina">
+            <button wire:click="report('pixm')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Pix">
+                Pix maquina
+            </button>
+            <button wire:click="report('accessPool')" class="mx-1 my-1 text-white shadow btn-search btn btn-sm btn-info"
+                data-trigger="hover" data-tooltip="tooltip" data-placement="top" title="Acesso Piscina">
                 Acessos Piscina
             </button>
         </div>
