@@ -5,7 +5,7 @@
                 @if ($installment->received_id)
                     <div class="p-0 tooltip tooltip-top" data-tip="Recibo">
                         <button wire:click="printReceived({{ $installment->received_id }})"
-                            class="px-3 py-2 text-blue-500 transition-colors duration-200  hover:bg-blue-500 hover:text-white whitespace-nowrap">
+                            class="px-3 py-2 text-blue-500 transition-colors duration-200 hover:bg-blue-500 hover:text-white whitespace-nowrap">
                             <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
@@ -24,8 +24,7 @@
                     @if ($installment->active == 1)
                         R$ {{ $installment->value }}
                     @else
-                        <input
-                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                        <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                             x-mask:dynamic="$money($input, ',')" placeholder="Valor" wire:model="value"
                             wire:change='updateValue()' required>
                     @endif
@@ -62,7 +61,9 @@
                         <option value='DIN'>Dinheiro</option>
                         <option value='CAR'>Cartões</option>
                         <option value='BOL'>Boleto</option>
-                        <option value='PIX'>PIX</option>
+
+                        <option value='PIX'>PIX caixa</option>
+                        <option value='PIXM'>PIX Maquina</option>
                     </Select>
                 @endif
 
