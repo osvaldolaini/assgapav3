@@ -38,7 +38,7 @@ class LocationInstallment extends Component
             $this->installment->title = 'Total';
             $this->installment->save();
         }
-        if($this->installment->title == 'Total' && $this->installment->location->convert_value($this->installment->location->value) != $this->installment->location->convert_value($this->installment->value) ){
+        if ($this->installment->title == 'Total' && $this->installment->location->convert_value($this->installment->location->value) != $this->installment->location->convert_value($this->installment->value)) {
             $this->title = 'Sinal';
             $this->installment->title = 'Sinal';
             $this->installment->save();
@@ -104,7 +104,8 @@ class LocationInstallment extends Component
     }
     public function updated($property)
     {
-        if ($property === 'value') {}
+        if ($property === 'value') {
+        }
     }
 
     public function updateValue()
@@ -140,12 +141,12 @@ class LocationInstallment extends Component
 
         $future = date('Y-m-d', strtotime("+1 year", strtotime(date('Y-m-d'))));
         $test = implode("-", array_reverse(explode("/", $this->installment_maturity_date)));
-            if ($test < date('Y-m-d')) {
-                $this->openAlert('info', 'A data informada ( '.$this->installment_maturity_date.' ) é menor que a data de hoje, tem certeza que está correta?');
-            }
-            if($test > $future){
-                $this->openAlert('info', 'A data informada ( '.$this->installment_maturity_date.' ) excede um ano, tem certeza que está correta?');
-            }
+        if ($test < date('Y-m-d')) {
+            $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) é menor que a data de hoje, tem certeza que está correta?');
+        }
+        if ($test > $future) {
+            $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) excede um ano, tem certeza que está correta?');
+        }
     }
     //PAGAR
     public function showCheckoutModal()
@@ -171,16 +172,19 @@ class LocationInstallment extends Component
             $this->checkoutModal = false;
             return;
         }
-        $received = Received::create([
-            'active'        => 1,
-            'title'         => $this->title . ' DO CONTRATO Nº ' . $this->location_id,
-            'paid_in'       => $this->installment_maturity_date,
-            'value'         => $this->value,
-            'form_payment'  => $this->form_payment,
-            'partner_id'    => $this->partner->id,
-            'partner'       => $this->partner->name,
-            'created_by'    => Auth::user()->name,
-        ]);
+        if ($this->form_payment != 'BOL') {
+            $received = Received::create([
+                'active'        => 1,
+                'title'         => $this->title . ' DO CONTRATO Nº ' . $this->location_id,
+                'paid_in'       => $this->installment_maturity_date,
+                'value'         => $this->value,
+                'form_payment'  => $this->form_payment,
+                'partner_id'    => $this->partner->id,
+                'partner'       => $this->partner->name,
+                'created_by'    => Auth::user()->name,
+            ]);
+        }
+
 
         Installment::updateOrCreate([
             'id' => $this->id,
@@ -190,7 +194,7 @@ class LocationInstallment extends Component
             'updated_by' => Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
-        $this->dispatch('updateInstallments',$this->location_id);
+        $this->dispatch('updateInstallments', $this->location_id);
         $this->checkoutModal = false;
         // redirect()->route('installments-location', $this->location_id);
     }
@@ -202,7 +206,7 @@ class LocationInstallment extends Component
     public function delete()
     {
         $data = Installment::where('id', $this->id)->first();
-        if ($data->title == 'Sinal' OR $data->title == 'Total') {
+        if ($data->title == 'Sinal' or $data->title == 'Total') {
             $data->active = 0;
         } else {
             $data->active = 3;
@@ -214,7 +218,7 @@ class LocationInstallment extends Component
         $this->openAlert('error', 'Excluir esse registro não exclui o
         recibo ' . $data->received_id . '
         automaticamente.');
-        redirect()->to('/locações/'.$this->location_id.'/parcelas')->with('success', 'Registro excluido com sucesso.')->with('error', 'Excluir esse registro não exclui o
+        redirect()->to('/locações/' . $this->location_id . '/parcelas')->with('success', 'Registro excluido com sucesso.')->with('error', 'Excluir esse registro não exclui o
         recibo ' . $data->received_id . '
         automaticamente.');
         // $this->dispatch('updateInstallments',$this->location_id);
