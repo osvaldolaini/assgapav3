@@ -37,7 +37,7 @@ class Dependents extends Component
     public $search;
     public $relationTables = "partner_categories,partner_categories.id,partners.partner_category"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'partners.name,partners.cpf,partner_categories.title as category,partner_categories.color as color,partners.active';
+    public $columnsInclude = 'partners.name,partners.cpf,partner_categories.title as category,partners.date_of_birth,partners.kinship,partner_categories.color as color,partners.active';
     public $searchable = 'partners.name,partners.cpf,partner_categories.title,partners.date_of_birth,partners.kinship'; //Colunas pesquisadas no banco de dados
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
