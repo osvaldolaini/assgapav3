@@ -167,6 +167,7 @@
             @php
                 $car = 0;
                 $pix = 0;
+                $pixM = 0;
                 $bol = 0;
             @endphp
             <div class="pdf-body">
@@ -208,6 +209,12 @@
                                             $pix += $received['value'];
                                         @endphp
                                     @endif
+                                    @if ($received['form_payment'] == 'PIXM')
+                                        <p><strong>Pagamento efetuado com PIX NA MAQUININHA.</strong></p>
+                                        @php
+                                            $pixM += $received['value'];
+                                        @endphp
+                                    @endif
 
                                     {{ $received['title'] }}
                                 </td>
@@ -240,8 +247,12 @@
                         <td class="head" colspan="2">SEM EFEITO NO CAIXA</td>
                     </tr>
                     <tr>
-                        <td style="text-align:left;">PAGAMENTOS COM PIX</td>
+                        <td style="text-align:left;">PAGAMENTOS COM PIX CEF</td>
                         <td>R$ {{ number_format($pix, 2, ',', '.') }}</td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:left;">PAGAMENTOS COM PIX MAQUININHA</td>
+                        <td>R$ {{ number_format($pixM, 2, ',', '.') }}</td>
                     </tr>
                     <tr>
                         <td style="text-align:left;">PAGAMENTOS COM BOLETO</td>
