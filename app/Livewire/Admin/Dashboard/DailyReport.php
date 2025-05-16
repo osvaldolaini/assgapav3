@@ -90,7 +90,6 @@ class DailyReport extends Component
                     'payment'       => $received->payment,
                     'paymentCategory' => $received->paymentCategory,
                 ];
-                dd($listReceiveds);
             }
         }
 

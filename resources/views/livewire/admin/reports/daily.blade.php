@@ -210,7 +210,7 @@
                                         @endphp
                                     @endif
                                     @if ($received['form_payment'] == 'PIXM')
-                                        <p><strong>Pagamento efetuado com PIX NA MAQUININHA.</strong></p>
+                                        <p><strong>Pagamento efetuado com PIX Nna MAQUININHA.</strong></p>
                                         @php
                                             $pixM += $received['value'];
                                         @endphp

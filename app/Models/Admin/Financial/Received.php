@@ -22,13 +22,26 @@ class Received extends Model
     protected $table = 'receiveds';
 
     protected $fillable = [
-        'title','active','paid_in','value','form_payment','partner_id','partner',
-        'updated_because','deleted_at','deleted_because','deleted_by','updated_by',
-        'created_by','ambience_id','location_id','ambience_tenant_id',
+        'title',
+        'active',
+        'paid_in',
+        'value',
+        'form_payment',
+        'partner_id',
+        'partner',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'created_by',
+        'ambience_id',
+        'location_id',
+        'ambience_tenant_id',
     ];
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
     }
 
     public function setValueAttribute($value)
@@ -44,16 +57,16 @@ class Received extends Model
     public function setPaidInAttribute($value)
     {
         if ($value != "") {
-            $this->attributes['paid_in']=implode("-",array_reverse(explode("/",$value)));
-        }else{
-            $this->attributes['paid_in']=NULL;
+            $this->attributes['paid_in'] = implode("-", array_reverse(explode("/", $value)));
+        } else {
+            $this->attributes['paid_in'] = NULL;
         }
     }
     public function getPaidInAttribute($value)
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
         }
     }
 
@@ -61,7 +74,7 @@ class Received extends Model
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
         }
     }
     public function partners()
@@ -70,36 +83,59 @@ class Received extends Model
     }
     public function ambiences()
     {
-        return $this->belongsTo(Ambience::class,  'ambience_id','id');
+        return $this->belongsTo(Ambience::class,  'ambience_id', 'id');
     }
     public function location()
     {
-        return $this->belongsTo(Location::class,  'location_id','id');
+        return $this->belongsTo(Location::class,  'location_id', 'id');
     }
     public function ambienceTenants()
     {
-        return $this->belongsTo(AmbienceTenant::class,'ambience_tenant_id','id');
+        return $this->belongsTo(AmbienceTenant::class, 'ambience_tenant_id', 'id');
     }
 
     public function getPaymentAttribute()
     {
         switch ($this->form_payment) {
-            case "DIN": $payment = 'DINHEIRO';   break;
-            case "PIX": $payment = 'PIX';   break;
-            case "BOL": $payment = 'BOLETO';   break;
-            case "CAR": $payment = 'CARTÃO';   break;
-            default: $payment =    'DINHEIRO';   break;
+            case "DIN":
+                $payment = 'DINHEIRO';
+                break;
+            case "PIX":
+                $payment = 'PIX';
+                break;
+            case "BOL":
+                $payment = 'BOLETO';
+                break;
+            case "CAR":
+                $payment = 'CARTÃO';
+                break;
+            default:
+                $payment =    'DINHEIRO';
+                break;
         }
         return $payment;
     }
     public function getPaymentCategoryAttribute()
     {
         switch ($this->form_payment) {
-            case "DIN": $background= 'background-color:#fff';   break;
-            case "PIX": $background= 'background-color:#ffa';   break;
-            case "BOL": $background= 'background-color:#aff';   break;
-            case "CAR": $background= 'background-color:#aaf';   break;
-            default:    $background= 'background-color:#fff';   break;
+            case "DIN":
+                $background = 'background-color:#fff';
+                break;
+            case "PIX":
+                $background = 'background-color:#ffa';
+                break;
+            case "PIXM":
+                $background = 'background-color:#afa';
+                break;
+            case "BOL":
+                $background = 'background-color:#aff';
+                break;
+            case "CAR":
+                $background = 'background-color:#aaf';
+                break;
+            default:
+                $background = 'background-color:#fff';
+                break;
         }
         return $background;
     }
@@ -107,7 +143,7 @@ class Received extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
 
@@ -149,7 +185,6 @@ class Received extends Model
                 }
                 return array('f' => 'LIKE', 'converted' => '%' . $converted . '%');
             }
-
         }
     }
 }
