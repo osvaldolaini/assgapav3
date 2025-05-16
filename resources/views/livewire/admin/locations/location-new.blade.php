@@ -142,7 +142,7 @@
                                         <option value="PRÓPRIO">PRÓPRIO</option>
                                         @foreach ($dependents as $item)
                                             <option value="{{ $item->name }}">
-                                                {{ $item->name }} - {{ $item->kinship }} ({{ $item->age }})
+                                                {{ $item->name }} - {{ $item->kinship }} ({{ $item->age }} anos)
                                             </option>
                                         @endforeach
                                     </Select>
