@@ -74,7 +74,7 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
                                                     dark:text-gray-400">
-                                            Idade
+                                            Idade / Parentesco
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
