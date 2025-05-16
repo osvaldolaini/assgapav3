@@ -114,8 +114,7 @@
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                                      text-gray-500 dark:text-gray-400 flex-nowrap">
-
-                                                    {{ $data->age }}"
+                                                    {{ $data->age }} ({{ $data->kinship }})
                                                 </td>
 
                                                 <td
