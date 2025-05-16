@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
                 <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
@@ -69,6 +69,12 @@
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
                                             Dependentes / indicados
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-center text-gray-500
+                                                    dark:text-gray-400">
+                                            Idade
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -104,6 +110,12 @@
                                                             {{ $data->category }}
                                                         </div>
                                                     @endif
+                                                </td>
+                                                <td
+                                                    class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
+                                                     text-gray-500 dark:text-gray-400 flex-nowrap">
+
+                                                    {{ $data->age }}"
                                                 </td>
 
                                                 <td
