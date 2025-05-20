@@ -190,7 +190,7 @@ class LocationInstallment extends Component
             'id' => $this->id,
         ], [
             'active' => 1,
-            'received_id' => $received->id,
+            // 'received_id' => '',
             'updated_by' => Auth::user()->name,
         ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
