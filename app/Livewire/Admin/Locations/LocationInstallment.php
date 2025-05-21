@@ -183,16 +183,24 @@ class LocationInstallment extends Component
                 'partner'       => $this->partner->name,
                 'created_by'    => Auth::user()->name,
             ]);
+            Installment::updateOrCreate([
+                'id' => $this->id,
+            ], [
+                'active' => 1,
+                'received_id' => $received->id,
+                'updated_by' => Auth::user()->name,
+            ]);
+        }else{
+            Installment::updateOrCreate([
+                'id' => $this->id,
+            ], [
+                'active' => 1,
+                // 'received_id' => $received->,
+                'updated_by' => Auth::user()->name,
+            ]);
         }
 
 
-        Installment::updateOrCreate([
-            'id' => $this->id,
-        ], [
-            'active' => 1,
-            // 'received_id' => '',
-            'updated_by' => Auth::user()->name,
-        ]);
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         $this->dispatch('updateInstallments', $this->location_id);
         $this->checkoutModal = false;
