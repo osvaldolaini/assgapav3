@@ -17,9 +17,19 @@ class Installment extends Model
     protected $table = 'installments';
 
     protected $fillable = [
-        'title','active','value','form_payment','installment_maturity_date','received_id',
-        'location_id', 'updated_because','deleted_at', 'deleted_because','deleted_by',
-        'updated_by','created_by'
+        'title',
+        'active',
+        'value',
+        'form_payment',
+        'installment_maturity_date',
+        'received_id',
+        'location_id',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'created_by'
     ];
 
     public function setInstallmentMaturityDateAttribute($value)
@@ -45,11 +55,27 @@ class Installment extends Model
     public function getPaymentAttribute($value)
     {
         switch ($value) {
-            case "DIN": $payment = 'DINHEIRO';   break;
-            case "PIX": $payment = 'PIX';   break;
-            case "BOL": $payment = 'BOLETO';   break;
-            case "CAR": $payment = 'CARTÃO';   break;
-            default: $payment =    'DINHEIRO';   break;
+            case "DIN":
+                $payment = 'DINHEIRO';
+                break;
+            case "BOL":
+                $payment = 'BOLETO';
+                break;
+            case "PIX":
+                $payment = 'PIX CAIXA';
+                break;
+            case "PIXM":
+                $payment = 'PIX MAQUINA';
+                break;
+            case "BOL":
+                $payment = 'BOLETO';
+                break;
+            case "CAR":
+                $payment = 'CARTÃO';
+                break;
+            default:
+                $payment =    'DINHEIRO';
+                break;
         }
         return $payment;
     }
@@ -125,5 +151,4 @@ class Installment extends Model
             }
         }
     }
-
 }
