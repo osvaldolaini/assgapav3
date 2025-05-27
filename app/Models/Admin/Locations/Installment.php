@@ -52,30 +52,30 @@ class Installment extends Model
     {
         $this->attributes['value'] = $this->convert_value($value);
     }
-    // public function getPaymentAttribute($value)
-    // {
-    //     switch ($value) {
-    //         case "DIN":
-    //             $payment = 'DINHEIRO';
-    //             break;
-    //         case "BOL":
-    //             $payment = 'BOLETO';
-    //             break;
-    //         case "PIX":
-    //             $payment = 'PIX CAIXA';
-    //             break;
-    //         case "PIXM":
-    //             $payment = 'PIX MAQUINA';
-    //             break;
-    //         case "CAR":
-    //             $payment = 'CARTÃO';
-    //             break;
-    //         default:
-    //             $payment =    'DINHEIRO';
-    //             break;
-    //     }
-    //     return $payment;
-    // }
+    public function getPaymentAttribute()
+    {
+        switch ($this->form_payment) {
+            case "DIN":
+                $payment = 'DINHEIRO';
+                break;
+            case "BOL":
+                $payment = 'BOLETO';
+                break;
+            case "PIX":
+                $payment = 'PIX CAIXA';
+                break;
+            case "PIXM":
+                $payment = 'PIX MAQUINA';
+                break;
+            case "CAR":
+                $payment = 'CARTÃO';
+                break;
+            default:
+                $payment =    'DINHEIRO';
+                break;
+        }
+        return $payment;
+    }
 
     public function getValueAttribute($value)
     {
