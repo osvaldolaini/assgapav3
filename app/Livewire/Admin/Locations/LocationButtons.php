@@ -18,7 +18,7 @@ class LocationButtons extends Component
     public $location;
     public $config;
     public $update;
-    public function mount(Location $location,$update=null)
+    public function mount(Location $location, $update = null)
     {
         $this->update = $update;
         $this->location = $location;
@@ -32,33 +32,39 @@ class LocationButtons extends Component
     //CONTRACT
     public function printContract()
     {
-            // Crie uma instância do mPDF
-            $mpdf = new Mpdf([
-                'mode'          => 'utf-8',
-                // 'format'        => 'L',
-                'margin_left'   => 10,
-                'margin_top'    => 10,
-                'default_font_size'  => 9,
-                'default_font'  => 'arial',
-            ]);
-            $today = Carbon::parse(now())->locale('pt-BR');
+        // Crie uma instância do mPDF
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            // 'format'        => 'L',
+            'margin_left'   => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
+        $today = Carbon::parse(now())->locale('pt-BR');
 
+        if ($this->location->updated_by) {
+            $responsible =  mb_strtoupper($this->location->updated_by);
+        } else {
+            $responsible = mb_strtoupper($this->location->created_by);
+        }
 
-
-            // Renderize a view do Livewire
-            $html = view('livewire.admin.locations.location-contract',
+        // Renderize a view do Livewire
+        $html = view(
+            'livewire.admin.locations.location-contract',
             [
                 'location'          => $this->location,
                 'config'            => $this->config,
-                'contract_number'   => 'Contrato nº '.str_pad($this->location->id, 5, '0', STR_PAD_LEFT),
-                'subtext'           => 'Contrato de locação do(a) – ' .mb_strtoupper($this->location->ambiences->title),
-                'responsible'       => Auth::user()->name,
+                'contract_number'   => 'Contrato nº ' . str_pad($this->location->id, 5, '0', STR_PAD_LEFT),
+                'subtext'           => 'Contrato de locação do(a) – ' . mb_strtoupper($this->location->ambiences->title),
+                'responsible'       => $responsible,
                 'today'             => $today->translatedFormat('d F Y'),
-            ])->render();
+            ]
+        )->render();
 
-            // Adicione o conteúdo HTML ao PDF
-            $mpdf->WriteHTML($html);
-            $mpdf->SetHTMLFooter('
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        $mpdf->SetHTMLFooter('
             <table width="100%">
                 <tr>
                     <td width="66%">Impressão realizada em {DATE j/m/Y} às {DATE H:i:s}</td>
@@ -66,43 +72,44 @@ class LocationButtons extends Component
                 </tr>
             </table>');
 
-            // Salve o PDF temporariamente
-            $down = storage_path('app/public/livewire-tmp/contract.pdf');
-            $pdfPath = url('storage/livewire-tmp/contract.pdf');
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/contract.pdf');
+        $pdfPath = url('storage/livewire-tmp/contract.pdf');
 
-            $mpdf->Output($down, 'F');
+        $mpdf->Output($down, 'F');
 
-            $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
-
+        $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
     }
     //TERM
     public function printTerm()
     {
-            // Crie uma instância do mPDF
-            $mpdf = new Mpdf([
-                'mode'          => 'utf-8',
-                // 'format'        => 'L',
-                'margin_left'   => 10,
-                'margin_top'    => 10,
-                'default_font_size'  => 9,
-                'default_font'  => 'arial',
-            ]);
-            $today = Carbon::parse(now())->locale('pt-BR');
+        // Crie uma instância do mPDF
+        $mpdf = new Mpdf([
+            'mode'          => 'utf-8',
+            // 'format'        => 'L',
+            'margin_left'   => 10,
+            'margin_top'    => 10,
+            'default_font_size'  => 9,
+            'default_font'  => 'arial',
+        ]);
+        $today = Carbon::parse(now())->locale('pt-BR');
 
-            // Renderize a view do Livewire
-            $html = view('livewire.admin.locations.location-term',
+        // Renderize a view do Livewire
+        $html = view(
+            'livewire.admin.locations.location-term',
             [
                 'location'          => $this->location,
                 'config'            => $this->config,
-                'contract_number'   => 'Contrato nº '.str_pad($this->location->id, 5, '0', STR_PAD_LEFT),
-                'subtext'           => 'Contrato de locação do(a) – ' .mb_strtoupper($this->location->ambiences->title),
+                'contract_number'   => 'Contrato nº ' . str_pad($this->location->id, 5, '0', STR_PAD_LEFT),
+                'subtext'           => 'Contrato de locação do(a) – ' . mb_strtoupper($this->location->ambiences->title),
                 'responsible'       => Auth::user()->name,
                 'today'             => $today->translatedFormat('d F Y'),
-            ])->render();
+            ]
+        )->render();
 
-            // Adicione o conteúdo HTML ao PDF
-            $mpdf->WriteHTML($html);
-            $mpdf->SetHTMLFooter('
+        // Adicione o conteúdo HTML ao PDF
+        $mpdf->WriteHTML($html);
+        $mpdf->SetHTMLFooter('
             <table width="100%">
                 <tr>
                     <td width="66%">Impressão realizada em {DATE j/m/Y} às {DATE H:i:s}</td>
@@ -110,13 +117,12 @@ class LocationButtons extends Component
                 </tr>
             </table>');
 
-            // Salve o PDF temporariamente
-            $down = storage_path('app/public/livewire-tmp/contract.pdf');
-            $pdfPath = url('storage/livewire-tmp/contract.pdf');
+        // Salve o PDF temporariamente
+        $down = storage_path('app/public/livewire-tmp/contract.pdf');
+        $pdfPath = url('storage/livewire-tmp/contract.pdf');
 
-            $mpdf->Output($down, 'F');
+        $mpdf->Output($down, 'F');
 
-            $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
-
+        $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
     }
 }
