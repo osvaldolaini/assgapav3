@@ -94,6 +94,12 @@ class LocationButtons extends Component
         ]);
         $today = Carbon::parse(now())->locale('pt-BR');
 
+        if ($this->location->updated_by) {
+            $responsible =  mb_strtoupper($this->location->updated_by);
+        } else {
+            $responsible = mb_strtoupper($this->location->created_by);
+        }
+
         // Renderize a view do Livewire
         $html = view(
             'livewire.admin.locations.location-term',
@@ -102,7 +108,7 @@ class LocationButtons extends Component
                 'config'            => $this->config,
                 'contract_number'   => 'Contrato nº ' . str_pad($this->location->id, 5, '0', STR_PAD_LEFT),
                 'subtext'           => 'Contrato de locação do(a) – ' . mb_strtoupper($this->location->ambiences->title),
-                'responsible'       => Auth::user()->name,
+                'responsible'       => $responsible,
                 'today'             => $today->translatedFormat('d F Y'),
             ]
         )->render();
