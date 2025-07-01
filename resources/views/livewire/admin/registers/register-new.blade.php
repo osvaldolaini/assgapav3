@@ -17,7 +17,7 @@
                 @livewire('admin.registers.upload-image', [''])
             </div>
             <form wire:submit="#" class="grid grid-cols-8 gap-2 col-span-full lg:col-span-3">
-                <div class="col-span-full sm:col-span-6">
+                <div class="col-span-full sm:col-span-8">
                     <label class="text-sm" for="name">*Nome completo</label>
                     <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                         placeholder="Nome completo" wire:model="name" required maxlength="100">
@@ -31,6 +31,14 @@
                     @error('date_of_birth')
                         <span class="text-red-500 error">{{ $message }}</span>
                     @enderror
+                </div>
+                <div class="col-span-full sm:col-span-2">
+                    <label class="text-sm" for="deceased">Falecido?</label>
+                    <Select wire:model="deceased"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                        <option value="1">Sim</option>
+                        <option value="0">Não</option>
+                    </Select>
                 </div>
                 <div class="col-span-full sm:col-span-2">
                     <label for="partner_category_master" class="text-sm">Sócio?</label>
@@ -56,14 +64,7 @@
                         <span class="text-red-500 error">{{ $message }}</span>
                     @enderror
                 </div>
-                <div class="col-span-full sm:col-span-2">
-                    <label class="text-sm" for="deceased">Falecido?</label>
-                    <Select wire:model="deceased"
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="1">Sim</option>
-                        <option value="0">Não</option>
-                    </Select>
-                </div>
+
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="discount">Desconto de folha</label>
                     <Select wire:model="discount"
