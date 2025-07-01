@@ -34,7 +34,7 @@
             @livewire('admin.registers.upload-image', [$id])
         </div>
         <form wire:submit="#" class="grid grid-cols-8 gap-2 col-span-full lg:col-span-3">
-            <div class="col-span-full sm:col-span-6">
+            <div class="col-span-full sm:col-span-8">
                 <label class="text-sm" for="name">*Nome completo</label>
                 <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
                     placeholder="Nome completo" wire:model="name" required maxlength="100">
@@ -50,6 +50,14 @@
                 @enderror
             </div>
             <div class="col-span-full sm:col-span-2">
+                <label class="text-sm" for="deceased">Falecido?</label>
+                <Select wire:model="deceased"
+                    class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                    <option value="0">Não</option>
+                    <option value="1">Sim</option>
+                </Select>
+            </div>
+            <div class="col-span-full sm:col-span-2">
                 <label for="partner_category_master" class="text-sm">Sócio?</label>
                 <Select wire:model.live="partner_category_master" required
                     class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
@@ -61,7 +69,7 @@
                     <span class="text-red-500 error">{{ $message }}</span>
                 @enderror
             </div>
-            <div class="col-span-full sm:col-span-4">
+            <div class="col-span-full sm:col-span-6">
                 <label for="partner_category" class="text-sm">*Categoria sócio</label>
                 <Select wire:model.live="partner_category" required
                     class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
@@ -145,8 +153,8 @@
             <div class="col-span-full sm:col-span-2">
                 <label class="text-sm" for="saram">SARAM</label>
                 <input x-mask="999999-9" placeholder="000000-0"
-                    class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" maxlength="8"
-                    placeholder="saram" wire:model="saram">
+                    class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                    maxlength="8" placeholder="saram" wire:model="saram">
             </div>
             {{-- Saram novo --}}
             <div class="col-span-full sm:col-span-2">

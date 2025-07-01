@@ -36,8 +36,8 @@
                     <label class="text-sm" for="deceased">Falecido?</label>
                     <Select wire:model="deceased"
                         class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="1">Sim</option>
                         <option value="0">Não</option>
+                        <option value="1">Sim</option>
                     </Select>
                 </div>
                 <div class="col-span-full sm:col-span-2">
