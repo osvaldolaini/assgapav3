@@ -20,6 +20,7 @@ class DependentNew extends Component
     public $kinship;
     public $image;
     public $date_of_birth;
+    public $deceased;
     public $obs;
     public $pf_pj = 'pf';
     public $cpf;
@@ -168,6 +169,7 @@ class DependentNew extends Component
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,
+            'deceased'              => $this->deceased,
             'obs'                   => $this->obs,
             'pf_pj'                 => $this->pf_pj,
             'cpf'                   => $this->cpf,

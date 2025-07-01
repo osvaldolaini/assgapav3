@@ -43,6 +43,7 @@ class Partner extends Model
         'kinship',
         'image',
         'date_of_birth',
+        'deceased',
         'obs',
         'pf_pj',
         'cpf',

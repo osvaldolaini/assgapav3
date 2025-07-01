@@ -14,6 +14,7 @@ class OtherFast extends Component
     //Campos
     public $name;
     public $date_of_birth;
+    public $deceased;
     public $pf_pj = 'pf';
     public $cpf;
     public $cnpj;
@@ -25,7 +26,7 @@ class OtherFast extends Component
     public $partner_category;
     public $partner_category_master = 'Não sócio';
     public $company;
-    public $category=[];
+    public $category = [];
 
     public $url;
 
@@ -50,8 +51,8 @@ class OtherFast extends Component
 
     public function render()
     {
-        $this->category = PartnerCategory::select('id','title')->orderBy('title','asc')
-        ->where('active',1)->where('parent_category',$this->partner_category_master)->get();
+        $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
+            ->where('active', 1)->where('parent_category', $this->partner_category_master)->get();
         return view('livewire.admin.registers.other-fast');
     }
     public function fast_create()
@@ -66,7 +67,7 @@ class OtherFast extends Component
             $this->rules = [
                 'cpf' => 'required|unique:partners|min:11',
             ];
-        }else{
+        } else {
             $this->rules = [
                 'cnpj' => 'required|unique:partners|min:14',
             ];
@@ -74,31 +75,31 @@ class OtherFast extends Component
 
         $this->validate();
         Partner::create([
-            'active'                =>1,
-            'name'                  =>$this->name,
-            'kinship'               =>'PRÓPRIO',
-            'date_of_birth'         =>$this->date_of_birth,
-            'pf_pj'                 =>$this->pf_pj,
-            'cpf'                   =>$this->cpf,
-            'cnpj'                  =>$this->cnpj,
-            'phone_first'           =>$this->phone_first,
-            'email'                 =>$this->email,
-            'email_birthday'        =>date('Y'),
-            'send_email_barthday'   =>$this->send_email_barthday,
-            'registration_at'       =>$this->registration_at,
-            'discount'              =>$this->discount,
-            'partner_category'      =>$this->partner_category,
+            'active'                => 1,
+            'name'                  => $this->name,
+            'kinship'               => 'PRÓPRIO',
+            'date_of_birth'         => $this->date_of_birth,
+            'pf_pj'                 => $this->pf_pj,
+            'cpf'                   => $this->cpf,
+            'cnpj'                  => $this->cnpj,
+            'phone_first'           => $this->phone_first,
+            'email'                 => $this->email,
+            'email_birthday'        => date('Y'),
+            'send_email_barthday'   => $this->send_email_barthday,
+            'registration_at'       => $this->registration_at,
+            'discount'              => $this->discount,
+            'partner_category'      => $this->partner_category,
             'partner_category_master'      => $this->partner_category_master,
-            'created_by'            =>Auth::user()->name,
+            'created_by'            => Auth::user()->name,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         $this->showModalCreate = false;
         redirect()->route($this->url);
     }
-     //MESSAGE
-     public function openAlert($status, $msg)
-     {
+    //MESSAGE
+    public function openAlert($status, $msg)
+    {
         $this->dispatch('openAlert', $status, $msg);
-     }
+    }
 }

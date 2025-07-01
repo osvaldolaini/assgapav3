@@ -22,6 +22,7 @@ class CreatePartnersTable extends Migration
             $table->string('kinship')->nullable();
             $table->string('image')->nullable();
             $table->date('date_of_birth')->nullable();
+            $table->boolean('deceased')->default(0);
             $table->text('obs')->nullable();
             $table->string('pf_pj')->nullable();
             $table->string('cpf')->nullable();

@@ -21,6 +21,7 @@ class DependentEdit extends Component
     public $kinship;
     public $image;
     public $date_of_birth;
+    public $deceased;
     public $obs;
     public $pf_pj;
     public $cpf;
@@ -135,6 +136,7 @@ class DependentEdit extends Component
         $this->kinship = $partner->kinship;
         $this->image = $partner->image;
         $this->date_of_birth = $partner->date_of_birth;
+        $this->deceased = $partner->deceased;
         $this->obs = $partner->obs;
         $this->pf_pj = $partner->pf_pj;
         $this->cpf = $partner->cpf;
@@ -240,6 +242,7 @@ class DependentEdit extends Component
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,
+            'deceased'              => $this->deceased,
             'obs'                   => $this->obs,
             'pf_pj'                 => $this->pf_pj,
             'cpf'                   => $this->cpf,
