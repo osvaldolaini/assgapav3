@@ -119,7 +119,7 @@
                                 </tr>
                                 <?php foreach ($location->installments as $installment) {?>
                                 <tr>
-                                    <td>{{$installment?->title ?? ''}} </td>
+                                    <td>{{$installment->title ?? ''}} </td>
                                     <td>R$ {{ $installment->value }}</td>
                                     <td>
                                         @if ($installment->value == 1)
@@ -191,7 +191,7 @@
                                 @break
                             @endswitch
                         </td>
-                        <td colspan="3">Categoria: {{ $location->partners->?category?->title ?? '' }}</td>
+                        <td colspan="3">Categoria: {{ $location->partners->?category->title ?? '' }}</td>
                     </tr>
                     <tr>
                         <td>Identidade: {{ $location->partners->rg }}</td>
@@ -211,7 +211,7 @@
                         <th colspan="5">Dados do Espaço</th>
                     </tr>
                     <tr>
-                        <td colspan="4">Ambiente: {{ $location->ambiences?->title ?? '' }}</td>
+                        <td colspan="4">Ambiente: {{ $location?->ambiences->title ?? '' }}</td>
                         <td>Capacidade: {{ $location->ambiences->capacity }} pessoa(s)</td>
                     </tr>
                     <tr>
