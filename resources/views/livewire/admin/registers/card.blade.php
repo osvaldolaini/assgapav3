@@ -184,7 +184,7 @@
                         </p>
                     </div>
                     <div style="float: left;">
-                        <img style="height: 3cm;" src="{{ url('storage/logos/assgapa.png') }}">
+                        <!-- <img style="height: 3cm;" src="{{ url('storage/logos/assgapa.png') }}"> -->
                     </div>
                 </div>
                 <!-- Assinatura -->
