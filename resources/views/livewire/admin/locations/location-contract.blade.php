@@ -191,7 +191,7 @@
                                 @break
                             @endswitch
                         </td>
-                        <td colspan="3">Categoria: {{ $location->partners?->category->title ?? '' }}</td>
+                        <td colspan="3">Categoria: {{ $location->partners?->category->title ?? 'Não selecionada' }}</td>
                     </tr>
                     <tr>
                         <td>Identidade: {{ $location->partners->rg }}</td>
