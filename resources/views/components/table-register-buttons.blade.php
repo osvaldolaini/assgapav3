@@ -102,7 +102,7 @@
                 </a>
             </div>
         @endif
-        @if ($discount == 0)
+        @if ($discount != 1)
             <div class="tooltip tooltip-top p-0" data-tip="Mensalidades">
                 <a href="{{ route('monthlys', $id) }}"
                     class="py-2 px-3 flex
