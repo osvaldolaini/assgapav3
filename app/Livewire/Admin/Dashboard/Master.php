@@ -49,7 +49,7 @@ class Master extends Component
         $partners = Partner::select('id', 'partner_category')
             ->where('active', 1)
             ->with(['category'])
-            ->where('discount', 0)
+            ->where('discount', '!=',1)
             ->where('partner_category_master', 'Sócio')
             ->orderBy('partner_category', 'asc')
             ->orderBy('name', 'asc')
