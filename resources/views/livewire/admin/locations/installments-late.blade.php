@@ -16,7 +16,7 @@
     <div>
         <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
             <x-table-search></x-table-search>
-            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
                 <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
@@ -85,13 +85,14 @@
                                                     class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->location->partners->name }}
                                                 </td>
-                                                <td
-                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
-                                                    {{ $data->location->ambiences->title }}
-                                                </td>
+
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->location->location_date }}
+                                                </td>
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->location->ambiences->title }}
                                                 </td>
 
                                                 <td
@@ -102,16 +103,19 @@
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                                      text-gray-500 dark:text-gray-400 flex-nowrap">
 
-                                                     <div class="p-0 tooltip tooltip-top" data-tip="Parcelas">
-                                                        <a href="{{ route('installments-location',$data->location_id) }}"
+                                                    <div class="p-0 tooltip tooltip-top" data-tip="Parcelas">
+                                                        <a href="{{ route('installments-location', $data->location_id) }}"
                                                             class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 "  viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 "
+                                                                viewBox="0 0 64 64" enable-background="new 0 0 64 64"
+                                                                xml:space="preserve">
                                                                 <g>
                                                                     <path fill="currentColor" d="M0,32v20c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4V32H0z M24,44h-8c-2.211,0-4-1.789-4-4s1.789-4,4-4h8
-                                                                        c2.211,0,4,1.789,4,4S26.211,44,24,44z"/>
-                                                                    <path fill="currentColor" d="M64,24V12c0-2.211-1.789-4-4-4H4c-2.211,0-4,1.789-4,4v12H64z"/>
+                                                                        c2.211,0,4,1.789,4,4S26.211,44,24,44z" />
+                                                                    <path fill="currentColor"
+                                                                        d="M64,24V12c0-2.211-1.789-4-4-4H4c-2.211,0-4,1.789-4,4v12H64z" />
                                                                 </g>
-                                                                </svg>
+                                                            </svg>
                                                         </a>
                                                     </div>
 
