@@ -30,12 +30,12 @@ class InstallmentsLate extends Component
 
     //Dados da tabela
     public $model = "App\Models\Admin\Locations\Installment"; //Model principal
-    public $modelId="locations.id as id"; //Ex: 'table.id' or 'id'
+    public $modelId = "locations.id as id"; //Ex: 'table.id' or 'id'
     public $search;
     public $relationTables = "locations,locations.id,installments.location_id | ambiences,ambiences.id,locations.ambience_id | partners,partners.id,locations.partner_id"; //Relacionamentos ( table , key , foreingKey )
-    public $customSearch='location_date,partners.name,ambiences.title as ambiente, locations.active as active_location'; //Colunas personalizadas, customizar no model
+    public $customSearch = 'location_date,partners.name,ambiences.title as ambiente, locations.active as active_location'; //Colunas personalizadas, customizar no model
     public $columnsInclude = 'installment_maturity_date,installments.location_id,partners.name,ambiences.title,installments.location_id';
-    public $searchable = 'installment_maturity_date,installments.value,ambiences.title,partners.name'; //Colunas pesquisadas no banco de dados
+    public $searchable = 'locations.location_date,installment_maturity_date,installments.value,ambiences.title,partners.name'; //Colunas pesquisadas no banco de dados
     public $sort = "installments.installment_maturity_date,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
@@ -77,7 +77,7 @@ class InstallmentsLate extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Contrato', 'Espaço','Locatário','Vencimento'),
+                'heads'         => array('Contrato', 'Espaço', 'Locatário', 'Vencimento'),
                 'body'          => $body,
             ]
         )->render();
@@ -102,7 +102,7 @@ class InstallmentsLate extends Component
     {
         $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
-        $data[] = array('Contrato', 'Espaço','Locatário','Vencimento');
+        $data[] = array('Contrato', 'Espaço', 'Locatário', 'Vencimento');
         foreach ($this->getData() as $item) {
             $data[] = [
                 'id'        => $item->id,
@@ -115,7 +115,7 @@ class InstallmentsLate extends Component
         return Excel::download(new AllExports($data), 'exportar-em-excel.xlsx');
     }
     //END EXPORT
-        //SEARCH PERSONALIZADO
+    //SEARCH PERSONALIZADO
     private function getData()
     {
 
@@ -125,7 +125,7 @@ class InstallmentsLate extends Component
             $query = $this->model::query();
             $query = $query->where('installments.active', '<=', 1);
         }
-        $selects = array($this->modelId .' as id');
+        $selects = array($this->modelId . ' as id');
         if ($this->columnsInclude) {
             foreach (explode(',', $this->columnsInclude) as $key => $value) {
                 array_push($selects, $value);
@@ -136,7 +136,7 @@ class InstallmentsLate extends Component
         // dd($selects);
         $query->select($selects);
 
-        $venc=date("Y-m-d",strtotime('+2 days',strtotime(date('Y-m-d'))));
+        $venc = date("Y-m-d", strtotime('+2 days', strtotime(date('Y-m-d'))));
         $query->where('installments.active', 0);
         $query->where('installments.installment_maturity_date', '<', $venc);
         $query->where('installments.value', '>', 0);
@@ -159,59 +159,59 @@ class InstallmentsLate extends Component
         }
     }
     #PRICIPAL FUNCTIONS
-        public function search($query)
-        {
-            $searchTerms = explode(',', $this->searchable);
-            $query->where(function ($innerQuery) use ($searchTerms) {
-                foreach ($searchTerms as $term) {
-                    if ($this->customSearch) {
-                        $fields = explode('|', $this->customSearch);
-                        if (in_array($term, $fields)) {
-                            $search = array($term => $this->search);
-                            $formattedSearch = $this->model::filterFields($search);
-                            if ($formattedSearch['converted'] != '%0%') {
-                                $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
-                            } else {
-                                $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
-                            }
+    public function search($query)
+    {
+        $searchTerms = explode(',', $this->searchable);
+        $query->where(function ($innerQuery) use ($searchTerms) {
+            foreach ($searchTerms as $term) {
+                if ($this->customSearch) {
+                    $fields = explode('|', $this->customSearch);
+                    if (in_array($term, $fields)) {
+                        $search = array($term => $this->search);
+                        $formattedSearch = $this->model::filterFields($search);
+                        if ($formattedSearch['converted'] != '%0%') {
+                            $innerQuery->orWhere($term, $formattedSearch['f'], $formattedSearch['converted']);
                         } else {
                             $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                         }
                     } else {
                         $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                     }
+                } else {
+                    $innerQuery->orWhere($term, 'LIKE', '%' . $this->search . '%');
                 }
-            });
-            // dd($query);
-        }
+            }
+        });
+        // dd($query);
+    }
     #END PRICIPAL FUNCTIONS
     #EXTRA FUNCTIONS
-        //SORT
-        public function sort($query)
-        {
-            $this->sort = str_replace(' ', '', $this->sort);
-            $sortData = explode('|', $this->sort);
-            $c = count($sortData);
-            for ($i = 0; $i < $c; $i++) {
-                $s = explode(',', $sortData[$i]);
-                if (count($s) === 2) {
-                    $query->orderBy($s[0], $s[1]);
-                }
+    //SORT
+    public function sort($query)
+    {
+        $this->sort = str_replace(' ', '', $this->sort);
+        $sortData = explode('|', $this->sort);
+        $c = count($sortData);
+        for ($i = 0; $i < $c; $i++) {
+            $s = explode(',', $sortData[$i]);
+            if (count($s) === 2) {
+                $query->orderBy($s[0], $s[1]);
             }
-            return $query;
         }
-        //RELATIONSHIPS
-        public function relationTables($query)
-        {
-            $this->relationTables = str_replace(' ', '', $this->relationTables);
-            $relationTables = explode('|', $this->relationTables);
-            $crt = count($relationTables);
-            for ($i = 0; $i < $crt; $i++) {
-                $rt = explode(',', $relationTables[$i]);
-                if (count($rt) === 3) {
-                    $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
-                }
+        return $query;
+    }
+    //RELATIONSHIPS
+    public function relationTables($query)
+    {
+        $this->relationTables = str_replace(' ', '', $this->relationTables);
+        $relationTables = explode('|', $this->relationTables);
+        $crt = count($relationTables);
+        for ($i = 0; $i < $crt; $i++) {
+            $rt = explode(',', $relationTables[$i]);
+            if (count($rt) === 3) {
+                $query->leftJoin($rt[0], $rt[1], '=', $rt[2]);
             }
-            return $query;
         }
+        return $query;
+    }
 }

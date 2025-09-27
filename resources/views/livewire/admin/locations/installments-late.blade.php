@@ -2,7 +2,7 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
@@ -14,10 +14,10 @@
     <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
     </x-table-buttons-relatories>
     <div>
-        <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+        <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
             <x-table-search></x-table-search>
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
@@ -38,6 +38,12 @@
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
                                             Espaço
+                                        </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-left text-gray-500
+                                                    dark:text-gray-400">
+                                            Data evento
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -84,6 +90,11 @@
                                                     {{ $data->location->ambiences->title }}
                                                 </td>
                                                 <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->location->location_date }}
+                                                </td>
+
+                                                <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->installment_maturity_date }}
                                                 </td>
@@ -91,12 +102,10 @@
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                                      text-gray-500 dark:text-gray-400 flex-nowrap">
 
-                                                     <div class="tooltip tooltip-top p-0" data-tip="Parcelas">
+                                                     <div class="p-0 tooltip tooltip-top" data-tip="Parcelas">
                                                         <a href="{{ route('installments-location',$data->location_id) }}"
-                                                            class="py-2 px-3 flex
-                                                                hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                                                                duration-200 whitespace-nowrap">
-                                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 "  viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
+                                                            class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 "  viewBox="0 0 64 64" enable-background="new 0 0 64 64" xml:space="preserve">
                                                                 <g>
                                                                     <path fill="currentColor" d="M0,32v20c0,2.211,1.789,4,4,4h56c2.211,0,4-1.789,4-4V32H0z M24,44h-8c-2.211,0-4-1.789-4-4s1.789-4,4-4h8
                                                                         c2.211,0,4,1.789,4,4S26.211,44,24,44z"/>
@@ -116,7 +125,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -135,7 +144,7 @@
                 <div class="col-span-full">
                     <label for="deleted_because">*Motivo da exclusão</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
                         placeholder="Descrição" wire:model="deleted_because" required>
                     @error('deleted_because')
                         <span class="error">{{ $message }}</span>
@@ -161,7 +170,7 @@
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)
