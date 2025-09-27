@@ -1,37 +1,36 @@
-
-<div >
+<div>
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
 
-            <div class="col-span-2 flex justify-end">
-                <div class="tooltip tooltip-top p-0" data-tip="Indisponibilidades">
+            <div class="flex justify-end col-span-2">
+                <div class="p-0 tooltip tooltip-top" data-tip="Indisponibilidades">
                     <a href="{{ route('ambience-unavailabilities') }}"
-                    class="py-2 px-3 flex
-                    hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                    duration-200 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 120 120" enable-background="new 0 0 120 120" xml:space="preserve">
+                        class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " viewBox="0 0 120 120"
+                            enable-background="new 0 0 120 120" xml:space="preserve">
                             <g>
-                                <path fill="currentColor" d="M60.005,23.299c9.799,0,19.014,3.817,25.946,10.75C92.884,40.98,96.701,50.197,96.701,60c0,9.803-3.817,19.02-10.75,25.952
+                                <path fill="currentColor"
+                                    d="M60.005,23.299c9.799,0,19.014,3.817,25.946,10.75C92.884,40.98,96.701,50.197,96.701,60c0,9.803-3.817,19.02-10.75,25.952
                                     C79.02,92.884,69.803,96.701,60,96.701c-9.803,0-19.02-3.817-25.952-10.75C27.116,79.02,23.299,69.804,23.299,60
                                     c0-9.804,3.817-19.02,10.75-25.952c6.931-6.931,16.148-10.749,25.955-10.75H60.005 M60,3.299
                                     C45.491,3.3,30.977,8.836,19.906,19.906c-22.144,22.144-22.143,58.045,0,80.188C30.978,111.166,45.489,116.701,60,116.701
-                                    s29.021-5.535,40.094-16.607c22.144-22.144,22.144-58.044,0-80.188C89.021,8.833,74.513,3.297,60,3.299L60,3.299z"/>
+                                    s29.021-5.535,40.094-16.607c22.144-22.144,22.144-58.044,0-80.188C89.021,8.833,74.513,3.297,60,3.299L60,3.299z" />
                             </g>
-                            <rect x="49.307" y="11.443" fill="currentColor" transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.7729 59.8067)" width="20.999" height="96.728"/>
-                            </svg>
+                            <rect x="49.307" y="11.443" fill="currentColor"
+                                transform="matrix(0.7071 -0.7071 0.7071 0.7071 -24.7729 59.8067)" width="20.999"
+                                height="96.728" />
+                        </svg>
                     </a>
                 </div>
-                <div class="tooltip tooltip-top p-0" data-tip="Termo / contrato">
+                <div class="p-0 tooltip tooltip-top" data-tip="Termo / contrato">
                     <a href="{{ route('ambience-contracts', $ambience_id) }}"
-                        class="py-2 px-3 flex
-                                                                hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                                                                duration-200 whitespace-nowrap">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 24 24" fill="none"
+                        class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " viewBox="0 0 24 24" fill="none"
                             xmlns="http://www.w3.org/2000/svg">
                             <path
                                 d="M16.5189 16.5013C16.6939 16.3648 16.8526 16.2061 17.1701 15.8886L21.1275 11.9312C21.2231 11.8356 21.1793 11.6708 21.0515 11.6264C20.5844 11.4644 19.9767 11.1601 19.4083 10.5917C18.8399 10.0233 18.5356 9.41561 18.3736 8.94849C18.3292 8.82066 18.1644 8.77687 18.0688 8.87254L14.1114 12.8299C13.7939 13.1474 13.6352 13.3061 13.4987 13.4811C13.3377 13.6876 13.1996 13.9109 13.087 14.1473C12.9915 14.3476 12.9205 14.5606 12.7786 14.9865L12.5951 15.5368L12.3034 16.4118L12.0299 17.2323C11.9601 17.4419 12.0146 17.6729 12.1708 17.8292C12.3271 17.9854 12.5581 18.0399 12.7677 17.9701L13.5882 17.6966L14.4632 17.4049L15.0135 17.2214L15.0136 17.2214C15.4394 17.0795 15.6524 17.0085 15.8527 16.913C16.0891 16.8004 16.3124 16.6623 16.5189 16.5013Z"
@@ -49,48 +48,50 @@
             </div>
         </div>
     </x-breadcrumb>
-    <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
-            <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
-                <div class="overflow-x-auto col-span-full rounded-md">
-                    <div class="grid grid-cols-12 gap-4 px-5 py-4 bg-gray-800 text-lg text-white ">
-                        <div class="col-span-7">Tipo de locatário</div>
+    <section class="container flex flex-col px-4 mx-auto space-y-12 dark:bg-gray-800 dark:text-gray-50">
+        <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
+            <div class="overflow-x-auto rounded-md col-span-full">
+                <div class="grid grid-cols-12 gap-4 px-5 py-4 text-lg text-white bg-gray-800 ">
+                    <div class="col-span-7">Tipo de locatário</div>
+                    <div class="col-span-2 text-center justify-items-center">
+                        Valor da locação
+                    </div>
+                    <div class="col-span-2 text-center justify-items-center">
+                        Caução
+                    </div>
+                    <div class="col-span-1">
+
+                    </div>
+                </div>
+                @php $z=0;@endphp
+                @foreach ($tenants as $item)
+                    @php $z+=1;@endphp
+                    {{-- @livewire('admin.ambiences.ambience-pivots-list', ['ambienceTenant' => $item,'ambience'=>$ambience_id], key($item->id)) --}}
+                    <div
+                        class="grid grid-cols-12 gap-4 px-5 py-2 items-center {{ $z % 2 == 0 ? 'bg-gray-100' : '' }} text-gray-800 text-md border-b">
+                        <div class="col-span-7 border-r">{{ $item->title }}</div>
                         <div class="col-span-2 text-center justify-items-center">
-                            Valor da locação
+                            @if (in_array($item->id, $this->pivots))
+                                @foreach ($this->ambiencePivot->where('ambienceTenant_id', $item->id)->take(1) as $v)
+                                    {{ $v['value'] }}
+                                @endforeach
+                            @endif
                         </div>
-                        <div class="col-span-2 text-center justify-items-center">
-                            Caução
+                        <div class="col-span-2 text-center border-l justify-items-center">
+                            @if (in_array($item->id, $this->pivots))
+                                @foreach ($this->ambiencePivot->where('ambienceTenant_id', $item->id)->take(1) as $v)
+                                    {{ $v['deposit'] }}
+                                @endforeach
+                            @endif
                         </div>
                         <div class="col-span-1">
-
-                        </div>
-                    </div>
-                    @php $z=0;@endphp
-                    @foreach ($tenants as $item)
-                    @php $z+=1;@endphp
-                        {{-- @livewire('admin.ambiences.ambience-pivots-list', ['ambienceTenant' => $item,'ambience'=>$ambience_id], key($item->id)) --}}
-                        <div class="grid grid-cols-12 gap-4 px-5 py-2 items-center {{ ($z%2 == 0? 'bg-gray-100':'') }} text-gray-800 text-md border-b">
-                            <div class="col-span-7 border-r">{{ $item->title }}</div>
-                            <div class="col-span-2 text-center justify-items-center">
-                                @if (in_array($item->id,$this->pivots))
-                                    @foreach ($this->ambiencePivot->where('ambienceTenant_id',$item->id)->take(1) as $v)
-                                        {{ $v['value'] }}
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="col-span-2 text-center justify-items-center border-l">
-                                @if (in_array($item->id,$this->pivots))
-                                    @foreach ($this->ambiencePivot->where('ambienceTenant_id',$item->id)->take(1) as $v)
-                                        {{ $v['deposit'] }}
-                                    @endforeach
-                                @endif
-                            </div>
-                            <div class="col-span-1">
-                                @if (in_array($item->id,$this->pivots))
-                                    @foreach ($this->ambiencePivot->where('ambienceTenant_id',$item->id)->take(1) as $v)
-                                    <button class="btn btn-success" wire:click="showModalUpdate({{ $v['ambienceTenant_id'] }},{{$v['id'] }})">
+                            @if (in_array($item->id, $this->pivots))
+                                @foreach ($this->ambiencePivot->where('ambienceTenant_id', $item->id)->take(1) as $v)
+                                    <button class="btn btn-success"
+                                        wire:click="showModalUpdate({{ $v['ambienceTenant_id'] }},{{ $v['id'] }})">
                                         <svg class="w-6 h-6" viewBox="0 0 32 32">
-                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
-                                                sketch:type="MSPage">
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                fill-rule="evenodd" sketch:type="MSPage">
                                                 <g id="Icon-Set-Filled" sketch:type="MSLayerGroup"
                                                     transform="translate(-154.000000, -517.000000)" fill="#000000">
                                                     <path
@@ -102,13 +103,13 @@
                                             </g>
                                         </svg>
                                     </button>
-                                    @endforeach
-                                @else
-                                <div class="tooltip tooltip-top p-0" data-tip="Editar">
+                                @endforeach
+                            @else
+                                <div class="p-0 tooltip tooltip-top" data-tip="Editar">
                                     <button class="btn btn-success" wire:click="showModalUpdate({{ $item->id }})">
                                         <svg class="w-6 h-6" viewBox="0 0 32 32">
-                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"
-                                                sketch:type="MSPage">
+                                            <g id="Page-1" stroke="none" stroke-width="1" fill="none"
+                                                fill-rule="evenodd" sketch:type="MSPage">
                                                 <g id="Icon-Set-Filled" sketch:type="MSLayerGroup"
                                                     transform="translate(-154.000000, -517.000000)" fill="#000000">
                                                     <path
@@ -121,24 +122,23 @@
                                         </svg>
                                     </button>
                                 </div>
+                            @endif
 
-                                @endif
-
-                            </div>
-                        </div>
-                        @endforeach
-                    <div class="grid grid-cols-12 gap-4 px-5 py-2 bg-gray-700 text-md text-white ">
-                        <div class="col-span-7">Tipo de locatário</div>
-                        <div class="col-span-2 text-center justify-items-center">
-                            Valor da locação
-                        </div>
-                        <div class="col-span-2 text-center justify-items-center">
-                            Caução
-                        </div>
-                        <div class="col-span-1">
                         </div>
                     </div>
+                @endforeach
+                <div class="grid grid-cols-12 gap-4 px-5 py-2 text-white bg-gray-700 text-md ">
+                    <div class="col-span-7">Tipo de locatário</div>
+                    <div class="col-span-2 text-center justify-items-center">
+                        Valor da locação
+                    </div>
+                    <div class="col-span-2 text-center justify-items-center">
+                        Caução
+                    </div>
+                    <div class="col-span-1">
+                    </div>
                 </div>
+            </div>
         </fieldset>
 
     </section>
@@ -153,8 +153,8 @@
                             Valor</label>
                         <div class="flex">
                             <input x-mask:dynamic="$money($input, ',')" wire:model="value" type="text" maxlength="8"
-                            placeholder="0,00"
-                            class="bg-gray-50 border border-gray-300 text-gray-900
+                                placeholder="0,00"
+                                class="bg-gray-50 border border-gray-300 text-gray-900
                         text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
                         block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
@@ -166,9 +166,9 @@
                         <label for="deposit" class="block text-sm font-medium text-gray-900 dark:text-white">
                             Caução</label>
                         <div class="flex">
-                            <input x-mask:dynamic="$money($input, ',')" wire:model="deposit" type="text" maxlength="8"
-                            placeholder="0,00"
-                            class="bg-gray-50 border border-gray-300 text-gray-900
+                            <input x-mask:dynamic="$money($input, ',')" wire:model="deposit" type="text"
+                                maxlength="8" placeholder="0,00"
+                                class="bg-gray-50 border border-gray-300 text-gray-900
                         text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600
                         block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600
                         dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500
@@ -196,4 +196,3 @@
         </x-slot>
     </x-dialog-modal>
 </div>
-

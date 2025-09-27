@@ -114,7 +114,7 @@ class LocationNew extends Component
                 ->where('ambience_id', $this->ambience_id)
                 ->where('ambienceTenant_id', $this->ambience_tenant_id)
                 ->first();
-            $this->value = $pivot->value;
+            $this->value = $pivot->value ?? 0.00;
             $this->deposit = $pivot->deposit;
             // $this->ambience_tenant = $this->typeTenant->title;
 
