@@ -37,8 +37,9 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
-                                            Espaço
+                                            Locatário
                                         </th>
+
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-left text-gray-500
@@ -49,7 +50,7 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-left text-gray-500
                                                     dark:text-gray-400">
-                                            Locatário
+                                            Espaço
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
