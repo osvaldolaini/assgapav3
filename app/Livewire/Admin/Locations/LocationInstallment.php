@@ -37,18 +37,12 @@ class LocationInstallment extends Component
             $this->title = 'Total';
             $this->installment->title = 'Total';
             $this->installment->save();
-        } else {
-            if ($this->installment->title == 'Total') {
-                $this->title = 'Sinal';
-                $this->installment->title = 'Sinal';
-                $this->installment->save();
-            }
+        } 
+        if ($this->installment->title == 'Total' && $this->installment->location->convert_value($this->installment->location->value) != $this->installment->location->convert_value($this->installment->value)) {
+            $this->title = 'Sinal';
+            $this->installment->title = 'Sinal';
+            $this->installment->save();
         }
-        // if ($this->installment->title == 'Total' && $this->installment->location->convert_value($this->installment->location->value) != $this->installment->location->convert_value($this->installment->value)) {
-        //     $this->title = 'Sinal';
-        //     $this->installment->title = 'Sinal';
-        //     $this->installment->save();
-        // }
         $this->value = $this->installment->value;
         $this->form_payment = $this->installment->form_payment;
         $this->installment_maturity_date = $this->installment->installment_maturity_date;

@@ -92,6 +92,9 @@
                         </svg>
                     </button>
                 </div>
+                <div>
+                    @livewire('admin.locations.location-installment-obs', ['installment' => $installment], key($installment->id))
+                </div>
             </div>
         </div>
     @endif

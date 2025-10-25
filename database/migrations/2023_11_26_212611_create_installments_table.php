@@ -30,12 +30,14 @@ class CreateInstallmentsTable extends Migration
             $table->string('deleted_by')->nullable();
             /*Padrão */
             $table->timestamps();
-            $table->string('updated_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
             /*RELACIONAMENTO*/
             $table->foreign('received_id')->references('id')->on('receiveds')->onDelete('SET NULL');
             $table->foreign('location_id')->references('id')->on('locations')->onDelete('SET NULL');
 
+            /*Observação inserido em 2025_10_24*/
+            $table->text('obs')->nullable();
         });
     }
 
