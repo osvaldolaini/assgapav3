@@ -27,8 +27,12 @@ class LocationInstallmentObs extends Component
         $this->showModal = true;
         if (isset($id)) {
             $data = Installment::where('id', $id)->first();
-
             $this->logs = logging($data->id, $this->model);
         }
+    }
+    public function updatedObservation($value)
+    {
+        // salva automaticamente ao atualizar
+        $this->installment->update(['obs' => $value]);
     }
 }

@@ -23,7 +23,7 @@
                     <fieldset class="grid items-start grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                         <div class="col-span-full ">
                             <textarea class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900" placeholder="Observação"
-                                wire:model="obs" rows="3">{{ $obs }}</textarea>
+                                wire:model.live.debounce.500ms="obs" rows="3">{{ $obs }}</textarea>
 
                         </div>
 
