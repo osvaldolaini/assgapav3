@@ -20,6 +20,7 @@ class Installment extends Model
         'title',
         'active',
         'value',
+        'obs',
         'form_payment',
         'installment_maturity_date',
         'received_id',
