@@ -16,6 +16,7 @@ class LocationInstallmentObs extends Component
     public function mount(Installment $installment)
     {
         $this->installment = $installment;
+        $this->obs = $installment->obs ?? '';
     }
     public function render()
     {
@@ -30,6 +31,7 @@ class LocationInstallmentObs extends Component
             $this->logs = logging($data->id, $this->model);
         }
     }
+
     public function updatedObservation($value)
     {
         // salva automaticamente ao atualizar
