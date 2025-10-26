@@ -32,9 +32,10 @@ class LocationInstallmentObs extends Component
         }
     }
 
-    public function updatedObservation($value)
+    public function updatedObs($value)
     {
         // salva automaticamente ao atualizar
+
         $this->installment->update(['obs' => $value]);
     }
 }
