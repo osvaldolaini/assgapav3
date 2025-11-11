@@ -212,6 +212,14 @@ class AmbienceUnavailabilities extends Component
                 return false;
             }
         }
+        //Mudança feita no dia 11/11/2025
+        if ($this->type == 2) {
+            if ($this->validity) {
+                $this->openAlert('error', 'O campo validade é obrigatório');
+                $this->alert = 'O campo validade é obrigatório.';
+                return false;
+            }
+        }
         if ($start <= $now) {
             $this->openAlert('error', 'A ação não pode ser realizada com data inferior ao dia atual.');
             $this->alert = 'A data deve ser maior que o dia de hoje.';
