@@ -16,6 +16,7 @@ class CreateSeasonPaysTable extends Migration
         Schema::create('season_pays', function (Blueprint $table) {
             $table->id();
             $table->string('title')->nullable();
+            $table->integer('bracelets')->nullable();
             $table->boolean('active')->nullable();
             $table->decimal('value', $precision = 10, $scale = 2)->nullable();
             $table->date('paid_in')->nullable();
@@ -32,13 +33,12 @@ class CreateSeasonPaysTable extends Migration
             $table->string('deleted_by')->nullable();
             /*Padrão */
             $table->timestamps();
-            $table->string('updated_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
             /*RELACIONAMENTO*/
             $table->foreign('partner_id')->references('id')->on('partners')->onDelete('SET NULL');
             $table->foreign('season_id')->references('id')->on('seasons')->onDelete('SET NULL');
             $table->foreign('received_id')->references('id')->on('receiveds')->onDelete('SET NULL');
-
         });
     }
 

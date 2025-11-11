@@ -44,6 +44,7 @@ class SeasonPayNew extends Component
     public $type = 'Diário';
     public $paid_id;
     public $season_id;
+    public $bracelets;
 
 
     public function mount()
@@ -107,7 +108,7 @@ class SeasonPayNew extends Component
         $this->validate();
         $received = Received::create([
             'active'        => 1,
-            'title'         => 'PAGAMENTO REFERENTE À '. Season::find($this->season_id)->title,
+            'title'         => 'PAGAMENTO REFERENTE À ' . Season::find($this->season_id)->title,
             'paid_in'       => $this->paid_in,
             'value'         => $this->value,
             'form_payment'  => $this->form_payment,
@@ -126,6 +127,7 @@ class SeasonPayNew extends Component
             'type'          => $this->type,
             'season_id'     => $this->season_id,
             'received_id'   => $received->id,
+            'bracelets'     => $this->bracelets,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');

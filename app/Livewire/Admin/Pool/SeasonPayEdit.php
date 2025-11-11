@@ -44,6 +44,7 @@ class SeasonPayEdit extends Component
     public $type = 'Diário';
     public $received_id;
     public $season_id;
+    public $bracelets;
 
     public function mount(SeasonPay $seasonPay)
     {
@@ -59,10 +60,12 @@ class SeasonPayEdit extends Component
         $this->type = $seasonPay->type;
         $this->season_id = $seasonPay->season_id;
 
+        $this->bracelets     = $seasonPay->bracelets;
+
         $this->seasons = Season::select('id', 'title')
             ->orderBy('title', 'asc')
-            ->where('start', '<=',now())
-            ->where('end', '>',now())
+            ->where('start', '<=', now())
+            ->where('end', '>', now())
             ->where('active', 1)->get();
     }
 
@@ -137,6 +140,7 @@ class SeasonPayEdit extends Component
             'partner_id' => $this->partner_id,
             'type' => $this->type,
             'season_id' => $this->season_id,
+            'bracelets'     => $this->bracelets,
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');

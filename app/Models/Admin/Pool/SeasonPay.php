@@ -20,9 +20,22 @@ class SeasonPay extends Model
     protected $table = 'season_pays';
 
     protected $fillable = [
-        'title', 'active', 'paid_in', 'value', 'form_payment', 'partner_id', 'type',
-        'updated_because', 'deleted_at', 'deleted_because', 'deleted_by', 'updated_by',
-        'created_by', 'received_id', 'season_id',
+        'title',
+        'active',
+        'paid_in',
+        'value',
+        'form_payment',
+        'partner_id',
+        'type',
+        'bracelets',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'created_by',
+        'received_id',
+        'season_id',
     ];
     public function setTitleAttribute($value)
     {

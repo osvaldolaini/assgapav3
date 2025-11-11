@@ -19,13 +19,23 @@ class Pass extends Model
     protected $table = 'passes';
 
     protected $fillable = [
-        'title','slug','category','active','validity','color',
-        'partner','obs','indication_id','validity_of_card','updated_by','created_by',
+        'title',
+        'slug',
+        'category',
+        'active',
+        'validity',
+        'color',
+        'partner',
+        'obs',
+        'indication_id',
+        'validity_of_card',
+        'updated_by',
+        'created_by',
     ];
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
     }
 
     public function setValidityOfCardAttribute($value)
@@ -77,15 +87,13 @@ class Pass extends Model
                 }
                 return array('f' => 'LIKE', 'converted' => '%' . $converted . '%');
             }
-
         }
     }
 
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
-
 }

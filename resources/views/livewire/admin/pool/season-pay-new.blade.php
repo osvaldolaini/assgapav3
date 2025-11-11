@@ -2,22 +2,22 @@
     <x-breadcrumb>
         <div class="grid grid-cols-7 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
     <div class="px-4">
-        @livewire('admin.registers.other-fast',['url' =>'new-seasonPay'])
+        @livewire('admin.registers.other-fast', ['url' => 'new-seasonPay'])
     </div>
-    <section class="px-4 dark:bg-gray-800 dark:text-gray-50 container flex flex-col mx-auto space-y-12">
+    <section class="container flex flex-col px-4 mx-auto space-y-12 dark:bg-gray-800 dark:text-gray-50">
         <form wire:submit="save_out">
-            <fieldset class="grid grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900 items-start">
+            <fieldset class="grid items-start grid-cols-12 gap-2 py-6 rounded-md dark:bg-gray-900">
                 <div class="col-span-6 ">
                     <label for="partner">*Nome completo</label>
-                    <div class="grid gap-4 mb-1 grid-cols-1">
-                        <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100"
+                    <div class="grid grid-cols-1 gap-4 mb-1">
+                        <fieldset class="w-full col-span-1 space-y-1 dark:text-gray-100"
                             wire:click="openModalSearch('partner')" wire:ignore>
                             <label for="Search" class="hidden">Pesquisar </label>
                             <div class="relative w-full">
@@ -53,38 +53,39 @@
                 </div>
 
                 @if ($partner_id)
-                <div class="col-span-4">
-                    <label for="season_id">*Temporada </label>
-                    <Select wire:model.lazy="season_id" required
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="">Selecione...</option>
-                        @foreach ($seasons as $season)
-                            <option value="{{ $season->id }}">
-                                {{ $season->title }}
-                            </option>
-                        @endforeach
-                    </Select>
-                    @error('season_id')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
-                <div class="col-span-full sm:col-span-3">
-                    <label for="type">*Período</label>
-                    <select wire:model="type"
-                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="Diário">DIÁRIO</option>
-                        <option value="Mensal">MENSAL</option>
-                        <option value="Temporada">TEMPORADA</option>
-                    </select>
-                    @error('type')
-                        <span class="error">{{ $message }}</span>
-                    @enderror
-                </div>
+                    <div class="col-span-4">
+                        <label for="season_id">*Temporada </label>
+                        <Select wire:model.lazy="season_id" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="">Selecione...</option>
+                            @foreach ($seasons as $season)
+                                <option value="{{ $season->id }}">
+                                    {{ $season->title }}
+                                </option>
+                            @endforeach
+                        </Select>
+                        @error('season_id')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-3">
+                        <label for="type">*Período</label>
+                        <select wire:model="type"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="Diário">DIÁRIO</option>
+                            <option value="Mensal">MENSAL</option>
+                            <option value="Temporada">TEMPORADA</option>
+                        </select>
+                        @error('type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
 
                     <div class="col-span-3">
                         <label for="form_payment">*Forma de pagamento</label>
                         <div class="flex">
-                            <Select wire:model="form_payment" required                                 class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <Select wire:model="form_payment" required
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                                 <option value=''>Selecione...</option>
                                 <option value='DIN'>Dinheiro</option>
                                 <option value='CAR'>Cartões</option>
@@ -99,9 +100,18 @@
                     <div class="col-span-full sm:col-span-2">
                         <label for="value">*Valor</label>
                         <input
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
                             placeholder="Valor" x-mask:dynamic="$money($input, ',')" wire:model="value" required>
                         @error('value')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label for="bracelets">
+                            Pulseiras</label>
+                        <input type="text" wire:model="bracelets" placeholder="Pulseiras" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                        @error('bracelets')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -110,7 +120,7 @@
 
 
         </form>
-        <div class="flex col-span-full items-center space-x-4 mt-10 justify-end">
+        <div class="flex items-center justify-end mt-10 space-x-4 col-span-full">
             <button class="btn btn-success">Salvar</button>
         </div>
         </fieldset>
@@ -119,8 +129,8 @@
     <x-dialog-modal wire:model="modalSearch" class="mt-0">
         <x-slot name="title">Pesquisar</x-slot>
         <x-slot name="content">
-            <div class="grid gap-4 mb-1 grid-cols-1">
-                <fieldset class="col-span-1 w-full space-y-1 dark:text-gray-100">
+            <div class="grid grid-cols-1 gap-4 mb-1">
+                <fieldset class="w-full col-span-1 space-y-1 dark:text-gray-100">
                     <label for="Search" class="hidden">Pesquisar </label>
                     <div class="relative w-full">
                         <span class="absolute inset-y-0 left-0 flex items-center pl-2">
@@ -133,9 +143,7 @@
                             </button>
                         </span>
                         <input type="text" placeholder="Pesquisar" wire:model.live="inputSearch"
-                            class="w-full border-blue-500 py-3 pl-10 text-sm text-gray-900
-                            rounded-2xl  focus:ring-primary-500 dark:bg-gray-700
-                            dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
+                            class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
                             autofocus />
                     </div>
                 </fieldset>
@@ -150,7 +158,7 @@
                                                 <div class="flex items-center gap-3 cursor-pointer "
                                                     wire:click="selectPartner({{ $item->id }})">
                                                     <div class="avatar">
-                                                        <div class="mask mask-squircle w-12 h-12">
+                                                        <div class="w-12 h-12 mask mask-squircle">
                                                             @if ($item->imageTitle)
                                                                 <picture>
                                                                     <source
