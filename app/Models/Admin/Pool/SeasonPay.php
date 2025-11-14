@@ -67,13 +67,16 @@ class SeasonPay extends Model
         }
     }
 
-    public function getDeletedAtInAttribute($value)
+    public function setBraceletsAttribute($value)
     {
-        if ($value != "") {
-            return Carbon::createFromFormat('Y-m-d', $value)
-                ->format('d/m/Y');
-        }
+        $this->attributes['bracelets'] = json_encode($value);
     }
+
+    public function getJsonBraceletsAttribute()
+    {
+        return json_decode($this->bracelets);
+    }
+
     public function partners()
     {
         return $this->belongsTo(Partner::class, 'partner_id', 'id');
@@ -86,6 +89,15 @@ class SeasonPay extends Model
     {
         return $this->belongsTo(Received::class,  'received_id', 'id');
     }
+
+    public function getDeletedAtInAttribute($value)
+    {
+        if ($value != "") {
+            return Carbon::createFromFormat('Y-m-d', $value)
+                ->format('d/m/Y');
+        }
+    }
+
 
     public function getPaymentAttribute()
     {

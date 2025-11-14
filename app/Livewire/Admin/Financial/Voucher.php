@@ -20,7 +20,7 @@ class Voucher extends Component
         'createReceived'
     ];
 
-    public function mount($data,$type)
+    public function mount($data, $type)
     {
         $this->type = $type;
         $this->data = $data;
@@ -43,7 +43,7 @@ class Voucher extends Component
             'partner' => $data->partner,
             'created_by' => Auth::user()->name,
         ]);
-        $this->dispatch('checkoutReturn',$this->data->id);
+        $this->dispatch('checkoutReturn', $this->data->id);
     }
     //RECEIVED
     public function printReceived()

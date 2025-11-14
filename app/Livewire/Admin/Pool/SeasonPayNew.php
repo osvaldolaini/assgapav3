@@ -44,7 +44,9 @@ class SeasonPayNew extends Component
     public $type = 'Diário';
     public $paid_id;
     public $season_id;
-    public $bracelets;
+
+    public $bracelets = [];
+    public $rows = [];
 
 
     public function mount()
@@ -133,6 +135,19 @@ class SeasonPayNew extends Component
         $this->openAlert('success', 'Registro atualizado com sucesso.');
 
         redirect()->route('seasonPays');
+    }
+
+    //bracelets
+    public function addRow()
+    {
+        $this->bracelets[] = ['number' => '', 'name' => ''];
+        // $this->dispatch('bracelets', $this->bracelets);
+    }
+    public function removeRow($index)
+    {
+        unset($this->bracelets[$index]);
+        $this->bracelets = array_values($this->bracelets);
+        // $this->dispatch('bracelets', $this->bracelets);
     }
 
 

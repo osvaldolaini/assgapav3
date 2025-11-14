@@ -229,6 +229,24 @@
         </p>
     </div>
 @endif
+
+@if ($received->poolPass())
+    <div style="margin-top: 10px;">
+        <h4>*Pulseiras</h4>
+        @php
+            $n = 0;
+        @endphp
+        @foreach ($received->poolPass()->json_bracelets as $index)
+            @php
+                $n += 1;
+            @endphp
+            <p>{{ $n }})
+                Pulseira nº {{ $index->number }} - {{ $index->name }}
+            </p>
+        @endforeach
+    </div>
+@endif
+
 @if ($received->updated_because)
     <div style="margin-top: 50px;">
         <h4>Alterações</h4>

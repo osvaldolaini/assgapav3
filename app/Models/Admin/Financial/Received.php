@@ -5,12 +5,13 @@ namespace App\Models\Admin\Financial;
 use App\Models\Admin\Ambiences\Ambience;
 use App\Models\Admin\Configs\AmbienceTenant;
 use App\Models\Admin\Locations\Location;
+use App\Models\Admin\Pool\SeasonPay;
 use App\Models\Admin\Registers\Partner;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\Activitylog\LogOptions;
 
@@ -92,6 +93,11 @@ class Received extends Model
     public function ambienceTenants()
     {
         return $this->belongsTo(AmbienceTenant::class, 'ambience_tenant_id', 'id');
+    }
+
+    public function poolPass()
+    {
+        return SeasonPay::where('received_id', $this->id)->first();
     }
 
     public function getPaymentAttribute()

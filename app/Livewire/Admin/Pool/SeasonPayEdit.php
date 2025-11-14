@@ -44,7 +44,9 @@ class SeasonPayEdit extends Component
     public $type = 'Diário';
     public $received_id;
     public $season_id;
-    public $bracelets;
+
+    public $bracelets = [];
+    public $rows = [];
 
     public function mount(SeasonPay $seasonPay)
     {
@@ -60,7 +62,26 @@ class SeasonPayEdit extends Component
         $this->type = $seasonPay->type;
         $this->season_id = $seasonPay->season_id;
 
-        $this->bracelets     = $seasonPay->bracelets;
+
+        $this->bracelets  = $seasonPay->json_bracelets;
+
+        // dd(is_array($this->bracelets));
+
+        if (is_array($this->bracelets)) {
+            // dd($this->bracelets);
+            if (!empty($this->bracelets)) {
+                foreach ($this->bracelets as $index) {
+                    $newbracelets[] = ['number' => $index->number, 'name' => $index->name];
+                }
+                $this->bracelets = $newbracelets;
+            } else {
+                $this->bracelets =  [];
+            }
+        } else {
+            $this->bracelets =  [];
+        }
+
+        // dd($this->board);
 
         $this->seasons = Season::select('id', 'title')
             ->orderBy('title', 'asc')
@@ -106,6 +127,23 @@ class SeasonPayEdit extends Component
         $this->modalSearch = false;
     }
 
+    //bracelets
+    public function addRow()
+    {
+        $this->bracelets[] = ['number' => '', 'name' => ''];
+        $this->seasonPay->bracelets = $this->bracelets;
+        $this->seasonPay->save();
+        // $this->dispatch('bracelets', $this->bracelets);
+    }
+    public function removeRow($index)
+    {
+        unset($this->bracelets[$index]);
+        $this->bracelets = array_values($this->bracelets);
+        $this->seasonPay->bracelets = $this->bracelets;
+        $this->seasonPay->save();
+        // $this->dispatch('bracelets', $this->bracelets);
+    }
+
 
     public function save()
     {
@@ -129,7 +167,6 @@ class SeasonPayEdit extends Component
 
         $this->validate();
 
-        $this->validate();
         SeasonPay::updateOrCreate([
             'id' => $this->id,
         ], [
