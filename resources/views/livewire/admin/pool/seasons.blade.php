@@ -2,18 +2,18 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     TEMPORADAS
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
 
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
@@ -92,10 +92,13 @@
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     <button wire:click="printSeason({{ $data->id }})"
-                                                        class="py-2 px-3 flex mx-auto
-                                                                hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                                                                duration-200 whitespace-nowrap">
-                                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="currentColor" viewBox="-64 0 512 512" xmlns="http://www.w3.org/2000/svg"><path d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM96 424c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm96-192c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm128 368c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16z"/></svg>
+                                                        class="flex px-3 py-2 mx-auto transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                                                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 "
+                                                            fill="currentColor" viewBox="-64 0 512 512"
+                                                            xmlns="http://www.w3.org/2000/svg">
+                                                            <path
+                                                                d="M336 64h-80c0-35.3-28.7-64-64-64s-64 28.7-64 64H48C21.5 64 0 85.5 0 112v352c0 26.5 21.5 48 48 48h288c26.5 0 48-21.5 48-48V112c0-26.5-21.5-48-48-48zM96 424c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm0-96c-13.3 0-24-10.7-24-24s10.7-24 24-24 24 10.7 24 24-10.7 24-24 24zm96-192c13.3 0 24 10.7 24 24s-10.7 24-24 24-24-10.7-24-24 10.7-24 24-24zm128 368c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16zm0-96c0 4.4-3.6 8-8 8H168c-4.4 0-8-3.6-8-8v-16c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16z" />
+                                                        </svg>
                                                     </button>
 
                                                 </td>
@@ -103,13 +106,12 @@
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                     @if ($data->active > 1)
                                                         <x-table-buttons-deleted id="{{ $data->id }}"
-                                                            :update="false" :delete="true" :view="true"
-                                                            >
+                                                            :update="false" :delete="true" :view="true">
                                                         </x-table-buttons-deleted>
                                                     @else
-                                                    <x-table-buttons id="{{ $data->id }}" :update="true"
-                                                        :delete="true" :view="true" :active="$data->active">
-                                                    </x-table-buttons>
+                                                        <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                            :delete="true" :view="true" :active="$data->active">
+                                                        </x-table-buttons>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -121,7 +123,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -153,7 +155,7 @@
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)
@@ -201,7 +203,7 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="value">*Valor</label>
                         <input
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
                             placeholder="Valor" x-mask:dynamic="$money($input, ',')" wire:model="value" required>
                         @error('value')
                             <span class="error">{{ $message }}</span>
@@ -210,15 +212,11 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="start">Início</label>
                         <div class="flex">
-                            <input
-                                type="text"
-                                wire:model.lazy="start"
-                                required
-                                x-mask="99/99/9999"
+                            <input type="text" wire:model.lazy="start" required x-mask="99/99/9999"
                                 placeholder="99/99/9999"
-                                class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                             <span
-                                class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -233,15 +231,11 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="end">Término</label>
                         <div class="flex">
-                            <input
-                                type="text"
-                                wire:model.lazy="end"
-                                required
-                                x-mask="99/99/9999"
+                            <input type="text" wire:model.lazy="end" required x-mask="99/99/9999"
                                 placeholder="99/99/9999"
-                                class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                             <span
-                                class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -250,6 +244,18 @@
                             </span>
                         </div>
                         @error('end')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label for="type">*Período</label>
+                        <select wire:model="type"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="Diário">DIÁRIO</option>
+                            <option value="Mensal">MENSAL</option>
+                            <option value="Temporada">TEMPORADA</option>
+                        </select>
+                        @error('type')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -290,7 +296,7 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="value">*Valor</label>
                         <input
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Valor "
                             placeholder="Valor" x-mask:dynamic="$money($input, ',')" wire:model="value" required>
                         @error('value')
                             <span class="error">{{ $message }}</span>
@@ -299,15 +305,11 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="start">Início</label>
                         <div class="flex">
-                            <input
-                                type="text"
-                                wire:model.lazy="start"
-                                required
-                                x-mask="99/99/9999"
+                            <input type="text" wire:model.lazy="start" required x-mask="99/99/9999"
                                 placeholder="99/99/9999"
-                                class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                             <span
-                                class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -322,15 +324,11 @@
                     <div class="col-span-full sm:col-span-1">
                         <label for="end">Término</label>
                         <div class="flex">
-                            <input
-                                type="text"
-                                wire:model.lazy="end"
-                                required
-                                x-mask="99/99/9999"
+                            <input type="text" wire:model.lazy="end" required x-mask="99/99/9999"
                                 placeholder="99/99/9999"
-                                class="w-full  rounded-l-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900">
+                                class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                             <span
-                                class="flex items-center px-3 pointer-events-none sm:text-sm rounded-r-md bg-green-700">
+                                class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                                 <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                     fill="currentColor" viewBox="0 0 20 20">
                                     <path
@@ -345,7 +343,7 @@
                     <div class="col-span-3">
                         <label for="updated_because">*Motivo da alteração</label>
                         <input
-                            class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
                             placeholder="Motivo" wire:model="updated_because" required>
                         @error('updated_because')
                             <span class="error">{{ $message }}</span>
