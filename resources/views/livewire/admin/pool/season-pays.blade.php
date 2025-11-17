@@ -2,18 +2,18 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     PAGAMENTOS TEMPORADAS
                 </h3>
             </div>
         </div>
     </x-breadcrumb>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
 
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="uppercase width:100%"
@@ -81,7 +81,7 @@
                                                 </td>
                                                 <td
                                                     class="uppercase py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                                    {{ $data->season }}
+                                                    {{ $data->type != 'Diário' ? $data->season : $data->type }}
                                                 </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
@@ -90,7 +90,7 @@
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     @if ($data->active == 1 && $data->received_id != '')
-                                                        @livewire('admin.financial.voucher', ['data' => $data->received,'type'=>'received'], key($data->id))
+                                                        @livewire('admin.financial.voucher', ['data' => $data->received, 'type' => 'received'], key($data->id))
                                                     @endif
                                                 </td>
                                                 <td
@@ -114,7 +114,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -134,7 +134,7 @@
                 <div class="col-span-full">
                     <label for="deleted_because">*Motivo da exclusão</label>
                     <input
-                        class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
                         placeholder="Descrição" wire:model="deleted_because" required>
                     @error('deleted_because')
                         <span class="error">{{ $message }}</span>
@@ -158,7 +158,7 @@
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)

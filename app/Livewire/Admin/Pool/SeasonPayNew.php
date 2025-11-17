@@ -41,7 +41,7 @@ class SeasonPayNew extends Component
     public $value;
     public $form_payment;
     public $partner_id;
-    public $type = 'Diário';
+    public $type = '';
     public $paid_id;
     public $season_id;
 
@@ -56,12 +56,6 @@ class SeasonPayNew extends Component
 
     public function render()
     {
-        $this->seasons = Season::select('id', 'title')
-            ->orderBy('title', 'asc')
-            ->where('start', '<=', now())
-            ->where('end', '>', now())
-            ->where('active', 1)->get();
-
         if ($this->inputSearch != '') {
             $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master')
                 ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
@@ -76,12 +70,30 @@ class SeasonPayNew extends Component
         $this->typeSearch = $typeSearch;
     }
 
+
     public function updated($property)
     {
         if ($property === 'season_id') {
             $season = Season::find($this->season_id);
-            $this->value = $season->value;
-            $this->type = $season->type;
+            $this->value = $season->value ?? '00,0';
+            $this->type = $season->type ?? '';
+        }
+    }
+    public function updatedType($value)
+    {
+        $this->seasons = Season::select('id', 'title', 'type')
+            ->orderBy('title', 'asc')
+            ->where('type', $value)
+            ->where('start', '<=', now())
+            ->where('end', '>', now())
+            ->where('active', 1)->get();
+        $this->season_id =  '';
+        $this->form_payment =  '';
+
+        if ($value == 'Diário') {
+            $this->addRow();
+        } else {
+            $this->bracelets = [];
         }
     }
     public function selectPartner($id)
@@ -149,8 +161,77 @@ class SeasonPayNew extends Component
         unset($this->bracelets[$index]);
         $this->bracelets = array_values($this->bracelets);
         // $this->dispatch('bracelets', $this->bracelets);
+        $this->recalculateSeasonTotal();
     }
+    //função alterar valor do diário
+    public function updateSeasonValue($index)
+    {
+        $seasonId = $this->bracelets[$index]['season_id'] ?? null;
 
+        if ($seasonId) {
+            $value = $this->getSeasonValue($seasonId);
+            // guarda o valor por índice (útil para mostrar ao lado do item também)
+            $this->bracelets[$index]['season_value'] = $value;
+        } else {
+            $this->bracelets[$index]['season_value'] = 0;
+        }
+
+        // recalcula a soma total
+        $this->recalculateSeasonTotal();
+    }
+    protected function getSeasonById($id)
+    {
+        if (!$id) return null;
+
+        // se $this->seasons for Collection/array de arrays ou models
+        $found = collect($this->seasons)->firstWhere('id', $id);
+        return $found;
+    }
+    protected function getSeasonValue($id): float
+    {
+        $s = $this->getSeasonById($id);
+        if (!$s) {
+            // fallback: buscar no DB se não estiver em $this->seasons (opcional)
+            // return \App\Models\Season::find($id)?->value ?? 0;
+            return 0.0;
+        }
+
+        // $s pode ser um model (objeto) ou array
+        $val = $s->value ?? ($s['value'] ?? ($s->price ?? null));
+
+        return $this->normalizeNumber($val);
+    }
+    //Recalcula valor ao excluir
+    /** Recalcula o total somando season_value de todos os itens */
+    public function recalculateSeasonTotal()
+    {
+        $sum = 0.0;
+        foreach ($this->bracelets as $item) {
+            $val = $item['season_value'] ?? 0;
+            $sum += $this->normalizeNumber($val);
+        }
+        $this->value = number_format($sum, 2, ',', '.');
+    }
+    protected function normalizeNumber($val): float
+    {
+        if ($val === null || $val === '') return 0.0;
+        if (is_numeric($val)) return (float) $val;
+
+        // Remove espaços
+        $v = trim($val);
+
+        // Se contém vírgula como separador decimal, transforma: 1.234,56 -> 1234.56
+        if (strpos($v, ',') !== false) {
+            // remove pontos (separador de milhar) e troca vírgula por ponto
+            $v = str_replace('.', '', $v);
+            $v = str_replace(',', '.', $v);
+        } else {
+            // caso 1.234.56 (estranho) apenas remove espaços
+            $v = str_replace(' ', '', $v);
+        }
+
+        return is_numeric($v) ? (float) $v : 0.0;
+    }
 
     //MESSAGE
     public function openAlert($status, $msg)

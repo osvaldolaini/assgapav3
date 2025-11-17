@@ -29,7 +29,7 @@ class SeasonPays extends Component
     public $search;
     public $relationTables = 'partners,partners.id,season_pays.partner_id | seasons,seasons.id,season_pays.season_id'; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = "paid_in"; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'season_pays.title,received_id,season_pays.active,season_pays.paid_in,partners.name,season_pays.value,seasons.title as season';
+    public $columnsInclude = 'season_pays.title,season_pays.type,received_id,season_pays.active,season_pays.paid_in,partners.name,season_pays.value,seasons.title as season';
     public $searchable = 'partners.name,season_pays.paid_in,seasons.title'; //Colunas pesquisadas no banco de dados
     public $sort = "season_pays.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
@@ -59,7 +59,7 @@ class SeasonPays extends Component
                 'Excluida por'      => $data->deleted_by,
                 'Motivo'            => $data->deleted_because,
             ];
-            $this->logs = logging($data->id,$this->model);
+            $this->logs = logging($data->id, $this->model);
         } else {
             $this->detail = '';
         }
@@ -71,55 +71,55 @@ class SeasonPays extends Component
     }
     public function showModalUpdate(SeasonPay $seasonPay)
     {
-        redirect()->route('edit-seasonPay',$seasonPay);
+        redirect()->route('edit-seasonPay', $seasonPay);
     }
 
     //DELETE
-   public function showModalDelete($id)
-   {
-       $this->showJetModal = true;
+    public function showModalDelete($id)
+    {
+        $this->showJetModal = true;
 
-       if (isset($id)) {
-           $this->registerId = $id;
-       } else {
-           $this->registerId = '';
-       }
-   }
+        if (isset($id)) {
+            $this->registerId = $id;
+        } else {
+            $this->registerId = '';
+        }
+    }
 
-   public function delete($id)
-   {
-       $this->rules = [
-           'deleted_because' => 'required',
-       ];
+    public function delete($id)
+    {
+        $this->rules = [
+            'deleted_because' => 'required',
+        ];
 
-       $this->validate();
+        $this->validate();
 
-       $data = SeasonPay::where('id', $id)->first();
-       $data->deleted_because = $this->deleted_because;
-       $data->deleted_at = date('Y-m-d');
-       $data->active = 2;
-       $data->save();
+        $data = SeasonPay::where('id', $id)->first();
+        $data->deleted_because = $this->deleted_because;
+        $data->deleted_at = date('Y-m-d');
+        $data->active = 2;
+        $data->save();
 
-       $this->openAlert('success', 'Registro excluido com sucesso.');
-       $this->openAlert('error', 'Excluir esse registro não exclui o
-       recibo '.$data->received_id.'
+        $this->openAlert('success', 'Registro excluido com sucesso.');
+        $this->openAlert('error', 'Excluir esse registro não exclui o
+       recibo ' . $data->received_id . '
        automaticamente.');
 
-       $this->showJetModal = false;
-   }
-   //ACTIVE
-   public function buttonActive($id)
-   {
-       $data = SeasonPay::where('id', $id)->first();
-       if ($data->active == 1) {
-           $data->active = 0;
-           $data->save();
-       } else {
-           $data->active = 1;
-           $data->save();
-       }
-       $this->openAlert('success', 'Registro atualizado com sucesso.');
-   }
+        $this->showJetModal = false;
+    }
+    //ACTIVE
+    public function buttonActive($id)
+    {
+        $data = SeasonPay::where('id', $id)->first();
+        if ($data->active == 1) {
+            $data->active = 0;
+            $data->save();
+        } else {
+            $data->active = 1;
+            $data->save();
+        }
+        $this->openAlert('success', 'Registro atualizado com sucesso.');
+    }
     //MESSAGE
     public function openAlert($status, $msg)
     {
