@@ -28,6 +28,12 @@
                                                     dark:text-gray-400">
                                             Título
                                         </th>
+                                        <th scope="col"
+                                            class="py-3.5 px-4 text-sm font-normal
+                                                    text-center text-gray-500
+                                                    dark:text-gray-400">
+                                            Período
+                                        </th>
 
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -76,7 +82,10 @@
                                                     class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
                                                     {{ $data->title }}
                                                 </td>
-
+                                                <td
+                                                    class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
+                                                    {{ $data->type }}
+                                                </td>
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->start }}
@@ -85,6 +94,7 @@
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->end }}
                                                 </td>
+
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->value }}
