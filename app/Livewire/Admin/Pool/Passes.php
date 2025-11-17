@@ -37,7 +37,7 @@ class Passes extends Component
     public $customSearch = "validity_of_card"; //Colunas personalizadas, customizar no model
     public $columnsInclude = 'title,validity_of_card,category,active,color';
     public $searchable = 'title,category'; //Colunas pesquisadas no banco de dados
-    public $sort = "id,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
+    public $sort = "active,desc|id,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
 
     //Campos
