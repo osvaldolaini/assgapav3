@@ -33,7 +33,7 @@ class Seasons extends Component
     public $search;
     public $relationTables; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = "start|end"; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'title,start,end,active,value';
+    public $columnsInclude = 'title,start,end,active,type,value';
     public $searchable = 'title'; //Colunas pesquisadas no banco de dados
     public $sort = "title,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
