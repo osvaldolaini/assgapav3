@@ -12,7 +12,7 @@
         <div>
             <x-table-search></x-table-search>
 
-            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
                 <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
@@ -100,7 +100,7 @@
                                                             :update="false" :delete="true" :view="true">
                                                         </x-table-buttons-deleted>
                                                     @else
-                                                        <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                        <x-table-buttons id="{{ $data->id }}" :update="false"
                                                             :delete="true" :view="true" :active="$data->active">
                                                         </x-table-buttons>
                                                     @endif

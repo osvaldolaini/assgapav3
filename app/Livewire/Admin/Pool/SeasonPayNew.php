@@ -87,7 +87,7 @@ class SeasonPayNew extends Component
             ->where('start', '<=', now())
             ->where('end', '>', now())
             ->where('active', 1)->get();
-        $this->season_id =  '';
+        $this->season_id =  null;
         $this->form_payment =  '';
 
         if ($value == 'Diário') {
@@ -111,19 +111,27 @@ class SeasonPayNew extends Component
 
     public function save_out()
     {
+        // dd($this->bracelets);
         $this->rules = [
             'paid_in'       => 'required|date_format:d/m/Y',
             'value'         => 'required',
             'form_payment'  => 'required',
             'partner_id'    => 'required',
             'type'          => 'required',
-            'season_id'     => 'required',
+            // 'season_id'     => 'required',
         ];
 
+        if ($this->type != 'Diário') {
+            $this->rules['season_id'] = 'required';
+        } else {
+            $this->season_id =  null;
+        }
         $this->validate();
         $received = Received::create([
             'active'        => 1,
-            'title'         => 'PAGAMENTO REFERENTE À ' . Season::find($this->season_id)->title,
+            'title'         => $this->type == 'Diário'
+                ? 'PAGAMENTO REFERENTE À DE DIÁRIAS'
+                : 'PAGAMENTO REFERENTE À ' . Season::find($this->season_id)->title,
             'paid_in'       => $this->paid_in,
             'value'         => $this->value,
             'form_payment'  => $this->form_payment,
@@ -132,6 +140,7 @@ class SeasonPayNew extends Component
             'created_by'    => Auth::user()->name,
         ]);
 
+        // dd($this->season_id);
         $season = SeasonPay::create([
             'active'        => 1,
             'created_by'    => Auth::user()->name,
@@ -153,7 +162,7 @@ class SeasonPayNew extends Component
     //bracelets
     public function addRow()
     {
-        $this->bracelets[] = ['number' => '', 'name' => ''];
+        $this->bracelets[] = ['number' => '', 'name' => '', 'season_id' => '', 'season_value' => ''];
         // $this->dispatch('bracelets', $this->bracelets);
     }
     public function removeRow($index)
