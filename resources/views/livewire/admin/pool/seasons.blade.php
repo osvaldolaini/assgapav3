@@ -12,7 +12,7 @@
         <div>
             <x-table-search></x-table-search>
 
-            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+            <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
                 <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
@@ -337,6 +337,18 @@
                             </span>
                         </div>
                         @error('end')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label for="type">*Período</label>
+                        <select wire:model="type"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="Diário">DIÁRIO</option>
+                            <option value="Mensal">MENSAL</option>
+                            <option value="Temporada">TEMPORADA</option>
+                        </select>
+                        @error('type')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
