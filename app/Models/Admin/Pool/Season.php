@@ -18,12 +18,20 @@ class Season extends Model
     protected $table = 'seasons';
 
     protected $fillable = [
-        'title', 'value','updated_because','deleted_because','start','end','deleted_at','active'
+        'title',
+        'value',
+        'type',
+        'updated_because',
+        'deleted_because',
+        'start',
+        'end',
+        'deleted_at',
+        'active'
     ];
 
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
     }
     public function setValueAttribute($value)
     {
@@ -127,7 +135,7 @@ class Season extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
     public function convert_value($value)

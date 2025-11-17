@@ -153,7 +153,7 @@ class Passes extends Component
     }
     public function printHistory(Pass $pass)
     {
-        $access = Pool::where('register_id',$pass->id)->get();
+        $access = Pool::where('register_id', $pass->id)->get();
 
         // Crie uma instância do mPDF
         $mpdf = new Mpdf([
@@ -169,15 +169,17 @@ class Passes extends Component
         $today = Carbon::parse(now())->locale('pt-BR');
 
         // Renderize a view do Livewire
-        $html = view('livewire.admin.pool.card-history',
-        [
-            'data'              => $access,
-            'config'            => Configs::find(1),
-            'contract_number'   => $pass->title,
-            'subtext'           => 'Histórico de acessos de ' .mb_strtoupper($pass->title),
-            'responsible'       => Auth::user()->name,
-            'today'             => $today->translatedFormat('d F Y'),
-        ])->render();
+        $html = view(
+            'livewire.admin.pool.card-history',
+            [
+                'data'              => $access,
+                'config'            => Configs::find(1),
+                'contract_number'   => $pass->title,
+                'subtext'           => 'Histórico de acessos de ' . mb_strtoupper($pass->title),
+                'responsible'       => Auth::user()->name,
+                'today'             => $today->translatedFormat('d F Y'),
+            ]
+        )->render();
         // Adicione o conteúdo HTML ao PDF
         $mpdf->WriteHTML($html);
 
@@ -271,7 +273,6 @@ class Passes extends Component
             $indication_p = Partner::find($pass->indication_id);
             $this->indication = $indication_p->name;
         }
-
     }
     public function update()
     {

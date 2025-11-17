@@ -21,12 +21,12 @@ class RegisterPassPool extends Component
     {
         if ($pass->indication_id) {
             $this->partner = $pass->partners->name;
-        }else{
+        } else {
             $this->partner = '';
         }
         $this->config = Configs::find(1);
         $this->pass = $pass;
-        $this->validity_of_card = implode("-",array_reverse(explode("/",$pass->validity_of_card)));
+        $this->validity_of_card = implode("-", array_reverse(explode("/", $pass->validity_of_card)));
     }
     public function render()
     {
@@ -41,9 +41,9 @@ class RegisterPassPool extends Component
             'partner'   => $this->partner,
         ]);
 
-        if($register){
+        if ($register) {
             $this->status = 'success';
-        }else{
+        } else {
             $this->status = 'error';
         }
     }

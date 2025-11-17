@@ -44,6 +44,7 @@ class Seasons extends Component
     public $value;
     public $start;
     public $end;
+    public $type;
     public $updated_because;
 
     public function render()
@@ -59,14 +60,15 @@ class Seasons extends Component
             'value',
             'start',
             'end',
+            'type',
         );
     }
     public function printSeason(Season $season)
     {
-        $payed = SeasonPay::where('season_id',$season->id)
-        ->with(['partners','received'])
-        ->where('active',1)
-        ->get();
+        $payed = SeasonPay::where('season_id', $season->id)
+            ->with(['partners', 'received'])
+            ->where('active', 1)
+            ->get();
         // Crie uma instância do mPDF
         $mpdf = new Mpdf([
             'mode'          => 'utf-8',
@@ -79,15 +81,17 @@ class Seasons extends Component
         $today = Carbon::parse(now())->locale('pt-BR');
 
         // Renderize a view do Livewire
-        $html = view('livewire.admin.pool.season-pdf',
-        [
-            'data'              => $payed,
-            'config'            => Configs::find(1),
-            'contract_number'   => $season->title,
-            'subtext'           => 'Pagamentos da ' .mb_strtoupper($season->title),
-            'responsible'       => Auth::user()->name,
-            'today'             => $today->translatedFormat('d F Y'),
-        ])->render();
+        $html = view(
+            'livewire.admin.pool.season-pdf',
+            [
+                'data'              => $payed,
+                'config'            => Configs::find(1),
+                'contract_number'   => $season->title,
+                'subtext'           => 'Pagamentos da ' . mb_strtoupper($season->title),
+                'responsible'       => Auth::user()->name,
+                'today'             => $today->translatedFormat('d F Y'),
+            ]
+        )->render();
 
         // Adicione o conteúdo HTML ao PDF
         $mpdf->WriteHTML($html);
@@ -106,8 +110,7 @@ class Seasons extends Component
         $mpdf->Output($down, 'F');
 
         $this->dispatch('openPdfInNewTab', pdfPath: $pdfPath);
-
-}
+    }
     //CREATE
     public function modalCreate()
     {
@@ -118,7 +121,7 @@ class Seasons extends Component
     {
         if ($property === 'end') {
 
-            $start =implode("-", array_reverse(explode("/", $this->start)));
+            $start = implode("-", array_reverse(explode("/", $this->start)));
             $end = implode("-", array_reverse(explode("/", $this->end)));
 
             if ($end < $start) {
@@ -139,7 +142,8 @@ class Seasons extends Component
             'title' => 'required',
             'value' => 'required',
             'start' => 'required|date_format:d/m/Y',
-            'end' => 'required|date_format:d/m/Y',
+            'end'   => 'required|date_format:d/m/Y',
+            'type'  => 'required',
         ];
         $this->validate();
 
@@ -148,6 +152,7 @@ class Seasons extends Component
             'value'         => $this->value,
             'start'         => $this->start,
             'end'           => $this->end,
+            'type'          => $this->type,
             'active'        => 1,
             'created_by'    => Auth::user()->name,
         ]);
@@ -185,6 +190,7 @@ class Seasons extends Component
         $this->end      = $season->end;
         $this->model_id = $season->id;
         $this->title    = $season->title;
+        $this->type    = $season->type;
         $this->updated_because = $season->updated_because;
         $this->showModalEdit = true;
     }
@@ -207,6 +213,7 @@ class Seasons extends Component
             'value'         => $this->value,
             'start'         => $this->start,
             'end'           => $this->end,
+            'type'          => $this->type,
             'updated_because' => $this->updated_because,
             'updated_by' => Auth::user()->name,
         ]);

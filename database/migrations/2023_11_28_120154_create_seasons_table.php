@@ -17,10 +17,11 @@ class CreateSeasonsTable extends Migration
             $table->id();
             $table->string('title')->nullable();
             $table->boolean('active')->nullable();
+            $table->string('type')->nullable();
             $table->date('start')->nullable();
             $table->date('end')->nullable();
             $table->decimal('value', $precision = 10, $scale = 2)->nullable();
-           
+
             /*Alteração */
             $table->text('updated_because')->nullable();
             /*Excluido */
@@ -29,12 +30,11 @@ class CreateSeasonsTable extends Migration
             $table->string('deleted_by')->nullable();
             /*Padrão */
             $table->timestamps();
-            $table->string('updated_by',50)->nullable();
-            $table->string('created_by',50)->nullable();
-
+            $table->string('updated_by', 50)->nullable();
+            $table->string('created_by', 50)->nullable();
         });
     }
- 
+
     /**
      * Reverse the migrations.
      *

@@ -81,6 +81,7 @@ class SeasonPayNew extends Component
         if ($property === 'season_id') {
             $season = Season::find($this->season_id);
             $this->value = $season->value;
+            $this->type = $season->type;
         }
     }
     public function selectPartner($id)
