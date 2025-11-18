@@ -209,6 +209,11 @@ class LocationInstallment extends Component
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
         $this->dispatch('updateInstallments', $this->location_id);
+
+        $data = Installment::where('id', $this->id)->first();
+        redirect()->to('/locações/' . $this->location_id . '/parcelas')->with('success', 'Registro excluido com sucesso.')->with('error', 'Excluir esse registro não exclui o
+        recibo ' . $data->received_id . '
+        automaticamente.');
         $this->checkoutModal = false;
         // redirect()->route('installments-location', $this->location_id);
     }
@@ -220,11 +225,20 @@ class LocationInstallment extends Component
     public function delete()
     {
         $data = Installment::where('id', $this->id)->first();
+        // dd($data->title);
         if ($data->title == 'Sinal' or $data->title == 'Total') {
-            $data->active = 0;
+            $data->active = 3;
+            Installment::create([
+                'active'        => 0,
+                'title'         => $data->title,
+                'value'         => $data->location->value,
+                'location_id'   => $data->location->id,
+                'created_by'    => Auth::user()->name
+            ]);
         } else {
             $data->active = 3;
         }
+
 
         $data->save();
         $this->showJetModal = false;
