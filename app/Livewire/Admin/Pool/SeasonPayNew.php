@@ -87,7 +87,7 @@ class SeasonPayNew extends Component
             ->where('start', '<=', now())
             ->where('end', '>', now())
             ->where('active', 1)->get();
-        $this->season_id =  null;
+        // $this->season_id =  null;
         $this->form_payment =  '';
 
         if ($value == 'Diário') {
