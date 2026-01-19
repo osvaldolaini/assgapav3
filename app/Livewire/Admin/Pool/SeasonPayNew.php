@@ -70,15 +70,6 @@ class SeasonPayNew extends Component
         $this->typeSearch = $typeSearch;
     }
 
-
-    public function updated($property)
-    {
-        if ($property === 'season_id') {
-            $season = Season::find($this->season_id);
-            $this->value = $season->value ?? '00,0';
-            $this->type = $season->type ?? '';
-        }
-    }
     public function updatedType($value)
     {
         $this->seasons = Season::select('id', 'title', 'type')
@@ -87,7 +78,7 @@ class SeasonPayNew extends Component
             ->where('start', '<=', now())
             ->where('end', '>', now())
             ->where('active', 1)->get();
-        // $this->season_id =  null;
+        $this->season_id = '';
         $this->form_payment =  '';
 
         if ($value == 'Diário') {
@@ -96,6 +87,16 @@ class SeasonPayNew extends Component
             $this->bracelets = [];
         }
     }
+
+    public function updateValue()
+    {
+        $s = Season::find($this->season_id);
+        $this->value = $s->value ?? '00,0';
+        // $this->type = $s->type ?? '';
+        // $this->season_id = $season->id ?? $value;
+        // dd($season->id, $this->season_id);
+    }
+
     public function selectPartner($id)
     {
         $partner = Partner::find($id);
@@ -111,7 +112,7 @@ class SeasonPayNew extends Component
 
     public function save_out()
     {
-        // dd($this->bracelets);
+        // dd($this->season_id);
         $this->rules = [
             'paid_in'       => 'required|date_format:d/m/Y',
             'value'         => 'required',
