@@ -69,7 +69,7 @@
                     @if ($type)
                         @if ($type != 'Diário')
                             <div class="col-span-4">
-                                <label for="season_id">*Temporada {{ $season_id }}</label>
+                                <label for="season_id">*Temporada </label>
                                 <Select wire:model="season_id" wire:change="updateValue()" wire:ignore required
                                     class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                                     <option value="">Selecione...</option>
