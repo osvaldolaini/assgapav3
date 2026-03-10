@@ -1,8 +1,8 @@
-<div wire:model="alertSession" class="fixed w-80 top-16 sm:top-24 right-5 sm:right-5 z-50">
+<div wire:model="alertSession" class="fixed z-50 w-80 top-24 sm:top-24 right-5 sm:right-5">
 
     @if (session('success'))
         <div id="alert-border-1"
-            class="relative flex items-center shadow-lg rounded-md w-auto p-4 mb-4 text-green-800 border-t-4 border-green-300 bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
+            class="relative flex items-center w-auto p-4 mb-4 text-green-800 border-t-4 border-green-300 rounded-md shadow-lg bg-green-50 dark:text-green-400 dark:bg-gray-800 dark:border-green-800"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -26,7 +26,7 @@
     @endif
     @if (session('info'))
         <div id="alert-border-2"
-            class="relative flex items-center shadow-lg rounded-md w-auto p-4 mb-4 text-blue-800 border-t-4 border-blue-300 bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800"
+            class="relative flex items-center w-auto p-4 mb-4 text-blue-800 border-t-4 border-blue-300 rounded-md shadow-lg bg-blue-50 dark:text-blue-400 dark:bg-gray-800 dark:border-blue-800"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -50,7 +50,7 @@
     @endif
     @if (session('error'))
         <div id="alert-border-3"
-            class="relative flex items-center shadow-lg rounded-md w-auto p-4 mb-4 text-red-800 border-t-4 border-red-300 bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
+            class="relative flex items-center w-auto p-4 mb-4 text-red-800 border-t-4 border-red-300 rounded-md shadow-lg bg-red-50 dark:text-red-400 dark:bg-gray-800 dark:border-red-800"
             role="alert">
             <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
                 viewBox="0 0 20 20">
@@ -74,10 +74,10 @@
     @endif
     @if (session('warning'))
         <div id="alert-border-4"
-            class="relative flex items-center shadow-lg rounded-md w-auto p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 bg-yellow-50 dark:text-yellow-400 dark:bg-gray-800 dark:border-yellow-800"
+            class="relative flex items-center w-auto p-4 mb-4 text-yellow-800 border-t-4 border-yellow-300 rounded-md shadow-lg bg-yellow-50 dark:text-yellow-400 dark:bg-gray-800 dark:border-yellow-800"
             role="alert">
-            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
-                fill="currentColor" viewBox="0 0 20 20">
+            <svg class="flex-shrink-0 w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="currentColor"
+                viewBox="0 0 20 20">
                 <path
                     d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
             </svg>
