@@ -99,8 +99,8 @@
                                                     {{ $data->location_date }}
                                                     <p>
                                                         @if ($data->location_hour_start)
-                                                            <div style="background-color:success;"
-                                                                class="badge flex-warp gap-2 mx-1 text-xs ">
+                                                            <div style="background-color:green;"
+                                                                class="gap-2 mx-1 text-xs badge flex-warp ">
                                                                 {{ $data->location_hour_start }} -
                                                                 {{ $data->location_hour_end }}</div>
                                                         @endif
