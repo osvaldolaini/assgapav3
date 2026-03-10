@@ -49,7 +49,7 @@
                                             class="py-3.5 px-4 text-sm font-normal
                                                     text-center text-gray-500
                                                     dark:text-gray-400">
-                                            Data
+                                            Data / hora
                                         </th>
                                         <th scope="col"
                                             class="py-3.5 px-4 text-sm font-normal
@@ -97,6 +97,9 @@
                                                 <td
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->location_date }}
+                                                    <p>
+                                                        {{ $data->location_hour_end ?? $data->location_hour_start }}
+                                                    </p>
                                                 </td>
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
