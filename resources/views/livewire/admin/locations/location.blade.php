@@ -98,15 +98,13 @@
                                                     class="py-1.5 px-4 text-sm font-normal text-center itens-center text-gray-500 dark:text-gray-400">
                                                     {{ $data->location_date }}
                                                     <p>
-                                                        {{ $data->location_hour_start
-                                                            ? '<div style="background-color:success;"
-                                                        
-                                                                                                                    class="badge flex-warp gap-2 mx-1 text-xs ">' .
-                                                                $data->location_hour_start .
-                                                                ' - ' .
-                                                                $data->location_hour_end .
-                                                                '</div>'
-                                                            : '' }}
+                                                        @if ($data->location_hour_start)
+                                                            <div style="background-color:success;"
+                                                                class="badge flex-warp gap-2 mx-1 text-xs ">
+                                                                {{ $data->location_hour_start }} -
+                                                                {{ $data->location_hour_end }}</div>
+                                                        @endif
+
                                                     </p>
                                                 </td>
                                                 <td
