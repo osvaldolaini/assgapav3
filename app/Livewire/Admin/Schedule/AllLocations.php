@@ -59,6 +59,7 @@ class AllLocations extends Component
         $this->ambiences = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
         $this->events = $this->getCalendarReservation($this->year);
+        // dd($this->events);
         return view('livewire.admin.schedule.all-locations');
     }
 
@@ -252,6 +253,7 @@ class AllLocations extends Component
                 ->get();
         }
 
+        // dd($unavailabilities);
         if ($unavailabilities) {
             foreach ($unavailabilities as $key) {
 

@@ -98,6 +98,8 @@ class AmbienceUnavailabilities extends Component
                 'end' => 'required',
                 'ambience_id' => 'required',
             ];
+
+            $this->validity = $this->end;
         }
 
 
@@ -173,6 +175,7 @@ class AmbienceUnavailabilities extends Component
                 'end' => 'required',
                 'ambience_id' => 'required',
             ];
+            $this->validity = $this->end;
         }
 
         $this->validate();
