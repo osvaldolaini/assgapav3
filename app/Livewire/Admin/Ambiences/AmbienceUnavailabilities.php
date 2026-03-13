@@ -278,14 +278,15 @@ class AmbienceUnavailabilities extends Component
     public function delete($id)
     {
         $data = AmbienceUnavailability::where('id', $id)->first();
-        dd($data);
+        // dd($data);
         $data->active = 2;
+        $data->validity = date('d/m/Y');
         $data->save();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');
 
         $this->showJetModal = false;
-        $this->resetAll();
+        // $this->resetAll();
     }
     //MESSAGE
     public function openAlert($status, $msg)
