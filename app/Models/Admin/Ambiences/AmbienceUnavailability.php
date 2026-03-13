@@ -52,6 +52,7 @@ class AmbienceUnavailability extends Model
     }
     public function setValidityAttribute($value)
     {
+        dd(implode("-", array_reverse(explode("/", $value))));
         $this->attributes['validity'] = implode("-", array_reverse(explode("/", $value)));
     }
 
