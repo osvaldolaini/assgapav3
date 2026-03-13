@@ -40,6 +40,7 @@ class Partner extends Model
         'slug',
         'name',
         'responsible',
+        'student',
         'kinship',
         'image',
         'date_of_birth',

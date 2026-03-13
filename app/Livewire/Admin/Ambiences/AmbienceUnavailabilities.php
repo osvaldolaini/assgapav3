@@ -278,6 +278,7 @@ class AmbienceUnavailabilities extends Component
     public function delete($id)
     {
         $data = AmbienceUnavailability::where('id', $id)->first();
+        // dd($data);
         $data->active = 2;
         $data->save();
 
