@@ -287,7 +287,7 @@ class AmbienceUnavailabilities extends Component
         $this->openAlert('success', 'Registro excluido com sucesso.');
 
         $this->showJetModal = false;
-        // $this->resetAll();
+        $this->resetAll();
     }
     //MESSAGE
     public function openAlert($status, $msg)

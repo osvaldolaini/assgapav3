@@ -48,12 +48,12 @@ class AmbienceUnavailability extends Model
     public function getValidityAttribute($value)
     {
         return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+            ->format('d/m/Y') ?? '';
     }
     public function setValidityAttribute($value)
     {
         $this->attributes['validity'] = implode("-", array_reverse(explode("/", $value)));
-        dd(implode("-", array_reverse(explode("/", $value))));
+        // dd(implode("-", array_reverse(explode("/", $value))));
     }
 
     public function getStartAttribute($value)
