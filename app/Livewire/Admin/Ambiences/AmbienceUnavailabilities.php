@@ -280,9 +280,10 @@ class AmbienceUnavailabilities extends Component
         $data = AmbienceUnavailability::where('id', $id)->first();
         // dd($data);
         $data->active = 2;
-        $data->validity = date('d/m/Y');
-        $data->save();
+        $data->validity = date('Y-m-d');
 
+        $data->save();
+        // dd($data, date('d/m/Y'));
         $this->openAlert('success', 'Registro excluido com sucesso.');
 
         $this->showJetModal = false;
