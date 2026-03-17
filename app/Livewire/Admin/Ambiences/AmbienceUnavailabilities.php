@@ -268,8 +268,7 @@ class AmbienceUnavailabilities extends Component
         $data = AmbienceUnavailability::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
-            // $data->save();
-            $data->delete();
+            $data->save();
         } else {
             $data->active = 1;
             $data->save();
@@ -281,6 +280,7 @@ class AmbienceUnavailabilities extends Component
         $data = AmbienceUnavailability::where('id', $id)->first();
         // dd($data);
         $data->active = 2;
+        $data->delete();
         $data->validity = date('d/m/Y', strtotime(date('Y-m-d') . ' +1 day'));
 
         $data->save();
