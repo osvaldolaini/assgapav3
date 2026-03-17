@@ -268,7 +268,8 @@ class AmbienceUnavailabilities extends Component
         $data = AmbienceUnavailability::where('id', $id)->first();
         if ($data->active == 1) {
             $data->active = 0;
-            $data->save();
+            // $data->save();
+            $data->delete();
         } else {
             $data->active = 1;
             $data->save();
