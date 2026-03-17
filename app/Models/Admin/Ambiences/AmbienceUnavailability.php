@@ -47,10 +47,10 @@ class AmbienceUnavailability extends Model
     }
     public function getValidityAttribute($value)
     {
-        // if (!empty($value)) {
-        return Carbon::createFromFormat('Y-m-d H:i:s', $value)
-            ->format('d/m/Y');
-        // }
+        if (!empty($value)) {
+            return Carbon::createFromFormat('Y-m-d', $value)
+                ->format('d/m/Y');
+        }
     }
     public function setValidityAttribute($value)
     {
