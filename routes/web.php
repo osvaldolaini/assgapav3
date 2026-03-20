@@ -53,6 +53,7 @@ use App\Livewire\Admin\Pool\RegisterPassPool;
 use App\Livewire\Admin\Pool\Seasons;
 use App\Livewire\Admin\Registers\DependentEdit;
 use App\Livewire\Admin\Registers\DependentNew;
+use App\Livewire\Admin\Registers\DependentOut;
 use App\Livewire\Admin\Registers\Dependents;
 use App\Livewire\Admin\Registers\History;
 use App\Livewire\Admin\Registers\OtherEdit;
@@ -188,6 +189,9 @@ Route::middleware([
         ->name('edit-dependent');
     Route::get('/cadastros/{partner}/mensalidades', Monthlys::class)
         ->name('monthlys');
+
+    Route::get('/dependentes-para-remover', DependentOut::class)
+        ->name('dependentes-out');
 
     Route::get('/cadastros-sócios-em-atraso', PartnersLate::class)
         ->name('partnersLate');
