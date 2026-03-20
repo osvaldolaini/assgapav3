@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin\Dashboard;
 
+use App\Livewire\Admin\Registers\Partners;
 use App\Models\Admin\Configs;
 use App\Models\Admin\Monthly\MonthlyPayment;
 use App\Models\Admin\Registers\Partner;
@@ -13,12 +14,34 @@ use Livewire\Component;
 
 class Master extends Component
 {
+    public  $showJetModal = false;
+    public $remove = 0;
+    public function mount()
+    {
+        $dependentOut = Partner::select('id', 'partner_category', 'student', 'date_of_birth')
+            ->where('active', 1)
+            ->with(['category'])
+            ->where('partner_category_master', 'Sócio')
+            ->where('remove_at', '>=', 21)->get();
+
+
+        foreach ($dependentOut as $data) {
+            if ((!$data->student && $data->age > 21) || ($data->student && $data->age > 24)) {
+                $this->remove += 1;
+            }
+        }
+        // dd($remove, $dependentOut);
+        if ($this->remove > 0) {
+            $this->showJetModal = true;
+        }
+    }
     public function render()
     {
         $dataAtual = Carbon::now();
         if (Auth::user()->dashboard == 3) {
             // $this->sentEmail();
         }
+
         if ($dataAtual->day <= 7) {
             $this->generateMonthly();
         } else {
@@ -49,7 +72,7 @@ class Master extends Component
         $partners = Partner::select('id', 'partner_category')
             ->where('active', 1)
             ->with(['category'])
-            ->where('discount', '!=',1)
+            ->where('discount', '!=', 1)
             ->where('partner_category_master', 'Sócio')
             ->orderBy('partner_category', 'asc')
             ->orderBy('name', 'asc')
@@ -121,5 +144,10 @@ class Master extends Component
     public function openAlert($status, $msg)
     {
         $this->dispatch('openAlert', $status, $msg);
+    }
+
+    public function go_to()
+    {
+        redirect()->route('dependentes-out');
     }
 }
