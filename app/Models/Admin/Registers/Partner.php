@@ -41,6 +41,7 @@ class Partner extends Model
         'name',
         'responsible',
         'student',
+        'remove_at',
         'kinship',
         'image',
         'date_of_birth',

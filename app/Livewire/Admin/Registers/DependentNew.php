@@ -17,6 +17,8 @@ class DependentNew extends Component
     //Campos
     public $name;
     public $responsible;
+    public $remove_at = 21; //inserido em 20/03
+    public $student = 0; //inserido em 20/03
     public $kinship;
     public $image;
     public $date_of_birth;
@@ -151,6 +153,9 @@ class DependentNew extends Component
             'registration_at'   => 'required',
             'phone_first'       => 'required',
             'cpf'               => 'required|unique:partners|min:11',
+
+            'remove_at'         => 'required',
+            'student'           => 'required',
         ];
 
 
@@ -166,6 +171,8 @@ class DependentNew extends Component
             'active'                => 1,
             'name'                  => $this->name,
             'responsible'           => $this->responsible,
+            'remove_at'             => $this->remove_at,
+            'student'               => $this->student,
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,

@@ -6,6 +6,10 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.27 20/03/2026
+
+-   Inserido campos idade para remover e se é estudante ou não.
+
 ## v 3.26 19/01/2026
 
 -Correção
@@ -101,7 +105,6 @@ Horário no contrato estava aparecendo indevidamente em ambiente sem multipla lo
     Marketing
     Email
 
-
 ## V 3.9 17/11/2023
 
     Cadastros
@@ -116,7 +119,6 @@ Horário no contrato estava aparecendo indevidamente em ambiente sem multipla lo
         -Contratos
         -Tabela de preços
         -Indisponibilidades
-
 
 ## V 3.7 11/11/2023
 

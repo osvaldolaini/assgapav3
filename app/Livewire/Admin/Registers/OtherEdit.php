@@ -13,6 +13,9 @@ class OtherEdit extends Component
     public $category;
     public $rules;
 
+    public $remove_at = 21; //inserido em 20/03
+    public $student = 0; //inserido em 20/03
+
     public $breadcrumb_title;
     //Campos
     public $id;
@@ -231,6 +234,7 @@ class OtherEdit extends Component
                 'kinship' => 'required',
                 'responsible' => 'required'
             ];
+            $this->saram = 0;
         }
 
         $this->validate();
@@ -240,6 +244,8 @@ class OtherEdit extends Component
         ], [
             'name'                  => $this->name,
             'responsible'           => $this->responsible,
+            'remove_at'             => $this->remove_at,
+            'student'               => $this->student,
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,

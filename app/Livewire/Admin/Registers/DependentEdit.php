@@ -10,6 +10,9 @@ use Intervention\Image\Facades\Image;
 
 class DependentEdit extends Component
 {
+
+    public $remove_at = 21; //inserido em 20/03
+    public $student = 0; //inserido em 20/03
     public $category;
     public $rules;
 
@@ -124,6 +127,10 @@ class DependentEdit extends Component
 
     public function mount(Partner $partner)
     {
+
+        $this->remove_at = $partner->remove_at; //inserido em 20/03
+        $this->student = $partner->student; //inserido em 20/03
+
         $this->breadcrumb_title = $partner->name;
         $this->registration_at = date('d/m/Y');
         $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
@@ -203,6 +210,8 @@ class DependentEdit extends Component
             'validity_of_card'  => 'date_format:d/m/Y',
             'grace_period'      => 'date_format:d/m/Y',
             'phone_first'       => 'required',
+            'remove_at'         => 'required',
+            'student'           => 'required',
         ];
 
         if ($this->pf_pj == 'pf') {
@@ -239,6 +248,8 @@ class DependentEdit extends Component
         ], [
             'name'                  => $this->name,
             'responsible'           => $this->responsible,
+            'remove_at'             => $this->remove_at,
+            'student'               => $this->student,
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,
@@ -248,7 +259,7 @@ class DependentEdit extends Component
             'cpf'                   => $this->cpf,
             'cnpj'                  => $this->cnpj,
             'rg'                    => $this->rg,
-            'saram'                 => $this->saram,
+            // 'saram'                 => $this->saram,
             'phone_first'           => $this->phone_first,
             'phone_second'          => $this->phone_second,
             'address'               => $this->address,
@@ -279,5 +290,14 @@ class DependentEdit extends Component
     public function openAlert($status, $msg)
     {
         $this->dispatch('openAlert', $status, $msg);
+    }
+
+    public function updatedStudent($value)
+    {
+        if ($value == 1) {
+            $this->remove_at = 24;
+        } else {
+            $this->remove_at = 21;
+        }
     }
 }

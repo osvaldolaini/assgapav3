@@ -18,6 +18,8 @@ class PartnerEdit extends Component
     public $id;
     public $name;
     public $responsible;
+    public $remove_at = 21; //inserido em 20/03
+    public $student = 0; //inserido em 20/03
     public $kinship;
     public $image;
     public $date_of_birth;
@@ -125,6 +127,9 @@ class PartnerEdit extends Component
     public function mount(Partner $partner)
     {
 
+        $this->remove_at = $partner->remove_at; //inserido em 20/03
+        $this->student = $partner->student; //inserido em 20/03
+
         $this->breadcrumb_title = $partner->name;
         $this->registration_at = date('d/m/Y');
         $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
@@ -226,6 +231,8 @@ class PartnerEdit extends Component
         if ($this->partner_category_master == 'Dependente') {
             $this->rules['kinship'] = 'required';
             $this->rules['responsible'] = 'required';
+            $this->rules['remove_at'] = 'required';
+            $this->rules['student'] = 'required';
         }
 
         $this->validate();
@@ -242,6 +249,8 @@ class PartnerEdit extends Component
         ], [
             'name'                  => $this->name,
             'responsible'           => $this->responsible,
+            'remove_at'             => $this->remove_at,
+            'student'               => $this->student,
             'kinship'               => $this->kinship,
             'image'                 => $this->image,
             'date_of_birth'         => $this->date_of_birth,

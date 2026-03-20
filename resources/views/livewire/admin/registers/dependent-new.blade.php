@@ -87,7 +87,24 @@
                             <span class="text-red-500 error">{{ $message }}</span>
                         @enderror
                     </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label class="text-sm" for="student">Estudante?</label>
+                        <Select wire:model="student"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </Select>
+                    </div>
+                    <div class="col-span-full sm:col-span-2">
+                        <label class="text-sm" for="remove_at">Idade para remover</label>
+                        <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Parentesco" wire:model="remove_at" required maxlength="100">
+                        @error('remove_at')
+                            <span class="text-red-500 error">{{ $message }}</span>
+                        @enderror
+                    </div>
                 @endif
+
 
                 <div class="col-span-full sm:col-span-2">
                     <label class="text-sm" for="pf_pj">*Tipo de cadastro</label>
