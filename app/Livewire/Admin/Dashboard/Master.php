@@ -21,7 +21,7 @@ class Master extends Component
         $dependentOut = Partner::select('id', 'partner_category', 'student', 'date_of_birth')
             ->where('active', 1)
             ->with(['category'])
-            ->where('partner_category_master', 'Sócio')
+            ->where('partner_category_master', 'Dependente')
             ->where('remove_at', '>=', 21)->get();
 
 
