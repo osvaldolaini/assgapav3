@@ -84,6 +84,8 @@ class Partner extends Model
         $this->attributes['name'] = mb_strtoupper($value);
         $this->attributes['slug'] = Str::slug($value);
     }
+
+
     public function setKinshipAttribute($value)
     {
         $this->attributes['kinship'] = mb_strtoupper($value);
@@ -130,10 +132,25 @@ class Partner extends Model
         }
         return $late;
     }
+
+    public function setPartnerCategoryMasterAttribute($value)
+    {
+        // verifica se já existia valor e se mudou
+        if (
+            isset($this->attributes['partner_category_master']) &&
+            $this->attributes['partner_category_master'] !== $value
+        ) {
+            $this->attributes['active_changed_at'] = now();
+        }
+
+        $this->attributes['partner_category_master'] = $value;
+    }
+
     /*Setar a categoria master */
     public function setActiveAttribute($value)
     {
         $this->attributes['active'] = $value;
+
         if ($value == 0) {
             $master = PartnerCategory::where('parent_category', 'Não sócio')->first();
             $this->attributes['partner_category'] = $master->id;

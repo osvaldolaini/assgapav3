@@ -55,6 +55,7 @@ class CreatePartnersTable extends Migration
             $table->string('company')->nullable();
 
             /*Padrão */
+            $table->timestamp('active_changed_at')->nullable();
             $table->timestamps();
             $table->string('updated_by', 50)->nullable();
             $table->string('created_by', 50)->nullable();
