@@ -77,7 +77,7 @@ class Cashiers extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Nº', 'Motivo','Valor','Vencimento / pagamento'),
+                'heads'         => array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento'),
                 'body'          => $body,
             ]
         )->render();
@@ -102,7 +102,7 @@ class Cashiers extends Component
     {
         $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
-        $data[] = array('Nº', 'Motivo','Valor','Vencimento / pagamento');
+        $data[] = array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento');
         foreach ($this->getData() as $item) {
             $data[] = [
                 'id'        => $item->id,
@@ -199,7 +199,7 @@ class Cashiers extends Component
     private function getData()
     {
 
-        if (Auth::user()->group->level <= 5) {
+        if (Auth::user()->group->level <= 10) {
             $query = $this->model::query();
         } else {
             $query = $this->model::query();

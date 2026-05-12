@@ -201,7 +201,7 @@ class Locations extends Component
     private function getData()
     {
 
-        if (Auth::user()->group->level <= 5) {
+        if (Auth::user()->group->level <= 10) {
             $query = $this->model::query();
         } else {
             $query = $this->model::query();

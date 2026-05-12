@@ -6,6 +6,10 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.28 12/05/2026
+
+-   Mudança no nivel do usuário que pode ver os apagados.
+
 ## v 3.27 20/03/2026
 
 -   Inserido campos idade para remover e se é estudante ou não.
