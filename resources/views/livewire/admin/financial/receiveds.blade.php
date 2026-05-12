@@ -7,45 +7,7 @@
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-                @if (Auth::user()->group->level <= 10)
-                    <div
-                        class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
-                        <div class="flex w-full">
-                            <div
-                                class="block w-full text-sm text-gray-900 focus:ring-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
-                                <label for="simple-search" class="sr-only">
-                                    Pesquisar
-                                </label>
-                                <div class="relative w-full">
-                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                        <svg aria-hidden="true" class="w-5 h-5 text-blue-500 dark:text-gray-400"
-                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                            <path fill-rule="evenodd"
-                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                                clip-rule="evenodd" />
-                                        </svg>
-                                    </div>
-                                    <input type="text" placeholder="Pesquisar" wire:model.live="searchExcluded"
-                                        class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl bg-gray-50 focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500" />
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            class="flex flex-col items-stretch justify-end flex-shrink-0 w-full space-y-2 md:w-auto md:flex-row md:space-y-0 md:items-center md:space-x-3">
-                            <div class="flex group ">
-                                <button wire:click="modalCreate()"
-                                    class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
-                                    <svg aria-hidden="true" class="w-5 h-5 text-white dark:text-gray-400"
-                                        fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                                        <path fill-rule="evenodd"
-                                            d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                            clip-rule="evenodd" />
-                                    </svg>
-                                </button>
-                            </div>
-                        </div>
-                    </div>
-                @endif
+
             </div>
         </div>
     </x-breadcrumb>
