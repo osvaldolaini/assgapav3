@@ -9,6 +9,7 @@
 ## v 3.28 12/05/2026
 
 -   Mudança no nivel do usuário que pode ver os apagados.
+-   Inclusão do perfil Vendedor Extrerno
 
 ## v 3.27 20/03/2026
 

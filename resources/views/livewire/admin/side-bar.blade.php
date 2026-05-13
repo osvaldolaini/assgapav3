@@ -487,11 +487,12 @@
                             <!-- End Dropdown Marketing -->
                         @endif
                         <div class="flex items-center py-1 mx-2 border-t border-gray-200 flex-nowrap"></div>
-                        <span
-                            class="flex items-center justify-start w-full px-4 py-0 my-0 mb-1 text-sm text-gray-600 transition-colors duration-200">
-                            Configurações do sistema
-                        </span>
+
                         @if (in_array(1, $pages) == true)
+                            <span
+                                class="flex items-center justify-start w-full px-4 py-0 my-0 mb-1 text-sm text-gray-600 transition-colors duration-200">
+                                Configurações do sistema
+                            </span>
                             <!-- Dropdown Configurações -->
                             <button id="dropdownConfigs" data-dropdown-toggle="configs"
                                 class="flex items-center justify-start w-full px-4 py-1
@@ -598,7 +599,7 @@
                         font-thin uppercase transition-colors duration-200
                         {{ Request::is('*profile*')
                             ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                                                                dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                                                                        dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                             : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }} sm:hidden">
                             <span class="text-left">
                                 <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
@@ -619,7 +620,7 @@
                             font-thin uppercase transition-colors duration-200
                             {{ Request::is('profile*')
                                 ? 'bg-gradient-to-r from-white to-blue-100
-                                                                                                                                                                                                                                                                                                                                                dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
+                                                                                                                                                                                                                                                                                                                                                                            dark:from-gray-700 dark:to-gray-800 text-blue-500 border-r-4 border-blue-500'
                                 : 'dark:text-gray-200 hover:text-blue-500 text-gray-800' }}
                             sm:hidden">
                                 <span class="text-left">
