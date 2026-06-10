@@ -37,7 +37,7 @@ class Receiveds extends Component
     public $search;
     public $relationTables = "partners,partners.id,receiveds.partner_id"; //Relacionamentos ( table , key , foreingKey )
     public $customSearch = 'paid_in'; //Colunas personalizadas, customizar no model
-    public $columnsInclude = 'paid_in,value,receiveds.active as active,receiveds.partner_id,partners.name,receiveds.title';
+    public $columnsInclude = 'paid_in,value,receiveds.created_by,receiveds.active as active,receiveds.partner_id,partners.name,receiveds.title';
     public $searchable = 'receiveds.id,receiveds.title,partners.name,paid_in'; //Colunas pesquisadas no banco de dados
     public $sort = "receiveds.id,desc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 10; //Qtd de registros por página
