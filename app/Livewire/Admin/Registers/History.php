@@ -36,6 +36,7 @@ class History extends Component
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $location->location_date,
+                    'created_by'    => $location->created_by,
                     'realDate'      => implode("-", array_reverse(explode("/", $location->location_date))),
                     'link'          => route('edit-location', $location->id)
                 ];
@@ -54,6 +55,7 @@ class History extends Component
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $monthly->paid_in,
+                    'created_by'          => $monthly->updated_by,
                     'realDate'      => implode("-", array_reverse(explode("/", $monthly->paid_in))),
                     'link'          => route('monthlys', $monthly->partner_id)
                 ];
@@ -67,6 +69,7 @@ class History extends Component
                     'received'      => $received->id,
                     'bill'          => '',
                     'date'          => $received->paid_in,
+                    'created_by'    => $received->created_by,
                     'realDate'      => implode("-", array_reverse(explode("/", $received->paid_in))),
                     'link'          => ''
                 ];
