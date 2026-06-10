@@ -65,10 +65,11 @@ class Receiveds extends Component
         $this->paginate = $this->getData()->count();
         foreach ($this->getData() as $item) {
             $body[] = [
-                'id'        => $item->id,
-                'title'     => $item->title,
-                'value'     => $item->value,
-                'paid_in'   => $item->paid_in,
+                'id'            => $item->id,
+                'title'         => $item->title,
+                'value'         => $item->value,
+                'paid_in'       => $item->paid_in,
+                'created_by'    => $item->created_by,
             ];
         }
         $html = view(
@@ -79,7 +80,7 @@ class Receiveds extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento'),
+                'heads'         => array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento', 'Responsável'),
                 'body'          => $body,
             ]
         )->render();
@@ -104,13 +105,14 @@ class Receiveds extends Component
     {
         $this->paginate = 'single';
         $this->paginate = $this->getData()->count();
-        $data[] = array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento');
+        $data[] = array('Nº', 'Motivo', 'Valor', 'Vencimento / pagamento', 'Responsável');
         foreach ($this->getData() as $item) {
             $data[] = [
                 'id'        => $item->id,
                 'title'     => $item->title,
                 'value'     => $item->value,
                 'paid_in'   => $item->paid_in,
+                'created_by'    => $item->created_by,
             ];
         }
         $this->paginate = 15;

@@ -6,10 +6,15 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.29 10/06/2026
+
+-   Inclusão do nome do responsável no relatório de pagamentos.
+-   Correnção do termo "MENSALIDADE"
+
 ## v 3.28 12/05/2026
 
 -   Mudança no nivel do usuário que pode ver os apagados.
--   Inclusão do perfil Vendedor Extrerno
+-   Inclusão do perfil Vendedor Externo
 
 ## v 3.27 20/03/2026
 
