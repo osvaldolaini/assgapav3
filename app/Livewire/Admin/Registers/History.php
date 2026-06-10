@@ -80,6 +80,7 @@ class History extends Component
                     'received'      => '',
                     'bill'          => $bill->id,
                     'date'          => $bill->paid_in,
+                    'created_by'    => $bill->created_by,
                     'realDate'      => implode("-", array_reverse(explode("/", $bill->paid_in))),
                     'link'          => ''
                 ];
