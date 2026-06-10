@@ -36,17 +36,17 @@ class History extends Component
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $location->location_date,
-                    'realDate'      => implode("-",array_reverse(explode("/",$location->location_date))),
+                    'realDate'      => implode("-", array_reverse(explode("/", $location->location_date))),
                     'link'          => route('edit-location', $location->id)
                 ];
             }
         }
-        if ($partner->monthlys->where('status','!=', 0)) {
+        if ($partner->monthlys->where('status', '!=', 0)) {
             foreach ($partner->monthlys as $monthly) {
                 if ($monthly->status == 1) {
-                    $text = 'Pagamento da mendalidade de: ' . $monthly->monthlyRef;
-                }else{
-                    $text = 'Liberação da mendalidade de: ' . $monthly->monthlyRef;
+                    $text = 'Pagamento da mensalidade de: ' . $monthly->monthlyRef;
+                } else {
+                    $text = 'Liberação da mensalidade de: ' . $monthly->monthlyRef;
                 }
                 $this->dataTable[] = [
                     'description'   => $text,
@@ -54,7 +54,7 @@ class History extends Component
                     'received'      => '',
                     'bill'          => '',
                     'date'          => $monthly->paid_in,
-                    'realDate'      => implode("-",array_reverse(explode("/",$monthly->paid_in))),
+                    'realDate'      => implode("-", array_reverse(explode("/", $monthly->paid_in))),
                     'link'          => route('monthlys', $monthly->partner_id)
                 ];
             }
@@ -67,7 +67,7 @@ class History extends Component
                     'received'      => $received->id,
                     'bill'          => '',
                     'date'          => $received->paid_in,
-                    'realDate'      => implode("-",array_reverse(explode("/",$received->paid_in))),
+                    'realDate'      => implode("-", array_reverse(explode("/", $received->paid_in))),
                     'link'          => ''
                 ];
             }
@@ -80,7 +80,7 @@ class History extends Component
                     'received'      => '',
                     'bill'          => $bill->id,
                     'date'          => $bill->paid_in,
-                    'realDate'      => implode("-",array_reverse(explode("/",$bill->paid_in))),
+                    'realDate'      => implode("-", array_reverse(explode("/", $bill->paid_in))),
                     'link'          => ''
                 ];
             }
@@ -108,6 +108,7 @@ class History extends Component
                 'received'      => $item['received'],
                 'bill'          => $item['bill'],
                 'date'          => $item['date'],
+                'created_by'    => $item['created_by'],
             ];
         }
         $html = view(
@@ -118,7 +119,7 @@ class History extends Component
                 'today'         => $today,
                 'responsible'   => Auth::user()->name,
                 'config'        => $config,
-                'heads'         => array('Tipo', 'Motivo','Receita','Despesa','data'),
+                'heads'         => array('Tipo', 'Motivo', 'Receita', 'Despesa', 'data', 'Responsável'),
                 'body'          => $body,
             ]
         )->render();
@@ -140,7 +141,7 @@ class History extends Component
     }
     public function excelExport()
     {
-        $data[] = array('Tipo', 'Motivo','Receita','Despesa','data');
+        $data[] = array('Tipo', 'Motivo', 'Receita', 'Despesa', 'data', 'Responsável');
         foreach ($this->export as $item) {
             $data[] = [
                 'type'          => $item['type'],
@@ -148,6 +149,7 @@ class History extends Component
                 'received'      => $item['received'],
                 'bill'          => $item['bill'],
                 'date'          => $item['date'],
+                'created_by'    => $item['created_by'],
             ];
         }
 
