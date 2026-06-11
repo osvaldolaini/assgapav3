@@ -44,21 +44,23 @@ class History extends Component
         }
         if ($partner->monthlys->where('status', '!=', 0)) {
             foreach ($partner->monthlys as $monthly) {
-                if ($monthly->status == 1) {
-                    $text = 'Pagamento da mensalidade de: ' . $monthly->monthlyRef;
-                } else {
-                    $text = 'Liberação da mensalidade de: ' . $monthly->monthlyRef;
+                if ($monthly->received_id == '') {
+                    if ($monthly->status == 1) {
+                        $text = 'Pagamento da mensalidade de: ' . $monthly->monthlyRef;
+                    } else {
+                        $text = 'Liberação da mensalidade de: ' . $monthly->monthlyRef;
+                    }
+                    $this->dataTable[] = [
+                        'description'   => $text,
+                        'type'          => 'Mensalidades',
+                        'received'      => $monthly?->receiveds->id ?? '',
+                        'bill'          => '',
+                        'date'          => $monthly->paid_in,
+                        'created_by'          => $monthly->updated_by,
+                        'realDate'      => implode("-", array_reverse(explode("/", $monthly->paid_in))),
+                        'link'          => route('monthlys', $monthly->partner_id)
+                    ];
                 }
-                $this->dataTable[] = [
-                    'description'   => $text,
-                    'type'          => 'Mensalidades',
-                    'received'      => '',
-                    'bill'          => '',
-                    'date'          => $monthly->paid_in,
-                    'created_by'          => $monthly->updated_by,
-                    'realDate'      => implode("-", array_reverse(explode("/", $monthly->paid_in))),
-                    'link'          => route('monthlys', $monthly->partner_id)
-                ];
             }
         }
         if ($partner->receiveds->where('active', 1)) {
