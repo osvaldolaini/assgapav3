@@ -75,9 +75,9 @@ class Master extends Component
     public function render()
     {
         $dataAtual = Carbon::now();
-        // if (Auth::user()->dashboard == 3) {
-        $this->sentEmail();
-        // }
+        if (Auth::user()->dashboard == 3) {
+            $this->sentEmail();
+        }
 
         if ($dataAtual->day <= 7) {
             $this->generateMonthly();
