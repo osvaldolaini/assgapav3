@@ -67,7 +67,7 @@ class History extends Component
             foreach ($partner->receiveds as $received) {
                 $this->dataTable[] = [
                     'description'   => 'Pago devido: ' . $received->title,
-                    'type'          => 'Mensalidades',
+                    'type'          => 'Pagamentos',
                     'received'      => $received->id,
                     'bill'          => '',
                     'date'          => $received->paid_in,

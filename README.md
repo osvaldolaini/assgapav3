@@ -6,6 +6,11 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.30 24/06/2026
+
+-   Inclusão do gráfico de sócio por categoria.
+-   Inclusão da "select" na lista de aniversáriantes.
+
 ## v 3.29 10/06/2026
 
 -   Inclusão do nome do responsável no relatório de pagamentos.

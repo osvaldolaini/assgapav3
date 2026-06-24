@@ -396,6 +396,10 @@
             class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
             @livewire('admin.charts.new-partner')
         </div>
+        <div
+            class="relative w-full row-span-2 overflow-hidden text-white bg-blue-500 rounded-lg shadow-md col-span-full sm:col-span-2">
+            @livewire('admin.charts.partners-categories')
+        </div>
     @endif
 
 </div>

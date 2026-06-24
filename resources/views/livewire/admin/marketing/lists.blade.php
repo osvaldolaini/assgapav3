@@ -135,6 +135,29 @@
                                 class="w-4 h-4 text-blue-500 bg-gray-100 border-gray-300 rounded cursor-pointer focus:ring-blue-400 dark:focus:ring-blue-400 dark:ring-offset-gray-700 dark:focus:ring-offset-gray-700 focus:ring-2 dark:bg-gray-600 dark:border-gray-500">
                         </div>
                     </li>
+                    <li class="w-full border-b border-gray-200 sm:border-b-0 sm:border-r dark:border-gray-600 ">
+
+                        <div class="flex items-center justify-around px-3">
+                            <label
+                                class="flex items-center w-full py-3 mx-2 text-sm font-medium text-gray-900 dark:text-gray-300">
+                                <span class="ml-2">Selecione o mês</span>
+                            </label>
+                            <select wire:model.live='month'>
+                                <option value="01">Jan</option>
+                                <option value="02">Fev</option>
+                                <option value="03">Mar</option>
+                                <option value="04">Abr</option>
+                                <option value="05">Mai</option>
+                                <option value="06">Jun</option>
+                                <option value="07">Jul</option>
+                                <option value="08">Ago</option>
+                                <option value="09">Set</option>
+                                <option value="10">Out</option>
+                                <option value="11">Nov</option>
+                                <option value="12">Dez</option>
+                            </select>
+                        </div>
+                    </li>
 
                 </ul>
             </div>
@@ -205,7 +228,8 @@
 
                                     </tr>
                                 </thead>
-                                <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
+                                <tbody
+                                    class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900 ">
                                     @if ($dataTable->isEmpty())
                                         <tr>
                                             <td colspan="5"

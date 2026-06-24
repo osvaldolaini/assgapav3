@@ -39,6 +39,12 @@ class Lists extends Component
     public $sort = "partners.name,asc"; //Ordenação da tabela se for mais de uma dividir com "|"
     public $paginate = 15; //Qtd de registros por página
 
+    public $month;
+
+    public function mount()
+    {
+        $this->month = date('m');
+    }
     public function render()
     {
         return view('livewire.admin.marketing.lists', [
@@ -228,7 +234,7 @@ class Lists extends Component
         $query->where('partner_category_master', 'Sócio');
 
         if ($this->birthdays) {
-            $query->where('date_of_birth', 'LIKE', '%-' . date('m') . '-%');
+            $query->where('date_of_birth', 'LIKE', '%-' . $this->month . '-%');
             // $query->where('date_of_birth', 'LIKE', '%-01-%');
         }
 
