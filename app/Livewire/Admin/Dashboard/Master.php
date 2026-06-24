@@ -76,7 +76,7 @@ class Master extends Component
     {
         $dataAtual = Carbon::now();
         if (Auth::user()->dashboard == 3) {
-            $this->sentEmail();
+            // $this->sentEmail();
         }
 
         if ($dataAtual->day <= 7) {
