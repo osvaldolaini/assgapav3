@@ -7,6 +7,7 @@ use App\Models\Admin\Registers\Partner;
 use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Intervention\Image\Facades\Image;
+use Illuminate\Validation\Rule;
 
 class PartnerNew extends Component
 {
@@ -151,9 +152,9 @@ class PartnerNew extends Component
         ];
 
         if ($this->pf_pj == 'pf') {
-            $this->rules['cpf'] = 'required|min:11';
+            $this->rules['cpf'] = 'required|min:11|unique:partners';
         } else {
-            $this->rules['cnpj'] = 'required|min:11';
+            $this->rules['cnpj'] = 'required|min:11|unique:partners';
         }
 
 

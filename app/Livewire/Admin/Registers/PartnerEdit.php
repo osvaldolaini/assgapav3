@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Intervention\Image\Facades\Image;
 
+
+use Illuminate\Validation\Rule;
+
 class PartnerEdit extends Component
 {
     public $category;
@@ -224,10 +227,20 @@ class PartnerEdit extends Component
         ];
 
         if ($this->pf_pj == 'pf') {
-            $this->rules['cpf'] = 'required|min:11';
+            $this->rules['cpf'] = [
+                'required',
+                'min:11',
+                Rule::unique('partners', 'cpf')->ignore($this->id),
+            ];
         } else {
-            $this->rules['cnpj'] = 'required|min:11';
+            $this->rules['cnpj'] = [
+                'required',
+                'min:11',
+                Rule::unique('partners', 'cnpj')->ignore($this->id),
+            ];
         }
+
+
         if ($this->partner_category_master == 'Dependente') {
             $this->rules['kinship'] = 'required';
             $this->rules['responsible'] = 'required';

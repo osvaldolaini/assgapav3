@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Auth;
 use Livewire\Component;
 use Intervention\Image\Facades\Image;
 
+
+use Illuminate\Validation\Rule;
+
 class DependentEdit extends Component
 {
 
@@ -212,17 +215,15 @@ class DependentEdit extends Component
             'phone_first'       => 'required',
             'remove_at'         => 'required',
             'student'           => 'required',
+            'cpf'               => [
+                'required',
+                'min:11',
+                Rule::unique('partners', 'cpf')->ignore($this->id),
+            ],
         ];
 
-        if ($this->pf_pj == 'pf') {
-            $this->rules = [
-                'cpf' => 'required|min:11',
-            ];
-        } else {
-            $this->rules = [
-                'cnpj' => 'required|min:14',
-            ];
-        }
+
+
         if ($this->partner_category_master == 'Dependente') {
             $this->rules = [
                 'kinship' => 'required',
