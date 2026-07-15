@@ -299,15 +299,21 @@ class Lists extends Component
     //SORT
     public function sort($query)
     {
-        $this->sort = str_replace(' ', '', $this->sort);
-        $sortData = explode('|', $this->sort);
-        $c = count($sortData);
-        for ($i = 0; $i < $c; $i++) {
-            $s = explode(',', $sortData[$i]);
-            if (count($s) === 2) {
-                $query->orderBy($s[0], $s[1]);
+        if ($this->birthdays) {
+            // $query->orderBy('date_of_birth', 'desc');
+            $query->orderByRaw('DAY(date_of_birth)');
+        } else {
+            $this->sort = str_replace(' ', '', $this->sort);
+            $sortData = explode('|', $this->sort);
+            $c = count($sortData);
+            for ($i = 0; $i < $c; $i++) {
+                $s = explode(',', $sortData[$i]);
+                if (count($s) === 2) {
+                    $query->orderBy($s[0], $s[1]);
+                }
             }
         }
+
         return $query;
     }
     //RELATIONSHIPS

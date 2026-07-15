@@ -17,7 +17,14 @@
                             </div>
                             <div class="stat-title">{{ $item->monthlyRef }}</div>
                             <div class="stat-value text-primary">R${{ $item->value }}</div>
-                            <div class="stat-desc">Forma de pagamento: {{ $item->Payment }}</div>
+                            <div class="stat-desc">
+                                <p>
+                                    Forma de pagamento: {{ $item->Payment }}
+                                </p>
+                                <p>
+                                    Data do pagamento: {{ $item->paid_in }}
+                                </p>
+                            </div>
                         </div>
                     </div>
                 @endforeach

@@ -6,6 +6,11 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.31 15/07/2026
+
+-   Data de pagamento no card de mensalidade paga.
+-   Ordenar aniversariantes por data.
+
 ## v 3.30 24/06/2026
 
 -   Inclusão do gráfico de sócio por categoria.
