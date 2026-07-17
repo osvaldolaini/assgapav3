@@ -117,9 +117,9 @@
                                     <td>Vencimento</td>
                                     <td>Pago</td>
                                 </tr>
-                                <?php foreach ($location->installments as $installment) {?>
+                                <?php foreach ($location->installments->where('active','!=',3) as $installment) {?>
                                 <tr>
-                                    <td>{{$installment->title }} </td>
+                                    <td>{{ $installment->title }} </td>
                                     <td>R$ {{ $installment->value }}</td>
                                     <td>
                                         @if ($installment->value == 1)
@@ -191,7 +191,8 @@
                                 @break
                             @endswitch
                         </td>
-                        <td colspan="3">Categoria: {{ $location->partners?->category->title ?? 'Não selecionada' }}</td>
+                        <td colspan="3">Categoria: {{ $location->partners?->category->title ?? 'Não selecionada' }}
+                        </td>
                     </tr>
                     <tr>
                         <td>Identidade: {{ $location->partners->rg }}</td>
