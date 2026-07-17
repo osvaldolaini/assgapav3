@@ -39,7 +39,7 @@
                     <div class="flex">
                         <input type="text" wire:model="installment_maturity_date" wire:change='updateDay()' required
                             x-mask="99/99/9999" placeholder="99/99/9999"
-                            class="{{ $border }} w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            class="border border-red-500 w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                         <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" viewBox="0 0 20 20">
