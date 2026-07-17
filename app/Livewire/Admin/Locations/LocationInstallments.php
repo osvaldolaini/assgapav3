@@ -23,25 +23,25 @@ class LocationInstallments extends Component
         $this->location = $location;
         $this->id = $location->id;
         $this->breadcrumb_title = 'LOCAÇÃO DE: ' . $location->partners->name;
-        $this->installments = $this->location->installments->where('active','!=',3);
+        $this->installments = $this->location->installments->where('active', '!=', 3);
     }
 
     #[On('updateInstallments')]
     public function updateInstallments(Location $location)
     {
         $this->location = $location;
-        $this->installments = $this->location->installments->where('active','!=',3);
+        $this->installments = $this->location->installments->where('active', '!=', 3);
     }
 
     #[On('updateInstallments')]
     public function render()
     {
         $pages = Auth::user()->access->pluck('page_id')->toArray();
-        if (in_array(13, $pages) == true){
+        if (in_array(13, $pages) == true) {
             $this->max_installments = 6;
         }
 
-        if($this->location->installments->count() < 1 && $this->location->convert_value($this->location->value) > 0){
+        if ($this->location->installments->count() < 1 && $this->location->convert_value($this->location->value) > 0) {
             Installment::create([
                 'active'        => 0,
                 'title'         => 'Sinal',
@@ -50,23 +50,22 @@ class LocationInstallments extends Component
                 'created_by'    => Auth::user()->name
             ]);
         }
-        return view('livewire.admin.locations.location-installments',[
+        return view('livewire.admin.locations.location-installments', [
             'location' => $this->location,
-            'installments' => $this->installments->where('active','!=',3)
+            'installments' => $this->installments->where('active', '!=', 3)
         ]);
     }
     public function insertParcel()
     {
         Installment::create([
             'active'        => 0,
-            'title'         => $this->installments->count(). 'ª parcela',
+            'title'         => $this->installments->where('active', '!=', 3)->count() . 'ª parcela',
             'location_id'   => $this->id,
             'created_by'    => Auth::user()->name
         ]);
 
         $this->openAlert('success', 'Registro atualizado com sucesso.');
-        redirect()->route('installments-location',$this->id);
-
+        redirect()->route('installments-location', $this->id);
     }
 
 
