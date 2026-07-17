@@ -130,6 +130,15 @@ class LocationInstallment extends Component
 
         $this->validate();
 
+        $future = date('Y-m-d', strtotime("+1 year", strtotime(date('Y-m-d'))));
+        $test = implode("-", array_reverse(explode("/", $this->installment_maturity_date)));
+        if ($test < date('Y-m-d')) {
+            $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) é menor que a data de hoje, tem certeza que está correta?');
+        }
+        if ($test > $future) {
+            $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) excede um ano, tem certeza que está correta?');
+        }
+
         Installment::updateOrCreate([
             'id' => $this->id,
         ], [
