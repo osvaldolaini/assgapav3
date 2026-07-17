@@ -129,6 +129,7 @@ class LocationInstallment extends Component
         ];
 
         $this->validate();
+
         Installment::updateOrCreate([
             'id' => $this->id,
         ], [
