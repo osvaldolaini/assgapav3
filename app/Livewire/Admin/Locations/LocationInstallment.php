@@ -29,7 +29,7 @@ class LocationInstallment extends Component
     public $remaining;
     public $active;
 
-    public $border;
+    public $bgcolor;
 
     public function mount(Installment $installment)
     {
@@ -131,7 +131,7 @@ class LocationInstallment extends Component
         $test = implode("-", array_reverse(explode("/", $this->installment_maturity_date)));
         if ($test < date('Y-m-d')) {
             $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) é menor que a data de hoje, tem certeza que está correta?');
-            $this->border = 'border border-red-500';
+            $this->bgcolor = 'bg-red-500';
         }
         if ($test > $future) {
             $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) excede um ano, tem certeza que está correta?');
