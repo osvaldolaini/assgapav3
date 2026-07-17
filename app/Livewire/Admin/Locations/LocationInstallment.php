@@ -124,6 +124,11 @@ class LocationInstallment extends Component
     }
     public function updatePayment()
     {
+        $this->rules = [
+            'installment_maturity_date'    => 'required|date_format:d/m/Y',
+        ];
+
+        $this->validate();
         Installment::updateOrCreate([
             'id' => $this->id,
         ], [
@@ -143,6 +148,7 @@ class LocationInstallment extends Component
         ], [
             'installment_maturity_date' => $this->installment_maturity_date,
         ]);
+
         $this->dispatch('closeAlert');
 
         $future = date('Y-m-d', strtotime("+1 year", strtotime(date('Y-m-d'))));
