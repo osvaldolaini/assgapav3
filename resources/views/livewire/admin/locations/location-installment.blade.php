@@ -50,6 +50,9 @@
                     </div>
                     </p>
                 @endif
+                @error('installment_maturity_date')
+                    <span class="text-red-500 error">{{ $message }}</span>
+                @enderror
             </div>
             <div class="flex items-center justify-center col-span-2 px-1 py-2 text-center">
                 @if ($installment->active == 1)
@@ -66,6 +69,7 @@
                         <option value='PIXM'>PIX maquina</option>
                     </Select>
                 @endif
+
 
             </div>
             <div class="flex items-center justify-center col-span-2 px-1 py-2">
