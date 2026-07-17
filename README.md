@@ -10,6 +10,7 @@
 
 -   Data de pagamento no card de mensalidade paga.
 -   Ordenar aniversariantes por data.
+-   Restrição para CPF iguais
 
 ## v 3.30 24/06/2026
 
