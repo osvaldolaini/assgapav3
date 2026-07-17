@@ -29,6 +29,8 @@ class LocationInstallment extends Component
     public $remaining;
     public $active;
 
+    public $border;
+
     public function mount(Installment $installment)
     {
         $this->id = $installment->id;
@@ -124,16 +126,12 @@ class LocationInstallment extends Component
     }
     public function updatePayment()
     {
-        $this->rules = [
-            'installment_maturity_date'    => 'required|date_format:d/m/Y',
-        ];
-
-        $this->validate();
 
         $future = date('Y-m-d', strtotime("+1 year", strtotime(date('Y-m-d'))));
         $test = implode("-", array_reverse(explode("/", $this->installment_maturity_date)));
         if ($test < date('Y-m-d')) {
             $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) é menor que a data de hoje, tem certeza que está correta?');
+            $this->border = 'border border-red-500';
         }
         if ($test > $future) {
             $this->openAlert('info', 'A data informada ( ' . $this->installment_maturity_date . ' ) excede um ano, tem certeza que está correta?');

@@ -39,7 +39,7 @@
                     <div class="flex">
                         <input type="text" wire:model="installment_maturity_date" wire:change='updateDay()' required
                             x-mask="99/99/9999" placeholder="99/99/9999"
-                            class="w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            class="{{ $border }} w-full rounded-l-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
                         <span class="flex items-center px-3 bg-green-700 pointer-events-none sm:text-sm rounded-r-md">
                             <svg class="w-4 h-4 text-white" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
                                 fill="currentColor" viewBox="0 0 20 20">
@@ -50,9 +50,7 @@
                     </div>
                     </p>
                 @endif
-                @error('installment_maturity_date')
-                    <span class="text-red-500 error">{{ $message }}</span>
-                @enderror
+
             </div>
             <div class="flex items-center justify-center col-span-2 px-1 py-2 text-center">
                 @if ($installment->active == 1)
