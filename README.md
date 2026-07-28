@@ -6,6 +6,11 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.32 28/07/2026
+
+-   Ficha de cadastro
+-
+
 ## v 3.31 15/07/2026
 
 -   Data de pagamento no card de mensalidade paga.

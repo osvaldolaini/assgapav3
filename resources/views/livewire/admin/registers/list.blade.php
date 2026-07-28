@@ -7,7 +7,7 @@
                 </h3>
             </div>
             <div class="col-span-2 justify-items-end">
-
+                @livewire('admin.registers.pdf')
             </div>
         </div>
     </x-breadcrumb>
@@ -84,31 +84,23 @@
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                                      text-gray-500 dark:text-gray-400 flex-nowrap">
 
-                                                    @if($data->partner_category_master == 'Sócio')
+                                                    @if ($data->partner_category_master == 'Sócio')
                                                         <x-table-register-buttons id="{{ $data->id }}"
-                                                        :card="true"
-                                                        :dependent="true"
-                                                        :history="true"
-                                                        :discount="$data->discount"
-                                                        align="justify-start"
-                                                         >
+                                                            :card="true" :dependent="true" :history="true"
+                                                            :discount="$data->discount" align="justify-start">
                                                         </x-table-register-buttons>
                                                     @else
                                                         <x-table-register-buttons id="{{ $data->id }}"
-                                                           :card="true"
-                                                           :dependent="true"
-                                                           :history="true"
-                                                           :discount="true"
-                                                           align="justify-start"
-                                                            >
-                                                       </x-table-register-buttons>
-                                                   @endif
+                                                            :card="true" :dependent="true" :history="true"
+                                                            :discount="true" align="justify-start">
+                                                        </x-table-register-buttons>
+                                                    @endif
                                                 </td>
 
                                                 <td
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-500 dark:text-gray-400">
                                                     <x-table-buttons id="{{ $data->id }}" :update="true"
-                                                        :delete="true" :view="true" >
+                                                        :delete="true" :view="true">
                                                     </x-table-buttons>
                                                 </td>
                                             </tr>
@@ -120,7 +112,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between py-4" >
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>

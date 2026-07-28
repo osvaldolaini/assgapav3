@@ -152,6 +152,7 @@
                         {{ $config->address . ' - ' . $config->city . '/' . $config->state . ', Fone: ' . $config->phone }}
                         {{ $config->whatsapp ? ',Whatsapp: ' . $config->whatsapp : '' }}
                     </h6>
+                    <h6 style="margin-bottom:0px; padding-bottom: 0px;">Chave PIX - CNPJ {{ $config->cnpj }}</h6>
                     <h5 style="margin-bottom:0px; padding-bottom: 0px;"><strong>{{ $subtext }}</strong></h5>
                 </div>
             </div>
