@@ -141,7 +141,7 @@ class PartnerEdit extends Component
         $this->id = $partner->id;
         $this->name = $partner->name;
         $this->responsible = $partner->responsible;
-        $this->responsible_name = $partner->parent->name . ' ( ' . $partner->parent->cpf . ' )';
+        $this->responsible_name = $partner?->parent->name . ' ( ' . $partner?->parent->cpf . ' )';
         $this->kinship = $partner->kinship;
         $this->image = $partner->image;
         $this->date_of_birth = $partner->date_of_birth;
