@@ -230,13 +230,14 @@ class PartnerEdit extends Component
             $this->rules['cpf'] = [
                 'required',
                 'min:11',
-                // Rule::unique('partners', 'cpf')->ignore($this->id),
+                'unique:partners,cpf,' . $this->id,
             ];
         } else {
             $this->rules['cnpj'] = [
                 'required',
                 'min:11',
-                Rule::unique('partners', 'cnpj')->ignore($this->id),
+                'unique:partners,cnpj,' . $this->id,
+                // Rule::unique('partners', 'cnpj')->ignore($this->id),
             ];
         }
 
