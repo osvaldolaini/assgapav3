@@ -205,6 +205,7 @@ class DependentEdit extends Component
     }
     public function persist()
     {
+
         $this->rules = [
             'name'              => 'required',
             'email'             => 'email',
@@ -218,7 +219,7 @@ class DependentEdit extends Component
             'cpf'               => [
                 'required',
                 'min:11',
-                Rule::unique('partners', 'cpf')->ignore($this->id),
+                'unique:partners,cpf,' . $this->id,
             ],
         ];
 

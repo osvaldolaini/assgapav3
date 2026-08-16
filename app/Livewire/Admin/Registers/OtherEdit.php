@@ -221,12 +221,17 @@ class OtherEdit extends Component
         ];
 
         if ($this->pf_pj == 'pf') {
-            $this->rules = [
-                'cpf' => 'required|min:11',
+            $this->rules['cpf'] = [
+                'required',
+                'min:11',
+                'unique:partners,cpf,' . $this->id,
             ];
         } else {
-            $this->rules = [
-                'cnpj' => 'required|min:14',
+            $this->rules['cnpj'] = [
+                'required',
+                'min:11',
+                'unique:partners,cnpj,' . $this->id,
+                // Rule::unique('partners', 'cnpj')->ignore($this->id),
             ];
         }
         if ($this->partner_category_master == 'Dependente') {

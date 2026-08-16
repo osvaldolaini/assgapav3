@@ -6,6 +6,10 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.33 16/08/2026
+
+-   Ficha de cadastro ( Erro na regra do CPF)
+
 ## v 3.32 28/07/2026
 
 -   Ficha de cadastro
