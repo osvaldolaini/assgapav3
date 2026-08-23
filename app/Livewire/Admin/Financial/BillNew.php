@@ -43,7 +43,8 @@ class BillNew extends Component
 
     public function mount()
     {
-        $this->paid_in = date('d/m/Y');
+        // $this->paid_in = date('d/m/Y');
+        $this->paid_in = date('Y-d-m');
         $this->categories = CostCenter::select('title', 'id')->get();
         $this->pages = Auth::user()->access->pluck('page_id')->toArray();
     }
@@ -51,9 +52,9 @@ class BillNew extends Component
     public function render()
     {
         if ($this->inputFavorites != '') {
-            $this->favorites = Bill::select('title','id')
+            $this->favorites = Bill::select('title', 'id')
                 ->where('title', 'LIKE', '%' . $this->inputFavorites . '%')
-                ->orderBy('title','ASC')
+                ->orderBy('title', 'ASC')
                 ->limit(7)->get()
                 ->groupBy('title')->toArray();
         }
@@ -93,8 +94,8 @@ class BillNew extends Component
     //favoritos
     public function openModalFavorites()
     {
-        $this->favorites = Bill::select('title','id')
-            ->orderBy('title','ASC')
+        $this->favorites = Bill::select('title', 'id')
+            ->orderBy('title', 'ASC')
             ->limit(7)->get()
             ->groupBy('title')->toArray();
         $this->modalFavorites = true;
