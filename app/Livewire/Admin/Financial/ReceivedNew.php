@@ -37,14 +37,14 @@ class ReceivedNew extends Component
 
     public function mount()
     {
-        $this->paid_in = date('d/m/Y');
+        $this->paid_in = date('Y/m/d');
     }
     public function render()
     {
         if ($this->inputFavorites != '') {
-            $this->favorites = Received::select('title','id')
+            $this->favorites = Received::select('title', 'id')
                 ->where('title', 'LIKE', '%' . $this->inputFavorites . '%')
-                ->orderBy('title','ASC')
+                ->orderBy('title', 'ASC')
                 ->limit(7)->get()
                 ->groupBy('title')->toArray();
         }
@@ -79,8 +79,8 @@ class ReceivedNew extends Component
     //favoritos
     public function openModalFavorites()
     {
-        $this->favorites = Received::select('title','id')
-            ->orderBy('title','ASC')
+        $this->favorites = Received::select('title', 'id')
+            ->orderBy('title', 'ASC')
             ->limit(7)->get()
             ->groupBy('title')->toArray();
         $this->modalFavorites = true;
