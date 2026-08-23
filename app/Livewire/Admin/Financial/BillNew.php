@@ -43,8 +43,7 @@ class BillNew extends Component
 
     public function mount()
     {
-        // $this->paid_in = date('d/m/Y');
-        $this->paid_in = date('Y-d-m');
+        $this->paid_in = date('d/m/Y');
         $this->categories = CostCenter::select('title', 'id')->get();
         $this->pages = Auth::user()->access->pluck('page_id')->toArray();
     }

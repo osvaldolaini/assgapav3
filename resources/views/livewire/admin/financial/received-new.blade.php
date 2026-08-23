@@ -87,9 +87,8 @@
                 </div>
                 <div class="col-span-full sm:col-span-3">
                     <label for="paid_in">*Pagamento / vencimento</label>
-                    {{-- <x-datepicker id='paid_in' :required="true" ></x-datepicker> --}}
-                    <input type="date" wire:model="paid_in" required readonly
-                        class="w-full mr-2 rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                    <x-datepicker-readonly id='paid_in' :required="true"></x-datepicker-readonly>
+
                     @error('paid_in')
                         <span class="error">{{ $message }}</span>
                     @enderror

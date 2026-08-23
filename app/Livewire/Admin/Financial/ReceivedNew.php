@@ -37,8 +37,7 @@ class ReceivedNew extends Component
 
     public function mount()
     {
-        // $this->paid_in = date('d/m/Y');
-        $this->paid_in = date('Y-d-m');
+        $this->paid_in = date('d/m/Y');
     }
     public function render()
     {
