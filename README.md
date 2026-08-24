@@ -10,6 +10,7 @@
 
 -   Data bloqueada no recibos (entrada e saídas)
 -   Data do contrato fixa
+-   Travada a edição do locatário
 
 ## v 3.33 16/08/2026
 
