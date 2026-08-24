@@ -6,6 +6,11 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.34 23/08/2026
+
+-   Data bloqueada no recibos (entrada e saídas)
+-   Data do contrato fixa
+
 ## v 3.33 16/08/2026
 
 -   Ficha de cadastro ( Erro na regra do CPF)

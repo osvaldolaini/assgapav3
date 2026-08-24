@@ -41,7 +41,9 @@ class LocationButtons extends Component
             'default_font_size'  => 9,
             'default_font'  => 'arial',
         ]);
-        $today = Carbon::parse(now())->locale('pt-BR');
+
+        $today = Carbon::parse($this->location->created_at)->locale('pt-BR');
+
 
         if ($this->location->updated_by) {
             $responsible =  mb_strtoupper($this->location->updated_by);
