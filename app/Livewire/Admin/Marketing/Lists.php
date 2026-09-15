@@ -12,8 +12,11 @@ use Illuminate\Support\Facades\Auth;
 use Maatwebsite\Excel\Facades\Excel;
 use Mpdf\Mpdf;
 
+use Livewire\WithPagination;
+
 class Lists extends Component
 {
+    use WithPagination;
 
     public Partner $partner;
     public $breadcrumb_title = 'LISTAS';
