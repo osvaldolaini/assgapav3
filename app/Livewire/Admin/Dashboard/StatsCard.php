@@ -89,7 +89,7 @@ class StatsCard extends Component
         if ($partnerLate) {
             $this->partnerLate = count($this->partnerLate());
 
-            dd($this->partnerLate());
+            // dd($this->partnerLate());
         }
         if ($locations) {
             /**Locações */
