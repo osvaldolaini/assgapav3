@@ -89,7 +89,7 @@ class StatsCard extends Component
         if ($partnerLate) {
             $this->partnerLate = count($this->partnerLate());
 
-            // dd($this->partnerLate());
+            dd($this->partnerLate());
         }
         if ($locations) {
             /**Locações */
@@ -161,13 +161,7 @@ class StatsCard extends Component
             $day = date('d', strtotime($partner->registration_at));
             if (date('Y', strtotime($partner->registration_at)) >= 2017) {
                 $start = date('Y', strtotime($partner->registration_at));
-                //Solicitação feita no dia 18/09/2025 
-                //incluir o MENSALIDADE CONSIDERADA ATRASADA APÓS O DIA 10 DO MÊS
-                if (date('d') > 10) {
-                    $mStart = date('m', strtotime($partner->registration_at));
-                } else {
-                    $mStart = date('m', strtotime($partner->registration_at)) + 1;
-                }
+                $mStart = date('m', strtotime($partner->registration_at)) + 1;
             } else {
                 $start = 2017;
                 $mStart = 1;
@@ -199,15 +193,23 @@ class StatsCard extends Component
             //     $row[] = $refs;
             // }
             /**Modificação feita por solicitação do clube em 17/01/25 */
+            // foreach ($partner->monthlys as $monthly) {
+            //     foreach ($partner->monthlys as $monthly) {
+            //         if ($monthly->status == 0) {
+            //             if (array_search($monthly->ref, $refs)) {
+            //                 $nrefs[$monthly->ref] = $monthly->ref;
+            //             }
+            //         }
+            //     }  
+            // }
             foreach ($partner->monthlys as $monthly) {
-                foreach ($partner->monthlys as $monthly) {
-                    if ($monthly->status == 0) {
-                        if (array_search($monthly->ref, $refs)) {
-                            $nrefs[$monthly->ref] = $monthly->ref;
-                        }
+                if ($monthly->status == 0) {
+                    if (array_search($monthly->ref, $refs)) {
+                        $nrefs[$monthly->ref] = $monthly->ref;
                     }
                 }
             }
+            // dd()
             if ($nrefs) {
                 $row[] = $nrefs;
             }
