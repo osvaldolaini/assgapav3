@@ -282,72 +282,24 @@ class PartnersLate extends Component
 
     public function partnerLate()
     {
-        $row = array();
+
         $late = array();
-        $partners = Partner::select('id', 'registration_at', 'partner_category')
-            ->where('active', 1)
-            //->where('id',8246)
-            ->with(['category'])
+
+        $refLimit = date('d') > 10
+            ? date('Y-m')
+            : date('Y-m', strtotime('-1 month'));
+
+        $totalLate = Partner::where('active', 1)
             ->where('discount', 0)
             ->where('partner_category_master', 'Sócio')
-            ->orderBy('partner_category', 'asc')
-            ->orderBy('name', 'asc')
-            ->get();
+            ->whereHas('monthlys', function ($q) use ($refLimit) {
+                $q->where('status', 0)
+                    ->where('ref', '<=', $refLimit);
+            })->get();
 
 
-        foreach ($partners as $partner) {
-            $refs = array();
-            $nrefs = array();
-            $day = date('d', strtotime($partner->registration_at));
-            // $day = 10;
-            if (date('Y', strtotime($partner->registration_at)) >= 2017) {
-                $start = date('Y', strtotime($partner->registration_at));
-                $mStart = date('m', strtotime($partner->registration_at)) + 1;
-            } else {
-                $start = 2017;
-                $mStart = 1;
-            }
-            for ($i = $start; $i < date('Y') + 1; $i++) {
-                if ($start == $i) {
-                    for ($m = $mStart; $m < 13; $m++) {
-                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                        }
-                    }
-                } else {
-                    for ($m = 1; $m < 13; $m++) {
-                        if ($i . '-' . sprintf("%02d", $m) . '-' . date('d') <= date('Y-m') . '-' . $day) {
-                            $refs[$i . '-' . sprintf("%02d", $m)] = $i . '-' . sprintf("%02d", $m);
-                        }
-                    }
-                }
-            }
-
-            // foreach ($partner->monthlys as $monthly) {
-            //     if ($monthly->status != 0) {
-            //         if (array_search($monthly->ref, $refs)) {
-            //             unset($refs[$monthly->ref]);
-            //         }
-            //     }
-            // }
-            // if ($refs) {
-            //     $row[] = $refs;
-            //     $late[] = $partner->id;
-            // }
-            /**Modificação feita por solicitação do clube em 17/01/25 */
-            foreach ($partner->monthlys as $monthly) {
-                foreach ($partner->monthlys as $monthly) {
-                    if ($monthly->status == 0) {
-                        if (array_search($monthly->ref, $refs)) {
-                            $nrefs[$monthly->ref] = $monthly->ref;
-                        }
-                    }
-                }
-            }
-            if ($nrefs) {
-                $row[] = $nrefs;
-                $late[] = $partner->id;
-            }
+        foreach ($totalLate as $partner) {
+            $late[] = $partner->id;
         }
 
 
