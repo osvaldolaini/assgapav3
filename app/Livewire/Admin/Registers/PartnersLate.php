@@ -299,6 +299,7 @@ class PartnersLate extends Component
             $refs = array();
             $nrefs = array();
             $day = date('d', strtotime($partner->registration_at));
+            // $day = 10;
             if (date('Y', strtotime($partner->registration_at)) >= 2017) {
                 $start = date('Y', strtotime($partner->registration_at));
                 $mStart = date('m', strtotime($partner->registration_at)) + 1;
