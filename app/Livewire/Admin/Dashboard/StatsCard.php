@@ -239,7 +239,8 @@ class StatsCard extends Component
             : date('Y-m', strtotime('-1 month'));
 
         $totalLate = Partner::where('active', 1)
-            ->where('discount', 0)
+            // ->where('discount', 0)
+            ->where('discount', '!=', 1)
             ->where('partner_category_master', 'Sócio')
             ->whereHas('monthlys', function ($q) use ($refLimit) {
                 $q->where('status', 0)

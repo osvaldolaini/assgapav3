@@ -11,6 +11,7 @@
 -   Botão excluir dependente
 -   Excluir dependente ao excluir sócio.
 -   Dados do usuário repetir nos dependentes
+-   Nova opção para "Desconto de folha : Parcial" (gera debito de mensalidade)
 
 ## v 3.34 23/08/2026
 
