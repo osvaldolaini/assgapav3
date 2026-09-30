@@ -15,9 +15,11 @@ class SearchBar extends Component
     public function render()
     {
         if ($this->navSearch != '') {
-            $this->resultSearch = Partner::select('id','name','cpf','partner_category_master','image')
-            ->where('name', 'LIKE', '%' . $this->navSearch . '%')
-            ->limit(7)->get();
+            $this->resultSearch = Partner::select('id', 'name', 'cpf', 'cnpj', 'partner_category_master', 'image')
+                ->where('name', 'LIKE', '%' . $this->navSearch . '%')
+                ->orWhere('cnpj', 'LIKE', '%' . $this->navSearch . '%')
+                ->orWhere('cpf', 'LIKE', '%' . $this->navSearch . '%')
+                ->limit(7)->get();
         }
 
         return view('livewire.admin.search-bar');
@@ -30,10 +32,10 @@ class SearchBar extends Component
                 break;
             case 'Não sócio':
                 redirect()->route('edit-other', $partner->id);
-                    break;
+                break;
 
             default:
-            redirect()->route('edit-partner', $partner->id);
+                redirect()->route('edit-partner', $partner->id);
                 break;
         }
     }

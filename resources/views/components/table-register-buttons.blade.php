@@ -1,14 +1,13 @@
-@props(['id', 'card', 'history', 'dependent', 'discount','align','responsible'])
+@props(['id', 'card', 'history', 'dependent', 'discount', 'align', 'responsible'])
 <div class="w-full">
-    <div class="flex {{ (isset($align) ? $align : 'justify-end') }} font-medium duration-200 ">
+    <div class="flex {{ isset($align) ? $align : 'justify-end' }} font-medium duration-200 ">
         @isset($responsible)
-        <div class="tooltip tooltip-top p-0" data-tip="Responsável">
-            <a href="{{ route('edit-partner', $responsible) }}"
-                class="py-2 px-3 flex
+            <div class="tooltip tooltip-top p-0" data-tip="Responsável">
+                <a href="{{ route('edit-partner', $responsible) }}"
+                    class="py-2 px-3 flex
                     hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
                     duration-200 whitespace-nowrap">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 " viewBox="0 0 512 512"  xml:space="preserve">
-
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 " viewBox="0 0 512 512"  xml:space="preserve">
                     <g>
                         <path class="st0" d="M192.167,96.435c26.634,0,48.212-21.596,48.212-48.213C240.38,21.578,218.802,0,192.167,0
                             c-26.644,0-48.223,21.578-48.223,48.222C143.945,74.839,165.523,96.435,192.167,96.435z"/>
@@ -24,9 +23,19 @@
                             c3.624,0,10.32,0,17.017,0c6.697,0,13.394,0,17.018,0c8.608,0,15.593-6.977,15.593-15.575l5.562-67.988c10.221,0,6.237,0,10.221,0
                             c8.085,0,14.638-6.562,14.638-14.648v-56.803C411.383,340.798,393.789,323.204,377.618,323.204z"/>
                     </g>
+                    </svg> --}}
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 " viewBox="0 0 32 32"
+                        version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <g id="icomoon-ignore">
+                        </g>
+                        <path
+                            d="M14.389 7.956v4.374l1.056 0.010c7.335 0.071 11.466 3.333 12.543 9.944-4.029-4.661-8.675-4.663-12.532-4.664h-1.067v4.337l-9.884-7.001 9.884-7zM15.456 5.893l-12.795 9.063 12.795 9.063v-5.332c5.121 0.002 9.869 0.26 13.884 7.42 0-4.547-0.751-14.706-13.884-14.833v-5.381z"
+                            fill="#000000">
+
+                        </path>
                     </svg>
-            </a>
-        </div>
+                </a>
+            </div>
         @endisset
         @if ($card == true)
             <div class="tooltip tooltip-top p-0" data-tip="Carteirinha">

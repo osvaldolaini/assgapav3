@@ -18,6 +18,8 @@ class SelectCards extends Component
     public $mpdf;
     public $config;
 
+    public $responsible;
+
     public function mount(Partner $partner)
     {
         $this->partner = $partner;
@@ -25,6 +27,8 @@ class SelectCards extends Component
         if ($partner->partner_category_master == 'Dependente') {
             $this->partner = Partner::find($partner->responsible);
         }
+
+        $this->responsible = $partner->id;
         $this->breadcrumb_title = $this->breadcrumb_title = 'DEPENDENTES DE: ' . $this->partner->name;
 
         // dd($this->partner);

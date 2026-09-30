@@ -23,10 +23,13 @@ class History extends Component
     public $dataTable = [];
     public $export = [];
 
+    public $responsible;
+
     public function mount(Partner $partner)
     {
         $this->breadcrumb_title = $partner->name;
         $this->partner = $partner;
+        $this->responsible = $partner->id;
 
         if ($partner->locations->where('active', 1)) {
             foreach ($partner->locations as $location) {

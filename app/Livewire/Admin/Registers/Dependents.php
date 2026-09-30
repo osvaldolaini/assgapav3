@@ -169,6 +169,7 @@ class Dependents extends Component
     {
         $data = Partner::where('id', $id)->first();
         $data->active = 0;
+        $data->responsible = null;
         $data->save();
 
         $this->openAlert('success', 'Registro excluido com sucesso.');

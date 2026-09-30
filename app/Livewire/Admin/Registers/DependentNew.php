@@ -127,6 +127,16 @@ class DependentNew extends Component
         $this->responsible = $partner->id;
         $this->breadcrumb_title = 'DEPENDENTE DE: ' . $partner->name;
 
+        $this->phone_first           = $partner->phone_first;
+        $this->phone_second          = $partner->phone_second;
+        $this->address               = $partner->address;
+        $this->city                  = $partner->city;
+        $this->district              = $partner->district;
+        $this->state                 = $partner->state;
+        $this->postalCode            = $partner->postalCode;
+        $this->number                = $partner->number;
+        $this->email                 = $partner->email;
+
         $this->registration_at = date('d/m/Y');
         $this->category = PartnerCategory::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->where('parent_category', $this->partner_category_master)->get();

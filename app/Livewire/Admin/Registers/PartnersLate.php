@@ -302,7 +302,6 @@ class PartnersLate extends Component
             $late[] = $partner->id;
         }
 
-
         return $late;
     }
 }

@@ -261,7 +261,7 @@ class PartnerEdit extends Component
             }
         }
 
-        Partner::updateOrCreate([
+        $partner = Partner::updateOrCreate([
             'id' => $this->id,
         ], [
             'name'                  => $this->name,
@@ -303,11 +303,22 @@ class PartnerEdit extends Component
 
             'updated_by'            => Auth::user()->name,
         ]);
+        if ($this->partner_category_master != 'Sócio') {
+            $this->removeDep($partner);
+        }
         $this->openAlert('success', 'Registro atualizado com sucesso.');
     }
     //MESSAGE
     public function openAlert($status, $msg)
     {
         $this->dispatch('openAlert', $status, $msg);
+    }
+
+    private function removeDep($partner)
+    {
+        foreach ($partner->dependents as $dependent) {
+            $dependent->responsible = null;
+            $dependent->save();
+        }
     }
 }

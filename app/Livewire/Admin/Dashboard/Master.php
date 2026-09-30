@@ -113,6 +113,7 @@ class Master extends Component
     }
     public function generateMonthly()
     {
+        $monthlys = [];
         $tot = 0;
         $partners = Partner::select('id', 'partner_category')
             ->where('active', 1)

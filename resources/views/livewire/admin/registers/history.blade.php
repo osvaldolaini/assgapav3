@@ -10,11 +10,11 @@
             <div class="col-span-2 justify-items-end">
                 @if ($partner->partner_category_master == 'Sócio')
                     <x-table-register-buttons id="{{ $partner->id }}" :card="true" :dependent="true"
-                        :history="false" :discount="$partner->discount">
+                        :history="false" :discount="$partner->discount" :responsible="$responsible">
                     </x-table-register-buttons>
                 @else
                     <x-table-register-buttons id="{{ $partner->id }}" :card="true" :dependent="true"
-                        :history="false" :discount="true">
+                        :history="false" :discount="true" :responsible="$responsible">
                     </x-table-register-buttons>
                 @endif
             </div>

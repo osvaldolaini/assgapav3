@@ -6,6 +6,12 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.35 30/09/2026
+
+-   Botão excluir dependente
+-   Excluir dependente ao excluir sócio.
+-   Dados do usuário repetir nos dependentes
+
 ## v 3.34 23/08/2026
 
 -   Data bloqueada no recibos (entrada e saídas)
