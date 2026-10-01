@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Laravel') }}</title>
+    <x-favicons></x-favicons>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.bunny.net">
+    <link href="https://fonts.bunny.net/css?family=figtree:400,500,600&display=swap" rel="stylesheet" />
+
+    <!-- Scripts -->
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+
+    <!-- Styles -->
+    @livewireStyles
+    @yield('styles')
+    <style>
+        .ck-editor__editable_inline {
+            min-height: 400px;
+        }
+    </style>
+</head>
+
+<body class="font-sans antialiased">
+    <div class="min-h-screen bg-gray-100 dark:bg-gray-900">
+        <nav x-data="{ open: false }"
+            class="text-white bg-blue-900 border-b border-gray-900 dark:bg-gray-800 dark:border-gray-700">
+            <!-- Primary Navigation Menu -->
+            <div class="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+                <div class="flex justify-between h-16">
+                    <div class="flex">
+                        <!-- Logo -->
+                        <div class="flex items-center shrink-0">
+                            <a href="{{ route('dashboard') }}" aria-label="Ir para homepage">
+                                <x-application-mark class="block w-auto h-9" />
+                            </a>
+                        </div>
+                    </div>
+
+
+                    <div class="hidden sm:flex sm:items-center sm:ml-6">
+
+                        <!-- Teams Dropdown -->
+                        @if (Laravel\Jetstream\Jetstream::hasTeamFeatures())
+                            <div class="relative ml-3">
+                                <span class="inline-flex rounded-md">
+                                    <button type="button"
+                                        class="inline-flex items-center px-3 py-2 text-sm font-medium leading-4 text-gray-500 transition duration-150 ease-in-out bg-white border border-transparent rounded-md dark:text-gray-400 dark:bg-gray-800 hover:text-gray-700 dark:hover:text-gray-300 focus:outline-none focus:bg-gray-50 dark:focus:bg-gray-700 active:bg-gray-50 dark:active:bg-gray-700">
+                                        {{ Auth::user()->currentTeam->name }}
+                                        <svg class="ml-2 -mr-0.5 h-4 w-4" xmlns="http://www.w3.org/2000/svg"
+                                            fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round"
+                                                d="M8.25 15L12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9" />
+                                        </svg>
+                                    </button>
+                                </span>
+
+                            </div>
+                        @endif
+
+                        <!-- Settings Dropdown -->
+                        <div class="relative ml-3">
+                            <button
+                                class="flex text-sm transition border-2 border-transparent rounded-full focus:outline-none focus:border-gray-300">
+                                <img class="object-cover w-8 h-8 rounded-full"
+                                    src="{{ Auth::user()->profile_photo_url }}" alt="{{ Auth::user()->name }}" />
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="flex items-center -mr-2 sm:hidden">
+                        <label for="my-drawer-3"
+                            class="inline-flex items-center justify-center p-2 text-gray-400 transition duration-150 ease-in-out rounded-md dark:text-gray-500 hover:text-gray-500 dark:hover:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-900 focus:outline-none focus:bg-gray-100 dark:focus:bg-gray-900 focus:text-gray-500 dark:focus:text-gray-400">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                class="inline-block w-6 h-6 stroke-current">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M4 6h16M4 12h16M4 18h16"></path>
+                            </svg>
+                        </label>
+                    </div>
+                </div>
+            </div>
+        </nav>
+
+        @livewire('message-alert')
+
+        <!-- Page Content -->
+        <main>
+            <div class="drawer lg:drawer-open">
+                <input id="my-drawer-3" type="checkbox" class="drawer-toggle" />
+                <div class="drawer-content">
+                    <!-- Page content here -->
+                    <div class="m-3 bg-white sm:m-4 sm:p-5 rounded-2xl dark:bg-gray-700 w-100">
+                        <x-breadcrumb>
+                            <div class="grid grid-cols-8 gap-4 text-gray-600 ">
+                                <div class="col-span-6 justify-items-start">
+                                    <h3 class="text-2xl font-bold tracki dark:text-gray-50">
+                                        ÁREA DE VENDEDOR
+                                    </h3>
+                                </div>
+                            </div>
+                        </x-breadcrumb>
+                        <div class="flex mx-3 space-x-4 sm:mx-4 sm:p-5">
+
+                            @livewire('admin.sellers.register')
+                            @livewire('admin.sellers.sales')
+                            @livewire('admin.sellers.indications')
+
+                        </div>
+                    </div>
+                    <div class="m-3 bg-white sm:m-4 sm:p-5 rounded-2xl dark:bg-gray-700">
+                        {{ $slot }}
+                    </div>
+                </div>
+                <div class="drawer-side">
+                    <label for="my-drawer-3" class="drawer-overlay"></label>
+                    {{-- @livewire('admin.side-bar') --}}
+                </div>
+            </div>
+        </main>
+    </div>
+
+    @stack('modals')
+
+
+    @livewireScripts
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/flowbite/1.8.1/flowbite.min.js"></script>
+    @yield('scripts')
+    @yield('push')
+</body>
+
+</html>

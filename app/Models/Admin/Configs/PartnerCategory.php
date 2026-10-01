@@ -24,6 +24,7 @@ class PartnerCategory extends Model
         'color',
         'responsible',
         'see_validity',
+        'see_seller',
         'parent_category',
         'value',
         'active',

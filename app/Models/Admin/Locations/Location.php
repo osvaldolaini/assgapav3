@@ -21,11 +21,36 @@ class Location extends Model
     protected $table = 'locations';
 
     protected $fillable = [
-        'ambience', 'guests', 'ambience_id', 'partner', 'partner_id', 'ambience_tenant', 'ambience_tenant_id',
-        'location_date', 'location_hour_start', 'location_hour_end', 'event_type', 'event_benefited',
-        'value', 'deposit', 'lighting', 'dressing_room', 'security', 'janitor', 'indication_id',
-        'reason_event_id', 'value_extra', 'loc_time', 'obs', 'updated_because', 'deleted_at',
-        'deleted_because', 'deleted_by', 'updated_by', 'created_by', 'active'
+        'ambience',
+        'guests',
+        'ambience_id',
+        'partner',
+        'partner_id',
+        'ambience_tenant',
+        'ambience_tenant_id',
+        'location_date',
+        'location_hour_start',
+        'location_hour_end',
+        'event_type',
+        'event_benefited',
+        'value',
+        'deposit',
+        'lighting',
+        'dressing_room',
+        'security',
+        'janitor',
+        'indication_id',
+        'reason_event_id',
+        'value_extra',
+        'loc_time',
+        'obs',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'created_by',
+        'active'
     ];
 
     public function setLocationDateAttribute($value)
@@ -149,6 +174,12 @@ class Location extends Model
     {
         return $this->belongsTo(AmbienceTenant::class, 'ambience_tenant_id', 'id');
     }
+
+    public function ambience_name()
+    {
+        return $this->belongsTo(Ambience::class, 'ambience_id', 'id');
+    }
+
     public function partners()
     {
         return $this->belongsTo(Partner::class, 'partner_id', 'id');

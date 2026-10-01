@@ -197,7 +197,6 @@
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-
                     <div class="col-span-full sm:col-span-1">
                         <label for="responsible" class="text-sm">Mostrar responsável</label>
                         <Select wire:model="responsible" required
@@ -217,6 +216,17 @@
                             <option value="1">Sim</option>
                         </Select>
                         @error('see_validity')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-1">
+                        <label for="see_seller" class="text-sm">Mostrar para vendedor</label>
+                        <Select wire:model="see_seller" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </Select>
+                        @error('see_seller')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
@@ -309,6 +319,17 @@
                             <option value="1">Sim</option>
                         </Select>
                         @error('responsible')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-1">
+                        <label for="see_seller" class="text-sm">Mostrar para vendedor</label>
+                        <Select wire:model="see_seller" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="0">Não</option>
+                            <option value="1">Sim</option>
+                        </Select>
+                        @error('see_seller')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>

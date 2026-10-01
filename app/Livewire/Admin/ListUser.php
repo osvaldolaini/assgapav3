@@ -2,6 +2,7 @@
 
 namespace App\Livewire\Admin;
 
+use App\Models\Admin\Registers\Partner;
 use App\Models\Admin\UserGroups;
 use App\Models\User;
 use Illuminate\Support\Facades\Auth;
@@ -34,6 +35,13 @@ class ListUser extends Component
     public $user_groups_id;
     public $groups;
 
+    public $partner_name;
+    public $partner_id;
+    //Search
+    public $modalSearch = false;
+    public $inputSearch;
+    public $results;
+
     protected $listeners =
     [
         'showModalRead',
@@ -44,12 +52,41 @@ class ListUser extends Component
     public function mount()
     {
         $this->groups = UserGroups::where('level', '>=', Auth::user()->group->level)->get();
+
+
         // dd($this->groups);
+    }
+    public function openModalSearch()
+    {
+        $this->modalSearch = true;
+    }
+    public function clean()
+    {
+        $this->partner_name = NULL;
+        $this->partner_id = NULL;
+    }
+
+    public function selectPartner($id)
+    {
+        $partner = Partner::find($id);
+        $this->partner_name = $partner->name;
+        $this->partner_id = $partner->id;
+
+        $this->inputSearch = '';
+        $this->results = '';
+
+        $this->modalSearch = false;
     }
     public function render()
     {
         if (Gate::allows('profile-user')) {
             abort(403);
+        }
+        if ($this->inputSearch != '') {
+            $this->results = Partner::select('id', 'name', 'cpf', 'image', 'partner_category_master')
+                ->where('name', 'LIKE', '%' . $this->inputSearch . '%')
+                ->orWhere('cpf', 'LIKE', '%' . $this->inputSearch . '%')
+                ->limit(5)->get();
         }
         return view('livewire.admin.list-user', [
             'users' => User::paginate($this->paginate),
@@ -62,6 +99,8 @@ class ListUser extends Component
             'email',
             'password',
             'user_groups_id',
+            'partner_id',
+            'partner_name'
         );
     }
     //CREATE
@@ -84,6 +123,7 @@ class ListUser extends Component
             'email'     => $this->email,
             'password'  => Hash::make($this->password),
             'user_groups_id'  => $this->user_groups_id,
+            'partner_id'    => $this->partner_id,
         ]);
 
         $this->openAlert('success', 'Registro criado com sucesso.');
@@ -118,7 +158,9 @@ class ListUser extends Component
         $this->model_id      = $user->id;
         $this->name          = $user->name;
         $this->email         = $user->email;
-        $this->user_groups_id      = $user->user_groups_id;
+        $this->user_groups_id  = $user->user_groups_id;
+        $this->partner_id      = $user->partner_id;
+        $this->partner_name      = $user?->partner->name ?? '';
         $this->showModalEdit = true;
     }
     public function update()
@@ -143,6 +185,7 @@ class ListUser extends Component
             'name'      => $this->name,
             'email'     => $this->email,
             'user_groups_id'  => $this->user_groups_id,
+            'partner_id'    => $this->partner_id,
         ]);
 
         if ($this->password) {

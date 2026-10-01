@@ -76,7 +76,8 @@ class Partner extends Model
         'partner_category_master',
         'company',
         'updated_by',
-        'created_by'
+        'created_by',
+        'seller_id'
     ];
 
     public function setNameAttribute($value)
@@ -283,5 +284,9 @@ class Partner extends Model
         } else {
             return null;
         }
+    }
+    public function indications(): HasMany
+    {
+        return $this->hasMany(Location::class, 'indication_id', 'id');
     }
 }

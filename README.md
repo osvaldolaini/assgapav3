@@ -6,6 +6,12 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.36 01/10/2026
+
+-   Vincular perfil de usuário a cadastro
+-   Opção de mostrar categoria de Não sócio para vendedor (editável)
+-   Área do vendedor com (minhas indicações, minhas vendas, cadastrar)
+
 ## v 3.35 30/09/2026
 
 -   Botão excluir dependente

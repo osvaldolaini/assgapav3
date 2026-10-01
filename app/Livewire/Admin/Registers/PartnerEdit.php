@@ -318,6 +318,8 @@ class PartnerEdit extends Component
     {
         foreach ($partner->dependents as $dependent) {
             $dependent->responsible = null;
+            $dependent->partner_category_master = $partner->partner_category_master;
+            $dependent->partner_category = $partner->partner_category;
             $dependent->save();
         }
     }

@@ -4,6 +4,7 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
+use App\Models\Admin\Registers\Partner;
 use App\Models\Admin\UserAccess;
 use App\Models\Admin\UserGroups;
 use Carbon\Carbon;
@@ -37,6 +38,7 @@ class User extends Authenticatable
         'dashboard',
         'user_groups_id',
         'nick',
+        'partner_id'
     ];
 
     /**
@@ -92,5 +94,14 @@ class User extends Authenticatable
     public function access(): HasMany
     {
         return $this->hasMany(UserAccess::class, 'user_id', 'id');
+    }
+
+    public function partner(): BelongsTo
+    {
+        return $this->belongsTo(Partner::class, 'partner_id', 'id');
+    }
+    public function indications(): HasMany
+    {
+        return $this->hasMany(Partner::class, 'seller_id', 'id');
     }
 }

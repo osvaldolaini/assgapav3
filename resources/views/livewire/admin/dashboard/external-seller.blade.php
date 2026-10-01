@@ -17,45 +17,7 @@
         <div>
             <div
                 class="flex flex-col items-end justify-start grid-cols-3 gap-1 px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-1">
-                {{-- <div class="col-span-1">
-                    <label for="year">Ano </label>
-                    <Select wire:model="year"
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                        @for ($i = 2018; $i <= $nextyear; $i++)
-                            <option value='{{ $i }}'>{{ $i }}</option>
-                        @endfor
 
-                    </Select>
-                </div>
-                <div class="col-span-1">
-                    <label for="mounth">Mes </label>
-                    <Select wire:model="mounth"
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value="">Todos</option>
-                        <option value="01" {{ date('m') == 1 ? 'selected' : '' }}>Janeiro</option>
-                        <option value="02" {{ date('m') == 2 ? 'selected' : '' }}>Fevereiro</option>
-                        <option value="03" {{ date('m') == 3 ? 'selected' : '' }}>Março</option>
-                        <option value="04" {{ date('m') == 4 ? 'selected' : '' }}>Abril</option>
-                        <option value="05" {{ date('m') == 5 ? 'selected' : '' }}>Maio</option>
-                        <option value="06" {{ date('m') == 6 ? 'selected' : '' }}>Junho</option>
-                        <option value="07" {{ date('m') == 7 ? 'selected' : '' }}>Julho</option>
-                        <option value="08" {{ date('m') == 8 ? 'selected' : '' }}>Agosto</option>
-                        <option value="09" {{ date('m') == 9 ? 'selected' : '' }}>Setembro</option>
-                        <option value="10" {{ date('m') == 10 ? 'selected' : '' }}>Outubro</option>
-                        <option value="11" {{ date('m') == 11 ? 'selected' : '' }}>Novembro</option>
-                        <option value="12" {{ date('m') == 12 ? 'selected' : '' }}>Dezembro</option>
-
-                    </Select>
-                </div>
-                <div class="col-span-1">
-                    <label for="mounthWidth">Formato </label>
-                    <Select wire:model="mounthWidth"
-                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                        <option value='200'>3X4</option>
-                        <option value='350'>2X6</option>
-                        <option value='650'>1X12</option>
-                    </Select>
-                </div> --}}
                 <div class="col-span-1">
                     <label for="ambience_id">Ambiente </label>
                     <Select wire:model="ambience_id"
@@ -84,22 +46,6 @@
                     </div>
                 </div>
 
-                {{-- <div class="flex items-end col-span-1">
-                    <label>&nbsp; </label>
-                    <div class="justify-end p-0 tooltip tooltip-top" data-tip="Imprimir">
-                        <button wire:click='printSchedule()'
-                            class="flex justify-end px-3 py-2 text-white transition-colors duration-200 bg-blue-500 rounded-md hover:bg-white hover:text-blue-500 whitespace-nowrap">Imprimir
-                            <svg class="w-6 h-6 ml-1" viewBox="0 0 24 24" fill="none"
-                                xmlns="http://www.w3.org/2000/svg">
-                                <path
-                                    d="M7 17H5C3.89543 17 3 16.1046 3 15V11C3 9.34315 4.34315 8 6 8H7M7 17V14H17V17M7 17V18C7 19.1046 7.89543 20 9 20H15C16.1046 20 17 19.1046 17 18V17M17 17H19C20.1046 17 21 16.1046 21 15V11C21 9.34315 19.6569 8 18 8H17M7 8V6C7 4.89543 7.89543 4 9 4H15C16.1046 4 17 4.89543 17 6V8M7 8H17M15 11H17"
-                                    stroke="currentColor" stroke-width="2" stroke-linecap="round"
-                                    stroke-linejoin="round" />
-                            </svg>
-                        </button>
-                    </div>
-
-                </div> --}}
             </div>
 
             <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">

@@ -42,6 +42,7 @@ class PartnerCategories extends Component
     public $color;
     public $responsible;
     public $see_validity;
+    public $see_seller;
     public $parent_category;
 
     public function render()
@@ -58,7 +59,8 @@ class PartnerCategories extends Component
             'parent_category',
             'color',
             'responsible',
-            'see_validity'
+            'see_validity',
+            'see_seller'
         );
     }
     //CREATE
@@ -77,6 +79,7 @@ class PartnerCategories extends Component
             'color' => 'required',
             'responsible' => 'required',
             'see_validity' => 'required',
+            'see_seller' => 'required',
         ];
         $this->validate();
 
@@ -86,7 +89,8 @@ class PartnerCategories extends Component
             'parent_category'       => $this->parent_category,
             'color'                 => $this->color,
             'responsible'           => $this->responsible,
-            'see_validity'           => $this->see_validity,
+            'see_validity'          => $this->see_validity,
+            'see_seller'            => $this->see_seller,
             'active'                => 1,
             'created_by' => Auth::user()->name,
         ]);
@@ -124,7 +128,8 @@ class PartnerCategories extends Component
         $this->parent_category  = $partnerCategory->parent_category;
         $this->color            = $partnerCategory->color;
         $this->responsible      = $partnerCategory->responsible;
-        $this->see_validity      = $partnerCategory->see_validity;
+        $this->see_validity     = $partnerCategory->see_validity;
+        $this->see_seller       = $partnerCategory->see_seller;
         $this->showModalEdit = true;
     }
     public function update()
@@ -136,6 +141,7 @@ class PartnerCategories extends Component
             'color'  => 'required',
             'responsible'  => 'required',
             'see_validity'  => 'required',
+            'see_seller'  => 'required',
         ];
 
         $this->validate();
@@ -148,6 +154,7 @@ class PartnerCategories extends Component
             'responsible'           => $this->responsible,
             'color'                 => $this->color,
             'see_validity'           => $this->see_validity,
+            'see_seller'            => $this->see_seller,
             'parent_category'       => $this->parent_category,
             'updated_by' => Auth::user()->name,
         ]);

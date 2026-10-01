@@ -108,7 +108,8 @@ class Master extends Component
             $this->ambiences = Ambience::select('id', 'title')->orderBy('title', 'asc')
                 ->where('active', 1)->get();
             $this->events = $this->getCalendarReservation($this->year);
-            return view('livewire.admin.dashboard.external-seller');
+
+            return view('livewire.admin.dashboard.external-seller')->layout('layouts.seller');
         }
     }
     public function generateMonthly()
