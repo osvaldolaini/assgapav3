@@ -49,7 +49,7 @@
             </div>
 
             <div class="px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
-                <div class="py-0 pl-0 pr-1 w-100 " id="calendar" wire:ignore wire:model.live='events'>
+                <div class="py-0 pl-0 pr-1" id="calendar" wire:ignore wire:model.live='events'>
                 </div>
 
                 {{-- MODAL READ --}}
@@ -109,11 +109,11 @@
                                 multiMonthMinWidth: @this.mounthWidth,
                                 eventDisplay: 'block',
                                 events: @this.events,
-                                eventClick: function(info) {
-                                    Livewire.dispatch('showModalRead', {
-                                        id: info.event.id
-                                    })
-                                },
+                                // eventClick: function(info) {
+                                //     Livewire.dispatch('showModalRead', {
+                                //         id: info.event.id
+                                //     })
+                                // },
                             });
                             calendar.render();
                         });
@@ -136,11 +136,11 @@
                             multiMonthMinWidth: @this.mounthWidth,
                             eventDisplay: 'block',
                             events: @this.events,
-                            eventClick: function(info) {
-                                Livewire.dispatch('showModalRead', {
-                                    id: info.event.id
-                                })
-                            },
+                            // eventClick: function(info) {
+                            //     Livewire.dispatch('showModalRead', {
+                            //         id: info.event.id
+                            //     })
+                            // },
                         });
                         calendar.render();
                     });

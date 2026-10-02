@@ -2,7 +2,7 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $this->breadcrumb_title }}
                 </h3>
             </div>
@@ -18,10 +18,7 @@
                 <div class="col-span-full lg:col-span-3">
                     <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">ACESSOS</h3>
                     <ul
-                        class=" items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-3 gap-4 ">
+                        class="grid items-center w-full grid-cols-3 gap-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <x-link-checkbox-new :access="$access" page="2" title="Lista de usuários">
                             <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path
@@ -77,10 +74,7 @@
                         </x-link-checkbox-new>
                     </ul>
                     <ul
-                        class="col-span-full lg:col-span-3 items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-3 gap-4 ">
+                        class="grid items-center w-full grid-cols-3 gap-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg col-span-full lg:col-span-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
 
                         <x-link-checkbox-new :access="$access" page="9" title="Piscinas">
                             <svg class="w-6 h-6" viewBox="0 0 15 15" fill="none">
@@ -93,7 +87,7 @@
                             </svg>
                         </x-link-checkbox-new>
                         <x-link-checkbox-new :access="$access" page="4" title="Ambientes">
-                            <svg class="h-6 w-6 " fill="none" viewBox="0 0 24 24" fill="none"
+                            <svg class="w-6 h-6 " fill="none" viewBox="0 0 24 24" fill="none"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M7 14.0014H17M7 14.0014V11.6014C7 11.0413 7 10.7613 7.10899 10.5474C7.20487 10.3592 7.35785 10.2062 7.54601 10.1104C7.75992 10.0014 8.03995 10.0014 8.6 10.0014H15.4C15.9601 10.0014 16.2401 10.0014 16.454 10.1104C16.6422 10.2062 16.7951 10.3592 16.891 10.5474C17 10.7613 17 11.0413 17 11.6014V14.0014M7 14.0014V18.0014V21.0014M17 14.0014V18.0014V21.0014M18.3466 6.17468L14.1466 4.07468C13.3595 3.68113 12.966 3.48436 12.5532 3.40691C12.1876 3.33832 11.8124 3.33832 11.4468 3.40691C11.034 3.48436 10.6405 3.68113 9.85338 4.07468L5.65337 6.17468C4.69019 6.65627 4.2086 6.89707 3.85675 7.25631C3.5456 7.574 3.30896 7.95688 3.16396 8.37725C3 8.85262 3 9.39106 3 10.4679V19.4014C3 19.9614 3 20.2414 3.10899 20.4554C3.20487 20.6435 3.35785 20.7965 3.54601 20.8924C3.75992 21.0014 4.03995 21.0014 4.6 21.0014H19.4C19.9601 21.0014 20.2401 21.0014 20.454 20.8924C20.6422 20.7965 20.7951 20.6435 20.891 20.4554C21 20.2414 21 19.9614 21 19.4014V10.4679C21 9.39106 21 8.85262 20.836 8.37725C20.691 7.95688 20.4544 7.574 20.1433 7.25631C19.7914 6.89707 19.3098 6.65627 18.3466 6.17468Z"
@@ -126,10 +120,7 @@
                         </x-link-checkbox-new>
                     </ul>
                     <ul
-                        class="col-span-full lg:col-span-3 items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-3 gap-4 ">
+                        class="grid items-center w-full grid-cols-3 gap-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg col-span-full lg:col-span-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
 
                         <x-link-checkbox-new :access="$access" page="5" title="Estoque">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 16 16" version="1.1"
@@ -148,7 +139,8 @@
                             </svg>
                         </x-link-checkbox-new>
                         <x-link-checkbox-new :access="$access" page="11" title="Multiplas Locações">
-                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
                                 <path
                                     d="M9 20H6C3.79086 20 2 18.2091 2 16V7C2 4.79086 3.79086 3 6 3H17C19.2091 3 21 4.79086 21 7V10"
                                     stroke="currentColor" stroke-width="2" stroke-linecap="round"
@@ -167,10 +159,7 @@
                         </x-link-checkbox-new>
                     </ul>
                     <ul
-                        class="col-span-full lg:col-span-3 items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-3 gap-4">
+                        class="grid items-center w-full grid-cols-3 gap-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg col-span-full lg:col-span-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white">
                         <x-link-checkbox-new :access="$access" page="8" title="Financeiro">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1920 1920"
                                 xmlns="http://www.w3.org/2000/svg">
@@ -194,16 +183,56 @@
                         </x-link-checkbox-new>
                     </ul>
                     <ul
-                        class="col-span-full lg:col-span-3 items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-3 gap-4 ">
+                        class="grid items-center w-full grid-cols-3 gap-4 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg col-span-full lg:col-span-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
 
                         <x-link-checkbox-new :access="$access" page="1" title="Configurações">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"
                                 xmlns="http://www.w3.org/2000/svg">
                                 <path fill-rule="evenodd"
                                     d="M1 3.5A1.5 1.5 0 012.5 2h15A1.5 1.5 0 0119 3.5v2A1.5 1.5 0 0117.5 7h-15A1.5 1.5 0 011 5.5v-2zm3.5 1a1 1 0 11-2 0 1 1 0 012 0zM1 9.5A1.5 1.5 0 012.5 8h6.073a1.5 1.5 0 011.342 2.17l-1 2a1.5 1.5 0 01-1.342.83H2.5A1.5 1.5 0 011 11.5v-2zm3.5 1a1 1 0 11-2 0 1 1 0 012 0zM1 15.5A1.5 1.5 0 012.5 14h5.27a1.5 1.5 0 011.471 1.206l.4 2A1.5 1.5 0 018.171 19H2.5A1.5 1.5 0 011 17.5v-2zm3.5 1a1 1 0 11-2 0 1 1 0 012 0zM12.159 13.059l-.682-.429a.987.987 0 01-.452-.611.946.946 0 01.134-.742.983.983 0 01.639-.425 1.023 1.023 0 01.758.15l.682.427c.369-.31.8-.54 1.267-.676V9.97c0-.258.104-.504.291-.686.187-.182.44-.284.704-.284.264 0 .517.102.704.284a.957.957 0 01.291.686v.783c.472.138.903.37 1.267.676l.682-.429a1.02 1.02 0 01.735-.107c.25.058.467.208.606.419.14.21.19.465.141.71a.97.97 0 01-.403.608l-.682.429a3.296 3.296 0 010 1.882l.682.43a.987.987 0 01.452.611.946.946 0 01-.134.742.982.982 0 01-.639.425 1.02 1.02 0 01-.758-.15l-.682-.428c-.369.31-.8.54-1.267.676v.783a.957.957 0 01-.291.686A1.01 1.01 0 0115.5 19a1.01 1.01 0 01-.704-.284.957.957 0 01-.291-.686v-.783a3.503 3.503 0 01-1.267-.676l-.682.429a1.02 1.02 0 01-.75.132.999.999 0 01-.627-.421.949.949 0 01-.135-.73.97.97 0 01.434-.61l.68-.43a3.296 3.296 0 010-1.882zm3.341-.507c-.82 0-1.487.65-1.487 1.449s.667 1.448 1.487 1.448c.82 0 1.487-.65 1.487-1.448 0-.8-.667-1.45-1.487-1.45z" />
+                            </svg>
+                        </x-link-checkbox-new>
+                        <x-link-checkbox-new :access="$access" page="15" title="Vendedores">
+                            <svg class="w-6 h-6" version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg"
+                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 490.412 490.412"
+                                xml:space="preserve">
+                                <g>
+                                    <path
+                                        d="M241.388,188.568c17.994,0,32.577-16.701,32.577-37.282c0-20.589-14.583-37.282-32.577-37.282
+                               c-18.011,0-32.594,16.692-32.594,37.282C208.794,171.867,223.377,188.568,241.388,188.568z" />
+                                    <path
+                                        d="M366.842,172.033c18.994,0,34.418-17.637,34.418-39.393c0-21.754-15.424-39.393-34.418-39.393
+                               c-19.042,0-34.449,17.639-34.449,39.393C332.393,154.396,347.8,172.033,366.842,172.033z" />
+                                    <path d="M488.678,358.184c-1.999-3.094-5.428-4.96-9.108-4.96h-34.085v-33.258c6.03-4.167,8.95-11.782,6.332-18.995l-6.666-18.423
+                               c14.425-0.421,26.04-12.218,26.04-26.746V27.665c0-14.79-12.028-26.825-26.815-26.825H26.817C12.027,0.84,0,12.875,0,27.665
+                               v228.137c0,14.79,12.027,26.826,26.817,26.826H154.81l13.235-31.959H31.959V32.798h407.274v217.871H433.6l-19.502-53.857
+                               c-2.684-7.465-9.238-10.417-17.773-10.417h-37.83h-19.738c-7.891,0-13.378,0.944-17.313,6.721l-32.069,46.955l-27.801-3.349
+                               c-9.269-1.063-17.297,5.38-18.392,14.433c-1.095,9.061,5.363,17.295,14.424,18.382l37.766,4.555
+                               c0.668,0.08,1.335,0.119,1.984,0.119c5.411,0,10.552-2.665,13.647-7.203l6.537-9.561l5.284,12.789v0.579l0.047,30.491l-8.68-20.945
+                               c-4.855,3.601-10.679,5.759-16.836,5.759c-1.126,0-2.269-0.063-3.412-0.206l-37.767-4.553
+                               c-15.582-1.88-26.705-16.042-24.816-31.634c1.889-15.591,15.852-26.817,31.641-24.825l20.613,2.483l5.395-7.902l-3.142-7.601
+                               c-2.46-5.919-8.141-9.109-14.124-9.196h-60.6c-6.045,0.031-11.775,3.229-14.249,9.196l-40.053,96.804
+                               c-3.3,7.99,0.509,17.129,8.474,20.43c1.951,0.817,3.982,1.191,5.982,1.191c6.142,0,11.965-3.635,14.456-9.663l1.413-3.412
+                               l-9.458,45.494c-0.714,3.435,0.159,7.021,2.38,9.743c2.207,2.73,5.538,4.316,9.061,4.316h10.934v93.314
+                               c0,10.362,8.412,18.772,18.773,18.772c10.36,0,18.771-8.411,18.771-18.772v-93.314h7.521v94.02c0,10.362,8.41,18.771,18.771,18.771
+                               c10.362,0,18.773-8.409,18.773-18.771v-94.02h10.948c3.507,0,6.839-1.586,9.06-4.316c2.222-2.722,3.095-6.3,2.381-9.743
+                               l-9.409-45.313l1.333,3.23c2.49,6.028,8.315,9.663,14.456,9.663c1.999,0,4.03-0.374,5.981-1.191
+                               c2.174-0.903,3.968-2.292,5.46-3.927l0.206,144.552c0,10.958,8.885,19.835,19.835,19.835c10.949,0,19.835-8.877,19.835-19.835
+                               V357.779h7.918v111.958c0,10.958,8.887,19.835,19.836,19.835c10.948,0,19.835-8.877,19.835-19.835v-44.462h46.493
+                               c4.253,0,8.125-2.499,9.87-6.388l22.725-50.357C490.962,365.174,490.678,361.278,488.678,358.184z M429.234,353.224h-18.866
+                               l0.333-68.74l10.045,27.737c1.539,4.252,4.713,7.315,8.488,9.124V353.224z" />
+                                    <path d="M71.058,210.459c3.031,0,6.046-1.15,8.363-3.46l100.843-100.843c4.617-4.616,4.617-12.107,0-16.724
+                               c-4.635-4.618-12.093-4.618-16.725,0L62.695,190.274c-4.617,4.618-4.617,12.107,0,16.725
+                               C65.013,209.308,68.027,210.459,71.058,210.459z" />
+                                    <path d="M117.979,110.163c0-18.597-15.138-33.728-33.735-33.728c-18.598,0-33.719,15.131-33.719,33.728
+                               c0,18.591,15.121,33.72,33.719,33.72C102.842,143.883,117.979,128.754,117.979,110.163z M66.773,110.163
+                               c0-9.639,7.839-17.479,17.471-17.479c9.648,0,17.486,7.84,17.486,17.479c0,9.633-7.838,17.471-17.486,17.471
+                               C74.612,127.634,66.773,119.796,66.773,110.163z" />
+                                    <path d="M156.953,219.544c18.597,0,33.736-15.131,33.736-33.728c0-18.591-15.14-33.72-33.736-33.72
+                               c-18.598,0-33.721,15.129-33.721,33.72C123.232,204.412,138.355,219.544,156.953,219.544z M156.953,168.345
+                               c9.646,0,17.487,7.838,17.487,17.471c0,9.64-7.841,17.479-17.487,17.479c-9.633,0-17.471-7.839-17.471-17.479
+                               C139.482,176.183,147.32,168.345,156.953,168.345z" />
+                                </g>
                             </svg>
                         </x-link-checkbox-new>
                     </ul>
@@ -216,18 +245,28 @@
 
                     <h3 class="mb-4 font-semibold text-gray-900 dark:text-white">PAINEL DE CONTROLE</h3>
                     <ul
-                        class="col-span-full lg:col-span-3 items-center w-full text-sm
-                        font-medium text-gray-900 bg-white border border-gray-200 rounded-lg
-                        dark:bg-gray-700 dark:border-gray-600 dark:text-white
-                        grid grid-cols-4 gap-3 ">
+                        class="grid items-center w-full grid-cols-4 gap-3 text-sm font-medium text-gray-900 bg-white border border-gray-200 rounded-lg col-span-full lg:col-span-3 dark:bg-gray-700 dark:border-gray-600 dark:text-white ">
 
                         <x-link-radio-new :dashboard="$user->dashboard" page="1" title="Presidência">
-                            <svg class="w-6 h-6" viewBox="0 -0.5 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.918 10.0005H7.082C6.66587 9.99708 6.26541 10.1591 5.96873 10.4509C5.67204 10.7427 5.50343 11.1404 5.5 11.5565V17.4455C5.5077 18.3117 6.21584 19.0078 7.082 19.0005H9.918C10.3341 19.004 10.7346 18.842 11.0313 18.5502C11.328 18.2584 11.4966 17.8607 11.5 17.4445V11.5565C11.4966 11.1404 11.328 10.7427 11.0313 10.4509C10.7346 10.1591 10.3341 9.99708 9.918 10.0005Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M9.918 4.0006H7.082C6.23326 3.97706 5.52559 4.64492 5.5 5.4936V6.5076C5.52559 7.35629 6.23326 8.02415 7.082 8.0006H9.918C10.7667 8.02415 11.4744 7.35629 11.5 6.5076V5.4936C11.4744 4.64492 10.7667 3.97706 9.918 4.0006Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.082 13.0007H17.917C18.3333 13.0044 18.734 12.8425 19.0309 12.5507C19.3278 12.2588 19.4966 11.861 19.5 11.4447V5.55666C19.4966 5.14054 19.328 4.74282 19.0313 4.45101C18.7346 4.1592 18.3341 3.9972 17.918 4.00066H15.082C14.6659 3.9972 14.2654 4.1592 13.9687 4.45101C13.672 4.74282 13.5034 5.14054 13.5 5.55666V11.4447C13.5034 11.8608 13.672 12.2585 13.9687 12.5503C14.2654 12.8421 14.6659 13.0041 15.082 13.0007Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path fill-rule="evenodd" clip-rule="evenodd" d="M15.082 19.0006H17.917C18.7661 19.0247 19.4744 18.3567 19.5 17.5076V16.4936C19.4744 15.6449 18.7667 14.9771 17.918 15.0006H15.082C14.2333 14.9771 13.5256 15.6449 13.5 16.4936V17.5066C13.525 18.3557 14.2329 19.0241 15.082 19.0006Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <svg class="w-6 h-6" viewBox="0 -0.5 25 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M9.918 10.0005H7.082C6.66587 9.99708 6.26541 10.1591 5.96873 10.4509C5.67204 10.7427 5.50343 11.1404 5.5 11.5565V17.4455C5.5077 18.3117 6.21584 19.0078 7.082 19.0005H9.918C10.3341 19.004 10.7346 18.842 11.0313 18.5502C11.328 18.2584 11.4966 17.8607 11.5 17.4445V11.5565C11.4966 11.1404 11.328 10.7427 11.0313 10.4509C10.7346 10.1591 10.3341 9.99708 9.918 10.0005Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M9.918 4.0006H7.082C6.23326 3.97706 5.52559 4.64492 5.5 5.4936V6.5076C5.52559 7.35629 6.23326 8.02415 7.082 8.0006H9.918C10.7667 8.02415 11.4744 7.35629 11.5 6.5076V5.4936C11.4744 4.64492 10.7667 3.97706 9.918 4.0006Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.082 13.0007H17.917C18.3333 13.0044 18.734 12.8425 19.0309 12.5507C19.3278 12.2588 19.4966 11.861 19.5 11.4447V5.55666C19.4966 5.14054 19.328 4.74282 19.0313 4.45101C18.7346 4.1592 18.3341 3.9972 17.918 4.00066H15.082C14.6659 3.9972 14.2654 4.1592 13.9687 4.45101C13.672 4.74282 13.5034 5.14054 13.5 5.55666V11.4447C13.5034 11.8608 13.672 12.2585 13.9687 12.5503C14.2654 12.8421 14.6659 13.0041 15.082 13.0007Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M15.082 19.0006H17.917C18.7661 19.0247 19.4744 18.3567 19.5 17.5076V16.4936C19.4744 15.6449 18.7667 14.9771 17.918 15.0006H15.082C14.2333 14.9771 13.5256 15.6449 13.5 16.4936V17.5066C13.525 18.3557 14.2329 19.0241 15.082 19.0006Z"
+                                    stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                            </svg>
                         </x-link-radio-new>
                         <x-link-radio-new :dashboard="$user->dashboard" page="2" title="Financeiro">
                             <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1920 1920"
@@ -237,23 +276,42 @@
                             </svg>
                         </x-link-radio-new>
                         <x-link-radio-new :dashboard="$user->dashboard" page="3" title="Secretaria">
-                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1920 1920" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M833.935 1063.327c28.913 170.315 64.038 348.198 83.464 384.79 27.557 51.84 92.047 71.944 144 44.387 51.84-27.558 71.717-92.273 44.16-144.113-19.426-36.593-146.937-165.46-271.624-285.064Zm-43.821-196.405c61.553 56.923 370.899 344.81 415.285 428.612 56.696 106.842 15.811 239.887-91.144 296.697-32.64 17.28-67.765 25.411-102.325 25.411-78.72 0-154.955-42.353-194.371-116.555-44.386-83.802-109.102-501.346-121.638-584.245-3.501-23.717 8.245-47.21 29.365-58.277 21.346-11.294 47.096-8.02 64.828 8.357ZM960.045 281.99c529.355 0 960 430.757 960 960 0 77.139-8.922 153.148-26.654 225.882l-10.39 43.144h-524.386v-112.942h434.258c9.487-50.71 14.231-103.115 14.231-156.084 0-467.125-380.047-847.06-847.059-847.06-467.125 0-847.059 379.935-847.059 847.06 0 52.97 4.744 105.374 14.118 156.084h487.454v112.942H36.977l-10.39-43.144C8.966 1395.137.044 1319.128.044 1241.99c0-529.243 430.645-960 960-960Zm542.547 390.686 79.85 79.85-112.716 112.715-79.85-79.85 112.716-112.715Zm-1085.184 0L530.123 785.39l-79.85 79.85L337.56 752.524l79.849-79.85Zm599.063-201.363v159.473H903.529V471.312h112.942Z" fill-rule="evenodd"/>
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 1920 1920"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M833.935 1063.327c28.913 170.315 64.038 348.198 83.464 384.79 27.557 51.84 92.047 71.944 144 44.387 51.84-27.558 71.717-92.273 44.16-144.113-19.426-36.593-146.937-165.46-271.624-285.064Zm-43.821-196.405c61.553 56.923 370.899 344.81 415.285 428.612 56.696 106.842 15.811 239.887-91.144 296.697-32.64 17.28-67.765 25.411-102.325 25.411-78.72 0-154.955-42.353-194.371-116.555-44.386-83.802-109.102-501.346-121.638-584.245-3.501-23.717 8.245-47.21 29.365-58.277 21.346-11.294 47.096-8.02 64.828 8.357ZM960.045 281.99c529.355 0 960 430.757 960 960 0 77.139-8.922 153.148-26.654 225.882l-10.39 43.144h-524.386v-112.942h434.258c9.487-50.71 14.231-103.115 14.231-156.084 0-467.125-380.047-847.06-847.059-847.06-467.125 0-847.059 379.935-847.059 847.06 0 52.97 4.744 105.374 14.118 156.084h487.454v112.942H36.977l-10.39-43.144C8.966 1395.137.044 1319.128.044 1241.99c0-529.243 430.645-960 960-960Zm542.547 390.686 79.85 79.85-112.716 112.715-79.85-79.85 112.716-112.715Zm-1085.184 0L530.123 785.39l-79.85 79.85L337.56 752.524l79.849-79.85Zm599.063-201.363v159.473H903.529V471.312h112.942Z"
+                                    fill-rule="evenodd" />
                             </svg>
                         </x-link-radio-new>
                         <x-link-radio-new :dashboard="$user->dashboard" page="4" title="Diretor">
-                            <svg class="w-6 h-6"  viewBox="-0.5 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <path d="M3.02 5.5H20.98C21.27 5.5 21.5 5.73 21.5 6.02V18.98C21.5 19.27 21.27 19.5 20.98 19.5H3.02C2.73 19.5 2.5 19.27 2.5 18.98V6.02C2.5 5.73 2.73 5.5 3.02 5.5Z" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 8.25V10.25" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M12 15.25V16.75" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M17 8.25V8.95999" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M7 11.25V16.75" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M7 9.75C7.55228 9.75 8 9.30228 8 8.75C8 8.19772 7.55228 7.75 7 7.75C6.44772 7.75 6 8.19772 6 8.75C6 9.30228 6.44772 9.75 7 9.75Z" fill="currentColor"/>
-                                <path d="M12 13.75C12.5523 13.75 13 13.3023 13 12.75C13 12.1977 12.5523 11.75 12 11.75C11.4477 11.75 11 12.1977 11 12.75C11 13.3023 11.4477 13.75 12 13.75Z" fill="currentColor"/>
-                                <path d="M17 11.96C17.5523 11.96 18 11.5122 18 10.96C18 10.4077 17.5523 9.95996 17 9.95996C16.4477 9.95996 16 10.4077 16 10.96C16 11.5122 16.4477 11.96 17 11.96Z" fill="currentColor"/>
-                                <path d="M17 12.96V16.75" stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round" stroke-linejoin="round"/>
-                                </svg>
+                            <svg class="w-6 h-6" viewBox="-0.5 0 25 25" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M3.02 5.5H20.98C21.27 5.5 21.5 5.73 21.5 6.02V18.98C21.5 19.27 21.27 19.5 20.98 19.5H3.02C2.73 19.5 2.5 19.27 2.5 18.98V6.02C2.5 5.73 2.73 5.5 3.02 5.5Z"
+                                    stroke="currentColor" stroke-miterlimit="10" stroke-linecap="round"
+                                    stroke-linejoin="round" />
+                                <path d="M12 8.25V10.25" stroke="currentColor" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M12 15.25V16.75" stroke="currentColor" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M17 8.25V8.95999" stroke="currentColor" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M7 11.25V16.75" stroke="currentColor" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                                <path
+                                    d="M7 9.75C7.55228 9.75 8 9.30228 8 8.75C8 8.19772 7.55228 7.75 7 7.75C6.44772 7.75 6 8.19772 6 8.75C6 9.30228 6.44772 9.75 7 9.75Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M12 13.75C12.5523 13.75 13 13.3023 13 12.75C13 12.1977 12.5523 11.75 12 11.75C11.4477 11.75 11 12.1977 11 12.75C11 13.3023 11.4477 13.75 12 13.75Z"
+                                    fill="currentColor" />
+                                <path
+                                    d="M17 11.96C17.5523 11.96 18 11.5122 18 10.96C18 10.4077 17.5523 9.95996 17 9.95996C16.4477 9.95996 16 10.4077 16 10.96C16 11.5122 16.4477 11.96 17 11.96Z"
+                                    fill="currentColor" />
+                                <path d="M17 12.96V16.75" stroke="currentColor" stroke-miterlimit="10"
+                                    stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
                         </x-link-radio-new>
+
                     </ul>
                 </div>
             </fieldset>

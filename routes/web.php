@@ -66,6 +66,8 @@ use App\Livewire\Admin\Registers\Partners;
 use App\Livewire\Admin\Registers\PartnersLate;
 use App\Livewire\Admin\Registers\SelectCards;
 use App\Livewire\Admin\Schedule\AllLocations;
+use App\Livewire\Admin\Sellers\Payments;
+use App\Livewire\Admin\Sellers\SellerList;
 use App\Livewire\Admin\UserAccesses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -142,6 +144,19 @@ Route::middleware([
         ->name('event-types');
     Route::get('/configurações-centro-de-custo', CostCenters::class)
         ->name('cost-center');
+});
+// Sellers pageAccess 15
+Route::middleware([
+    'auth:sanctum',
+    config('jetstream.auth_session'),
+    'verified',
+    'registerLogging',
+    'pagesAccess:15'
+])->group(function () {
+    Route::get('/vendedores', SellerList::class)
+        ->name('seller-list');
+    Route::get('/pagamento-vendedores/{partner}', Payments::class)
+        ->name('payments-seller');
 });
 // Usuários pageAccess 2
 Route::middleware([
