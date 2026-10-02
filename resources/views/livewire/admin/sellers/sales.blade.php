@@ -50,12 +50,18 @@
                                     class="py-3.5 px-4 text-sm font-normal
                                             text-center text-gray-500
                                             dark:text-gray-400">
-                                    Valor
+                                    Valor da locação
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-4 text-sm font-normal
+                                            text-center text-gray-500
+                                            dark:text-gray-400">
+                                    Cashback (%)
                                 </th>
 
                             </tr>
                         </thead>
-                        <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
+                        <tbody class="text-xs bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
 
                             @if ($sales)
                                 @foreach ($sales as $item)
@@ -92,8 +98,11 @@
                                             </p>
                                         </td>
                                         <td
-                                            class="py-1.5 px-4 text-sm font-normal text-left itens-center text-gray-500 dark:text-gray-400">
+                                            class="text-sm font-normal text-left text-gray-500 itens-center dark:text-gray-400">
                                             {{ $item->value }}
+                                        </td>
+                                        <td>
+                                            {{ $item->ambience_name->cashback }}%
                                         </td>
                                     </tr>
                                 @endforeach

@@ -2,12 +2,10 @@
 <div class="w-full">
     <div class="flex {{ isset($align) ? $align : 'justify-end' }} font-medium duration-200 ">
         @isset($responsible)
-            <div class="tooltip tooltip-top p-0" data-tip="Responsável">
+            <div class="p-0 tooltip tooltip-top" data-tip="Responsável">
                 <a href="{{ route('edit-partner', $responsible) }}"
-                    class="py-2 px-3 flex
-                    hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                    duration-200 whitespace-nowrap">
-                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 " viewBox="0 0 512 512"  xml:space="preserve">
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    {{-- <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 " viewBox="0 0 512 512"  xml:space="preserve">
                     <g>
                         <path class="st0" d="M192.167,96.435c26.634,0,48.212-21.596,48.212-48.213C240.38,21.578,218.802,0,192.167,0
                             c-26.644,0-48.223,21.578-48.223,48.222C143.945,74.839,165.523,96.435,192.167,96.435z"/>
@@ -24,7 +22,7 @@
                             c8.085,0,14.638-6.562,14.638-14.648v-56.803C411.383,340.798,393.789,323.204,377.618,323.204z"/>
                     </g>
                     </svg> --}}
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="h-6 w-6 " viewBox="0 0 32 32"
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="w-6 h-6 " viewBox="0 0 32 32"
                         version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
                         <g id="icomoon-ignore">
                         </g>
@@ -38,12 +36,10 @@
             </div>
         @endisset
         @if ($card == true)
-            <div class="tooltip tooltip-top p-0" data-tip="Carteirinha">
+            <div class="p-0 tooltip tooltip-top" data-tip="Carteirinha">
                 <a href="{{ route('select-cards', $id) }}"
-                    class="py-2 px-3 flex
-                        hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                        duration-200 whitespace-nowrap">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="currentColor" viewBox="0 -32 576 576"
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " fill="currentColor" viewBox="0 -32 576 576"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M528 32H48C21.5 32 0 53.5 0 80v16h576V80c0-26.5-21.5-48-48-48zM0 432c0 26.5 21.5 48 48 48h480c26.5 0 48-21.5 48-48V128H0v304zm352-232c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zm0 64c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zm0 64c0-4.4 3.6-8 8-8h144c4.4 0 8 3.6 8 8v16c0 4.4-3.6 8-8 8H360c-4.4 0-8-3.6-8-8v-16zM176 192c35.3 0 64 28.7 64 64s-28.7 64-64 64-64-28.7-64-64 28.7-64 64-64zM67.1 396.2C75.5 370.5 99.6 352 128 352h8.2c12.3 5.1 25.7 8 39.8 8s27.6-2.9 39.8-8h8.2c28.4 0 52.5 18.5 60.9 44.2 3.2 9.9-5.2 19.8-15.6 19.8H82.7c-10.4 0-18.8-10-15.6-19.8z" />
@@ -53,12 +49,10 @@
         @endif
 
         @if ($dependent == true)
-            <div class="tooltip tooltip-top p-0" data-tip="Dependentes">
+            <div class="p-0 tooltip tooltip-top" data-tip="Dependentes">
                 <a href="{{ route('dependent', $id) }}"
-                    class="py-2 px-3 flex
-                        hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                        duration-200 whitespace-nowrap">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="currentColor" version="1.1"
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " fill="currentColor" version="1.1"
                         id="_x32_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
                         viewBox="0 0 512 512" xml:space="preserve">
 
@@ -94,12 +88,10 @@
             </div>
         @endif
         @if ($history == true)
-            <div class="tooltip tooltip-top p-0" data-tip="Histórico">
+            <div class="p-0 tooltip tooltip-top" data-tip="Histórico">
                 <a href="{{ route('history', $id) }}"
-                    class="py-2 px-3 flex
-                        hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                        duration-200 whitespace-nowrap">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " viewBox="0 0 24 24" fill="none"
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " viewBox="0 0 24 24" fill="none"
                         xmlns="http://www.w3.org/2000/svg">
                         <path
                             d="M14.9303 2.5V8.4C14.9303 8.84 14.4103 9.06 14.0903 8.77L12.3403 7.16C12.1503 6.98 11.8503 6.98 11.6603 7.16L9.91031 8.76C9.59031 9.06 9.07031 8.83 9.07031 8.4V2.5C9.07031 2.22 9.29031 2 9.57031 2H14.4303C14.7103 2 14.9303 2.22 14.9303 2.5Z"
@@ -112,14 +104,25 @@
             </div>
         @endif
         @if ($discount != 1)
-            <div class="tooltip tooltip-top p-0" data-tip="Mensalidades">
+            <div class="p-0 tooltip tooltip-top" data-tip="Mensalidades">
                 <a href="{{ route('monthlys', $id) }}"
-                    class="py-2 px-3 flex
-                        hover:text-white dark:hover:bg-blue-500 transition-colors hover:hover:bg-blue-500
-                        duration-200 whitespace-nowrap">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 " fill="currentColor" xviewBox="0 0 24 24">
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " fill="currentColor" xviewBox="0 0 24 24">
                         <path
                             d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z" />
+                    </svg>
+                </a>
+            </div>
+            <div class="p-0 tooltip tooltip-top" data-tip="Jóia">
+                <a href="{{ route('jewels', $id) }}"
+                    class="flex px-3 py-2 transition-colors duration-200 hover:text-white dark:hover:bg-blue-500 hover:hover:bg-blue-500 whitespace-nowrap">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " viewBox="0 0 24 24" fill="none"
+                        xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" clip-rule="evenodd" d="M19 8.5L17 5.5H14.5L15.5 8.5L12 18.5L19 8.5Z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                        <path
+                            d="M4.37596 8.08397C4.1462 8.42862 4.23933 8.89427 4.58397 9.12404C4.92862 9.3538 5.39427 9.26067 5.62404 8.91603L4.37596 8.08397ZM7 5.5V4.75C6.74924 4.75 6.51506 4.87533 6.37596 5.08397L7 5.5ZM9.5 6.25C9.91421 6.25 10.25 5.91421 10.25 5.5C10.25 5.08579 9.91421 4.75 9.5 4.75V6.25ZM5.61442 8.0699C5.37689 7.73057 4.90924 7.64804 4.5699 7.88558C4.23057 8.12311 4.14804 8.59076 4.38558 8.9301L5.61442 8.0699ZM12 18.5L11.3856 18.9301C11.6004 19.237 12.0088 19.3383 12.3421 19.1674C12.6755 18.9965 12.8317 18.6058 12.7079 18.2522L12 18.5ZM9.20789 8.25224C9.07106 7.86128 8.6432 7.65527 8.25224 7.79211C7.86128 7.92894 7.65527 8.3568 7.79211 8.74776L9.20789 8.25224ZM5 7.75C4.58579 7.75 4.25 8.08579 4.25 8.5C4.25 8.91421 4.58579 9.25 5 9.25V7.75ZM8.5 9.25C8.91421 9.25 9.25 8.91421 9.25 8.5C9.25 8.08579 8.91421 7.75 8.5 7.75V9.25ZM10.2115 5.73717C10.3425 5.34421 10.1301 4.91947 9.73717 4.78849C9.34421 4.6575 8.91947 4.86987 8.78849 5.26283L10.2115 5.73717ZM7.78849 8.26283C7.6575 8.65579 7.86987 9.08053 8.26283 9.21151C8.65579 9.3425 9.08053 9.13013 9.21151 8.73717L7.78849 8.26283ZM9.5 4.75C9.08579 4.75 8.75 5.08579 8.75 5.5C8.75 5.91421 9.08579 6.25 9.5 6.25V4.75ZM14.5 6.25C14.9142 6.25 15.25 5.91421 15.25 5.5C15.25 5.08579 14.9142 4.75 14.5 4.75V6.25ZM8.5 7.75C8.08579 7.75 7.75 8.08579 7.75 8.5C7.75 8.91421 8.08579 9.25 8.5 9.25V7.75ZM19 9.25C19.4142 9.25 19.75 8.91421 19.75 8.5C19.75 8.08579 19.4142 7.75 19 7.75V9.25ZM5.62404 8.91603L7.62404 5.91603L6.37596 5.08397L4.37596 8.08397L5.62404 8.91603ZM7 6.25H9.5V4.75H7V6.25ZM4.38558 8.9301L11.3856 18.9301L12.6144 18.0699L5.61442 8.0699L4.38558 8.9301ZM12.7079 18.2522L9.20789 8.25224L7.79211 8.74776L11.2921 18.7478L12.7079 18.2522ZM5 9.25H8.5V7.75H5V9.25ZM8.78849 5.26283L7.78849 8.26283L9.21151 8.73717L10.2115 5.73717L8.78849 5.26283ZM9.5 6.25H14.5V4.75H9.5V6.25ZM8.5 9.25H19V7.75H8.5V9.25Z"
+                            fill="currentColor" />
                     </svg>
                 </a>
             </div>

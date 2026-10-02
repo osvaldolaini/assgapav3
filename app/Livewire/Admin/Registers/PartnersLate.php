@@ -289,6 +289,10 @@ class PartnersLate extends Component
             ? date('Y-m')
             : date('Y-m', strtotime('-1 month'));
 
+        $refLimitJewels = date('d') > 10
+            ? date('Y-m-d')
+            : date('Y-m-d', strtotime('-1 month'));
+
         $totalLate = Partner::where('active', 1)
             // ->where('discount', 0)
             ->where('discount', '!=', 1)
@@ -298,8 +302,21 @@ class PartnersLate extends Component
                     ->where('ref', '<=', $refLimit);
             })->get();
 
+        $totalJewels = Partner::where('active', 1)
+            // ->where('discount', 0)
+            ->where('discount', '!=', 1)
+            ->where('partner_category_master', 'Sócio')
+            ->whereHas('jewels', function ($q) use ($refLimitJewels) {
+                $q->where('status', 0)
+                    ->where('paid_in', '<=', $refLimitJewels);
+            })->get();
 
+        // dd($totalJewels);
         foreach ($totalLate as $partner) {
+            $late[] = $partner->id;
+        }
+
+        foreach ($totalJewels as $partner) {
             $late[] = $partner->id;
         }
 

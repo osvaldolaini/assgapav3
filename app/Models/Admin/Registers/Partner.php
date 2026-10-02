@@ -2,6 +2,7 @@
 
 namespace App\Models\Admin\Registers;
 
+use App\Models\Admin\Jewels\Jewel;
 use App\Models\Admin\Configs\PartnerCategory;
 use App\Models\Admin\Financial\Bill;
 use App\Models\Admin\Financial\Received;
@@ -288,5 +289,9 @@ class Partner extends Model
     public function indications(): HasMany
     {
         return $this->hasMany(Location::class, 'indication_id', 'id');
+    }
+    public function jewels(): HasMany
+    {
+        return $this->hasMany(Jewel::class, 'partner_id', 'id');
     }
 }

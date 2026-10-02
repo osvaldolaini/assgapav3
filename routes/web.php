@@ -27,6 +27,7 @@ use App\Livewire\Admin\Financial\PaidMonth;
 use App\Livewire\Admin\Financial\ReceivedEdit;
 use App\Livewire\Admin\Financial\ReceivedNew;
 use App\Livewire\Admin\Financial\Receiveds;
+use App\Livewire\Admin\Jewels\Jewel;
 use App\Livewire\Admin\Locations\DeleteLocations;
 use App\Livewire\Admin\Locations\MultipleLocation;
 use App\Livewire\Admin\Locations\InstallmentsLate;
@@ -189,6 +190,8 @@ Route::middleware([
         ->name('edit-dependent');
     Route::get('/cadastros/{partner}/mensalidades', Monthlys::class)
         ->name('monthlys');
+    Route::get('/cadastros/{partner}/joia', Jewel::class)
+        ->name('jewels');
 
     Route::get('/dependentes-para-remover', DependentOut::class)
         ->name('dependentes-out');

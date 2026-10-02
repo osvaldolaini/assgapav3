@@ -11,6 +11,8 @@
 -   Vincular perfil de usuário a cadastro
 -   Opção de mostrar categoria de Não sócio para vendedor (editável)
 -   Área do vendedor com (minhas indicações, minhas vendas, cadastrar)
+-   Pagamento de Jóia
+-   Acusando atraso
 
 ## v 3.35 30/09/2026
 
