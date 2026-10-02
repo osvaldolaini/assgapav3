@@ -173,7 +173,7 @@ class ListUser extends Component
 
         if ($this->password) {
             $this->rules = [
-                'password' => 'required|min:8|confirmed',
+                'password' => 'required|min:8',
             ];
         }
 
