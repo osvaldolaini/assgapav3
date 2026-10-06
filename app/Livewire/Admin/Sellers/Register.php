@@ -40,7 +40,7 @@ class Register extends Component
     }
     public function mount()
     {
-        $this->seller_id = Auth::user()->id;
+        $this->seller_id = Auth::user()->partner->id;
     }
     public function modalRegister()
     {

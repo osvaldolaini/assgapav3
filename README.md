@@ -6,6 +6,10 @@
 
 # Sistema ASSGAPA V3
 
+## v 3.37 02/10/2026
+
+-   Pagamentos vendedor
+
 ## v 3.36 01/10/2026
 
 -   Vincular perfil de usuário a cadastro

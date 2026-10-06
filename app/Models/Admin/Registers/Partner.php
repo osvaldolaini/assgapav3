@@ -290,6 +290,10 @@ class Partner extends Model
     {
         return $this->hasMany(Location::class, 'indication_id', 'id');
     }
+    public function registers(): HasMany
+    {
+        return $this->hasMany($this::class, 'seller_id', 'id');
+    }
     public function jewels(): HasMany
     {
         return $this->hasMany(Jewel::class, 'partner_id', 'id');

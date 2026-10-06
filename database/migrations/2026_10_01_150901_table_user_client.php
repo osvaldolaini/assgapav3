@@ -15,7 +15,7 @@ return new class extends Migration
             // $table->foreignId('seller_id')->nullable()->constrained();
             $table->unsignedBigInteger('seller_id')->nullable();
             /*RELACIONAMENTOS*/
-            $table->foreign('seller_id')->references('id')->on('users')->onDelete('SET NULL');
+            $table->foreign('seller_id')->references('id')->on('partners')->onDelete('SET NULL');
         });
     }
 
