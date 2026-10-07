@@ -14,7 +14,7 @@
         </div>
     </x-breadcrumb>
 
-    <div class="pt-3 px-4 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
+    <div class="px-4 pt-3 my-6 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div class="grid grid-cols-1 gap-4 md:grid-cols-4">
             {{-- Locações indicadas --}}
             <div class="col-span-full sm:col-span-1">
@@ -223,14 +223,78 @@
         <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
             <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                 <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
-                    <x-table-search></x-table-search>
+                    <div class="flex py-5 space-x-2">
+                        @if (count($pay) > 0)
+                            <button wire:click="modalReleased()"
+                                class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                </svg>
+                                <span>Liberar </span>
+                            </button>
+                            <button wire:click="modalPaid()"
+                                class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                                <x-layout.svg.dollar class="w-5 h-5 mr-2"></x-layout.svg.dollar>
+                                <span>Pagar </span>
+                            </button>
+                        @endif
+                    </div>
+                    <div
+                        class="flex flex-col items-center justify-between px-4 space-y-3 md:flex-row md:space-y-0 md:space-x-4">
+                        <div class="flex w-full">
+                            <div
+                                class="block w-full text-sm text-gray-900 bg-gray-50 focus:ring-blue-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 ">
+                                <label for="simple-search" class="sr-only">
+                                    Pesquisar
+                                </label>
+                                <div class="relative w-full">
+                                    <div class="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                        <svg aria-hidden="true" class="w-5 h-5 text-blue-500 dark:text-gray-400"
+                                            fill="currentColor" viewbox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd"
+                                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
+                                                clip-rule="evenodd" />
+                                        </svg>
+                                    </div>
+                                    <input type="text" placeholder="Pesquisar"
+                                        wire:model.live.debounce.300ms="search"
+                                        class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl bg-gray-50 focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                     <table style="width:100%" class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
                         <thead class="bg-gray-50 dark:bg-gray-800">
+                            {{-- <tr>
+                                <td colspan="6"
+                                    class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
+                                    <div class="flex space-x-2">
+                                        @if (count($pay) > 0)
+                                            <button wire:click="modalReleased()"
+                                                class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                                                <svg class="w-4 h-4 mr-2" fill="currentColor" viewbox="0 0 20 20"
+                                                    xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                                                    <path clip-rule="evenodd" fill-rule="evenodd"
+                                                        d="M10 3a1 1 0 011 1v5h5a1 1 0 110 2h-5v5a1 1 0 11-2 0v-5H4a1 1 0 110-2h5V4a1 1 0 011-1z" />
+                                                </svg>
+                                                <span>Liberar </span>
+                                            </button>
+                                            <button wire:click="modalPaid()"
+                                                class="flex items-center justify-center w-1/2 px-5 py-3 text-sm tracking-wide text-white transition-colors duration-200 bg-blue-500 rounded-lg sm:w-auto gap-x-2 hover:bg-blue-600 dark:hover:bg-blue-500 dark:bg-blue-600">
+                                                <x-layout.svg.dollar class="w-5 h-5 mr-2"></x-layout.svg.dollar>
+                                                <span>Pagar </span>
+                                            </button>
+                                        @endif
+                                    </div>
+                                </td>
+                            </tr> --}}
                             <tr scope="col"
                                 class="py-3.5 px-4 text-xs font-normal text-left text-gray-500
                                 dark:text-gray-400">
 
-                                <th scope="col"
+                                <th scope="col" colspan="2"
                                     class="py-3.5 px-4 text-xs font-normal
                                             text-left text-gray-500
                                             dark:text-gray-400">
@@ -265,19 +329,96 @@
                             </tr>
                         </thead>
                         <tbody class="bg-white divide-y divide-gray-200 dark:divide-gray-700 dark:bg-gray-900">
-                            {{-- @if ($items->isEmpty())
+                            @foreach ($this->filteredItems as $item)
                                 <tr>
-                                    <td colspan="5"
-                                        class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
-                                        Nenhum resultado encontrado.
+                                    <td>
+                                        <div class="flex w-full">
+                                            @if ($item->status === PaymentStatus::WAITING)
+                                                @if ($item->value_db > 0)
+                                                    <div class="w-full">
+                                                        <input type="checkbox" wire:model.live="pay"
+                                                            value="{{ $item->type }}:{{ $item->model->id }}"
+                                                            id="item-{{ $item->type }}-{{ $item->model->id }}"
+                                                            class="hidden peer">
+
+                                                        {{-- Desmarcado --}}
+                                                        <label for="item-{{ $item->type }}-{{ $item->model->id }}"
+                                                            class="inline-flex items-center justify-between w-full text-gray-500 bg-gray-200 border-2 border-gray-200 rounded-lg cursor-pointer peer-checked:hidden">
+                                                            <div
+                                                                class="flex items-center justify-center h-full p-0 m-0">
+                                                                <svg class="w-12 h-12 p-2" viewBox="0 0 24 24"
+                                                                    fill="none" xmlns="http://www.w3.org/2000/svg">
+
+                                                                    <path fill-rule="evenodd" clip-rule="evenodd"
+                                                                        d="M6 5C5.44772 5 5 5.44772 5 6V13V18C5 18.5523 5 19 6 19H18C19 19 19 18.5523 19 18V13V6C19 5.44772 18.5523 5 18 5H6ZM3 6C3 4.34315 4.34315 3 6 3H18C19.6569 3 21 4.34315 21 6V13V18C21 19.6569 19.6569 21 18 21H6C4.34315 21 3 18.5523 3 18V13V6Z"
+                                                                        fill="currentColor" />
+                                                                </svg>
+                                                            </div>
+                                                        </label>
+
+                                                        {{-- Selecionado --}}
+                                                        <label for="item-{{ $item->type }}-{{ $item->model->id }}"
+                                                            class="items-center justify-between hidden w-full text-white bg-blue-500 border-2 border-blue-500 rounded-lg cursor-pointer peer-checked:inline-flex">
+                                                            <div
+                                                                class="flex items-center justify-center h-full p-0 m-0">
+                                                                <svg class="w-12 h-12 p-2 text-white"
+                                                                    viewBox="0 0 24 24" fill="none"
+                                                                    xmlns="http://www.w3.org/2000/svg">
+
+                                                                    <path d="M8 12L11 15L16 9" stroke="currentColor"
+                                                                        stroke-width="2" stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+
+                                                                    <path
+                                                                        d="M4 16.8002V7.2002C4 6.08009 4 5.51962 4.21799 5.0918C4.40973 4.71547 4.71547 4.40973 5.0918 4.21799C5.51962 4 6.08009 4 7.2002 4H16.8002C17.9203 4 18.4796 4 18.9074 4.21799C19.2837 4.40973 19.5905 4.71547 19.7822 4.21799C20 5.5192 20 6.07899 20 7.19691V16.8036C20 17.9215 20 18.4805 19.7822 18.9079C19.5905 19.2842 19 19.5905 18.9074 20C18.48 20 17.921 20 16.8031 20H7.19691C6.07899 20 5.5192 20 5.0918 19.7822C4 18.4801 4 17.9203 4 16.8002Z"
+                                                                        stroke="currentColor" stroke-width="2"
+                                                                        stroke-linecap="round"
+                                                                        stroke-linejoin="round" />
+                                                                </svg>
+                                                            </div>
+                                                        </label>
+
+                                                    </div>
+                                                @else
+                                                    <div
+                                                        class="flex items-center justify-center w-full text-blue-500 border-2 border-blue-500 rounded-lg">
+                                                        {{-- ícone liberado --}}
+                                                        {{-- Selecionado --}}
+                                                        <x-layout.svg.check class="w-10 h-10"></x-layout.svg.check>
+                                                    </div>
+                                                @endif
+                                            @elseif ($item->status === PaymentStatus::PAID)
+                                                <div
+                                                    class="flex items-center justify-center w-full text-blue-500 border-2 border-blue-500 rounded-lg">
+                                                    {{-- ícone pago --}}
+                                                    {{-- Selecionado --}}
+                                                    <div class="p-0 tooltip tooltip-top" data-tip="Recibo">
+                                                        <button wire:click="printBill({{ $item->payment_item->id }})"
+                                                            class="px-3 py-2 text-blue-500 transition-colors duration-200 hover:bg-blue-500 hover:text-white whitespace-nowrap">
+                                                            <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 "
+                                                                viewBox="0 0 20 20"
+                                                                xmlns="http://www.w3.org/2000/svg">
+                                                                <path fill-rule="evenodd"
+                                                                    d="M4.5 0h11A1.5 1.5 0 0117 1.5v18.223a.2.2 0 01-.335.148l-1.662-1.513a.5.5 0 00-.673 0l-1.66 1.51a.5.5 0 01-.673 0l-1.66-1.51a.5.5 0 00-.674 0l-1.66 1.51a.5.5 0 01-.673 0l-1.66-1.51a.5.5 0 00-.673 0L3.335 19.87A.2.2 0 013 19.723V1.5A1.5 1.5 0 014.5 0zm4.207 11.293c.667.667 1.29.706 1.316.707.528 0 .977-.448.977-1 0-.646-.128-.751-1.243-1.03h-.001C8.725 9.712 7 9.28 7 7a2.993 2.993 0 012-2.815V4a1 1 0 012 0v.2c.645.23 1.228.604 1.707 1.093a1 1 0 01-1.414 1.414c-.667-.667-1.291-.706-1.317-.707C9.448 6 9 6.448 9 7c0 .646.127.751 1.242 1.03h.002C11.274 8.288 13 8.72 13 11a2.995 2.995 0 01-2 2.815V14a1 1 0 01-2 0v-.2a4.49 4.49 0 01-1.707-1.093 1 1 0 111.414-1.414z"
+                                                                    fill="currentColor" />
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            @elseif ($item->status === PaymentStatus::RELEASED)
+                                                <div
+                                                    class="flex items-center justify-center w-full text-blue-500 border-2 border-blue-500 rounded-lg">
+                                                    {{-- ícone liberado --}}
+                                                    {{-- Selecionado --}}
+                                                    <x-layout.svg.check class="w-10 h-10"></x-layout.svg.check>
+                                                </div>
+                                            @endif
+                                        </div>
                                     </td>
-                                </tr>
-                            @else --}}
-                            @foreach ($items as $item)
-                                <tr>
                                     <td
                                         class="py-1.5 px-4 text-sm font-normal  text-left text-gray-500 dark:text-gray-400">
-                                        {{ PaymentType::From($item->type)->label() }}
+                                        {{ $item->type->label() }}
+
                                     </td>
                                     <td
                                         class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
@@ -303,20 +444,30 @@
                                         class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
                                         {{ $item->value }}
                                     </td>
-
                                     <td
                                         class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                              text-gray-500 dark:text-gray-400 flex-nowrap">
                                         <div class="flex items-center gap-2">
-                                            @if ($item->status === 'waiting')
-                                                <span class="badge badge-warning gap-1">
-                                                    {{ PaymentStatus::from($item->status)->label() }} </span>
-                                            @elseif ($item->status === 'paid')
-                                                <span class="badge badge-success gap-1">
-                                                    {{ PaymentStatus::from($item->status)->label() }} </span>
-                                            @elseif ($item->status === 'released')
-                                                <span class="badge badge-info gap-1">
-                                                    {{ PaymentStatus::from($item->status)->label() }}
+                                            @if ($item->value_db > 0)
+                                                @if ($item->status === PaymentStatus::WAITING)
+                                                    <span class="gap-1 badge badge-warning">
+                                                        <x-layout.svg.waiting class="w-4 h-4"></x-layout.svg.waiting>
+                                                        {{ $item->status->label() }}...
+                                                    </span>
+                                                @elseif ($item->status === PaymentStatus::PAID)
+                                                    <span class="gap-1 badge badge-success">
+                                                        <x-layout.svg.check class="w-4 h-4"></x-layout.svg.check>
+                                                        {{ $item->status->label() }} </span>
+                                                @elseif ($item->status === PaymentStatus::RELEASED)
+                                                    <span class="gap-1 badge badge-info">
+                                                        <x-layout.svg.check class="w-4 h-4"></x-layout.svg.check>
+                                                        {{ $item->status->label() }}
+                                                    </span>
+                                                @endif
+                                            @else
+                                                <span class="gap-1 badge badge-info">
+                                                    <x-layout.svg.check class="w-4 h-4"></x-layout.svg.check>
+                                                    {{ PaymentStatus::RELEASED->label() }}
                                                 </span>
                                             @endif
                                         </div>
@@ -334,64 +485,143 @@
 
     </div>
     {{-- MODAL PAID --}}
-    <x-dialog-modal wire:model="showModalPay">
+    <x-dialog-modal wire:model="showModalPaid">
         <x-slot name="title">Pagar</x-slot>
         <x-slot name="content">
-            <form wire:submit="store">
-                <div class="grid grid-cols-2 gap-2 mb-1 sm:gap-4 sm:mb-5">
-                    <div class="col-span-full">
-                        <label for="title">*Descrição</label>
-                        <input
-                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
-                            placeholder="Descrição" wire:model="title" required>
-                        @error('title')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="text-left col-span-full sm:col-span-1">
-                        <label for="form_payment">*Forma de pagamento</label>
-                        <Select wire:model="form_payment" required
-                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                            <option value=''>Selecione...</option>
-                            <option value='DIN'>Dinheiro</option>
-                            <option value='CAR'>Cartões</option>
-                            <option value='BOL'>Boleto</option>
-                            <option value='PIX'>PIX</option>
-                        </Select>
-                        @error('form_payment')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
-                    <div class="col-span-1 text-left">
-                        <label for="received">*Gerar recibo</label>
-                        <Select wire:model="received" required
-                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                            <option value=''>Selecione...</option>
-                            <option value='1'>SIM</option>
-                            <option value='2'>NÃO</option>
-                        </Select>
-                        @error('received')
+            @if (count($selectedItems) > 0)
+                <p class="mb-4 text-sm text-gray-500">
+                    Confira os itens que serão liberado neste pagamento:
+                </p>
+
+                <div class="space-y-2">
+                    @foreach ($selectedItems as $item)
+                        <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                            <div>
+                                <div class="font-semibold">
+                                    {{ $item->type->label() }}
+                                </div>
+
+                                <div class="text-xs text-gray-500">
+                                    {{ $item->date }}
+                                </div>
+                            </div>
+
+                            <div class="font-semibold">
+                                R$ {{ $item->value }}
+                            </div>
+                        </div>
+                    @endforeach
+
+                </div>
+
+            @endif
+            <fieldset>
+                <form wire:submit="checkout" class="grid grid-cols-12 gap-2 pb-6 rounded-md dark:bg-gray-900">
+                    <div class="col-span-full sm:col-span-8">
+                        <label for="creditor">*Fornecedor / colaborador</label>
+                        <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Fornecedor / colaborador" wire:model="creditor" required readonly>
+                        @error('creditor')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
 
-                    <div class="col-span-full sm:col-span-1">
-                        <label for="paid_in">*Pagamento / vencimento</label>
-                        <x-datepicker id='paid_in' :required="true"></x-datepicker>
+
+                    @if ($pf_pj == 'pf')
+                        <div class="col-span-full sm:col-span-4" x-data x-init="Inputmask({
+                            'mask': '999.999.999-99'
+                        }).mask($refs.creditor_document)">
+                            <label class="text-sm" for="creditor_document">*CPF</label>
+                            <input x-ref="creditor_document" placeholder="000.000.000-00" required readonly
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                                wire:model="creditor_document">
+                        </div>
+                    @else
+                        <div class="col-span-full sm:col-span-4" x-data x-init="Inputmask({
+                            'mask': '99.999.999/9999-99'
+                        }).mask($refs.creditor_document)">
+                            <label class="text-sm" for="creditor_document">*CNPJ</label>
+                            <input x-ref="creditor_document" placeholder="00.000.000/0000-00" required readonly
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                                wire:model="creditor_document">
+                        </div>
+                    @endif
+                    <div class="col-span-full sm:col-span-12">
+                        <label for="cost_center_id">Motivo da despesa</label>
+                        <select wire:model="cost_center_id"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="">Selecione...</option>
+                            @foreach ($categories as $category)
+                                <option value="{{ $category->id }}">
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
+                        @error('cost_center_id')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-6">
+                        <label for="type">*Setor responsável</label>
+                        <select wire:model="type"
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                            required>
+                            <option value="">Selecione</option>
+                            <option value="SEC">SECRETARIA</option>
+                            @if (in_array(12, $pages) == true)
+                                <option value="FIN">FINANCEIRO</option>
+                            @endif
+                            <option value="DIR">DIRETOR</option>
+                        </select>
+                        @error('type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+                    <div class="col-span-full sm:col-span-3">
+                        <label for="value">*Valor</label>
+                        <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                            placeholder="Valor" wire:model="value" id="value" required readonly>
+                        @error('value')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+
+                    </div>
+                    <div class="col-span-full sm:col-span-3">
+                        <label for="paid_in">Data</label>
+                        {{-- <x-datepicker id='paid_in' :required="true" ></x-datepicker> --}}
+                        <x-datepicker-readonly id='paid_in' :required="true"></x-datepicker-readonly>
                         @error('paid_in')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="col-span-full sm:col-span-1">
-                        <label for="value">*Valor total</label>
-                        <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
-                            x-mask:dynamic="$money($input, ',')" placeholder="Valor" wire:model="value" required>
+                    <div class="col-span-full">
+                        <label for="title">*Descrição</label>
+                        <div class="flex w-full px-0 mx-0">
+                            <input
+                                class="w-full mr-2 rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
+                                placeholder="Descrição" wire:model="title" required>
+                            <div class="p-0 tooltip tooltip-top" data-tip="Favoritos">
+                                <button class="btn btn-square btn-outline hover:text-white"
+                                    wire:click="openModalFavorites()" wire:ignore>
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6 " fill="currentColor"
+                                        viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                        <path
+                                            d="M1.537,9.488a1,1,0,0,0,.326,1.041l4.805,3.963-1.515,6.79a1,1,0,0,0,1.56,1.03L12,18.509l5.287,3.8a1,1,0,0,0,1.56-1.03l-1.515-6.79,4.805-3.963a1,1,0,0,0-.492-1.761l-5.817-.849L12.9,2.053a1.042,1.042,0,0,0-1.79,0L8.172,7.919l-5.817.849A1,1,0,0,0,1.537,9.488Zm7.441.335a1,1,0,0,0,.75-.542L12,4.736l2.272,4.545a1,1,0,0,0,.75.542l4.1.6L15.586,13.34a1,1,0,0,0-.339.989l1.076,4.826-3.739-2.69a1,1,0,0,0-1.168,0l-3.739,2.69,1.076-4.826a1,1,0,0,0-.339-.989L4.876,10.421Z" />
+                                    </svg>
+                                </button>
+                            </div>
+                        </div>
+
+                        @error('title')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
                     </div>
-                </div>
-            </form>
+                </form>
+            </fieldset>
+
         </x-slot>
         <x-slot name="footer">
-            <button type="submit" wire:click="checkout"
+            <button type="submit" wire:click="checkout('paid')"
                 class="text-white
                         bg-blue-700 hover:bg-blue-800
                         focus:ring-4 focus:outline-none focus:ring-blue-300
@@ -400,39 +630,83 @@
                         dark:focus:ring-blue-800">
                 Pagar
             </button>
-            <x-secondary-button wire:click="$toggle('showModalPay')" class="mx-2">
+            <x-secondary-button wire:click="$toggle('showModalPaid')" class="mx-2">
                 Fechar
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
-    {{-- MODAL DELETE --}}
-    <x-confirmation-modal wire:model="showJetModal">
-        <x-slot name="title">
-            Excluir registro
-        </x-slot>
 
+    {{-- MODAL RELEASED --}}
+    <x-dialog-modal wire:model="showModalReleased">
+        <x-slot name="title">Liberar</x-slot>
         <x-slot name="content">
-            <h2 class="h2">Deseja realmente excluir o registro?</h2>
-            <p>Não será possível reverter esta ação!</p>
-        </x-slot>
+            <h2 class="h2">Deseja realmente liberar o registro?</h2>
+            <p>Esta ação não gera financeiro!</p>
+            <form wire:submit="store">
 
+                @if (count($selectedItems) > 0)
+                    <p class="mb-4 text-sm text-gray-500">
+                        Confira os itens que serão liberado neste pagamento:
+                    </p>
+
+                    <div class="space-y-2">
+                        @foreach ($selectedItems as $item)
+                            <div class="flex items-center justify-between p-3 bg-gray-100 rounded-lg">
+                                <div>
+                                    <div class="font-semibold">
+                                        {{ $item->type->label() }}
+                                    </div>
+
+                                    <div class="text-xs text-gray-500">
+                                        {{ $item->date }}
+                                    </div>
+                                </div>
+
+                                <div class="font-semibold">
+                                    R$ {{ $item->value }}
+                                </div>
+                            </div>
+                        @endforeach
+
+                    </div>
+                    <div class="flex items-center justify-between pt-4 mt-4 border-t">
+
+                        <span class="font-semibold">
+                            Total
+                        </span>
+
+                        <span class="text-lg font-bold">
+                            R$
+                            {{ number_format($this->selectedItems->sum(fn($item) => (float) $item->value), 2, ',', '.') }}
+                        </span>
+
+                    </div>
+                @endif
+
+            </form>
+        </x-slot>
         <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('showJetModal')" wire:loading.attr="disabled">
-                Cancelar
+            <button type="submit" wire:click="checkout('released')"
+                class="text-white
+                        bg-blue-700 hover:bg-blue-800
+                        focus:ring-4 focus:outline-none focus:ring-blue-300
+                        font-medium rounded-lg text-sm px-5 py-2.5
+                        text-center dark:bg-blue-600 dark:hover:bg-blue-700
+                        dark:focus:ring-blue-800">
+                Liberar
+            </button>
+            <x-secondary-button wire:click="$toggle('showModalReleased')" class="mx-2">
+                Fechar
             </x-secondary-button>
-
-            <x-danger-button class="ml-2" wire:click="delete({{ $registerId }})" wire:loading.attr="disabled">
-                Apagar registro
-            </x-danger-button>
         </x-slot>
-    </x-confirmation-modal>
+    </x-dialog-modal>
 
 
     {{-- MODAL READ --}}
     <x-dialog-modal wire:model="showModalView">
         <x-slot name="title">Detalhes</x-slot>
         <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
+            <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
                 @if ($detail)
                     @foreach ($detail as $item => $value)
                         @if ($value)
@@ -462,5 +736,70 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
+
+    <x-dialog-modal wire:model="modalFavorites" class="mt-0">
+        <x-slot name="title">Pesquisar</x-slot>
+        <x-slot name="content">
+            <div class="grid grid-cols-1 gap-4 mb-1">
+                <fieldset class="w-full col-span-1 space-y-1 dark:text-gray-100">
+                    <label for="Favorites" class="hidden">Pesquisar </label>
+                    <div class="relative w-full">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-2">
+                            <button type="button" title="Favorites" class="p-1 focus:outline-none focus:ring">
+                                <svg fill="currentColor" viewBox="0 0 512 512" class="w-4 h-4 dark:text-gray-100">
+                                    <path
+                                        d="M479.6,399.716l-81.084-81.084-62.368-25.767A175.014,175.014,0,0,0,368,192c0-97.047-78.953-176-176-176S16,94.953,16,192,94.953,368,192,368a175.034,175.034,0,0,0,101.619-32.377l25.7,62.2L400.4,478.911a56,56,0,1,0,79.2-79.195ZM48,192c0-79.4,64.6-144,144-144s144,64.6,144,144S271.4,336,192,336,48,271.4,48,192ZM456.971,456.284a24.028,24.028,0,0,1-33.942,0l-76.572-76.572-23.894-57.835L380.4,345.771l76.573,76.572A24.028,24.028,0,0,1,456.971,456.284Z">
+                                    </path>
+                                </svg>
+                            </button>
+                        </span>
+                        <input type="text" placeholder="Pesquisar" wire:model.live="inputFavorites"
+                            class="w-full py-3 pl-10 text-sm text-gray-900 border-blue-500 rounded-2xl focus:ring-primary-500 dark:bg-gray-700 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500"
+                            autofocus />
+                    </div>
+                </fieldset>
+                @isset($favorites)
+                    <div class="overflow-x-auto">
+                        <table class="table">
+                            <tbody>
+                                @if ($favorites)
+                                    @foreach ($favorites as $key => $value)
+                                        @if ($value[0])
+                                            <tr class="hover:bg-gray-200">
+                                                <td>
+                                                    <div class="flex items-center gap-3 cursor-pointer "
+                                                        wire:click="selectFavorites({{ $value[0]['id'] }})">
+                                                        {{ mb_strtoupper($key) }}
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                @endif
+                            </tbody>
+                        </table>
+                    </div>
+
+                @endisset
+
+            </div>
+        </x-slot>
+        <x-slot name="footer">
+            <x-secondary-button wire:click="$toggle('modalFavorites')" class="mx-2">
+                Fechar
+            </x-secondary-button>
+        </x-slot>
+    </x-dialog-modal>
+    @section('scripts')
+        <script>
+            document.addEventListener('livewire:init', () => {
+                Livewire.on('openPdfInNewTab', ({
+                    pdfPath
+                }) => {
+                    window.open(pdfPath, '_blank');
+                })
+            })
+        </script>
+    @endsection
 
 </div>

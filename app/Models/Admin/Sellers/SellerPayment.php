@@ -3,6 +3,7 @@
 namespace App\Models\Admin\Sellers;
 
 use App\Enums\Payments\PaymentStatus;
+use App\Models\Admin\Financial\Bill;
 use App\Models\Admin\Registers\Partner;
 use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
@@ -27,6 +28,7 @@ class SellerPayment extends Model
         'value',
         'form_payment',
         'observation',
+        'bill_id',
         'created_by',
     ];
 
@@ -61,5 +63,10 @@ class SellerPayment extends Model
     public function createdBy(): BelongsTo
     {
         return $this->belongsTo(User::class, 'created_by');
+    }
+
+    public function bills()
+    {
+        return $this->belongsTo(Bill::class,  'bill_id', 'id');
     }
 }

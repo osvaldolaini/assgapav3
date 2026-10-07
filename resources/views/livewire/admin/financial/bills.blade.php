@@ -2,7 +2,7 @@
     <x-breadcrumb>
         <div class="grid grid-cols-8 gap-4 text-gray-600 ">
             <div class="col-span-6 justify-items-start">
-                <h3 class="text-2xl font-bold tracki  dark:text-gray-50">
+                <h3 class="text-2xl font-bold tracki dark:text-gray-50">
                     {{ $breadcrumb_title }}
                 </h3>
             </div>
@@ -13,16 +13,15 @@
     </x-breadcrumb>
     <x-table-buttons-relatories :pdf="true" :print="true" :excel="true">
     </x-table-buttons-relatories>
-    <div class="bg-white dark:bg-gray-800 pt-3 sm:rounded-lg">
+    <div class="pt-3 bg-white dark:bg-gray-800 sm:rounded-lg">
         <div>
             <x-table-search></x-table-search>
-            <div class=" bg-white dark:bg-gray-800 sm:rounded-lg my-6 px-4">
-                <div class="-mx-4  overflow-x-auto sm:-mx-6 lg:-mx-8">
+            <div class="px-4 my-6 bg-white  dark:bg-gray-800 sm:rounded-lg">
+                <div class="-mx-4 overflow-x-auto sm:-mx-6 lg:-mx-8">
                     <div class="inline-block min-w-full align-middle md:px-6 lg:px-8">
                         <div class="overflow-hidden border border-gray-200 dark:border-gray-700 sm:rounded-lg">
                             <table style="width:100%"
-                                class='min-w-full divide-y divide-gray-200
-                             dark:divide-gray-700'>
+                                class='min-w-full divide-y divide-gray-200 dark:divide-gray-700'>
                                 <thead class="bg-gray-50 dark:bg-gray-800">
                                     <tr scope="col"
                                         class="py-3.5 px-4 text-sm font-normal text-left text-gray-600
@@ -89,7 +88,7 @@
                                                     class="py-1.5 px-4 text-sm uppercase font-normal text-left itens-center text-gray-600 dark:text-gray-400">
                                                     @if ($data->category)
                                                         <div style="background-color:{{ $data->color }};"
-                                                            class="badge flex-warp gap-2 mx-1 text-sm ">
+                                                            class="gap-2 mx-1 text-sm badge flex-warp ">
                                                             {{ $data->category }}
                                                         </div>
                                                     @endif
@@ -107,9 +106,7 @@
                                                     class="py-1.5 px-4 text-sm font-normal text-center
                                                        flex-nowrap">
                                                     @if ($data->active == 1)
-                                                    @if ($data->active == 1)
-                                                    @livewire('admin.financial.voucher', ['data' => $data,'type'=>'bills'], key($data->id))
-                                                @endif
+                                                        @livewire('admin.financial.voucher', ['data' => $data, 'type' => 'bills'], key($data->id))
                                                     @endif
                                                 </td>
 
@@ -117,14 +114,13 @@
                                                     class="w-1/6 py-1.5 px-4 text-sm font-normal text-center text-gray-600 dark:text-gray-400">
                                                     @if ($data->active > 1)
                                                         <x-table-buttons-deleted id="{{ $data->id }}"
-                                                            :update="false" :delete="true" :view="true"
-                                                            >
+                                                            :update="false" :delete="true" :view="true">
                                                         </x-table-buttons-deleted>
                                                     @else
-                                                    <x-table-buttons id="{{ $data->id }}" :update="true"
-                                                        :delete="true" :view="true">
-                                                    </x-table-buttons>
-                                                    {{-- <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                        <x-table-buttons id="{{ $data->id }}" :update="true"
+                                                            :delete="true" :view="true">
+                                                        </x-table-buttons>
+                                                        {{-- <x-table-buttons id="{{ $data->id }}" :update="true"
                                                         :delete="true" :view="true" :active="$data->active">
                                                     </x-table-buttons> --}}
                                                     @endif
@@ -140,7 +136,7 @@
                     </div>
                 </div>
 
-                <div class="items-center justify-between  py-4">
+                <div class="items-center justify-between py-4">
                     {{ $dataTable->links() }}
                 </div>
             </div>
@@ -155,63 +151,63 @@
         <x-slot name="content">
             <h2 class="h2">Deseja realmente excluir o registro?</h2>
             <p>Não será possível reverter esta ação!</p>
-            <form >
-            <div class="col-span-full">
-                <label for="deleted_because">*Motivo da exclusão</label>
-                <input
-                    class="w-full rounded-md focus:ring focus:ri focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
-                    placeholder="Descrição" wire:model="deleted_because" required>
-                @error('deleted_because')
-                    <span class="error">{{ $message }}</span>
-                @enderror
+            <form>
+                <div class="col-span-full">
+                    <label for="deleted_because">*Motivo da exclusão</label>
+                    <input
+                        class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"="Motivo"
+                        placeholder="Descrição" wire:model="deleted_because" required>
+                    @error('deleted_because')
+                        <span class="error">{{ $message }}</span>
+                    @enderror
             </form>
-            </div>
-        </x-slot>
+</div>
+</x-slot>
 
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('showJetModal')" wire:loading.attr="disabled">
-                Cancelar
-            </x-secondary-button>
+<x-slot name="footer">
+    <x-secondary-button wire:click="$toggle('showJetModal')" wire:loading.attr="disabled">
+        Cancelar
+    </x-secondary-button>
 
-            <x-danger-button class="ml-2" wire:click="delete({{ $registerId }})" wire:loading.attr="disabled">
-                Apagar registro
-            </x-danger-button>
-        </x-slot>
-    </x-confirmation-modal>
+    <x-danger-button class="ml-2" wire:click="delete({{ $registerId }})" wire:loading.attr="disabled">
+        Apagar registro
+    </x-danger-button>
+</x-slot>
+</x-confirmation-modal>
 
-    {{-- MODAL READ --}}
-    <x-dialog-modal wire:model="showModalView">
-        <x-slot name="title">Detalhes</x-slot>
-        <x-slot name="content">
-            <dl class="max-w text-gray-900 divide-y divide-gray-200 dark:text-white dark:divide-gray-700">
-                @if ($detail)
-                    @foreach ($detail as $item => $value)
-                        @if ($value)
-                            @if ($item == 'Foto')
-                                <figure class="w-48">
-                                    <img class="photo" src="{{ $value }}" alt="Movie" />
-                                </figure>
-                            @else
-                                <div class="flex flex-col pb-1">
-                                    <dt class="text-gray-600 md:text-lg dark:text-gray-400">{{ $item }}:</dt>
-                                    <dd class="text-lg font-semibold">
-                                        {{ $value }}
-                                    </dd>
-                                </div>
-                            @endif
+{{-- MODAL READ --}}
+<x-dialog-modal wire:model="showModalView">
+    <x-slot name="title">Detalhes</x-slot>
+    <x-slot name="content">
+        <dl class="text-gray-900 divide-y divide-gray-200 max-w dark:text-white dark:divide-gray-700">
+            @if ($detail)
+                @foreach ($detail as $item => $value)
+                    @if ($value)
+                        @if ($item == 'Foto')
+                            <figure class="w-48">
+                                <img class="photo" src="{{ $value }}" alt="Movie" />
+                            </figure>
+                        @else
+                            <div class="flex flex-col pb-1">
+                                <dt class="text-gray-600 md:text-lg dark:text-gray-400">{{ $item }}:</dt>
+                                <dd class="text-lg font-semibold">
+                                    {{ $value }}
+                                </dd>
+                            </div>
                         @endif
-                    @endforeach
-                @endif
-                @if ($logs)
-                    {!! $logs !!}
-                @endif
-            </dl>
-        </x-slot>
-        <x-slot name="footer">
-            <x-secondary-button wire:click="$toggle('showModalView')" class="mx-2">
-                Fechar
-            </x-secondary-button>
-        </x-slot>
-    </x-dialog-modal>
+                    @endif
+                @endforeach
+            @endif
+            @if ($logs)
+                {!! $logs !!}
+            @endif
+        </dl>
+    </x-slot>
+    <x-slot name="footer">
+        <x-secondary-button wire:click="$toggle('showModalView')" class="mx-2">
+            Fechar
+        </x-secondary-button>
+    </x-slot>
+</x-dialog-modal>
 
 </div>

@@ -10,7 +10,7 @@ enum PaymentType: string
     public function label(): string
     {
         return match ($this) {
-            self::JEWEL => 'Joia',
+            self::JEWEL => 'Jóia',
             self::RENTAL => 'Locação',
         };
     }

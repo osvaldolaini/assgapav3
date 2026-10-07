@@ -8,7 +8,7 @@
 
 ## v 3.37 02/10/2026
 
--   Pagamentos vendedor
+-   Pagamentos vendedor (falta pesquisar)
 
 ## v 3.36 01/10/2026
 

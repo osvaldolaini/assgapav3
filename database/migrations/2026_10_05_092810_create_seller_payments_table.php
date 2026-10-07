@@ -15,6 +15,7 @@ return new class extends Migration
                 ->constrained('partners')
                 ->cascadeOnDelete();
 
+            $table->foreignId('bill_id')->nullable()->constrained();
             $table->date('date');
 
             $table->decimal('value', 10, 2);

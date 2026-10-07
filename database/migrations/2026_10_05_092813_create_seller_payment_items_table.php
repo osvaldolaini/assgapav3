@@ -11,8 +11,9 @@ return new class extends Migration
         Schema::create('seller_payment_items', function (Blueprint $table) {
             $table->id();
 
-            $table->boolean('status')->nullable();
+            $table->string('status');
 
+            $table->foreignId('bill_id')->nullable()->constrained();
             $table->foreignId('seller_payment_id')
                 ->constrained('seller_payments')
                 ->cascadeOnDelete();

@@ -8,6 +8,7 @@ enum PaymentStatus: string
     case PAID = 'paid';
     case RELEASED = 'released';
 
+
     public function label(): string
     {
         return match ($this) {

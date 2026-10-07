@@ -2,6 +2,8 @@
 
 namespace App\Models\Admin\Sellers;
 
+use App\Enums\Payments\PaymentStatus;
+use App\Models\Admin\Financial\Bill;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
@@ -22,12 +24,17 @@ class SellerPaymentItem extends Model
         'seller_payment_id',
         'item_type',
         'item_id',
+        'status',
+        'bill_id',
         'value',
     ];
 
     protected $casts = [
         'value' => 'decimal:2',
+        'status' => PaymentStatus::class,
     ];
+
+
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
@@ -43,5 +50,9 @@ class SellerPaymentItem extends Model
     public function item(): MorphTo
     {
         return $this->morphTo();
+    }
+    public function bills()
+    {
+        return $this->belongsTo(Bill::class,  'bill_id', 'id');
     }
 }

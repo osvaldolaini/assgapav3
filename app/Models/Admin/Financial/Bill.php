@@ -21,22 +21,34 @@ class Bill extends Model
     protected $table = 'bills';
 
     protected $fillable = [
-        'title','active','creditor','creditor_document','paid_in','value','cost_center_id','type',
-        'updated_because','deleted_at','deleted_because','deleted_by','updated_by','creditor_id',
+        'title',
+        'active',
+        'creditor',
+        'creditor_document',
+        'paid_in',
+        'value',
+        'cost_center_id',
+        'type',
+        'updated_because',
+        'deleted_at',
+        'deleted_because',
+        'deleted_by',
+        'updated_by',
+        'creditor_id',
         'created_by'
     ];
     public function setCreditorAttribute($value)
     {
-        $this->attributes['creditor']=mb_strtoupper($value);
+        $this->attributes['creditor'] = mb_strtoupper($value);
     }
     public function setTitleAttribute($value)
     {
-        $this->attributes['title']=mb_strtoupper($value);
+        $this->attributes['title'] = mb_strtoupper($value);
     }
 
-    public function cost_center():BelongsTo
+    public function cost_center(): BelongsTo
     {
-        return $this->belongsTo(CostCenter::class,'cost_center_id','id');
+        return $this->belongsTo(CostCenter::class, 'cost_center_id', 'id');
     }
     public function setValueAttribute($value)
     {
@@ -51,16 +63,16 @@ class Bill extends Model
     public function setPaidInAttribute($value)
     {
         if ($value != "") {
-            $this->attributes['paid_in']=implode("-",array_reverse(explode("/",$value)));
-        }else{
-            $this->attributes['paid_in']=NULL;
+            $this->attributes['paid_in'] = implode("-", array_reverse(explode("/", $value)));
+        } else {
+            $this->attributes['paid_in'] = NULL;
         }
     }
     public function getPaidInAttribute($value)
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
         }
     }
 
@@ -68,11 +80,11 @@ class Bill extends Model
     {
         if ($value != "") {
             return Carbon::createFromFormat('Y-m-d', $value)
-            ->format('d/m/Y');
+                ->format('d/m/Y');
         }
     }
 
-    public function partner()
+    public function partner(): BelongsTo
     {
         return $this->belongsTo(Partner::class, 'creditor_id', 'id');
     }
@@ -81,7 +93,7 @@ class Bill extends Model
     public function getActivitylogOptions(): LogOptions
     {
         return LogOptions::defaults()
-        ->logOnly($this->fillable);
+            ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
     }
 
@@ -131,15 +143,14 @@ class Bill extends Model
                     $converted = 2;
                 } elseif (stripos('despesa', $value) !== false) {
                     $converted = 2;
-                }elseif (stripos('Receira', $value) !== false) {
+                } elseif (stripos('Receira', $value) !== false) {
                     $converted = 1;
-                }elseif (stripos('Receira', $value) !== false) {
+                } elseif (stripos('Receira', $value) !== false) {
                     $converted = 1;
                 }
 
-                return array('f'=>'LIKE','converted'=>'%' . $converted . '%');
+                return array('f' => 'LIKE', 'converted' => '%' . $converted . '%');
             }
-
         }
     }
 }
