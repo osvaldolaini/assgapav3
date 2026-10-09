@@ -9,7 +9,7 @@
             <div class="col-span-2 justify-items-end">
                 @if ($partner_category_master == 'Sócio')
                     <x-table-register-buttons id="{{ $id }}" :card="true" :dependent="true"
-                        :history="true" :discount="true">
+                        :history="true" :discount="true" :responsible="$responsible">
                     </x-table-register-buttons>
                 @else
                     @if ($partner_category_master == 'Dependente')

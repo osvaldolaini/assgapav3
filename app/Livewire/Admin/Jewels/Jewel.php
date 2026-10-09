@@ -40,6 +40,8 @@ class Jewel extends Component
 
     public $year;
 
+    public $responsible;
+
     public function mount(Partner $partner)
     {
         $this->partner = $partner;
@@ -49,6 +51,7 @@ class Jewel extends Component
 
         $this->breadcrumb_title = 'JÓIA: ' . $partner->name;
         $this->id = $partner->id;
+        $this->responsible = $partner->id;
     }
 
     public function render()

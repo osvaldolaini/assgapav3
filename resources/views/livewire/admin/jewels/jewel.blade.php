@@ -8,7 +8,7 @@
             </div>
             <div class="col-span-2 justify-items-end">
                 <x-table-register-buttons id="{{ $id }}" :card="true" :dependent="true" :history="true"
-                    :discount="true">
+                    :discount="true" :responsible="$responsible">
                 </x-table-register-buttons>
 
             </div>
