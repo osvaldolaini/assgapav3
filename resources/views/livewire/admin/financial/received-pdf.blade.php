@@ -106,7 +106,14 @@
     <table>
         <tr>
             <td colspan="2"><b>Recebemos de:</b> {{ mb_strtoupper($received->partners->name) }}</td>
-            <td><b>Forma de pagamento:</b> {{ mb_strtoupper($received->form_payment) }}</td>
+            <td><b>CPF / CNPJ:</b>
+                @if ($received->partners->pf_pj == 'pf')
+                    {{ mb_strtoupper($received->partners->cpf) }}
+                @else
+                    {{ mb_strtoupper($received->partners->cnpj) }}
+                @endif
+
+            </td>
         </tr>
         <tr>
             <td colspan="3"><b>Endereço:</b> {{ mb_strtoupper($received->partners->address) }},
@@ -114,13 +121,14 @@
                 {{ mb_strtoupper($received->partners->state) }} </td>
         </tr>
         <tr>
-            <td colspan="3"><b>Operador responsável:</b>
+            <td colspan="2"><b>Operador responsável:</b>
                 @if ($received->updated_by)
                     {{ mb_strtoupper($received->updated_by) }}
                 @else
                     {{ mb_strtoupper($received->created_by) }}
                 @endif
             </td>
+            <td><b>Forma de pagamento:</b> {{ mb_strtoupper($received->form_payment) }}</td>
         </tr>
         <tr>
             <td style="width:40%;"><b>A importância de:</b> R$ {{ $received->value }} </td>
@@ -167,7 +175,15 @@
 <div class="receipt-body">
     <table>
         <tr>
-            <td colspan="3"><b>Recebemos de:</b> {{ mb_strtoupper($received->partners->name) }}</td>
+            <td colspan="2"><b>Recebemos de:</b> {{ mb_strtoupper($received->partners->name) }}</td>
+            <td><b>CPF / CNPJ:</b>
+                @if ($received->partners->pf_pj == 'pf')
+                    {{ mb_strtoupper($received->partners->cpf) }}
+                @else
+                    {{ mb_strtoupper($received->partners->cnpj) }}
+                @endif
+
+            </td>
         </tr>
         <tr>
             <td colspan="3"><b>Endereço:</b> {{ mb_strtoupper($received->partners->address) }},
@@ -175,13 +191,14 @@
                 {{ mb_strtoupper($received->partners->state) }} </td>
         </tr>
         <tr>
-            <td colspan="3"><b>Operador responsável:</b>
+            <td colspan="2"><b>Operador responsável:</b>
                 @if ($received->updated_by)
                     {{ mb_strtoupper($received->updated_by) }}
                 @else
                     {{ mb_strtoupper($received->created_by) }}
                 @endif
             </td>
+            <td><b>Forma de pagamento:</b> {{ mb_strtoupper($received->form_payment) }}</td>
         </tr>
         <tr>
             <td style="width:40%;"><b>A importância de:</b> R$ {{ $received->value }} </td>
