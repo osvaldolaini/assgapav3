@@ -189,7 +189,9 @@
                                 </div>
                             </div>
                         </x-breadcrumb>
+                        @livewire('admin.sellers.cards')
                         <div class="flex mx-3 space-x-4 sm:mx-4 sm:p-5">
+                           
 
                             @livewire('admin.sellers.register')
                             @livewire('admin.sellers.sales')

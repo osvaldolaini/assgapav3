@@ -8,6 +8,7 @@ use App\Models\Admin\Financial\Bill;
 use App\Models\Admin\Financial\Received;
 use App\Models\Admin\Locations\Location;
 use App\Models\Admin\Monthly\MonthlyPayment;
+use App\Models\Admin\Sellers\SellerPayment;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -297,5 +298,39 @@ class Partner extends Model
     public function jewels(): HasMany
     {
         return $this->hasMany(Jewel::class, 'partner_id', 'id');
+    }
+
+    public function sales(): HasMany
+    {
+        return $this->hasMany(SellerPayment::class, 'seller_id', 'id');
+    }
+
+    function getMascararCpfAttribute(): string
+    {
+        // Remove tudo que não é número
+        $numeros = preg_replace('/\D/', '', $this->cpf);
+
+        if (strlen($numeros) !== 11) {
+            return $this->cpf; // ou lance uma exception se preferir
+        }
+
+        // Formato: 123.*.*-01
+        return substr($numeros, 0, 3) . '.*.*-' . substr($numeros, -2);
+    }
+
+    function getMascararNameAttribute()
+    {
+        $partes = explode(' ', trim($this->name));
+        $resultado = [];
+
+        foreach ($partes as $parte) {
+            if (strlen($parte) <= 2) {
+                $resultado[] = $parte[0] . str_repeat('*', strlen($parte) - 1);
+            } else {
+                // Mostra 1ª letra + asteriscos + última letra
+                $resultado[] = $parte[0] . str_repeat('*', strlen($parte) - 2) . $parte[strlen($parte) - 1];
+            }
+        }
+        return implode(' ', $resultado);
     }
 }

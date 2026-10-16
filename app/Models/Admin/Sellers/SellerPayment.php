@@ -26,6 +26,7 @@ class SellerPayment extends Model
         'seller_id',
         'date',
         'value',
+        'status',
         'form_payment',
         'observation',
         'bill_id',
@@ -48,6 +49,18 @@ class SellerPayment extends Model
         return LogOptions::defaults()
             ->logOnly($this->fillable);
         // Chain fluent methods for configuration options
+    }
+    public function setValueAttribute($value)
+    {
+        $this->attributes['value'] = $this->convert_value($value);
+    }
+    public function convert_value($value)
+    {
+        str_replace(' ', '', $value);
+        ltrim($value);
+        $value = str_replace('.', '', $value);
+        $value = str_replace(',', '.', $value);
+        return str_replace(' ', '', $value);
     }
 
     public function seller(): BelongsTo

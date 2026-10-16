@@ -210,8 +210,8 @@
                             <dt class="text-sm font-medium leading-5 text-white truncate">
                                 Total pago
                             </dt>
-                            <dd class="mt-1 text-5xl font-bold leading-9 text-white">
-                                {{-- {{ $jewels ?? 0 }} --}}
+                            <dd class="mt-1 text-3xl font-bold leading-9 text-white">
+                                R$ {{ number_format($totalPay, 2, ',', '.') ?? 0 }}
                             </dd>
                         </dl>
                     </div>
@@ -318,6 +318,12 @@
                                             text-center text-gray-500
                                             dark:text-gray-400">
                                     Valor
+                                </th>
+                                <th scope="col"
+                                    class="py-3.5 px-4 text-sm font-normal
+                                            text-center text-gray-500
+                                            dark:text-gray-400">
+                                    Cashback
                                 </th>
                                 <th scope="col"
                                     class="py-3.5 px-4 text-sm font-normal
@@ -445,6 +451,10 @@
                                         {{ $item->value }}
                                     </td>
                                     <td
+                                        class="py-1.5 px-4 text-sm font-normal  text-center text-gray-500 dark:text-gray-400">
+                                        {{ number_format($item->payment_value, 2, ',', '.') }}
+                                    </td>
+                                    <td
                                         class="w-1/6 py-1.5 px-4 text-sm font-normal text-center
                                              text-gray-500 dark:text-gray-400 flex-nowrap">
                                         <div class="flex items-center gap-2">
@@ -506,8 +516,15 @@
                                 </div>
                             </div>
 
-                            <div class="font-semibold">
-                                R$ {{ $item->value }}
+                            <div>
+                                <div class="font-semibold">
+                                    Cashback
+                                </div>
+
+                                <div class="text-xs text-gray-500">
+                                    R$
+                                    {{ number_format($item->payment_value, 2, ',', '.') }}
+                                </div>
                             </div>
                         </div>
                     @endforeach
@@ -580,7 +597,7 @@
                     <div class="col-span-full sm:col-span-3">
                         <label for="value">*Valor</label>
                         <input class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900"
-                            placeholder="Valor" wire:model="value" id="value" required readonly>
+                            placeholder="Valor" wire:model="value" id="value" required>
                         @error('value')
                             <span class="error">{{ $message }}</span>
                         @enderror
@@ -661,10 +678,17 @@
                                         {{ $item->date }}
                                     </div>
                                 </div>
+                                <div>
+                                    <div class="font-semibold">
+                                        Cashback
+                                    </div>
 
-                                <div class="font-semibold">
-                                    R$ {{ $item->value }}
+                                    <div class="text-xs text-gray-500">
+                                        R$
+                                        {{ number_format($item->payment_value, 2, ',', '.') }}
+                                    </div>
                                 </div>
+
                             </div>
                         @endforeach
 
@@ -677,7 +701,7 @@
 
                         <span class="text-lg font-bold">
                             R$
-                            {{ number_format($this->selectedItems->sum(fn($item) => (float) $item->value), 2, ',', '.') }}
+                            {{ number_format($this->selectedItems->sum(fn($item) => (float) $item->payment_value), 2, ',', '.') }}
                         </span>
 
                     </div>

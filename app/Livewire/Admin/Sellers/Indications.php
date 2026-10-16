@@ -15,7 +15,8 @@ class Indications extends Component
     {
 
         $this->showModalCreate = true;
-        $this->indications = Auth::user()->indications;
+        $this->indications = Auth::user()->partner->indications;
+        // dd($this->indications);
     }
     public function render()
     {

@@ -42,6 +42,12 @@ class Master extends Component
     public $detail;
     public $showModalView = false;
 
+    public $indications;
+    public $registers;
+    public $totalPay;
+    public $jewels;
+
+
     protected $listeners =
     [
         'changeAmbience',
@@ -108,6 +114,7 @@ class Master extends Component
             $this->ambiences = Ambience::select('id', 'title')->orderBy('title', 'asc')
                 ->where('active', 1)->get();
             $this->events = $this->getCalendarReservation($this->year);
+
 
             return view('livewire.admin.dashboard.external-seller')->layout('layouts.seller');
         }

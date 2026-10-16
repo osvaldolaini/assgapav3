@@ -42,27 +42,12 @@
                                         <tr class="hover:bg-gray-200">
                                             <td>
                                                 <div class="flex items-center gap-3 ">
-                                                    <div class="avatar">
-                                                        <div class="w-12 h-12 mask mask-squircle">
-                                                            @if ($item->imageTitle)
-                                                                <picture>
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.webp') }}" />
-                                                                    <source
-                                                                        srcset="{{ url('storage/partners/' . $item->imageTitle . '.png') }}" />
-                                                                    <img src="{{ url('storage/partners/' . $item->imageTitle . '.jpg') }}"
-                                                                        alt="{{ $item->name }}">
-                                                                </picture>
-                                                            @endif
-
-                                                        </div>
-                                                    </div>
                                                     <div>
-                                                        <div class="font-bold">{{ $item->name }} -
-                                                            {{ $item->partner_category_master }}</div>
-                                                        <div class="text-sm opacity-50">{{ $item->cpf }} </div>
+                                                        <div class="font-bold">
+                                                            {{ $item->partners->mascarar_name }}
+                                                        </div>
+                                                        <div class="text-sm opacity-50">{{ $item->partners->mascarar_cpf }}
+                                                        </div>
                                                     </div>
                                                 </div>
                                             </td>

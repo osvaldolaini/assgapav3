@@ -61,6 +61,7 @@ class Payments extends Component
     public $categories;
     public $favorites;
     public $pages;
+    public $totalPay;
 
     public string $search = '';
 
@@ -81,6 +82,9 @@ class Payments extends Component
         $this->categories = CostCenter::select('title', 'id')->get();
 
         $this->pages = Auth::user()->access->pluck('page_id')->toArray();
+
+        $this->totalPay = $partner->sales->sum(fn($sale) => (float) $sale->value);
+        // dd($partner->sales);
     }
     public function render()
     {
@@ -146,13 +150,16 @@ class Payments extends Component
                 },
                 'bill' => $paymentItem?->bills ?? '',
                 'payment_item' => $paymentItem,
-                'payment_value' => $paymentItem?->value,
+                'payment_value' => $jewel->value_db * 0.1,
             ];
         });
+        // dd($jewels);
+
 
         $rentals = $rentals->map(function ($rental) use ($paymentItems) {
             $key = Location::class . ':' . $rental->id;
             $paymentItem = $paymentItems->get($key);
+            // $p = $rental->cashback;
             return (object) [
                 'type' => PaymentType::RENTAL,
                 'model' => $rental,
@@ -167,7 +174,7 @@ class Payments extends Component
                 },
                 'payment_item' => $paymentItem,
                 'bill' => $paymentItem?->bills ?? '',
-                'payment_value' => $paymentItem?->value,
+                'payment_value' => $rental->cashback,
             ];
         });
 
@@ -260,7 +267,7 @@ class Payments extends Component
                 ->groupBy('title')->toArray();
         }
         $this->selectedItems = $this->getSelectedItemsProperty();
-        $this->value = number_format($this->selectedItems->sum(fn($item) => (float) $item->value), 2, ',', '.');
+        $this->value = number_format($this->selectedItems->sum(fn($item) => (float) $item->payment_value), 2, ',', '.');
     }
     //LIBERAR
     public function modalReleased()
@@ -281,17 +288,27 @@ class Payments extends Component
     public function checkout($status)
     {
         $this->status = $status;
+
         if (empty($this->pay)) {
             return;
         }
+
         DB::transaction(function () {
+
+            $value = 0;
+            if ($this->status == 'released') {
+                $value = 0;
+            } else {
+                $value = $this->value;
+            }
 
             $payment = SellerPayment::create([
                 'seller_id'     => $this->partner->id,
                 'date'          => now(),
-                'value'         => 0,
+                'value'         => $value,
                 'form_payment'  => null,
                 'observation'   => null,
+                'status'        => $this->status,
                 'created_by'    => auth()->id(),
             ]);
 
@@ -303,8 +320,10 @@ class Payments extends Component
 
                 if ($type === 'joia') {
                     $model = Jewel::find($id);
+                    $value = (float) $model?->value * 0.1 ?? 0;
                 } elseif ($type === 'locacao') {
                     $model = Location::find($id);
+                    $value = (float) $model?->cashback;
                 } else {
                     continue;
                 }
@@ -321,9 +340,6 @@ class Payments extends Component
                 if ($alreadyPaid) {
                     continue;
                 }
-
-                $value = (float) $model->value;
-
                 SellerPaymentItem::create([
                     'seller_payment_id' => $payment->id,
                     'item_type'         => $model::class,
@@ -334,12 +350,12 @@ class Payments extends Component
 
                 $total += $value;
             }
+            // dd($this->status);
+            // $payment->update([
+            //     'value' => $total,
+            // ]);
 
-            $payment->update([
-                'value' => $total,
-            ]);
-
-            if ($this->status) {
+            if ($this->status != 'released') {
                 $payment->update([
                     'bill_id' => $this->save_out(),
                 ]);
@@ -350,6 +366,7 @@ class Payments extends Component
                 }
             }
         });
+
 
         $this->pay = [];
 

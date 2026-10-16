@@ -10,13 +10,13 @@ return new class extends Migration
     {
         Schema::create('seller_payments', function (Blueprint $table) {
             $table->id();
-
             $table->foreignId('seller_id')
                 ->constrained('partners')
                 ->cascadeOnDelete();
 
             $table->foreignId('bill_id')->nullable()->constrained();
             $table->date('date');
+            $table->string('status');
 
             $table->decimal('value', 10, 2);
 
