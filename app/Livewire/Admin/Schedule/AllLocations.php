@@ -226,6 +226,7 @@ class AllLocations extends Component
                 'start' => $start,
                 'end' => $end,
                 'id' => $event->id,
+                'type_event' => 1
             );
         }
         // // dd($calendar);
@@ -262,6 +263,8 @@ class AllLocations extends Component
 
                 if ($key->type == 0) {
                     $text = 'Pré-reserva: ' . $key->title;
+                } elseif ($key->type == 2) {
+                    $text = 'Sem contrato: ' . $key->title;
                 } else {
                     $text = 'Motivo: ' . $key->title;
                 }
@@ -280,26 +283,28 @@ class AllLocations extends Component
     }
 
     //READ
-    public function showModalRead($id)
+    public function showModalRead($event)
     {
-        redirect()->route('edit-location', $id);
-        // $this->showModalView = true;
-        // if (isset($id)) {
-        //     $data = Location::find($id);
-        //     $this->detail = [
-        //         'Locatário'         => $data->partners->name,
-        //         'Motivo'            => ($data->reasons ? $data->reasons->title : $data->event_type),
-        //         'Beneficiado'       => $data->event_benefited,
-        //         'Criada em'         => $data->updated,
-        //         'Criada por'        => $data->created_by,
-        //         'Atualizada'        => $data->updated,
-        //         'Atualizada por'    => $data->updated_by,
-        //     ];
-        //     //   $this->logs = logging($data->id,$this->model);
-        // } else {
-        //     $this->detail = '';
-        // }
-        // $this->getFullCalendar();
+        // dd($event['extendedProps']);
+        if ($event['extendedProps']['type_event'] == 0) {
+            $this->showModalView = true;
+            if (isset($event['id'])) {
+                $data = AmbienceUnavailability::find($event['id']);
+                $this->detail = [
+                    'Motivo / Locatário' => $data->title,
+                    'Criada em'         => $data->updated,
+                    'Criada por'        => $data->created_by,
+                    'Atualizada'        => $data->updated,
+                    'Atualizada por'    => $data->updated_by,
+                ];
+                //   $this->logs = logging($data->id,$this->model);
+            } else {
+                $this->detail = '';
+            }
+            // $this->getFullCalendar();
+        } else {
+            redirect()->route('edit-location', $event['id']);
+        }
     }
     //MESSAGE
     public function openAlert($status, $msg)

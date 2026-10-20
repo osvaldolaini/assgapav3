@@ -12,41 +12,71 @@
     </div>
     {{-- MODAL CREATE --}}
     <x-dialog-modal wire:model="showModalCreate">
-        <x-slot name="title">Pré reserva </x-slot>
+        <x-slot name="title">Locação </x-slot>
         <x-slot name="content">
             <form wire:submit="store">
-                <div class="grid gap-4 mb-1 text-left sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                <div class="grid gap-4 mb-1 sm:grid-cols-2 sm:gap-6 sm:mb-5">
+                    <div class="col-span-full ">
+                        <label for="type" class="block text-sm font-medium text-gray-900 dark:text-white">
+                            *Tipo</label>
+                        <Select wire:model.live="type" required
+                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                            <option value="">Selecione</option>
+                            <option value="0">Pré reserva</option>
+                            <option value="2">Sem contrato</option>
+                        </Select>
+                        @error('type')
+                            <span class="error">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <div class="col-span-full ">
                         <label for="title" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            *Cliente</label>
-                        <input type="text" wire:model="title" placeholder="Cliente" required
+                            *Motivo</label>
+                        <input type="text" wire:model="title" placeholder="Motivo" required
                             class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
                         @error('title')
                             <span class="error">{{ $message }}</span>
                         @enderror
                     </div>
-                    <div class="sm:col-span-1">
-                        <label for="ambience_id" class="text-sm">*Ambiente</label>
-                        <Select wire:model.live="ambience_id" required
-                            class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
-                            <option value="">Selecione...</option>
-                            @foreach ($ambience as $item)
-                                <option value="{{ $item->id }}">
-                                    {{ $item->title }}
-                                </option>
-                            @endforeach
-                        </Select>
-                    </div>
-                    <div class="col-span-2 sm:col-span-1">
-                        <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
-                            Data <span class="text-red-500">{{ $alert }}</span></label>
-                        <input type="text" x-mask="99/99/9999" wire:model.live="start" placeholder="Data" required
-                            class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
-                        @error('start')
-                            <span class="error">{{ $message }}</span>
-                        @enderror
-                    </div>
+                    @if ($type != '')
+                        <div class="{{ $type != 1 ? 'sm:col-span-1' : 'col-span-full sm:col-span-2' }}">
+                            <label for="ambience_id" class="text-sm">*Ambiente</label>
+                            <Select wire:model.live="ambience_id" required
+                                class="w-full rounded-md focus:ring focus:ri dark:border-gray-700 dark:text-gray-900">
+                                <option value="">Selecione...</option>
+                                @foreach ($ambience as $item)
+                                    <option value="{{ $item->id }}">
+                                        {{ $item->title }}
+                                    </option>
+                                @endforeach
+                            </Select>
+                        </div>
+                        @if ($ambience_id)
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="start" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Data <span class="text-red-500">{{ $alert }}</span></label>
+                                <input type="text" x-mask="99/99/9999" wire:model.live="start" placeholder="Data"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('start')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="col-span-2 sm:col-span-1">
+                                <label for="validity" class="block text-sm font-medium text-gray-900 dark:text-white">
+                                    Validade</label>
+                                <input type="text" x-mask="99/99/9999" wire:model="validity" placeholder="Data"
+                                    required
+                                    class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-primary-500 dark:focus:border-primary-500">
+                                @error('validity')
+                                    <span class="error">{{ $message }}</span>
+                                @enderror
+                            </div>
+                        @endif
 
+
+                    @endif
 
 
                 </div>
@@ -67,4 +97,5 @@
             </x-secondary-button>
         </x-slot>
     </x-dialog-modal>
+
 </div>

@@ -165,7 +165,7 @@
                                 events: @this.events,
                                 eventClick: function(info) {
                                     Livewire.dispatch('showModalRead', {
-                                        id: info.event.id
+                                        event: info.event
                                     })
                                 },
                             });
@@ -192,10 +192,11 @@
                             events: @this.events,
                             eventClick: function(info) {
                                 Livewire.dispatch('showModalRead', {
-                                    id: info.event.id
+                                    event: info.event
                                 })
                             },
                         });
+
                         calendar.render();
                     });
 

@@ -126,6 +126,8 @@ class LocationCalendar extends Component
 
                 if ($key->type == 0) {
                     $text = 'Pré-reserva: ' . $key->title;
+                } elseif ($key->type == 2) {
+                    $text = 'Sem contrato: ' . $key->title;
                 } else {
                     $text = 'Motivo: ' . $key->title;
                 }
@@ -170,12 +172,14 @@ class LocationCalendar extends Component
             ->where('ambience_id', $this->ambience_id)
             ->where('start', 'LIKE', '%' . $initial . '%')
             ->first();
-        // dd($unavailabilities);
+
         if ($unavailabilities) {
             $created_at = Carbon::parse($unavailabilities->created_at)
                 ->format('d/m/Y H:i:s');
             if ($unavailabilities->type == 0) {
                 $this->openAlert('error', 'Existe uma pré-reserva para: ' . $unavailabilities->title . ' realizada no dia ' . $created_at . ' por ' . $unavailabilities->created_by);
+            } elseif ($unavailabilities->type == 1) {
+                $this->openAlert('error', 'Existe uma locação sem contrato para: ' . $unavailabilities->title . ' realizada no dia ' . $created_at . ' por ' . $unavailabilities->created_by);
             } else {
                 $unavailabilities->openAlert('error', 'Existe uma indisponibilidade por: ' . $unavailabilities->title);
             }
@@ -336,6 +340,8 @@ class LocationCalendar extends Component
 
                 if ($key->type == 0) {
                     $text = 'Pré-reserva: ' . $key->title;
+                } elseif ($key->type == 2) {
+                    $text = 'SEM CONTRATO: ' . $key->title;
                 } else {
                     $text = 'Motivo: ' . $key->title;
                 }
@@ -359,6 +365,17 @@ class LocationCalendar extends Component
         if (isset($id)) {
             // dd($id);
             if ($type == 0) {
+                $data = AmbienceUnavailability::where('active', 1)
+                    ->where('id', $id)
+                    ->first();
+                $this->detail = [
+                    'Locatário'         => $data->title,
+                    'Criada em'         => $data->updated,
+                    'Criada por'        => $data->created_by,
+                    'Atualizada'        => $data->updated,
+                    'Atualizada por'    => $data->updated_by,
+                ];
+            } elseif ($type == 2) {
                 $data = AmbienceUnavailability::where('active', 1)
                     ->where('id', $id)
                     ->first();

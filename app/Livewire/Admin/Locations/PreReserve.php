@@ -26,10 +26,14 @@ class PreReserve extends Component
     public $ambience;
     public $alert;
 
+    public $validity;
+
+
     public function mount()
     {
         $this->ambience = Ambience::select('id', 'title')->orderBy('title', 'asc')
             ->where('active', 1)->get();
+        $this->validity = date('d/m/Y', strtotime(date('Y-m-d') . ' +1 day'));
     }
     public function resetAll()
     {
@@ -59,24 +63,13 @@ class PreReserve extends Component
     }
     public function store()
     {
-        if ($this->type == 0) {
-            $this->rules = [
-                'type' => 'required',
-                'title' => 'required',
-                'start' => 'required',
-                'ambience_id' => 'required',
-            ];
-            $this->end = $this->start;
-        } else {
-            $this->rules = [
-                'type' => 'required',
-                'title' => 'required',
-                'start' => 'required',
-                'end' => 'required',
-                'ambience_id' => 'required',
-            ];
-        }
-
+        $this->rules = [
+            'type' => 'required',
+            'title' => 'required',
+            'start' => 'required',
+            'ambience_id' => 'required',
+        ];
+        $this->end = $this->start;
 
         $this->validate();
 
@@ -91,6 +84,7 @@ class PreReserve extends Component
                 'end'            => $this->end,
                 'ambience_id'    => $this->ambience_id,
                 'active'         => 1,
+                'validity'       => $this->validity,
                 'created_by' => Auth::user()->name,
             ]);
 
